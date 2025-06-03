@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scholarship Recommendation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #2c001e;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #3a0028;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
+
+    nav a {
+      font-size: 16px;
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ff4c;
+    }
+
+    .signup-btn {
+      background-color: #20a009;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .signup-btn:hover {
+      background-color: #18a507;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2CC302;
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .intro {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      color: #e0e0e0;
+    }
+
+    /* HOW IT WORKS SECTION */
+    .how-it-works {
+      text-align: left;
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .how-it-works-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .how-it-steps {
+      width: 55%;
+      font-size: 17px;
+    }
+
+    .check {
+      color: #00ff4c;
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    /* VIDEO SECTION */
+    .how-it-video {
+      width: 40%;
+    }
+
+    .how-it-video video {
+      width: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+      object-fit: cover;
+    }
+
+    /* BUTTON */
+    .start-btn {
+      display: block;
+      margin: 30px auto;
+      background-color: #00ff4c;
+      color: black;
+      border: none;
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .start-btn:hover {
+      background-color: #00e043;
+      transform: scale(1.05);
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 600px) {
+      .how-it-works-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .how-it-steps,
+      .how-it-video {
+        width: 80%;
+      }
+
+      .how-it-video video {
+        max-height: 120px;
+      }
+    }
+
+    /* Sidebar Menu */
+    #sidebar {
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+      padding-top: 20px;
+      z-index: 1000;
+      transition: 0.3s ease-in-out;
+    }
+
+    #sidebar.open {
+      left: 0;
+    }
+
+    #sidebar .profile {
+      text-align: center;
+      padding: 20px;
+    }
+
+    #sidebar .profile img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #sidebar ul li {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #sidebar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+
+    #sidebar .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="menu-icon" onclick="toggleSidebar()">&#9776;</span>
+  <div class="logo">🎓Exploring Scholarships in Cambodia</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="university-list.html">University List</a>
+    <a href="recmm.html">Recommend</a>
+  </nav>
+  <button class="signup-btn" onclick="window.location.href='signup.html';">Sign Up</button>
+</header>
+
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="hidden">
+  <button class="close-btn" id="close-menu" onclick="toggleSidebar()">×</button>
+  <div class="profile">
+    <img src="user-placeholder.png" alt="Profile Picture">
+    <h3>Guest User</h3>
+    <a href="#">+ Add your university or school</a>
+  </div>
+  <ul>
+    <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="library.html"><i class="fa fa-book"></i> My Library</a></li>
+    <li><a href="ai-notes.html"><i class="fa fa-sticky-note"></i> AI Notes <span class="new-badge">New</span></a></li>
+    <li><a href="ask-ai.html"><i class="fa fa-comments"></i> Ask AI</a></li>
+    <li><a href="chats.html"><i class="fa fa-envelope"></i> Chats</a></li>
+    <li><a href="recent.html"><i class="fa fa-clock"></i> Recent</a></li>
+  </ul>
+</div>
+
+
+<div class="container">
+  <h1>Find the Best Scholarships for You!</h1>
+  <p class="intro">
+    Welcome to our Scholarship Recommendation System! Answer a few quick questions about your education, interests, and financial background, and we’ll match you with the best scholarships available in Cambodia. Based on your skills and preferences, we’ll also recommend top universities in Cambodia and the best majors suited for your abilities
+  </p>
+
+  <div class="how-it-works">
+    <h2>💡 How It Works:</h2>
+    <div class="how-it-works-content">
+      <div class="how-it-steps"><p>
+        <p><span class="check">✅</span>Provide your academic details & preferences</p>
+        <p><span class="check">✅</span>Get personalized scholarship recommendations</p>
+        <p><span class="check">✅</span>Apply for the best opportunities that fit you</p>
+        <p><span class="margin-top: 30px;"></span> Click "Start" to begin and discover scholarships tailored just for you!🚀</p>
+      </div>
+      <div class="how-it-video">
+        <video controls>
+          <source src="../vdo/quiz.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="handleSubmit()">Start</button>
+</div>
+
+<script >
+  function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
+  }
+
+  function handleSubmit() {
+    window.location.href = "recomment1.html";
+  }
+</script>
+
+</body>
+</html>

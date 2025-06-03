@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root {
+      --accent-color: #2a0316;
+      --base-color: #771938;
+      --text-color: #000000;
+      --input-color: #2e2626;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      background-color: #ffffff;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrapper {
+      width: 400px;
+      padding: 30px;
+      background-color: var(--base-color);
+      border-radius: 10px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .input-icon {
+      position: relative;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .input-icon i.left-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-color);
+    }
+    .input-icon i.right-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--accent-color);
+    }
+    .input-icon input {
+      width: 100%;
+      padding: 10px 40px 10px 35px;
+      border: 2px solid var(--input-color);
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: var(--text-color);
+    }
+    p {
+      margin-top: 10px;
+      color: white;
+    }
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Welcome to Signup</h1>
+       <form action="../php/signup.php" method="POST" id="signup-form">
+
+
+      <div class="input-icon">
+        <i class="fa-solid fa-user left-icon"></i>
+        <input required type="text" name="firstname" id="firstname-input" placeholder="First Name">
+      </div>
+      <div class="input-icon">
+        <i class="fa-solid fa-envelope left-icon"></i>
+        <input required type="email" name="email" id="email-input" placeholder="Email">
+      </div>
+      <div class="input-icon">
+        <i class="fa-solid fa-key left-icon"></i>
+        <input required type="password" name="password" id="password-input" placeholder="Password">
+        <i class="fa-solid fa-eye-slash right-icon" id="password-input-icon" onclick="togglePasswordVisibility('password-input')"></i>
+      </div>
+      <div class="input-icon">
+        <i class="fa-solid fa-rotate-left left-icon"></i>
+        <input required type="password" name="repeat-password" id="repeat-password-input" placeholder="Repeat Password">
+        <i class="fa-solid fa-eye-slash right-icon" id="repeat-password-input-icon" onclick="togglePasswordVisibility('repeat-password-input')"></i>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    function togglePasswordVisibility(id) {
+      const input = document.getElementById(id);
+      const icon = document.getElementById(id + "-icon");
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      }
+    }
+
+  </script>
+</body>
+</html>

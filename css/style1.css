@@ -1,0 +1,442 @@
+/* 🌍 Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+  }
+  
+/* Existing CSS for the links */
+.nav-links a,
+.footer-links a,
+.details-btn,
+.hero-content .btn,
+.search-box .btn,
+.contact .btn,
+#sidebar ul li a {
+    /* Your existing styles */
+    text-decoration: none; /* Ensure no default underline */
+    color: inherit; /* Inherit color, important for inline underline */
+    /* Other existing styles */
+    transition: text-decoration 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect */
+.nav-links a:hover,
+.footer-links a:hover,
+.details-btn:hover,
+.hero-content .btn:hover,
+.search-box .btn:hover,
+.contact .btn:hover,
+#sidebar ul li a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+  body {
+    background-color: #d8e2ec;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* 🚀 Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+  }
+  
+  .navbar .logo-container {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links li {
+    margin-left: 20px;
+  }
+  
+  .nav-links .btn {
+    background: rgb(35, 209, 13);
+    color: #edf1f4;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* 🎓 Hero Section */
+.header {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.background-video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.overlay {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5); /* Darker for better text visibility */
+  padding: 20px;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 45px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.hero-content .btn {
+  background: #ff9800;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.hero-content .btn:hover {
+  background: #e68900;
+}
+
+  /* 🎥 Video Section */
+  .video-section {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .video-section video {
+    width: 80%;
+    max-width: 800px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  /* 🔎 Search Section */
+.search-container {
+  text-align: center;
+  padding: 50px 20px;
+  background: #e3f2fd;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.search-box .btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box .btn:hover {
+  background: #0056b3;
+}
+
+  
+ /* Scholarships Section */
+.scholarships {
+  text-align: center;
+  padding: 50px 20px;
+  background: #c2d3f9;
+}
+.scholarships h2 {
+  font-size: 28px;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Scholarship Card Layout */
+.scholarship-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.scholarship-card {
+  background: rgb(248, 248, 248);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  flex: 1;
+  min-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.scholarship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Scholarship Header */
+.scholarship-header h3 {
+  font-size: 20px;
+  color: #222;
+  margin-bottom: 8px;
+}
+.scholarship-header p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Explore Details Button */
+.details-btn {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  background: #0056b3;
+  color: white;
+  margin-top: 10px;
+}
+.details-btn:hover {
+  background: #004494;
+}
+
+
+   /* FAQ Section */
+   .faq {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .faq-item {
+    background: #eef2f3;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px auto;
+    width: 70%;
+  }
+  
+  /* 📩 Contact Section */
+  .contact {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .contact form {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact input,
+  .contact textarea {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .contact .btn {
+    background: #ff9800;
+    color: white;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  /* 🌎 Footer */
+  .footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .footer-links div {
+    text-align: left;
+  }
+  
+  .footer-links h3 {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  /* Sidebar Menu */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+  }
+  
+  /* Hide sidebar by default */
+  .hidden {
+    display: none;
+  }
+  
+  #sidebar .profile {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #sidebar ul li a i {
+    margin-right: 10px;
+    color: #0056b3;
+  }
+  
+  #sidebar .new-badge {
+    background: pink;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 12px;
+    margin-left: 10px;
+  }
+  
+  #sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Hamburger Icon */
+  #menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  /* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+      padding: 15px;
+  }
+
+  .overlay {
+      height: auto;
+      padding: 100px 20px;
+  }
+
+  .hero-content h1 {
+      font-size: 30px;
+  }
+
+  .hero-content p {
+      font-size: 16px;
+  }
+
+  .hero-content .btn {
+      font-size: 16px;
+      padding: 10px 15px;
+  }
+
+  .search-box {
+      flex-direction: column;
+  }
+
+  .footer-links {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .video-section video {
+      width: 100%; /* Full width on mobile */
+  }
+}
+#content-frame {
+  width: 100%;
+  height: 80vh;
+  display: block;
+  margin-top: 20px;
+}

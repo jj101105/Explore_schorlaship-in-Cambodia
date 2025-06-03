@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Scholarships in Cambodia</title>
+    <link rel="stylesheet" href="../css/style1.css">
+    <link rel="stylesheet" href="about-us.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+
+    @media (max-width: 768px) {
+        .mission {
+            flex-direction: column;
+            text-align: center;
+        }
+    
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+        }
+        
+        .feature {
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            text-align: left; /* Align text to the left */
+        }
+        
+        .feature i {
+            font-size: 1.5em; /* Adjust icon size */
+            margin-right: 10px; /* Space between icon and title */
+            color: #006400; /* Dark Green Color for Icons */
+            vertical-align: middle; /* Align icon vertically */
+        }
+        
+        .feature h3 {
+            font-size: 1.2em; /* Adjust title size */
+            font-weight: bold;
+            color: #faf4f4; /* Title color */
+            display: inline-block; /* Display title inline with icon */
+            vertical-align: middle; /* Align title vertically */
+        }
+        
+        .feature p {
+            font-size: 1em; /* Adjust description size */
+            line-height: 1.6;
+            color: #000000; /* Description color */
+            margin-top: 10px; /* Space between title and description */
+        }
+    
+        .team-members {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    
+    .background-video {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    
+    
+    body {
+      /*  background-image: repeating-linear-gradient(45deg, #f8f8f8, #f8f8f8 10px, #f0f0f0 10px, #f0f0f0 20px);*/
+        background-color: #2a0316; /* Dark reddish-brown background */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: white; /* Recommended: change text color for readability */
+    }
+    
+    .mission-text .btn:hover {
+        background-color: #45a049; /* Darker green */
+        transition: background-color 0.3s ease;
+    }
+    
+    
+    /* ... rest of your CSS ... */
+    
+    .about-us-content {
+        text-align: center;
+        padding: 50px 20px;
+    }
+    
+    /* Mission Section */
+    .mission {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 40px 20px;
+    }
+    .mission-text {
+        text-align: left;
+        max-width: 50%;
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .mission-section {
+        background-color: #2a0316;
+        color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 50px 20px;
+    }
+    
+    .mission-text {
+        text-align: left;
+        max-width: 50%;
+    }
+    
+    .mission-text h1 {
+        font-family: 'Archivo Black', sans-serif;
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+    
+    .mission-text p {
+        font-size: 1.5em; /* Smaller than heading */
+        font-weight: bold; /* Make the text bold */
+        font-family: 'Archivo Black', sans-serif; /* Use same font */
+        margin-bottom: 30px;
+        color: white;
+    }
+    .mission-text .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .mission-image img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Empowering Section */
+    .empowering {
+        background-color: #f7f7f7;
+        text-align: center;
+        padding: 50px 20px;
+    }
+    
+    .empowering h2 {
+        font-size: 3em; /* Adjust to match the Figma size */
+        font-weight: bold; /* Make it bold */
+        color: #333; /* Darker color for the heading */
+        margin-bottom: 20px;
+        font-family: sans-serif; /* Use sans-serif font */
+    }
+    
+    .empowering p {
+        font-size: 26px; /* Adjust paragraph font size */
+        font-weight: bold;
+        color: #252222; /* Darker color for the paragraph */
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 30px;
+        font-family: sans-serif; /* Use sans-serif font */
+    }
+    
+    .empowering img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    /* Features Section */
+    .features {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 40px 20px;
+    }
+    
+    .features p {
+        background-color: #440303;
+        padding: 40px 20px;
+    }
+    
+    .feature {
+        width: 300px;
+        padding: 20px;
+       
+        border-radius: 10px;
+        margin: 10px;
+    }
+    
+    .feature i {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+    
+    /* Team Section */
+    .team {
+        padding: 40px 20px;
+    }
+    
+    .team h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    
+    .team-members {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .team-member {
+        margin: 10px;
+    }
+    
+    .team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    .scrollable-content {
+        width: 100%;
+        height: 500px;
+        overflow-y: auto;
+    }
+    
+    .social-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+    .social-icons {
+        display: flex;
+        flex-direction: column; /* Stack icons vertically */
+        align-items: center; /* Center icons horizontally */
+        gap: 8px; /* Adjust vertical spacing */
+        margin-top: 10px; /* Add space above icons */
+    }
+    
+    .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #444;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        background-color: #666;
+    }
+    
+    .social-icons i {
+        font-size: 16px;
+    }
+    
+</style>
+</head>
+
+<body style="background-color: #2a0316; color: white;">
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                🎓 <span>Scholarships in Cambodia</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" style="color: white;">Home</a></li>
+                <li><a href="signup.html" class="btn" style="color: white;">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="about-us-content">
+       
+        
+        <section class="mission">
+            <div class="mission-text">
+                <h1>About Us</h1>
+                <p>Our mission is to empower Cambodian students with accurate, scholarship and financial aid information.</p>
+                <a href="signup.html" class="btn" style="color: white;">Sign Up For Free</a>
+            </div>
+            <div class="mission-image">
+                <img src="../images/mission-illustration.jpg" alt="Mission Illustration">
+            </div>
+        </section>
+
+        <section class="empowering">
+            <h2>Empowering Students, Unlocking Opportunities</h2>
+            <p>At Exploring scholarship in cambodia, we believe that education is the key to brighter future. Our mission is to help students make informed decisions, access scholarships, and unlock their opportunities.</p>
+            <img src="../images/empowering-students.png" alt="Empowering Students Illustration">
+        </section>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-search"></i>
+                <h3>Scholarship Finder</h3>
+                <p>We collect and update scholarship opportunities from top universities in Phnom Penh, making it easier for students to find financial aid.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-university"></i>
+                <h3>University Guide</h3>
+                <p>Explore detailed information about universities in Phnom Penh, including available programs, admission processes, and tuition fees.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-file-alt"></i>
+                <h3>Application Support</h3>
+                <p>Get expert advice on how to apply for scholarships, write strong motivation letters, and prepare for university admissions.</p>
+            </div>
+        </div>
+
+        <section class="team">
+            <h2>Team Member</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="../images/team-member-1.png" alt="Team Member 1">
+                    <p>Member 1</p>
+                </div>
+                <div class="team-member">
+                    <img src="../images/Rasy.jpg" alt="Team Member 2">
+                    <p>Member 2</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" style="background-color: #333; color: white;">
+        <div class="footer-links">
+            <div>
+                <h3>About</h3>
+                <a href="about-us.html" style="color: white;">About us</a>
+                <a href="scholarship-policy.html" style="color: white;">Scholarship Policy</a>
+                <a href="blog.html" style="color: white;">Blog</a>
+            </div>
+            <div>
+                <h3>Opportunities</h3>
+                <a href="scholarship-by-province.html" style="color: white;">Find Scholarships by Province</a>
+                <a href="undergratuate.html" style="color: white;">Undergraduate Scholarship</a>
+                <a href="postgratuate.html" style="color: white;">Postgraduate Scholarships</a>
+            </div>
+            <div>
+                <h3>Useful links</h3>
+                <a href="free-resources.html" style="color: white;">Free Resource</a>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <a href="privacy-policy.html" style="color: white;">Privacy Policy</a>
+                <a href="faqs.html" style="color: white;">FAQs</a>
+            </div>
+            <h3>Connect</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/161V5KMnMx/"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/borasy.27?igsh=MXRoaXQxZWNxZGIxYw=="><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Scholarships in Cambodia. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
