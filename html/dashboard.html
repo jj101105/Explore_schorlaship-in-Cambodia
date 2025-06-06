@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | Scholarship Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
+  <div class="flex items-center justify-center mb-8">
+    <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 transition-transform duration-200 hover:scale-105">
+      <span class="text-3xl">🎓</span>
+      <span class="text-xl font-extrabold text-blue-1000 tracking-wide drop-shadow">Scholarship Admin</span>
+    </div>
+  </div>
+  <nav class="space-y-3">
+        <nav class="space-y-3">
+        <a href="dashboard.html" class="flex items-center gap-3 text-blue-600 font-medium">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="scholarship.html" class="flex items-center gap-3 hover:text-blue-500">
+          <i class="fas fa-graduation-cap"></i> Scholarships
+        </a>
+        <a href="university.html" class="flex items-center gap-3 hover:text-blue-500">
+          <i class="fas fa-university"></i> Universities
+        </a>
+        <a href="major.html" class="flex items-center gap-3 hover:text-blue-500">
+          <i class="fas fa-book"></i> Majors
+        </a>
+        <a href="user.html" class="flex items-center gap-3 hover:text-blue-500">
+          <i class="fas fa-users"></i> Users
+        </a>
+        <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-500">
+          <i class="fas fa-comment-dots"></i> Feedback
+        </a>
+        <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-6">
+
+      <!-- Topbar -->
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Dashboard</h1>
+        <div class="flex items-center gap-4 relative">
+          <button class="relative">
+            <i class="fas fa-bell text-xl"></i>
+            <span class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 rounded-full"></span>
+          </button>
+          <div class="relative">
+            <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+              <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full border" />
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+  <div class="bg-white p-5 rounded-xl shadow text-center">
+    <div class="text-gray-500 text-sm mb-1">Scholarships</div>
+    <div class="text-3xl font-bold text-blue-600" id="total-scholarships">0</div>
+  </div>
+  <div class="bg-white p-5 rounded-xl shadow text-center">
+    <div class="text-gray-500 text-sm mb-1">Registered Users</div>
+    <div class="text-3xl font-bold text-green-600" id="total-users">0</div>
+  </div>
+  <div class="bg-white p-5 rounded-xl shadow text-center">
+    <div class="text-gray-500 text-sm mb-1">Universities</div>
+    <div class="text-3xl font-bold text-purple-600" id="total-universities">0</div>
+  </div>
+  <div class="bg-white p-5 rounded-xl shadow text-center">
+    <div class="text-gray-500 text-sm mb-1">Feedback</div>
+    <div class="text-3xl font-bold text-red-600" id="total-feedback">0</div>
+  </div>
+</div>
+
+
+
+      <!-- Scholarships Table -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Scholarships</h2>
+          <button onclick="document.getElementById('addModal').classList.remove('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <i class="fas fa-plus mr-1"></i> Add New
+          </button>
+        </div>
+        <input type="text" placeholder="Search..." class="w-full mb-4 px-3 py-2 border rounded" />
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm border">
+            <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
+              <tr>
+                <th class="p-3 text-left border">#</th>
+                <th class="p-3 text-left border">Name</th>
+                <th class="p-3 text-left border">University</th>
+                <th class="p-3 text-left border">Level</th>
+                <th class="p-3 text-left border">Actions</th>
+              </tr>
+            </thead>
+            
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Add Scholarship Modal -->
+  <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+    <div class="bg-white p-6 w-full max-w-md rounded-xl shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Add Scholarship</h2>
+      <form class="space-y-4">
+        <input type="text" placeholder="Scholarship Name" class="w-full px-4 py-2 border rounded" required />
+        <input type="text" placeholder="University" class="w-full px-4 py-2 border rounded" required />
+        <select class="w-full px-4 py-2 border rounded">
+          <option value="">Select Level</option>
+          <option>Bachelor</option>
+          <option>Master</option>
+          <option>Associate</option>
+        </select>
+        <textarea placeholder="Description" class="w-full px-4 py-2 border rounded"></textarea>
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="document.getElementById('addModal').classList.add('hidden')" class="px-4 py-2 border rounded">Cancel</button>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <script>
+  async function loadStats() {
+    try {
+      const response = await fetch('../php/dashboard-stats.php');
+      const stats = await response.json();
+
+    document.getElementById('total-scholarships').textContent = stats.scholarships ?? 0;
+document.getElementById('total-users').textContent = stats.users ?? 0;
+document.getElementById('total-universities').textContent = stats.universities ?? 0;
+document.getElementById('total-feedback').textContent = stats.feedback ?? 0;
+
+
+    } catch (err) {
+      console.error("Error loading dashboard stats:", err);
+    }
+  }
+
+  loadStats();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback | Scholarship Explorer Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
+      <div class="flex items-center justify-center mb-8">
+        <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300">
+          <span class="text-3xl">🎓</span>
+          <span class="text-xl font-extrabold text-blue-900 tracking-wide">Scholarship Admin</span>
+        </div>
+      </div>
+      <nav class="space-y-3">
+        <a href="dashboard.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="scholarship.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-graduation-cap"></i> Scholarships</a>
+        <a href="university.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-university"></i> Universities</a>
+        <a href="major.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-book"></i> Majors</a>
+        <a href="user.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-users"></i> Users</a>
+        <a href="feedback.html" class="flex items-center gap-3 text-blue-600 font-medium"><i class="fas fa-comment-dots"></i> Feedback</a>
+        <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">User Feedback</h1>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border">
+        <input type="text" placeholder="Search by name or message" class="w-full mb-4 px-3 py-2 border rounded" />
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm border">
+            <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
+              <tr>
+                <th class="p-3 text-left border">#</th>
+                <th class="p-3 text-left border">Name</th>
+                <th class="p-3 text-left border">Email</th>
+                <th class="p-3 text-left border">Message</th>
+                <th class="p-3 text-left border">Date</th>
+                <th class="p-3 text-left border">Action</th>
+              </tr>
+            </thead>
+
+                <tbody id="feedback-table-body" class="text-gray-700"></tbody>
+
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+ async function loadFeedback() {
+  try {
+    const response = await fetch('../php/get-feedback.php'); // Use correct relative path
+    const data = await response.json();
+
+    const tableBody = document.getElementById('feedback-table-body');
+    tableBody.innerHTML = "";
+
+    data.forEach((item, index) => {
+      const row = `
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3 border">${index + 1}</td>
+          <td class="p-3 border">${item.name}</td>
+          <td class="p-3 border">${item.email}</td>
+          <td class="p-3 border">${item.message}</td>
+          <td class="p-3 border">${new Date(item.submitted_at).toLocaleString()}</td>
+          <td class="p-3 border text-center">
+            <button class="text-red-600 hover:underline" onclick="deleteFeedback(${item.id})">Delete</button>
+          </td>
+        </tr>
+      `;
+      tableBody.insertAdjacentHTML("beforeend", row);
+    });
+  } catch (error) {
+    console.error("Failed to load feedback:", error);
+  }
+}
+
+
+  // Optionally: create a deleteFeedback function later
+  function deleteFeedback(id) {
+    if (confirm("Are you sure you want to delete this feedback?")) {
+      fetch(`../php/delete-feedback.php?id=${id}`, { method: "GET" })
+        .then(res => res.text())
+        .then(msg => {
+          alert(msg);
+          loadFeedback(); // Reload table
+        });
+    }
+  }
+
+  // Initial load
+  loadFeedback();
+</script>
+
+</body>
+</html>
