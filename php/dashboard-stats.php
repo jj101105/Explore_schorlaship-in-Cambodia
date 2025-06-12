@@ -14,12 +14,36 @@ if ($conn->connect_error) {
     exit();
 }
 
-$feedbackCount = 0;
+$response = [
+    "feedback" => 0,
+    "university" => 0,
+    "scholarships" => 0,
+    "users" => 0
+];
+
+// Feedback count
 $result = $conn->query("SELECT COUNT(*) AS count FROM contacts");
 if ($result) {
-    $feedbackCount = $result->fetch_assoc()['count'];
+    $response["feedback"] = (int)$result->fetch_assoc()['count'];
 }
 
-echo json_encode(["feedback" => $feedbackCount]);
+// University count
+$result = $conn->query("SELECT COUNT(*) AS count FROM university");
+if ($result) {
+    $response["universities"] = (int)$result->fetch_assoc()['count'];
+}
 
+// Scholarships count
+$result = $conn->query("SELECT COUNT(*) AS count FROM scholarships");
+if ($result) {
+    $response["scholarships"] = (int)$result->fetch_assoc()['count'];
+}
+
+// Users count (from another DB)
+$result = $conn->query("SELECT COUNT(*) AS count FROM userdb.users");
+if ($result) {
+    $response["users"] = (int)$result->fetch_assoc()['count'];
+}
+
+echo json_encode($response);
 $conn->close();

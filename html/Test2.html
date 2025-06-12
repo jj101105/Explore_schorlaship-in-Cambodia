@@ -5,55 +5,68 @@
   <title>Scholarship Recommendation</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
- /* === Base Styles === */
-body {
-  background-color: #f4f7fc;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #131212;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* === Navbar === */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #220011;
-  color: white;
-  padding: 14px 30px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #2c001e;
+      color: #ffffff;
+      text-align: center;
+    }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 18px;
-}
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #3a0028;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  padding: 0;
-}
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
 
-.nav-links a, .nav-links .btn {
-  color: white;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  transition: 0.3s;
-  font-weight: 500;
-}
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
 
-.nav-links a:hover, .nav-links .btn:hover {
-  background-color: #33ff70;
-}
+    nav a {
+      font-size: 16px;
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ff4c;
+    }
+
+    .signup-btn {
+      background-color: #20a009;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .signup-btn:hover {
+      background-color: #18a507;
+    }
 
     /* MAIN CONTAINER */
     .container {
@@ -74,7 +87,7 @@ body {
       font-weight: 400;
       line-height: 1.8;
       margin-bottom: 40px;
-      color: #010000;
+      color: #e0e0e0;
     }
 
     /* HOW IT WORKS SECTION */
@@ -119,7 +132,7 @@ body {
     .start-btn {
       display: block;
       margin: 30px auto;
-      background-color: #00a231;
+      background-color: #00ff4c;
       color: black;
       border: none;
       padding: 15px 35px;
@@ -131,7 +144,7 @@ body {
     }
 
     .start-btn:hover {
-      background-color: #00a231;
+      background-color: #00e043;
       transform: scale(1.05);
     }
 
@@ -214,23 +227,16 @@ body {
 </head>
 <body>
 
-
-<!-- ...existing code... -->
 <header>
-  <nav class="navbar">
-    <div class="logo-container">
-      <div id="menu-icon" class="menu-icon">&#9776;</div>
-      🎓 <span>Exploring Scholarships in Cambodia</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="university-list.html">University List</a></li>
-      <li><a href="recmm.html">Recommend</a></li>
-      <li><a href="signup.html" class="btn">Sign Up</a></li>
-    </ul>
+  <span class="menu-icon" onclick="toggleSidebar()">&#9776;</span>
+  <div class="logo">🎓Exploring Scholarships in Cambodia</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="university-list.html">University List</a>
+    <a href="recmm.html">Recommend</a>
   </nav>
+  <button class="signup-btn" onclick="window.location.href='signup.html';">Sign Up</button>
 </header>
-<!-- ...existing code... -->
 
 
 <!-- Sidebar Menu -->
@@ -268,9 +274,9 @@ body {
         <p><span class="margin-top: 30px;"></span> Click "Start" to begin and discover scholarships tailored just for you!🚀</p>
       </div>
       <div class="how-it-video">
-        <video controls autoplay muted>
-  <source src="../vdo/quiz.mp4" type="video/mp4">
-</video>
+        <video controls>
+          <source src="../vdo/quiz.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
@@ -284,7 +290,7 @@ body {
   }
 
   function handleSubmit() {
-    window.location.href = "recommend.html";
+    window.location.href = "recomment1.html";
   }
 </script>
 

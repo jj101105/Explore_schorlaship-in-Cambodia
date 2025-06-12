@@ -1,41 +1,60 @@
 <?php
-$filename = '../data/universities.json'; // or connect to DB if preferred
+$host = "localhost";
+$user = "root";
+$password = "";
+$dbname = "scholarshipdb";
 
-// Load data
-$data = file_exists($filename) ? json_decode(file_get_contents($filename), true) : [];
+$conn = new mysqli($host, $user, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add') {
-    $new = [
-        "id" => uniqid(),
-        "name" => $_POST['name'],
-        "location" => $_POST['location'],
-        "type" => $_POST['type'],
-        "website" => $_POST['website'] ?? '',
-        "description" => $_POST['description'] ?? ''
-    ];
-    $data[] = $new;
-    file_put_contents($filename, json_encode($data));
+    $name = $_POST['name'];
+    $type = $_POST['type'];
+    $location = $_POST['location'];
+    $website = $_POST['website'] ?? '';
+    $description = $_POST['description'] ?? '';
+
+    $sql = "INSERT INTO university (University_Name, Type, Location, Website, Description) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssss", $name, $type, $location, $website, $description);
+    $stmt->execute();
+
     echo "added";
-} elseif ($action === 'delete') {
-    $id = $_POST['id'];
-    $data = array_filter($data, fn($u) => $u['id'] !== $id);
-    file_put_contents($filename, json_encode(array_values($data)));
-    echo "deleted";
-} elseif ($action === 'edit') {
-    foreach ($data as &$u) {
-        if ($u['id'] === $_POST['id']) {
-            $u['name'] = $_POST['name'];
-            $u['location'] = $_POST['location'];
-            $u['type'] = $_POST['type'];
-            $u['website'] = $_POST['website'];
-            $u['description'] = $_POST['description'];
-            break;
-        }
-    }
-    file_put_contents($filename, json_encode($data));
-    echo "edited";
-} else {
-    echo "invalid";
 }
+elseif ($action === 'edit') {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $location = $_POST['location'];
+    $type = $_POST['type'];
+    $website = $_POST['website'];
+
+    $sql = "UPDATE university SET University_Name=?, Location=?, Type=?, Website=? WHERE University_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssi", $name, $location, $type, $website, $id);
+    
+    if ($stmt->execute()) {
+        echo "edited";
+    } else {
+        echo "error: " . $stmt->error;
+    }
+}
+elseif ($action === 'delete') {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM university WHERE University_ID=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        echo "deleted";
+    } else {
+        echo "error: " . $stmt->error;
+    }
+}
+else {
+    echo "invalid action";
+}
+?>

@@ -7,43 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
- <!-- Add inside <head> -->
-<script>
-function loadUniversities() {
-  fetch("../php/load_universities.php")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("universityTable").innerHTML = data;
-    });
-}
-
-function submitUniversityForm(event) {
-  event.preventDefault();
-  const form = document.getElementById("addUniversityForm");
-  const formData = new FormData(form);
-  formData.append("action", "add");
-
-  fetch("../php/university.php", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.text())
-  .then(data => {
-    if (data.trim() === "added") {
-      document.getElementById("addUniversityModal").classList.add("hidden");
-      form.reset();
-      loadUniversities();
-    } else {
-      alert("Error: " + data);
-    }
-  });
-}
-
-window.onload = loadUniversities;
-
-
-</script>
-
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
   <div class="flex min-h-screen">
@@ -145,6 +108,7 @@ window.onload = loadUniversities;
   </div>
 </div>
 
+<script src="../javaScript/university.js"></script>
  
 </body>
-</html>  
+</html>        

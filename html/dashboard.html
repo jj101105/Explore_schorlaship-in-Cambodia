@@ -136,24 +136,25 @@
     </div>
   </div>
 
-    <script>
-  async function loadStats() {
-    try {
-      const response = await fetch('../php/dashboard-stats.php');
-      const stats = await response.json();
+    <script>async function loadStats() {
+  try {
+     const response = await fetch('../php/dashboard-stats.php'); // Adjust if path is different
+    
+     const stats = await response.json();
+
+    console.log(stats); // DEBUG output
 
     document.getElementById('total-scholarships').textContent = stats.scholarships ?? 0;
-document.getElementById('total-users').textContent = stats.users ?? 0;
-document.getElementById('total-universities').textContent = stats.universities ?? 0;
-document.getElementById('total-feedback').textContent = stats.feedback ?? 0;
-
-
-    } catch (err) {
-      console.error("Error loading dashboard stats:", err);
-    }
+    document.getElementById('total-users').textContent = stats.users ?? 0;
+    document.getElementById('total-universities').textContent = stats.universities ?? 0;
+    document.getElementById('total-feedback').textContent = stats.feedback ?? 0;
+  } catch (err) {
+    console.error("Error loading dashboard stats:", err);
   }
+}
 
-  loadStats();
+loadStats();
+
 </script>
 
 

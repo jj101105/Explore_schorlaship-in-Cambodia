@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scholarship Recommendation</title>
+  <style>
+   /* === Base Styles === */
+body {
+  background-color: #f4f7fc;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* === Navbar === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #220011;
+  color: white;
+  padding: 14px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  padding: 0;
+}
+
+.nav-links a, .nav-links .btn {
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.nav-links a:hover, .nav-links .btn:hover {
+  background-color: #33ff70;
+}
+
+/* === Wrapper and Form === */
+.wrapper {
+  max-width: 780px;
+  margin: 60px auto;
+  background: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #1a2c4e;
+}
+
+/* === Form Fields === */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fefefe;
+  transition: border-color 0.3s;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* === Study Level Buttons === */
+.level-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.level-button {
+  flex: 1;
+  padding: 12px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.level-button:hover {
+  background-color: #dce9ff;
+}
+
+.level-button.active {
+  background-color: #0056a3;
+  color: white;
+  border-color: #0056a3;
+}
+
+/* === Submit Button === */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #ff9933;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #e68a00;
+}
+
+/* === Result Cards === */
+.results {
+  margin-top: 40px;
+}
+
+.result-card {
+  background: #fefefe;
+  border-left: 5px solid #220011;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.result-card strong {
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* === Sidebar === */
+#sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 60px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.08);
+  z-index: 999;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+#sidebar.hidden {
+  display: none;
+}
+
+#sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar ul li {
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+#sidebar ul li a {
+  text-decoration: none;
+  color: #220011;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+#sidebar ul li a:hover {
+  background-color: #f2f2f2;
+}
+
+#sidebar .profile {
+  background-color: #220011;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+#sidebar .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+.new-badge {
+  background: red;
+  font-size: 10px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: white;
+  margin-left: 5px;
+}
+
+/* === Footer === */
+.footer {
+  background-color: #220011;
+  color: white;
+  text-align: center;
+  padding: 18px;
+  margin-top: 60px;
+  font-size: 14px;
+}
+
+
+    
+  </style>
+</head>
+<body>
+  <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <div id="menu-icon" class="menu-icon">&#9776;</div>
+                🎓 <span>Exploring Scholarships in Cambodia</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="university-list.html">University List</a></li>
+                <li><a href="recmm.html">Recommend</a></li>
+                <li><a href="signup.html" class="btn">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="factories-container">
+            </div>
+    </div>
+
+    <div id="sidebar" class="sidebar hidden">
+        <button id="close-menu" class="close-btn">&times;</button>
+        <div class="profile">
+            <img src="user-placeholder.png" alt="Profile Picture">
+            <h3>Guest User</h3>
+            <a href="#">+ Add your university or school</a>
+        </div>
+        <ul>
+            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="library.html"><i class="fa fa-book"></i> My Library</a></li>
+            <li><a href="ai-notes.html"><i class="fa fa-sticky-note"></i> AI Notes <span class="new-badge">New</span></a></li>
+            <li><a href="ask-ai.html"><i class="fa fa-comments"></i> Ask AI</a></li>
+            <li><a href="chats.html"><i class="fa fa-envelope"></i> Chats</a></li>
+            <li><a href="recent.html"><i class="fa fa-clock"></i> Recent</a></li>
+        </ul>
+    </div>
+
+  <div class="wrapper">
+    <h1>Scholarship & University Recommendation</h1>
+
+    <form id="recommendationForm">
+      <div class="form-group">
+        <label>Study Level</label>
+        <div class="level-buttons">
+          <div class="level-button" data-value="associate">Associate</div>
+          <div class="level-button" data-value="bachelor">Bachelor</div>
+          <div class="level-button" data-value="master">Master</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="skill">Your Strongest Skill</label>
+        <select id="skill" required>
+          <option value="">Select a skill</option>
+          <option value="programming">Programming</option>
+          <option value="math">Math</option>
+          <option value="english">English</option>
+          <option value="art">Art</option>
+          <option value="leadership">Leadership</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Preferred Province</label>
+        <select id="location" required>
+          <option value="">Select province</option>
+          <option value="phnom penh">Phnom Penh</option>
+          <option value="siem reap">Siem Reap</option>
+          <option value="kampong cham">Kampong Cham</option>
+          <option value="battambang">Battambang</option>
+          <option value="takeo">Takeo</option>
+        </select>
+      </div>
+
+      <button type="submit">View Results</button>
+    </form>
+
+    <div class="results" id="results"></div>
+  </div>
+   <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Scholarship Hub. All Rights Reserved.</p>
+    </footer>
+  <script>
+    let selectedLevel = "";
+
+    const levelButtons = document.querySelectorAll(".level-button");
+    levelButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        levelButtons.forEach(b => b.classList.remove("active"));
+        button.classList.add("active");
+        selectedLevel = button.dataset.value;
+      });
+    });
+
+
+    // ...existing code...
+const data = [
+  {
+    skill: "programming",
+    level: "bachelor",
+    location: "phnom penh",
+    scholarship: "Tech Talent Scholarship",
+    university: "Royal University of Phnom Penh",
+    page: "rupp.html"
+  },
+  {
+    skill: "math",
+    level: "bachelor",
+    location: "kampong cham",
+    scholarship: "STEM Provincial Scholarship",
+    university: "Kampong Cham Institute of Technology",
+    page: "kcit.html"
+  },
+  {
+    skill: "english",
+    level: "associate",
+    location: "siem reap",
+    scholarship: "Language Excellence Grant",
+    university: "Siem Reap College",
+    page: "src.html"
+  },
+  {
+    skill: "leadership",
+    level: "master",
+    location: "phnom penh",
+    scholarship: "Future Leaders Fellowship",
+    university: "Paññāsāstra University",
+    page: "puc.html"
+  },
+  {
+    skill: "art",
+    level: "bachelor",
+    location: "battambang",
+    scholarship: "Creative Arts Award",
+    university: "Battambang Arts University",
+    page: "bau.html"
+  },
+  // --- Added more Phnom Penh results below ---
+  {
+    skill: "math",
+    level: "bachelor",
+    location: "phnom penh",
+    scholarship: "Mathematics Excellence Scholarship",
+    university: "Institute of Technology of Cambodia",
+    page: "itc.html"
+  },
+  {
+    skill: "english",
+    level: "bachelor",
+    location: "phnom penh",
+    scholarship: "English Communication Grant",
+    university: "Royal University of Phnom Penh",
+    page: "rupp.html"
+  },
+  {
+    skill: "art",
+    level: "bachelor",
+    location: "phnom penh",
+    scholarship: "Phnom Penh Art Talent Award",
+    university: "Royal University of Fine Arts",
+    page: "rupa.html"
+  },
+  {
+    skill: "leadership",
+    level: "bachelor",
+    location: "phnom penh",
+    scholarship: "Emerging Leaders Scholarship",
+    university: "Cambodia University of Management and Economics",
+    page: "cume.html"
+  }
+];
+// ...existing code...
+const form = document.getElementById("recommendationForm");
+const resultsDiv = document.getElementById("results");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const skill = document.getElementById("skill").value;
+  const location = document.getElementById("location").value;
+
+  // Filter data based on user input
+  const results = data.filter(item =>
+    item.skill === skill &&
+    item.level === selectedLevel &&
+    item.location === location
+  );
+
+  // Clear previous results
+  resultsDiv.innerHTML = "";
+
+  if (results.length === 0) {
+    resultsDiv.innerHTML = `<p>No matching recommendations found.</p>`;
+  } else {
+    results.forEach(r => {
+      const div = document.createElement("div");
+      div.className = "result-card";
+      div.innerHTML = `
+        <strong>Scholarship:</strong> ${r.scholarship}
+        <strong>University:</strong> ${r.university}
+        <strong>Location:</strong> ${r.location}
+        <div style="margin-top:10px;">
+          Now if you want to know details about this university, 
+          <a href="${r.page}" style="color:#0056a3;text-decoration:underline;" target="_blank">
+            visit the university page
+          </a>.
+        </div>
+      `;
+      resultsDiv.appendChild(div);
+    });
+  }
+});
+// ...existing code...
+
+  </script>
+</body>
+</html>
