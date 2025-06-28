@@ -20,6 +20,8 @@ echo "<td class='p-3 border university-name'>" . htmlspecialchars($row['Universi
 echo "<td class='p-3 border university-location'>" . htmlspecialchars($row['Location']) . "</td>";
 echo "<td class='p-3 border university-type'>" . htmlspecialchars($row['Type']) . "</td>";
 echo "<td class='p-3 border university-website'><a href='" . htmlspecialchars($row['Website']) . "' class='text-blue-600 hover:underline' target='_blank'>" . htmlspecialchars($row['Website']) . "</a></td>";
+echo "<td class='p-3 border university-description'>" . htmlspecialchars($row['Description']) . "</td>";
+
 echo "<td class='p-3 border actions-cell'>
         <button class='text-blue-600 hover:underline mr-2 edit-btn'>Edit</button>
         <button class='text-red-600 hover:underline delete-btn'>Delete</button>

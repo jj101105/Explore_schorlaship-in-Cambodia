@@ -12,6 +12,17 @@ if ($conn->connect_error) {
 $action = $_POST['action'] ?? '';
 
 if ($action === 'add') {
+    // Add this before insert
+$check = $conn->prepare("SELECT * FROM university WHERE University_Name = ?");
+$check->bind_param("s", $name);
+$check->execute();
+$result = $check->get_result();
+
+if ($result->num_rows > 0) {
+    echo "duplicate";
+    exit;
+}
+
     $name = $_POST['name'];
     $type = $_POST['type'];
     $location = $_POST['location'];
@@ -31,17 +42,19 @@ elseif ($action === 'edit') {
     $location = $_POST['location'];
     $type = $_POST['type'];
     $website = $_POST['website'];
+    $description = $_POST['description'] ?? '';
 
-    $sql = "UPDATE university SET University_Name=?, Location=?, Type=?, Website=? WHERE University_ID=?";
+    $sql = "UPDATE university SET University_Name=?, Location=?, Type=?, Website=?, Description=? WHERE University_ID=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $name, $location, $type, $website, $id);
-    
+    $stmt->bind_param("sssssi", $name, $location, $type, $website, $description, $id);
+
     if ($stmt->execute()) {
         echo "edited";
     } else {
         echo "error: " . $stmt->error;
     }
 }
+
 elseif ($action === 'delete') {
     $id = $_POST['id'];
     $sql = "DELETE FROM university WHERE University_ID=?";

@@ -78,12 +78,14 @@ function attachEventListeners() {
       const location = row.querySelector(".university-location").textContent;
       const type = row.querySelector(".university-type").textContent;
       const website = row.querySelector(".university-website a")?.textContent || "";
+      const description = row.querySelector(".university-description").textContent;
 
       const form = document.getElementById("addUniversityForm");
       form.name.value = name;
       form.location.value = location;
       form.type.value = type;
       form.website.value = website;
+      form.description.value = description;
 
       document.getElementById("addUniversityModal").classList.remove("hidden");
     });
