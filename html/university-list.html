@@ -3,430 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Listing | Scholarship Hub</title>
+    <title>University List in Cambodia | Scholarship Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #200015;
-            color: white;
+         body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
         }
-
-       /* Sidebar Menu */
-#sidebar {
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: #fff;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
-    padding-top: 20px;
-    z-index: 1000;
-    transition: 0.3s;
-  }
-  
-  /* Hide sidebar by default */
-  .hidden {
-    display: none;
-  }
-  
-  #sidebar .profile {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  #sidebar .profile img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
-  
-  #sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  #sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  #sidebar ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-  }
-  
-  #sidebar ul li a i {
-    margin-right: 10px;
-    color: #0056b3;
-  }
-  
-  #sidebar .new-badge {
-    background: pink;
-    color: white;
-    font-size: 12px;
-    padding: 3px 6px;
-    border-radius: 12px;
-    margin-left: 10px;
-  }
-  
-  #sidebar .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Hamburger Icon */
-  #menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-
-        /* Navigation Bar */
-        .navbar {
+        .header {
+            background-color: #fff;
+            width: 100%;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
-            background-color: #330022;
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
-            left: 0;
-            z-index: 1000;
+            z-index: 100;
         }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            letter-spacing: -1px;
         }
-        
-        .nav-links a {
+        .nav-link { color: #374151; font-weight: 500; margin-left: 1.5rem; transition: color 0.2s; }
+        .nav-link:hover, .nav-link:focus { color: #2563eb; outline: none; }
+        .hero-section {
+            background: linear-gradient(120deg, #52549c 0%, #362ab8 100%);
             color: white;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #72ff00;
-            text-decoration: underline; /* Adds an underline on hover */
-            background-color: rgba(114, 255, 0, 0.1); /* Adds a light background color */
-            padding: 5px 10px; /* Adds some space around the text */
-            border-radius: 5px; /* Makes the background corners rounded */
-        }
-        
-        
-        .nav-links .btn {
-            background: #21c32d;
-            padding: 8px 14px;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        
-        .nav-links .btn:hover {
-            background: #1aad26;
-        }
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            margin-right: 80px; /* added this to move links to the left */
-          }
-          
-          
-        .logo-container {
-            display: flex;
-            align-items: center; /* Vertically align icon and text */
-        }
-        
-        .logo-container span {
-            margin-left: 10px; /* Add space between icon and text */
-        }
-        .navbar .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar .nav-links li {
-            display: inline;
-        }
-
-        .navbar .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .no-underline {
-        text-decoration: none;
-        color: white; 
-    }
-
-    .navbar-right {
-  display: flex;
-  gap: 30px;
-  margin-right: 40px; /* Reduce this value */
-}
-
-        /* Page Header */
-        .header {
+            width: 100%;
+            padding: 4rem 1rem 3rem 1rem;
             text-align: center;
-            padding: 100px 20px 30px;
+            position: relative;
+            overflow: hidden;
         }
-
-        .header h1 {
-            font-size: 36px;
-            color: #72ff00;
+        .hero-section h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero-section p { font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-section .cta-btn {
+            background: #fff;
+            color: #3b82f6;
+            font-weight: 700;
+            padding: 0.9rem 2.2rem;
+            border-radius: 0.75rem;
+            font-size: 1.15rem;
+            box-shadow: 0 6px 20px rgba(59,130,246,0.13);
+            transition: background 0.2s, color 0.2s, transform 0.1s;
         }
-
-        /* University Sections */
-        .university-section {
-            padding: 20px;
+        .hero-section .cta-btn:hover {
+            background: #3b82f6;
+            color: #fff;
+            transform: translateY(-2px) scale(1.03);
         }
-
-        .university-section h2 {
-            margin-bottom: 10px;
-        }
-
-        /* Scrollable University List */
-        .university-list {
+        .search-bar {
+            max-width: 400px;
+            margin: 2rem auto 2.5rem auto;
             display: flex;
-            overflow-x: auto;
-            padding: 10px 0;
-            scroll-behavior: smooth;
+            align-items: center;
+            background: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 12px rgba(59,130,246,0.07);
+            padding: 0.5rem 1rem;
         }
-
-        .university-list::-webkit-scrollbar {
-            display: none; /* Hide scrollbar */
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 1.1rem;
+            background: transparent;
+            padding: 0.5rem 0.5rem 0.5rem 0.2rem;
         }
-
+        .search-bar i { color: #3b82f6; font-size: 1.2rem; }
+        .university-section {
+            padding: 2.5rem 1rem 1.5rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .university-section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .university-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 2rem;
+        }
         .university-card {
-            flex: 0 0 auto;
-            width: 120px;
-            margin: 0 15px;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 18px rgba(59,130,246,0.07);
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+            padding: 1.2rem 0.5rem 1rem 0.5rem;
+            border: 2px solid #f1f5f9;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .university-card:hover {
-            transform: scale(1.1);
+        .university-card:hover, .university-card:focus-within {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 8px 32px rgba(59,130,246,0.13);
+            border-color: #3b82f6;
+            outline: none;
         }
-
         .university-card img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid white;
+            border: 3px solid #e0e7ef;
+            margin-bottom: 0.7rem;
+            background: #f1f5f9;
         }
-
         .university-card p {
-            margin-top: 5px;
-            font-size: 14px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 0;
         }
-
-      
-        .scroll-btn.left {
-            left: 0;
-        }
-
-        .scroll-btn.right {
-            right: 0;
-        }
-
-        /* Footer */
         .footer {
-            background: #220011;
-            padding: 20px;
+            background: #1e293b;
+            color: #d1d5db;
+            width: 100%;
+            padding: 2.5rem 1rem 1rem 1rem;
+            margin-top: 4rem;
             text-align: center;
+            font-size: 1rem;
         }
-
-        
-
+        .footer-links a {
+            color: #93c5fd;
+            margin: 0 0.75rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #60a5fa; }
+        .social-icons a {
+            color: #d1d5db;
+            font-size: 1.5rem;
+            margin: 0 0.75rem;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover { color: #fff; }
+        @media (max-width: 700px) {
+            .header-logo { font-size: 1.3rem; }
+            .university-card img { width: 60px; height: 60px; }
+        }
     </style>
 </head>
 <body>
-
-    <header>
-        <nav class="navbar">
-            <div class="logo-container">
-                <div id="menu-icon" class="menu-icon">&#9776;</div>
-                🎓 <span>Exploring Scholarships in Cambodia</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="university-list.html">University List</a></li>
-                <li><a href="recmm.html">Recommend</a></li>
-                <li><a href="signup.html" class="btn">Sign Up</a></li>
-            </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">Exploring Scholarship in Cambodia</div>
+        <nav class="flex items-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="recmm.html" class="nav-link">Quizzes</a>
+            <a href="university-list.html" class="nav-link">University</a>
+            <a href="all-scholarship.html" class="nav-link">Scholarship</a>
+            <!-- Search Button -->
+            <button id="searchToggle" class="nav-link bg-transparent border-none p-0" aria-label="Search" style="background:none;">
+                <i class="fas fa-search"></i>
+            </button>
+            <a href="#" class="nav-link" aria-label="User"><i class="fas fa-user-circle"></i></a>
         </nav>
-    </header>
-    <div class="content">
-        <div class="factories-container">
-            </div>
-    </div>
-
-    <div id="sidebar" class="sidebar hidden">
-        <button id="close-menu" class="close-btn">&times;</button>
-        <div class="profile">
-            <img src="user-placeholder.png" alt="Profile Picture">
-            <h3>Guest User</h3>
-            <a href="#">+ Add your university or school</a>
+        <!-- Search Bar (hidden by default) -->
+        <div id="searchBar" class="absolute right-8 top-20 bg-white rounded-lg shadow-lg p-2 flex items-center gap-2" style="display:none; z-index:200;">
+            <input type="text" id="searchInput" class="border border-gray-300 rounded px-3 py-1 focus:outline-none" placeholder="Search scholarships, universities...">
+            <button id="searchBtn" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" aria-label="Submit Search">
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
-        <ul>
-            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="library.html"><i class="fa fa-book"></i> My Library</a></li>
-            <li><a href="ai-notes.html"><i class="fa fa-sticky-note"></i> AI Notes <span class="new-badge">New</span></a></li>
-            <li><a href="ask-ai.html"><i class="fa fa-comments"></i> Ask AI</a></li>
-            <li><a href="chats.html"><i class="fa fa-envelope"></i> Chats</a></li>
-            <li><a href="recent.html"><i class="fa fa-clock"></i> Recent</a></li>
-        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="background: linear-gradient(120deg, #ede9fe 0%, #c7d2fe 100%); color: #5f4dee; border-radius: 0 0 2.5rem 2.5rem; box-shadow: 0 8px 32px rgba(95,77,238,0.07); padding: 8rem 1rem 7rem 1rem; position: relative; overflow: hidden;">
+    <div class="max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
+        <h1 style="font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 1.2rem; color: #5f4dee; text-shadow: 0 4px 24px rgba(95,77,238,0.08);">
+            <i class="fas fa-university mr-3 text-blue-400"></i>
+            Explore Top Universities in Cambodia
+        </h1>
+        <p style="font-size: 1.25rem; margin-bottom: 2.2rem; color: #6d28d9; font-weight: 500; text-shadow: 0 2px 8px rgba(95,77,238,0.07); max-width: 700px;">
+            Discover the most popular and trusted universities in Cambodia.<br>
+            Click on a university to learn more about its programs, scholarships, and campus life.
+        </p>
+        <a href="#popular" class="cta-btn mt-2 inline-flex items-center gap-2" style="background: #5f4dee; color: #fff; font-weight: 700; padding: 1rem 2.5rem; border-radius: 2rem; font-size: 1.15rem; box-shadow: 0 8px 32px rgba(95,77,238,0.13); border: 2px solid #5f4dee; transition: background 0.2s, color 0.2s, border 0.2s, transform 0.1s;">
+            <i class="fas fa-arrow-down"></i> See Popular Universities
+        </a>
     </div>
-
-    <!-- Page Header -->
-    <section class="header">
-        <h1>University Listing</h1>
-    </section>
-
+    <!-- Decorative SVG for extra modern look -->
+    <svg viewBox="0 0 1440 320" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#c7d2fe" fill-opacity="1" d="M0,224L80,197.3C160,171,320,117,480,117.3C640,117,800,171,960,186.7C1120,203,1280,181,1360,170.7L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+    </svg>
+</section>
+    <!-- Decorative SVG for extra modern look -->
+    <svg viewBox="0 0 1440 320" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#c7d2fe" fill-opacity="1" d="M0,224L80,197.3C160,171,320,117,480,117.3C640,117,800,171,960,186.7C1120,203,1280,181,1360,170.7L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+    </svg>
+</section>
 
     <!-- Popular Universities -->
-    <section class="university-section">
-        <h2>🔥 Popular Universities</h2>
-        <div class="scroll-container">
-            <div class="university-list" id="popular-list">
-                <div class="university-card"><a href="rupp.html" class="no-underline"><img src="../images/rupp_logo.png" alt="RUPP"><p>RUPP</p></a></div>
-                <div class="university-card"><a href="itc.html" class="no-underline"><img src="../images/itc-cambodia.png" alt="TECHNO"><p>ITC</p></a></div>
-                <div class="university-card"><a href="uhs.html" class="no-underline"><img src="../images/UHS_Cambodia_logo.png" alt="UHS"><p>UHS</p></a></div>
-                <div class="university-card"><a href="num.html" class="no-underline"><img src="../images/National_University_of_Cambodia_logo.png" alt="NUM"><p>NUM</p></a></div>
-                <div class="university-card"><a href="paragon.html" class="no-underline"><img src="../images/PARAGON.jpg" alt="PARAGON"><p>PARAGON</p></a></div>
-                <div class="university-card"><a href="rule.html" class="no-underline"><img src="../images/RULE.png" alt="RULE"><p>RULE</p></a></div>
-                <div class="university-card"><a href="puc.html" class="no-underline"><img src="../images/PUC.jpg" alt="PUC"><p>PUC</p></a></div>
-                <div class="university-card"><a href="aupp.html" class="no-underline"><img src="../images/AUPP_Logo.png" alt="AUPP"><p>AUPP</p></a></div>
-                <div class="university-card"><a href="norton.html" class="no-underline"><img src="../images/nu.png" alt="NORTON"><p>NORTON</p></a></div>
-                <div class="university-card"><a href="uc.html" class="no-underline"><img src="../images/UC.jpg" alt="UC"><p>UC</p></a></div>
-                <div class="university-card"><a href="rua.html" class="no-underline"><img src="../images/RUA.png" alt="RUA"><p>RUA</p></a></div>
-                <div class="university-card"><a href="cadt.html" class="no-underline"><img src="../images/CADT.jpg" alt="CADT"><p>CADT</p></a></div>
-                <div class="university-card"><a href="camED.html" class="no-underline"><img src="../images/CamEd.png" alt="CamED"><p>CamED</p></a></div>
-                <div class="university-card"><a href="up.html" class="no-underline"><img src="../images/UP.jpg" alt="UP"><p>UP</p></a></div>
-            </div>
+    <section class="university-section" id="popular">
+        <h2><span>🔥</span> Popular Universities</h2>
+        <div class="university-grid" id="popular-list">
+            <div class="university-card" data-name="RUPP"><a href="rupp.html"><img src="../images/rupp_logo.png" alt="RUPP"><p>RUPP</p></a></div>
+            <div class="university-card" data-name="ITC"><a href="itc.html"><img src="../images/itc-cambodia.png" alt="TECHNO"><p>ITC</p></a></div>
+            <div class="university-card" data-name="UHS"><a href="uhs.html"><img src="../images/UHS_Cambodia_logo.png" alt="UHS"><p>UHS</p></a></div>
+            <div class="university-card" data-name="NUM"><a href="num.html"><img src="../images/National_University_of_Cambodia_logo.png" alt="NUM"><p>NUM</p></a></div>
+            <div class="university-card" data-name="PARAGON"><a href="paragon.html"><img src="../images/PARAGON.jpg" alt="PARAGON"><p>PARAGON</p></a></div>
+            <div class="university-card" data-name="RULE"><a href="rule.html"><img src="../images/RULE.png" alt="RULE"><p>RULE</p></a></div>
+            <div class="university-card" data-name="PUC"><a href="puc.html"><img src="../images/PUC.jpg" alt="PUC"><p>PUC</p></a></div>
+            <div class="university-card" data-name="AUPP"><a href="aupp.html"><img src="../images/AUPP_Logo.png" alt="AUPP"><p>AUPP</p></a></div>
+            <div class="university-card" data-name="NORTON"><a href="norton.html"><img src="../images/nu.png" alt="NORTON"><p>NORTON</p></a></div>
+            <div class="university-card" data-name="UC"><a href="uc.html"><img src="../images/UC.jpg" alt="UC"><p>UC</p></a></div>
+            <div class="university-card" data-name="RUA"><a href="rua.html"><img src="../images/RUA.png" alt="RUA"><p>RUA</p></a></div>
+            <div class="university-card" data-name="CADT"><a href="cadt.html"><img src="../images/CADT.jpg" alt="CADT"><p>CADT</p></a></div>
+            <div class="university-card" data-name="CamED"><a href="camED.html"><img src="../images/CamEd.png" alt="CamED"><p>CamED</p></a></div>
+            <div class="university-card" data-name="Setec"><a href="setec.html"><img src="../images/Setec.png" alt="Setec Institute"><p>Setec</p></a></div>
+            <div class="university-card" data-name="WESTERN"><a href="western.html"><img src="../images/Western.jpg" alt="Western"><p>WESTERN</p></a></div>
         </div>
     </section>
-
 
     <!-- All Universities -->
     <section class="university-section">
-        <h2>🏫 All Universities</h2>
-        <div class="scroll-container">
-            <div class="university-list" id="all-universities">
-            <div class="university-card"><a href="bbu.html" class="no-underline"><img src="../images/BBU.jpg" alt="BBU"><p>BBU</p></a></div>
-            <div class="university-card"><a href="setec.html" class="no-underline"><img src="../images/Setec.png" alt="Setec Institute"><p>Setec</p></a></div>
-            <div class="university-card"><a href="vanda.html" class="no-underline"><img src="../images/VANNDA.png" alt="Vanda Institute"><p>Vanda</p></a></div>
-            <div class="university-card"><a href="beltei.html" class="no-underline"><img src="../images/BELTIE.jpg" alt="BELTEI"><p>BELTEI</p></a></div>
-            <div class="university-card"><a href="acleda.html" class="no-underline"><img src="../images/ACLEDA.jpg" alt="ACLEDA"><p>ACLEDA</p></a></div>
-            <div class="university-card"><a href="limkokwing.html" class="no-underline"><img src="../images/Limkokwing.jpg" alt="Limkokwing"><p>LIMKOKWING</p></a></div>
-            <div class="university-card"><a href="npic.html" class="no-underline"><img src="../images/NPIC.jpg" alt="NPIC"><p>NPIC</p></a></div>
-            <div class="university-card"><a href="western.html" class="no-underline"><img src="../images/Western.jpg" alt="Western"><p>WESTERN</p></a></div>
-            <div class="university-card"><a href="asia-europ.html" class="no-underline"><img src="../images/AsiaEuro.jpg" alt="Asia Euro"><p>Asia Euro</p></a></div>
-            <div class="university-card"><a href="mekong.html" class="no-underline"><img src="../images/Mekong.png" alt="Mekong University"><p>Mekong</p></a></div>
-            <div class="university-card"><a href="rac.html" class="no-underline"><img src="../images/RAC.jpg" alt="Royal Academy of Cambodia"><p>RAC</p></a></div>
-            <div class="university-card"><a href="chea-sim.html" class="no-underline"><img src="../images/Chea Sim.jpg " alt="Chea Sim"><p>Chea Sim</p></a></div>
-            <div class="university-card"><a href="angkor.html" class="no-underline"><img src="../images/Angkor.jpg" alt="University of Angkor"><p>Angkor</p></a></div>
-            <div class="university-card"><a href="PPIU.html" class="no-underline"><img src="../images/PPIU.png" alt="PPIU"><p>PPIU</p></a></div>
-            <div class="university-card"><a href="SEA.html" class="no-underline"><img src="../images/SEA.png" alt="South-East Asia"><p>SEA</p></a></div>
-            <div class="university-card"><a href="Cam-tech.html" class="no-underline"><img src="../images/CAMTECH.png" alt="Cambodia Tech"><p>CT</p></a></div>
-            <div class="university-card"><a href="Khemarak.html" class="no-underline"><img src="../images/Khemarak.jpg" alt="Khemarak University"><p>Khemarak</p></a></div>
-            <div class="university-card"><a href="MCU.html" class="no-underline"><img src="../images/NMU.jpg" alt="Mean Chey University"><p>MCU</p></a></div>
-            <div class="university-card"><a href="NIB.html" class="no-underline"><img src="../images/NIB.jpg" alt="National Institute of Business"><p>NIB</p></a></div>
-            <div class="university-card"><a href="PPI.html" class="no-underline"><img src="../images/PreahKossomak.jpg" alt="Preah Kossomak Polytechnic Institute"><p>PPI</p></a></div>
-            <div class="university-card"><a href="SRU.html" class="no-underline"><img src="../images/SRU.png" alt="University of Svay Rieng"><p>SRU</p></a></div>
+        <h2><span>🏫</span> All Universities</h2>
+        <div class="university-grid" id="all-universities">
+            <div class="university-card" data-name="BBU"><a href="bbu.html"><img src="../images/BBU.jpg" alt="BBU"><p>BBU</p></a></div>
+            <div class="university-card" data-name="Vanda"><a href="vanda.html"><img src="../images/VANNDA.png" alt="Vanda Institute"><p>Vanda</p></a></div>
+            <div class="university-card" data-name="BELTEI"><a href="beltei.html"><img src="../images/BELTIE.jpg" alt="BELTEI"><p>BELTEI</p></a></div>
+            <div class="university-card" data-name="ACLEDA"><a href="acleda.html"><img src="../images/ACLEDA.jpg" alt="ACLEDA"><p>ACLEDA</p></a></div>
+            <div class="university-card" data-name="LIMKOKWING"><a href="limkokwing.html"><img src="../images/Limkokwing.jpg" alt="Limkokwing"><p>LIMKOKWING</p></a></div>
+            <div class="university-card" data-name="NPIC"><a href="npic.html"><img src="../images/NPIC.jpg" alt="NPIC"><p>NPIC</p></a></div>
+            <div class="university-card" data-name="WESTERN"><a href="western.html"><img src="../images/Western.jpg" alt="Western"><p>WESTERN</p></a></div>
+            <div class="university-card" data-name="Asia Euro"><a href="asia-europ.html"><img src="../images/AsiaEuro.jpg" alt="Asia Euro"><p>Asia Euro</p></a></div>
+            <div class="university-card" data-name="Mekong"><a href="mekong.html"><img src="../images/Mekong.png" alt="Mekong University"><p>Mekong</p></a></div>
+            <div class="university-card" data-name="RAC"><a href="rac.html"><img src="../images/RAC.jpg" alt="Royal Academy of Cambodia"><p>RAC</p></a></div>
+            <div class="university-card" data-name="Chea Sim"><a href="chea-sim.html"><img src="../images/Chea Sim.jpg" alt="Chea Sim"><p>Chea Sim</p></a></div>
+            <div class="university-card" data-name="Angkor"><a href="angkor.html"><img src="../images/Angkor.jpg" alt="University of Angkor"><p>Angkor</p></a></div>
+            <div class="university-card" data-name="PPIU"><a href="PPIU.html"><img src="../images/PPIU.png" alt="PPIU"><p>PPIU</p></a></div>
+            <div class="university-card" data-name="SEA"><a href="SEA.html"><img src="../images/SEA.png" alt="South-East Asia"><p>SEA</p></a></div>
+            <div class="university-card" data-name="CT"><a href="Cam-tech.html"><img src="../images/CAMTECH.png" alt="Cambodia Tech"><p>CT</p></a></div>
+            <div class="university-card" data-name="Khemarak"><a href="Khemarak.html"><img src="../images/Khemarak.jpg" alt="Khemarak University"><p>Khemarak</p></a></div>
+            <div class="university-card" data-name="MCU"><a href="MCU.html"><img src="../images/NMU.jpg" alt="Mean Chey University"><p>MCU</p></a></div>
+            <div class="university-card" data-name="NIB"><a href="NIB.html"><img src="../images/NIB.jpg" alt="National Institute of Business"><p>NIB</p></a></div>
+            <div class="university-card" data-name="PPI"><a href="PPI.html"><img src="../images/PreahKossomak.jpg" alt="Preah Kossomak Polytechnic Institute"><p>PPI</p></a></div>
+            <div class="university-card" data-name="SRU"><a href="SRU.html"><img src="../images/SRU.png" alt="University of Svay Rieng"><p>SRU</p></a></div>
         </div>
-    </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2025 Scholarship Hub. All Rights Reserved.</p>
+        <div class="footer-links mb-2">
+            <a href="#">Terms of Use</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Contact</a>
+        </div>
+        <div class="social-icons mb-2">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="mt-2">&copy; 2025 Scholarship Hub. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript for Scrolling -->
     <script>
-        function scrollLeft(listId) {
-            document.getElementById(listId).scrollBy({
-                left: -200,
-                behavior: 'smooth'
+    // Simple search filter for universities
+    function filterUniversities() {
+        const query = document.getElementById('universitySearch').value.toLowerCase();
+        document.querySelectorAll('.university-grid').forEach(grid => {
+            grid.querySelectorAll('.university-card').forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(query) ? '' : 'none';
             });
-        }
-
-        function scrollRight(listId) {
-            document.getElementById(listId).scrollBy({
-                left: 200,
-                behavior: 'smooth'
-            });
-        }
-        //======================================================================
-           // Get elements
-const menuIcon = document.getElementById("menu-icon");
-const sidebar = document.getElementById("sidebar");
-const closeBtn = document.getElementById("close-menu");
-
-// Show sidebar when menu icon is clicked
-menuIcon.addEventListener("click", function() {
-    sidebar.classList.remove("hidden"); // Remove the 'hidden' class to show sidebar
-});
-
-// Hide sidebar when close button is clicked
-closeBtn.addEventListener("click", function() {
-    sidebar.classList.add("hidden"); // Add 'hidden' class to hide sidebar
-});
-//=========================================================================
-function openTab(evt, tabName) {
-    var tabcontent = document.getElementsByClassName("tab-content");
-    for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        });
     }
-
-    var tablinks = document.getElementsByClassName("tab-link");
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
-
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.classList.add("active");
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".tab-link.active").click();
-});//============================================================
-function openTab(evt, tabName) {
-    var tabcontent = document.getElementsByClassName("tab-content");
-    for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    
-    var tablinks = document.getElementsByClassName("tab-link");
-    for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
-
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.classList.add("active");
-}
     </script>
-
 </body>
 </html>
+

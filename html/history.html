@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User History | Exploring Scholarships in Cambodia</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Base Styles */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6fb;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0055aa, #007fd9);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      padding: 1.8rem 1.5rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #0055aa;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #e3e7ee;
+      display: flex;
+      flex-direction: column;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    .tag {
+      background: #e6f2ff;
+      color: #007acc;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 0.3rem;
+      width: fit-content;
+    }
+
+    .timestamp {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 0.3rem;
+    }
+
+    .empty {
+      color: #aaa;
+      font-style: italic;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      section h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-history"></i> User Activity History</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2><i class="fas fa-graduation-cap"></i> Viewed Scholarships</h2>
+      <ul id="scholarshipHistory">
+        <li class="empty">No scholarships viewed yet.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-university"></i> Viewed Universities</h2>
+      <ul id="universityHistory">
+        <li class="empty">No universities viewed yet.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-clipboard-check"></i> Completed Questionnaires</h2>
+      <ul id="quizHistory">
+        <li class="empty">No completed questionnaires yet.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Sample data (replace with actual user data from localStorage or database)
+    const scholarshipHistory = [
+      { title: "Korea Government Scholarship 2025", viewedAt: "2025-07-06 14:30" },
+      { title: "Chevening Scholarship", viewedAt: "2025-07-05 10:00" }
+    ];
+
+    const universityHistory = [
+      { name: "Royal University of Phnom Penh", viewedAt: "2025-07-03 16:45" },
+      { name: "Institute of Technology of Cambodia", viewedAt: "2025-07-02 09:15" }
+    ];
+
+    const quizSessions = [
+      { topic: "Associate Degree Skills Quiz", completedAt: "2025-07-01 13:20" },
+      { topic: "Love Language Quiz", completedAt: "2025-06-30 11:00" }
+    ];
+
+    function renderHistory(listId, data, keyName) {
+      const container = document.getElementById(listId);
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = `<li class="empty">No ${keyName} history found.</li>`;
+        return;
+      }
+
+      data.forEach(item => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${item.title || item.name || item.topic}</strong>
+          <span class="tag">${item.title ? "Scholarship" : item.name ? "University" : "Quiz"}</span>
+          <span class="timestamp">${item.viewedAt || item.completedAt}</span>
+        `;
+        container.appendChild(li);
+      });
+    }
+
+    // Render sections
+    renderHistory('scholarshipHistory', scholarshipHistory, 'scholarship');
+    renderHistory('universityHistory', universityHistory, 'university');
+    renderHistory('quizHistory', quizSessions, 'questionnaire');
+  </script>
+</body>
+</html>

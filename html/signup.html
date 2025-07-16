@@ -2,144 +2,372 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Signup</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Your Platform</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     :root {
-      --accent-color: #2a0316;
-      --base-color: #771938;
-      --text-color: #000000;
-      --input-color: #2e2626;
+      --primary: #6A0DAD;
+      --primary-hover: #5A099A;
+      --gradient-start: #8E2DE2;
+      --gradient-end: #4A00E0;
+      --text-dark: #333;
+      --text-medium: #666;
+      --text-light: #aaa;
+      --border: #e0e0e0;
+      --white: #fff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --bg: #E6EBF5;
     }
-    * {
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      min-height: 100vh;
-      background-color: #ffffff;
-      font-family: 'Poppins', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 100vh;
+      color: var(--text-dark);
     }
-    .wrapper {
-      width: 400px;
-      padding: 30px;
-      background-color: var(--base-color);
-      border-radius: 10px;
-      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-      text-align: center;
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      max-width: 950px;
+      width: 90%;
     }
-    h1 {
-      font-size: 2rem;
-      color: #ffffff;
+
+    .left-panel {
+      flex: 1;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #fff;
+      padding: 40px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .left-panel .logo {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .left-panel .logo i {
+      font-size: 28px;
+      margin-right: 8px;
+    }
+
+    .left-panel h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .left-panel p {
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .left-panel .site-link {
+      position: absolute;
+      bottom: 30px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+
+    .left-panel .site-link:hover {
+      text-decoration: underline;
+    }
+
+    .right-panel {
+      flex-basis: 450px;
+      padding: 50px 40px;
+      box-sizing: border-box;
+      background: var(--white);
+    }
+
+    .right-panel h1 {
+      font-size: 28px;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      position: relative;
       margin-bottom: 20px;
     }
-    .input-icon {
-      position: relative;
+
+    .form-group input {
       width: 100%;
-      margin-bottom: 10px;
-    }
-    .input-icon i.left-icon {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--accent-color);
-    }
-    .input-icon i.right-icon {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: var(--accent-color);
-    }
-    .input-icon input {
-      width: 100%;
-      padding: 10px 40px 10px 35px;
-      border: 2px solid var(--input-color);
-      border-radius: 5px;
-      background-color: #fff;
-      font-size: 1rem;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: var(--accent-color);
-      color: white;
+      padding: 14px 0;
       border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+      background: transparent;
+      outline: none;
+      color: var(--text-dark);
     }
-    button:hover {
-      background-color: var(--text-color);
+
+    .form-group input:focus {
+      border-color: var(--primary);
     }
-    p {
-      margin-top: 10px;
-      color: white;
+
+    .form-group label {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      color: var(--text-light);
+      font-size: 15px;
+      pointer-events: none;
+      transition: 0.2s;
     }
-    a {
-      color: var(--accent-color);
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      font-size: 12px;
+      color: var(--primary);
+    }
+
+    .form-group input::placeholder {
+      color: transparent;
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      font-size: 14px;
+      margin: 20px 0;
+    }
+
+    .terms input {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+
+    .terms a {
+      color: var(--primary);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
-    a:hover {
+
+    .terms a:hover {
       text-decoration: underline;
+    }
+
+    .submit-button {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px var(--shadow);
+      transition: background 0.2s ease;
+    }
+
+    .submit-button:hover {
+      background: var(--primary-hover);
+    }
+
+    .divider {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 14px;
+      margin: 30px 0 20px;
+    }
+
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #fff;
+      text-decoration: none;
+    }
+    .google {
+      background: #DB4437;
+    }
+
+    .facebook {
+      background: linear-gradient(to right, #3C5B9A, #4267B2);
+    }
+
+    .social-button i {
+      margin-right: 8px;
+    }
+
+    .login-link {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text-medium);
+      text-align: center;
+    }
+
+    .login-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 850px) {
+      .container {
+        flex-direction: column;
+        max-width: 450px;
+      }
+
+      .left-panel {
+        height: 240px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .left-panel h2 {
+        font-size: 26px;
+      }
+
+      .right-panel {
+        padding: 30px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Welcome to Signup</h1>
-       <form action="../php/signup.php" method="POST" id="signup-form">
+  <main class="container">
+    <section class="left-panel">
+      <div class="logo"><i class="fas fa-fingerprint"></i> LOGO</div>
+      <h2>Welcome</h2>
+      <p>Sign up to<br>continue access</p>
+      <a href="https://www.yoursite.com" class="site-link">www.yoursite.com</a>
+    </section>
+
+    <section class="right-panel">
+      <h1>Create Account</h1>
+      <form action="../php/signup.php" method="POST" autocomplete="on">
+        <div class="form-group">
+          <input type="text" id="firstname" name="firstname" required placeholder=" " autocomplete="name" />
+          <label for="name">Full Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+          <label for="email">Email</label>
+        </div>
+        <div class="form-group" style="position: relative;">
+        <input type="password" id="password" name="password" required placeholder=" " autocomplete="new-password" />
+        <label for="password">Password</label>
+        <i class="fa-solid fa-eye-slash toggle-password" id="toggle-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;"></i>
+        </div>
+        <div class="form-group" style="position: relative;">
+        <input type="password" id="repeat-password" name="repeat-password" required placeholder=" " />
+        <label for="repeat-password">Repeat Password</label>
+        <i class="fa-solid fa-eye-slash toggle-password" id="toggle-repeat-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;"></i>
+        </div>
 
 
-      <div class="input-icon">
-        <i class="fa-solid fa-user left-icon"></i>
-        <input required type="text" name="firstname" id="firstname-input" placeholder="First Name">
-      </div>
-      <div class="input-icon">
-        <i class="fa-solid fa-envelope left-icon"></i>
-        <input required type="email" name="email" id="email-input" placeholder="Email">
-      </div>
-      <div class="input-icon">
-        <i class="fa-solid fa-key left-icon"></i>
-        <input required type="password" name="password" id="password-input" placeholder="Password">
-        <i class="fa-solid fa-eye-slash right-icon" id="password-input-icon" onclick="togglePasswordVisibility('password-input')"></i>
-      </div>
-      <div class="input-icon">
-        <i class="fa-solid fa-rotate-left left-icon"></i>
-        <input required type="password" name="repeat-password" id="repeat-password-input" placeholder="Repeat Password">
-        <i class="fa-solid fa-eye-slash right-icon" id="repeat-password-input-icon" onclick="togglePasswordVisibility('repeat-password-input')"></i>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="login.html">Login</a></p>
-  </div>
+        <div class="terms">
+          <input type="checkbox" id="terms" required />
+          <label for="terms">I agree with the <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a></label>
+        </div>
 
+        <button type="submit" class="submit-button">Register</button>
+      </form>
+
+      <div class="divider">or connect with</div>
+      <div class="social-buttons">
+          <a href="../php/google-login.php" class="social-button google">
+        <i class="fab fa-google"></i> Login with Google
+      </a>
+
+      <a href="../php/facebook-login.php" class="social-button facebook">
+        <i class="fab fa-facebook-f"></i> Login with Facebook
+      </a>
+      </div>
+      <div class="login-link">
+        Already have an account? <a href="login.html">Login</a>
+      </div>
+    </section>
+  </main>
   <script>
-    function togglePasswordVisibility(id) {
-      const input = document.getElementById(id);
-      const icon = document.getElementById(id + "-icon");
-      if (input.type === "password") {
-        input.type = "text";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-      } else {
-        input.type = "password";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
+  function setupTogglePassword(id, toggleId) {
+    const input = document.getElementById(id);
+    const icon = document.getElementById(toggleId);
+    
+    icon.addEventListener('click', () => {
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      icon.classList.toggle('fa-eye');
+      icon.classList.toggle('fa-eye-slash');
+    });
+  }
+
+  // Setup for each password field
+  setupTogglePassword('password', 'toggle-password');
+  const repeatPassword = document.getElementById('repeat-password');
+  if (repeatPassword) {
+    setupTogglePassword('repeat-password', 'toggle-repeat-password');
+  }
+
+document.getElementById("signup-form").addEventListener("submit", function (e) {
+  const agree = document.getElementById("agree-terms");
+
+  if (!agree.checked) {
+    e.preventDefault();
+    alert("❌ You must agree to the Terms and Privacy Policy.");
+  }
+});
+
+
+  const form = document.querySelector("form");
+  form.addEventListener("submit", function (e) {
+    const pwd = document.getElementById("password").value;
+    const repeatPwdField = document.getElementById("repeat-password");
+
+    if (repeatPwdField) {
+      const repeatPwd = repeatPwdField.value;
+      if (pwd !== repeatPwd) {
+        e.preventDefault();
+        alert("Passwords do not match!");
       }
     }
+  });
+</script>
 
-  </script>
 </body>
 </html>
+
+

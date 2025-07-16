@@ -1,175 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Scholarships in Cambodia | Scholarship Hub</title>
-  <link rel="stylesheet" href="../css/test.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarships in Cambodia | Scholarship Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        .hero-bg {
+            background: linear-gradient(120deg, #6366f1 0%, #362ab8 100%), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            min-height: 480px;
+            position: relative;
+        }
+        .hero-overlay {
+            background: rgba(30, 41, 59, 0.65);
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quick-card:hover, .quick-card:focus {
+            box-shadow: 0 8px 32px rgba(59,130,246,0.13);
+            transform: translateY(-4px) scale(1.03);
+            outline: none;
+        }
+        .scholarship-card:hover, .scholarship-card:focus-within {
+            box-shadow: 0 8px 24px rgba(59,130,246,0.13);
+            transform: translateY(-4px) scale(1.01);
+            outline: none;
+        }
+        .faq-item:hover, .faq-item:focus {
+            background: #e0e7ff;
+            box-shadow: 0 4px 16px rgba(99,102,241,0.13);
+            outline: none;
+        }
+        .footer-links a:hover, .footer-links a:focus { color: #60a5fa; outline: none; }
+        .social-icons a:hover, .social-icons a:focus { color: #fff; outline: none; }
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
 
- <!-- 🎓 Hero Section -->
-<header class="header">
-  <video autoplay muted loop class="background-video">
-    <source src="../vdo/6550419-uhd_3840_2160_25fps.mp4" type="video/mp4">
-  </video>
-  
-  <!-- 🌍 Navigation Bar (Inside Video) -->
-  <nav class="navbar">
-    <div class="logo-container">
-      
-      🎓 <span>Exploring Scholarships in Cambodia</span>
-    </div>
-    <ul class="nav-links">
-      
-      <li><a href="signup.html" class="btn">Sign Up</a></li>
-    </ul>
-  </nav>
-
-  <div class="overlay">
-    <div class="hero-content">
-      <h1>About Exploring Scholarships in Cambodia</h1>
-      <p>Exploring Scholarships in Cambodia is a platform dedicated to helping Cambodian students discover scholarship opportunities both within Cambodia and abroad. Our mission is to make education accessible and to guide students through the process of finding and applying for scholarships.</p>
-        <!-- Button to go to the next page -->
-        <a href="explore-now.html" class="btn"> Next Page</a>
-      </div>
-    </div>
-  </div>
-  </head>
-  
-
-
-<!-- 🎓 Featured Scholarships -->
-<section class="scholarships">
-  <h2>🎓 Availbale scholarship in cambodia.</h2>
-  <div class="scholarship-container">
-      <!-- Scholarship 1 -->
-      <div class="scholarship-card">
-          <div class="scholarship-header">
-              <h3>Kampuchea Higher Education Grant</h3>
-              <p>Financial aid for students in rural Cambodia.</p>
-          </div>
-          <div class="scholarship-footer">
-              <a href="kampuchea-details.html" class="details-btn">Learn More</a>
-          </div>
-      </div>
-
-      <!-- Scholarship 2 (New) -->
-      <div class="scholarship-card">
-          <div class="scholarship-header">
-              <h3>Overseas Study Scholarship</h3>
-              <p>Support for Cambodian students to study abroad.</p>
-          </div>
-          <div class="scholarship-footer">
-            <a href="explore-details.html" class="details-btn">Explore Details</a>
-          </div>
-      </div>
-
-  </div>
-</section>
-
-<section class="faq">
-  <h2>Frequently Asked Questions</h2>
-
-  <div class="faq-item" onclick="reloadFAQPage()">
-      <h3>The journey towards scholarship opportunities.</h3>
-      <p>Visit the scholarship page and follow the instructions.</p>
-  </div>
-
-  <div class="faq-item" onclick="reloadFAQPage()">
-      <h3>What documents do I need?</h3>
-      <p>Common documents include transcripts and recommendation letters.</p>
-  </div>
-</section>
-
-<script>
-  function reloadFAQPage() {
-      window.location.href = "faqs.html"; // Redirects to the FAQ page
-  }
-</script>
-
-
-<a!-- 🎥 Video Below Title -->
-<section class="video-section">
-  <h2>The journey to success!</h2>
-  <video controls>
-    <source src="../vdo/schorlorship.mp4" type="video/mp4">
-  </video>
-</section>
-
-<!-- 📩 Contact Section -->
-<section class="contact">
-  <h2>Contact Us</h2>
-  <form action="../php/contact.php" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button class="btn" type="submit">Send Message</button>
-  </form>
-</section>
-
- <!-- 🌎 Footer -->
- <footer class="footer">
-  <div class="footer-links">
-      <div>
-          <h3>About</h3>
-          <a href="about-us.html">About us</a>
-          <a href="scholarship-policy.html">Scholarship Policy</a>
-          <a href="blog.html">Blog</a>
-      </div>
-      <div>
-          <h3>Opportunities</h3>
-          <a href="scholarship-by-province.html">Find Scholarships by Province</a>
-          <a href="undergratuate.html">Undergraduate Scholarship</a>
-          <a href="postgratuate.html">Postgraduate Scholarships</a>
-      </div>
-      <div>
-          <h3>Useful links</h3>
-          <a href="free-resources.html">Free Resource</a>
-      </div>
-      <div>
-          <h3>Support</h3>
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="faqs.html">FAQs</a>
-      </div>
-
-        <h3>Connect</h3>
-        <div class="social-icons">
-            <a href="https://www.facebook.com/share/161V5KMnMx/"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com/borasy.27?igsh=MXRoaXQxZWNxZGIxYw=="><i class="fab fa-instagram"></i></a>
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <div class="text-2xl font-bold text-blue-600 tracking-tight">🎓Exploring Scholarships in Cambodia</div>
+            <nav class="flex items-center gap-6">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="recmm.html" class="nav-link">Quizzes</a>
+                <a href="university-list.html" class="nav-link">University</a>
+                <a href="all-scholarship.html" class="nav-link">Scholarship</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600"><i class="fas fa-search"></i></a>
+                <a href="#" class="text-gray-700 hover:text-blue-600"><i class="fas fa-user-circle"></i></a>
+                <a href="#" class="text-gray-700 hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a>
+            </nav>
         </div>
+    </header>
 
-  </div>
-  <div class="footer-bottom">
-      <p>© 2025 Scholarships in Cambodia. All rights reserved.</p>
-  </div>
-</footer>
+    <!-- Hero Section -->
+<section class="hero-bg min-h-[700px] flex items-center justify-center">
+    <div class="hero-overlay w-full flex items-center justify-center">
+        <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-12 gap-10">
+            <!-- Left: Text Content -->
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                    Empowering Students<br>Through Scholarships
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100 mb-8">
+                    We help Cambodian students discover opportunities locally and globally.<br>
+                    Our mission is to make higher education accessible to all.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start mb-8">
+                    <a href="all-scholarship.html" class="quick-card flex items-center gap-3 bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-50 transition">
+                        <i class="fas fa-graduation-cap text-xl"></i> Scholarships
+                    </a>
+                    <a href="university-list.html" class="quick-card flex items-center gap-3 bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-50 transition">
+                        <i class="fas fa-university text-xl"></i> Universities
+                    </a>
+                    <a href="recmm.html" class="quick-card flex items-center gap-3 bg-white text-blue-700 px-6 py-3 rounded-xl font-semibold shadow hover:bg-blue-50 transition">
+                        <i class="fas fa-lightbulb text-xl"></i> Recommendations
+                    </a>
+                </div>
+                <a href="#features" class="inline-block text-white text-2xl animate-bounce"><i class="fas fa-chevron-down"></i></a>
+            </div>
+            <!-- Right: Video Content -->
+            <div class="flex-1 flex items-center justify-center">
+                <div class="bg-white bg-opacity-80 rounded-2xl shadow-lg p-4 md:p-6 w-full max-w-md">
+                    <video controls poster="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="rounded-xl w-full h-60 object-cover">
+                        <source src="../vdo/schorlorship.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="mt-3 flex items-center justify-center">
+                        <button class="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-2 rounded-full flex items-center gap-2 shadow transition">
+                            <i class="fas fa-play"></i> Watch the Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+    <!-- Featured Scholarships -->
+<section class="py-14 bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-extrabold text-blue-800 mb-10 flex items-center gap-3">
+            <i class="fas fa-award text-yellow-400"></i>
+            Featured Scholarships in Cambodia
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="scholarship-card bg-white rounded-2xl shadow-lg p-7 flex flex-col justify-between border border-blue-100 hover:border-blue-400 transition group">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-university text-2xl text-blue-500 group-hover:text-blue-700"></i>
+                        <h3 class="font-bold text-lg text-gray-900 group-hover:text-blue-700 transition">Kampuchea Higher Education Grant</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Financial aid for students in rural Cambodia. <span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded ml-2">Local</span></p>
+                </div>
+                <a href="kampuchea-details.html" class="inline-block mt-2 bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition shadow group-hover:scale-105">Learn More</a>
+            </div>
+            <!-- Card 2 -->
+            <div class="scholarship-card bg-white rounded-2xl shadow-lg p-7 flex flex-col justify-between border border-blue-100 hover:border-blue-400 transition group">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-globe-asia text-2xl text-green-500 group-hover:text-green-700"></i>
+                        <h3 class="font-bold text-lg text-gray-900 group-hover:text-green-700 transition">Overseas Study Scholarship</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Support for Cambodian students to study abroad. <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded ml-2">International</span></p>
+                </div>
+                <a href="explore-details.html" class="inline-block mt-2 bg-green-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-green-700 transition shadow group-hover:scale-105">Explore Details</a>
+            </div>
+            <!-- Card 3 (Example) -->
+            <div class="scholarship-card bg-white rounded-2xl shadow-lg p-7 flex flex-col justify-between border border-blue-100 hover:border-blue-400 transition group">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fas fa-user-graduate text-2xl text-purple-500 group-hover:text-purple-700"></i>
+                        <h3 class="font-bold text-lg text-gray-900 group-hover:text-purple-700 transition">STEM Excellence Award</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">For outstanding students in Science, Technology, Engineering, and Math. <span class="inline-block bg-purple-100 text-purple-700 text-xs px-2 py-0.5 rounded ml-2">STEM</span></p>
+                </div>
+                <a href="#" class="inline-block mt-2 bg-purple-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-purple-700 transition shadow group-hover:scale-105">See Details</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-<!-- 📂 Sidebar Menu -->
-<div id="sidebar" class="hidden">
-  <button class="close-btn" id="close-menu">×</button>
-  <div class="profile">
-    <img src="user-placeholder.png" alt="Profile Picture">
-    <h3>Guest User</h3>
-    <a href="#">+ Add your university or school</a>
-  </div>
-  <ul>
-    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-    <li><a href="#"><i class="fa fa-book"></i> My Library</a></li>
-    <li><a href="#"><i class="fa fa-sticky-note"></i> AI Notes <span class="new-badge">New</span></a></li>
-    <li><a href="#"><i class="fa fa-comments"></i> Ask AI</a></li>
-    <li><a href="#"><i class="fa fa-envelope"></i> Chats</a></li>
-    <li><a href="#"><i class="fa fa-clock"></i> Recent</a></li>
-  </ul>
-</div>
+<!-- FAQ Section -->
+<section class="py-14 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-extrabold text-blue-800 mb-10 flex items-center gap-3">
+            <i class="fas fa-question-circle text-blue-400"></i>
+            Frequently Asked Questions
+        </h2>
+        <div class="space-y-6">
+            <div class="faq-item bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 shadow-md cursor-pointer border border-blue-100 hover:border-blue-400 transition group" tabindex="0" onclick="window.location.href='faqs.html'">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-route text-blue-500 group-hover:text-blue-700 text-xl"></i>
+                    <h3 class="font-semibold text-lg text-gray-900 group-hover:text-blue-700 transition">How do I start my scholarship journey?</h3>
+                </div>
+                <p class="text-gray-600 ml-8">Visit the scholarship page and follow the instructions to apply.</p>
+            </div>
+            <div class="faq-item bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 shadow-md cursor-pointer border border-blue-100 hover:border-blue-400 transition group" tabindex="0" onclick="window.location.href='faqs.html'">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-file-alt text-green-500 group-hover:text-green-700 text-xl"></i>
+                    <h3 class="font-semibold text-lg text-gray-900 group-hover:text-green-700 transition">What documents do I need?</h3>
+                </div>
+                <p class="text-gray-600 ml-8">Common documents include transcripts, recommendation letters, and a personal statement.</p>
+            </div>
+            <div class="faq-item bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 shadow-md cursor-pointer border border-blue-100 hover:border-blue-400 transition group" tabindex="0" onclick="window.location.href='faqs.html'">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fas fa-calendar-check text-purple-500 group-hover:text-purple-700 text-xl"></i>
+                    <h3 class="font-semibold text-lg text-gray-900 group-hover:text-purple-700 transition">When are the deadlines?</h3>
+                </div>
+                <p class="text-gray-600 ml-8">Deadlines vary by scholarship. Check each listing for details.</p>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Video Section -->
+    <section class="py-12 bg-blue-50">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-blue-700 mb-6">The Journey to Success!</h2>
+            <video controls class="rounded-xl shadow-lg w-full max-w-2xl mx-auto">
+                <source src="../vdo/schorlorship.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+<section class="py-12 bg-white">
+    <div class="max-w-lg mx-auto px-4">
+        <h2 class="text-2xl font-bold text-blue-700 mb-6">Contact Us</h2>
+        <form action="../php/contact.php" method="POST" class="space-y-4" onsubmit="return validateContactForm()">
+            <input type="text" id="name" name="name" placeholder="Your Name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" id="email" name="email" placeholder="Your Email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea id="message" name="message" placeholder="Your Message" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition w-full" type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
 
-<!-- JavaScript for Sidebar Toggle -->
-<script src="university-data.js"></script>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-200 py-8 mt-8">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 px-4">
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">About</h3>
+                <a href="about-us.html" class="footer-links block mb-1">About us</a>
+                <a href="blog.html" class="footer-links block mb-1">Blog</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Opportunities</h3>
+                <a href="undergratuate.html" class="footer-links block mb-1">Undergraduate Scholarship</a>
+                <a href="postgratuate.html" class="footer-links block mb-1">Postgraduate Scholarships</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Useful links</h3>
+                <a href="free-resources.html" class="footer-links block mb-1">Free Resource</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Support</h3>
+                <a href="privacy-policy.html" class="footer-links block mb-1">Privacy Policy</a>
+                <a href="faqs.html" class="footer-links block mb-1">FAQs</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Connect</h3>
+                <div class="social-icons flex gap-4 mt-2">
+                    <a href="https://www.facebook.com/share/161V5KMnMx/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/borasy.27?igsh=MXRoaXQxZWNxZGIxYw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 mt-8">
+            © 2025 Scholarships in Cambodia. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Sidebar (hidden by default, add JS to toggle if needed) -->
+    <div id="sidebar" class="hidden fixed inset-0 bg-black bg-opacity-40 z-50">
+        <div class="bg-white w-80 h-full shadow-xl p-6 flex flex-col">
+            <button class="self-end text-2xl mb-4" onclick="document.getElementById('sidebar').classList.add('hidden')">&times;</button>
+            <div class="profile flex flex-col items-center mb-6">
+                <img src="user-placeholder.png" alt="Profile Picture" class="w-20 h-20 rounded-full mb-2">
+                <h3 class="font-bold text-lg">Guest User</h3>
+                <a href="#" class="text-blue-600 mt-2">+ Add your university or school</a>
+            </div>
+            <ul class="space-y-3">
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-book"></i> My Library</a></li>
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-sticky-note"></i> AI Notes <span class="bg-blue-600 text-white text-xs px-2 py-0.5 rounded ml-2">New</span></a></li>
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-comments"></i> Ask AI</a></li>
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-envelope"></i> Chats</a></li>
+                <li><a href="#" class="flex items-center gap-2 text-gray-700 hover:text-blue-600"><i class="fa fa-clock"></i> Recent</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="university-data.js"></script>
 <script src="province-data.js"></script>
 <script>
   const menuIcon = document.getElementById("menu-icon");
@@ -285,6 +375,6 @@ document.getElementById("exploreNow").addEventListener("click", function(event) 
       document.getElementById("exploreNow").addEventListener("click", saveSelection);
     
   </script>
-
 </body>
 </html>
+

@@ -1,13 +1,14 @@
 <?php
 header('Content-Type: application/json');
 
+// Connect to scholarshipdb
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'scholarshipdb';
+$scholarshipDb = 'scholarshipdb';
+$userDb = 'userdb';
 
-$conn = new mysqli($host, $username, $password, $dbname);
-
+$conn = new mysqli($host, $username, $password, $scholarshipDb);
 if ($conn->connect_error) {
     http_response_code(500);
     echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
@@ -16,7 +17,7 @@ if ($conn->connect_error) {
 
 $response = [
     "feedback" => 0,
-    "university" => 0,
+    "universities" => 0,
     "scholarships" => 0,
     "users" => 0
 ];
@@ -39,8 +40,9 @@ if ($result) {
     $response["scholarships"] = (int)$result->fetch_assoc()['count'];
 }
 
-// Users count (from another DB)
-$result = $conn->query("SELECT COUNT(*) AS count FROM userdb.users");
+// 🔄 Switch to userdb to count users
+$conn->select_db($userDb);
+$result = $conn->query("SELECT COUNT(*) AS count FROM users");
 if ($result) {
     $response["users"] = (int)$result->fetch_assoc()['count'];
 }

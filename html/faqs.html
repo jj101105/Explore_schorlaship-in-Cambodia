@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | Scholarships in Cambodia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #6a0dad;
+            text-align: center;
+        }
+        .faq-item {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background: #f0f0f0;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .faq-question h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .faq-answer {
+            margin-top: 10px;
+            font-size: 1rem;
+            display: none;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .back-btn {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #6a0dad;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #540b9b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq">
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Why was Scholarships in Cambodia created?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">We created this platform to help students in Cambodia easily find scholarships, get guidance, and receive financial aid for their education.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How do we support students?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">We provide free access to a large database of scholarships, offer mentorship programs, and share application tips to increase your chances of success.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Who can apply for these scholarships?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Our platform provides opportunities for high school graduates, university students, and postgraduate candidates. Each scholarship has its own criteria.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>How do I apply for a scholarship?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Visit our scholarship page, choose an opportunity that fits your eligibility, and follow the application instructions carefully.</p>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>What documents do I need to apply?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Most scholarships require transcripts, recommendation letters, a personal statement, and proof of financial need.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Are there scholarships for international studies?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Yes, we provide information on scholarships for Cambodian students who want to study abroad in different countries.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Can I apply for multiple scholarships?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Yes, you can apply for multiple scholarships, as long as you meet the eligibility criteria for each one.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>What should I do if my application is rejected?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">If your application is rejected, don’t be discouraged. Learn from feedback, improve your documents, and reapply next year.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Do scholarships cover full tuition fees?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">Some scholarships cover full tuition, while others are partial. Always check the scholarship details to understand what’s covered.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Where can I get help with my application?</h3>
+                <span class="faq-icon">➕</span>
+            </div>
+            <p class="faq-answer">You can seek guidance from school counselors, university advisors, or online forums that specialize in scholarships.</p>
+        </div>
+    </div>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-btn">Back to Home</a>
+</div>
+
+<!-- JavaScript for FAQ Accordion -->
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            const icon = question.querySelector('.faq-icon');
+
+            if (faqItem.classList.contains('active')) {
+                faqItem.classList.remove('active');
+                icon.textContent = '➕';
+            } else {
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-icon').textContent = '➕';
+                });
+                faqItem.classList.add('active');
+                icon.textContent = '➖';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

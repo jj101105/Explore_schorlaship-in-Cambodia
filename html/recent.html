@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recent Activity | My History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Base styling */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #2a2a2a;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin: 30px 0 15px;
+      color: #444;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background: #fafafa;
+      border: 1px solid #e2e2e2;
+      margin-bottom: 10px;
+      padding: 12px 18px;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+
+    li:hover {
+      background: #f0f4ff;
+      border-color: #b5ceff;
+    }
+
+    .time {
+      font-size: 13px;
+      color: #777;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .empty {
+      font-style: italic;
+      color: #888;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #d72638;
+      color: white;
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #b91d2b;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h2>🕘 My Recent Activity</h2>
+
+    <div class="section">
+      <h3>🎓 Viewed Scholarships</h3>
+      <ul id="scholarshipList"></ul>
+    </div>
+
+    <div class="section">
+      <h3>🏫 Viewed Universities</h3>
+      <ul id="universityList"></ul>
+    </div>
+
+    <div class="section">
+      <h3>📝 Completed Questionnaires</h3>
+      <ul id="qcmList"></ul>
+    </div>
+
+    <button onclick="clearHistory()">🗑 Clear All History</button>
+  </div>
+
+  <script>
+    // Sample history data
+    const exampleData = [
+      {
+        type: "view_scholarship",
+        title: "STEM Scholarship 2025",
+        item_id: 101,
+        time: "2025-07-03 10:45 AM"
+      },
+      {
+        type: "view_university",
+        title: "Royal University of Phnom Penh (RUPP)",
+        item_id: 12,
+        time: "2025-07-03 10:50 AM"
+      },
+      {
+        type: "complete_qcm",
+        title: "Bachelor Degree Questionnaire",
+        item_id: "qcm_bachelor_01",
+        time: "2025-07-03 11:00 AM"
+      }
+    ];
+
+    // Load default data only if none exists
+    if (!localStorage.getItem('userHistory')) {
+      localStorage.setItem('userHistory', JSON.stringify(exampleData));
+    }
+
+    function loadHistory() {
+      const history = JSON.parse(localStorage.getItem('userHistory') || '[]');
+
+      const scholarships = history.filter(h => h.type === 'view_scholarship');
+      const universities = history.filter(h => h.type === 'view_university');
+      const qcms = history.filter(h => h.type === 'complete_qcm');
+
+      renderList('scholarshipList', scholarships);
+      renderList('universityList', universities);
+      renderList('qcmList', qcms);
+    }
+
+function getUrl(historyItem) {
+  if (historyItem.type === 'view_scholarship') {
+    return `/html/scholarship.html?id=${historyItem.item_id}`;
+  } else if (historyItem.type === 'view_university') {
+    switch (historyItem.title) {
+      case "Royal University of Phnom Penh (RUPP)":
+        return '/html/rupp.html';
+      case "National University (NU)":
+        return '/html/nu.html';
+      case "Some Other University":
+        return '/html/other-university.html';
+      default:
+        return `/html/university.html?id=${historyItem.item_id}`;
+    }
+  } else if (historyItem.type === 'complete_qcm') {
+    return `/html/questionnaire_${historyItem.item_id}.html`;
+  }
+  return '#';
+}
+
+
+
+ function renderList(elementId, data) {
+  const container = document.getElementById(elementId);
+  if (data.length === 0) {
+    container.innerHTML = `<li class="empty">No activity recorded.</li>`;
+    return;
+  }
+  container.innerHTML = data.map(h => {
+    const url = getUrl(h);
+    return `
+      <li>
+        <a href="${url}" style="text-decoration:none; color:inherit; display:block;">
+          <strong>${h.title}</strong>
+          <span class="time">${h.time}</span>
+        </a>
+      </li>
+    `;
+  }).join('');
+}
+
+
+
+    function clearHistory() {
+      if (confirm("Clear all history?")) {
+        localStorage.removeItem('userHistory');
+        loadHistory();
+      }
+    }
+
+    // Run on load
+    loadHistory();
+  </script>
+
+</body>
+</html>

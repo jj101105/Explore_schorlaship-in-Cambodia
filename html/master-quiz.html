@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Degrees Quiz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            flex-direction: column; /* Allow content to stack vertically */
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0; /* Remove body padding, container will handle it */
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: #ffffff;
+            width: 100%;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        .nav-link {
+            color: #4b5563;
+            font-weight: 500;
+            margin-left: 1.5rem;
+            transition: color 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #2563eb;
+        }
+        .hero-section {
+            background-color: #555099; /* Deep purple/blue background */
+            width: 100%;
+            padding: 4rem 2rem;
+            color: white;
+            display: flex;
+            flex-direction: column; /* Default to column for small screens */
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* For circular elements */
+            min-height: 450px; /* Ensure enough height for content */
+        }
+        .hero-main-content {
+            max-width: 1200px; /* Wider content area for hero */
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Default to column */
+            align-items: center;
+            justify-content: center;
+            gap: 2rem; /* Space between text and image sections */
+            z-index: 10;
+        }
+        @media (min-width: 768px) { /* Medium screens and up */
+            .hero-main-content {
+                flex-direction: row; /* Row layout for larger screens */
+                justify-content: space-between;
+                text-align: left;
+            }
+            .hero-text-content {
+                flex: 1;
+                max-width: 50%; /* Text takes half width */
+                align-items: flex-start;
+            }
+            .hero-image-content {
+                flex: 1;
+                max-width: 50%; /* Images take half width */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .hero-text-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center for small screens */
+        }
+        @media (min-width: 768px) {
+            .hero-text-content {
+                align-items: flex-start; /* Align left for larger screens */
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem; /* Slightly smaller for better fit */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            font-size: 1.125rem; /* Slightly smaller */
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+        .language-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .language-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .language-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .language-btn.active {
+            background-color: #ffffff;
+            color: #6366f1;
+            font-weight: 600;
+        }
+        .start-button {
+            background-color: #87ccec; /* Red button */
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 6px 15px rgba(96, 114, 203, 0.4);
+        }
+        .start-button:hover {
+            background-color: #b793ef;
+            transform: translateY(-2px);
+        }
+        .start-button:active {
+            transform: translateY(0);
+        }
+
+        /* Circular elements for hero section background */
+        .circle-1 {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -50px;
+            left: -50px;
+        }
+        .circle-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+        }
+        .circle-3 {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+        }
+
+        /* Hero Image Content */
+        .hero-image-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            position: relative; /* For absolute positioning of circular image */
+        }
+        .circular-image-container {
+            width: 250px; /* Size of the main circular image */
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.3); /* White border */
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.1); /* Inner glow */
+            position: relative;
+            z-index: 5;
+        }
+        .circular-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .stacked-images {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: absolute; /* Position relative to hero-image-content */
+            right: -80px; /* Adjust as needed */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+        }
+        .stacked-images img {
+            width: 100px; /* Size of stacked images */
+            height: 70px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            width: 100%;
+            max-width: 1200px; /* Wider content area */
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-card-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            max-width: 768px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 2rem; /* Space from hero section */
+        }
+        .question-card {
+            background-color: #f9fafb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e5e7eb;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #d1d5db;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .option-label:hover {
+            background-color: #eff6ff;
+            border-color: #93c5fd;
+        }
+        .option-label input[type="radio"]:checked + span {
+            font-weight: 600;
+            color: #2563eb;
+        }
+        .option-label input[type="radio"]:checked {
+            accent-color: #3b82f6;
+        }
+        .submit-button, .nav-quiz-button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+        }
+        .submit-button:hover, .nav-quiz-button:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .submit-button:active, .nav-quiz-button:active {
+            transform: translateY(0);
+        }
+        .results-section {
+            background-color: #f0f9ff;
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid #bfdbfe;
+            text-align: center;
+        }
+        .result-title {
+            color: #1d4ed8;
+        }
+        .result-description {
+            color: #4b5563;
+        }
+
+        /* Quiz Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        .quiz-navigation button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .quiz-navigation button:hover:not(:disabled) {
+            background-color: #d1d5db;
+        }
+        .quiz-navigation button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results Page Styling */
+        .results-page {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        @media (min-width: 768px) {
+            .results-page {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-around;
+            }
+        }
+
+        .results-chart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #e5e7eb; /* Neutral background for the circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0; /* Prevent shrinking on smaller screens */
+            box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+        }
+        .results-chart-inner {
+            width: 120px;
+            height: 120px;
+            background-color: #f0f9ff; /* Inner circle background */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #4b5563;
+            font-weight: 600;
+        }
+        .results-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 350px; /* Limit width for readability */
+        }
+        .results-list li {
+            display: flex;
+            align-items: center; /* Align icon and text vertically */
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 1.1rem;
+            color: #374151;
+        }
+        .results-list li:last-child {
+            border-bottom: none;
+        }
+        .results-list li .icon {
+            margin-right: 0.75rem;
+            font-size: 1.2rem; /* Slightly larger icons */
+            width: 24px; /* Fixed width for icons */
+            text-align: center;
+        }
+        .results-list li strong {
+            margin-left: auto; /* Push value to the right */
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .results-list li a {
+            color: #3b82f6; /* Link color for universities */
+            text-decoration: underline;
+        }
+
+        .result-primary-language {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #1d4ed8;
+            margin-bottom: 1rem;
+        }
+        .result-description-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid #e5e7eb;
+        }
+        .result-description-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+        .result-description-card p {
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        .result-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .result-actions button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .result-actions button:hover {
+            background-color: #d1d5db;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #6b7280;
+            cursor: pointer;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        .modal-select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background-color: white; /* Ensure consistent background */
+        }
+        .modal-submit-btn {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            width: 100%;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .modal-submit-btn:hover {
+            background-color: #dc2626;
+        }
+        .modal-info-text {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+
+        .additional-quizzes-section {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .quiz-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            text-align: left;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid #e5e7eb;
+        }
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .quiz-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+        .quiz-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-card-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+
+        /* Dive Deeper Section */
+        .dive-deeper-section {
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .book-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .book-card img {
+            width: 150px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .book-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .book-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #dc2626; /* Red for price */
+        }
+        .book-price span {
+            font-weight: 400;
+            color: #6b7280;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #1f2937; /* Dark gray background */
+            color: #d1d5db;
+            width: 100%;
+            padding: 2rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .footer-links a {
+            color: #93c5fd;
+            margin: 0 0.75rem;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        .footer-links a:hover {
+            color: #60a5fa;
+        }
+        .social-icons a {
+            color: #d1d5db;
+            font-size: 1.5rem;
+            margin: 0 0.75rem;
+            transition: color 0.2s ease-in-out;
+        }
+        .social-icons a:hover {
+            color: #ffffff;
+        }
+        
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">Exploring Scholarship in Cambodia </div>
+        <nav class="flex items-center">
+            <a href="index1.html" class="nav-link">Home</a>
+            <a href="recmm.html" class="nav-link">Quizzes</a>
+            <a href="university-list.html" class="nav-link">University</a>
+            <a href="all-scholarship.html" class="nav-link">Scholarship</a>
+            <!-- Search Button -->
+            <button id="searchToggle" class="nav-link bg-transparent border-none p-0" aria-label="Search" style="background:none;">
+                <i class="fas fa-search"></i>
+            </button>
+            <a href="#" class="nav-link" aria-label="User"><i class="fas fa-user-circle"></i></a>
+        </nav>
+        <!-- Search Bar (hidden by default) -->
+        <div id="searchBar" class="absolute right-8 top-20 bg-white rounded-lg shadow-lg p-2 flex items-center gap-2" style="display:none; z-index:200;">
+            <input type="text" id="searchInput" class="border border-gray-300 rounded px-3 py-1 focus:outline-none" placeholder="Search scholarships, universities...">
+            <button id="searchBtn" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" aria-label="Submit Search">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </header>
+    <!-- Hero Section -->
+<section class="hero-section" id="heroSection">
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+    <div class="circle-3"></div>
+    <div class="hero-main-content">
+        <div class="hero-text-content">
+            <h1 class="hero-title">The Master Degree® Quiz</h1>
+            <p class="hero-subtitle">Degree path based on your background, skills, and goals.</p>
+            <p class="mb-6 text-lg">Take this quiz to discover your potential degree path and scholarship opportunities tailored to your profile.</p>
+            <button id="startQuizButton" class="start-button">Start Quiz</button>
+            <p class="text-sm mt-4 opacity-80">You may print, share or save your results for future reference - they will not be saved automatically.</p>
+        </div>
+        <div class="hero-image-content">
+            <div class="circular-image-container">
+                <!-- Main circular image -->
+                <img src="/images/pf-chen-zhi-scholarship.jpg" alt="Chen Zhi Scholarship" onerror="this.onerror=null;this.src='https://placehold.co/100x70/6366f1/ffffff?text=Image+Error';">
+            </div>
+            <div class="stacked-images hidden md:flex">
+                <img src="/images/uc1.jpg" alt="UC" onerror="this.onerror=null;this.src='https://placehold.co/100x70/6366f1/ffffff?text=Image+Error';">
+                <img src="/images/stu.jpg" alt="Student" onerror="this.onerror=null;this.src='https://placehold.co/250x250/6366f1/ffffff?text=Student';">
+                <img src="/images/Graduation-Ceremony-for-Class-of-2023.jpg" alt="Campus/Students" onerror="this.onerror=null;this.src='https://placehold.co/100x70/6366f1/ffffff?text=Image+Error';">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Main Content Area - Quiz Questions (initially hidden) -->
+    <div class="main-content hidden" id="quizQuestionsContainer">
+        <div class="quiz-card-container">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Your Scholarship Path Quiz</h2>
+                <button id="cancelQuizBtn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition">Cancel</button>
+            </div>
+            <div id="questionDisplay" class="mb-8">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+            <div class="quiz-navigation">
+                <button id="prevQuestionBtn" class="nav-quiz-button" disabled><i class="fas fa-arrow-left mr-2"></i> Previous</button>
+                <button id="nextQuestionBtn" class="nav-quiz-button">Next <i class="fas fa-arrow-right ml-2"></i></button>
+                <button id="submitQuizBtn" class="submit-button hidden">Submit Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area - Results Page (initially hidden) -->
+    <div class="main-content hidden" id="quizResultsPage">
+        <div class="results-page">
+            <div class="flex flex-col items-center">
+                <h2 class="text-xl font-bold text-gray-700 mb-2">Your Exploring Scholarship® Quiz Results:</h2>
+                <p id="resultsPrimaryLanguage" class="result-primary-language">Recommended Path</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 w-full justify-center">
+                <div class="results-chart-container">
+                    <div class="results-chart-inner">
+                        <!-- Icon or text inside the circle -->
+                        <i class="fas fa-graduation-cap text-4xl text-blue-500"></i>
+                    </div>
+                </div>
+                <ul id="resultsList" class="results-list">
+                    <!-- Results will be dynamically loaded here -->
+                </ul>
+            </div>
+            <div class="result-description-card w-full">
+                <h3 id="resultsDescriptionTitle">Your Path</h3>
+                <p id="resultsDescriptionText">Based on your answers, you can explore various programs. Contact local institutions for suitable scholarships or programs.</p>
+                <div class="result-actions">
+                    <button id="printResultsBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-600 transition"><i class="fas fa-print mr-2"></i> Print</button>
+                    <button id="sendResultsBtn" class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition"><i class="fas fa-envelope mr-2"></i> Send</button>
+                </div>
+            </div>
+            <button id="retakeQuizFromResults" class="mt-6 submit-button">Retake Quiz</button>
+        </div>
+
+    </div>
+
+    <!-- Send Results Modal -->
+    <div id="sendResultsModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Who would you like to send your results to?</h3>
+            <form id="sendForm">
+                <input type="text" id="yourName" class="modal-input" placeholder="Your First Name" required>
+                <input type="text" id="recipientName" class="modal-input" placeholder="Recipient's Name" required>
+                <input type="email" id="recipientEmail" class="modal-input" placeholder="Recipient's Email" required>
+                <select id="relationship" class="modal-select" required>
+                    <option value="">Select the person or group to share this with:</option>
+                    <option value="parent">Parent</option>
+                    <option value="guardian">Guardian</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="friend">Friend</option>
+                    <option value="other">Other</option>
+                </select>
+                <p class="modal-info-text">We are not storing any email addresses. It will not be added to any lists.</p>
+                <button type="submit" class="modal-submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Alert/Message Box -->
+    <div id="customMessageBox" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="messageBoxTitle" class="text-2xl font-bold text-gray-800 mb-4 text-center"></h3>
+            <p id="messageBoxText" class="text-gray-700 mb-6 text-center"></p>
+            <button id="closeMessageBoxBtn" class="modal-submit-btn">OK</button>
+        </div>
+    </div>
+
+    <!-- Additional Quizzes Section -->
+<section class="additional-quizzes-section">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">
+        Discover even more with <span class="text-blue-600">additional quizzes</span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="associate-quiz.html" class="block hover:shadow-lg transition" target="_blank">
+            <div class="quiz-card cursor-pointer">
+                <div class="quiz-card-icon"><i class="fas fa-tools"></i></div>
+                <h3 class="quiz-card-title text-xl font-semibold text-gray-700 mb-2 text-center">Associate Degree Quiz</h3>
+                <p class="quiz-card-description">Discover TVET skills, scholarships, and career tracks based on your strengths and province.</p>
+            </div>
+        </a>
+        <a href="bachelor-quiz.html" class="block hover:shadow-lg transition" target="_blank">
+            <div class="quiz-card cursor-pointer">
+                <div class="quiz-card-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="quiz-card-title text-xl font-semibold text-gray-700 mb-2 text-center">Bachelor's Degree Quiz</h3>
+                <p class="quiz-card-description text-gray-600 text-center">Find the best-fit major and scholarship opportunities using your high school subject preferences.</p>
+            </div>
+        </a>
+        <a href="master-quiz.html" class="block hover:shadow-lg transition" target="_blank">
+            <div class="quiz-card cursor-pointer">
+                <div class="quiz-card-icon"><i class="fas fa-user-graduate"></i></div>
+                <h3 class="quiz-card-title text-xl font-semibold text-gray-700 mb-2 text-center">Master's Degree Quiz</h3>
+                <p class="quiz-card-description text-gray-600 text-center">Advance your career by selecting a master's program aligned with your work experience and goals.</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons mb-4">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="footer-links mb-2">
+            <a href="#">Terms of Use</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Return Policy</a>
+        </div>
+        <p>&copy; 2025 Scholarship Explorer. All Rights Reserved.</p>
+    </footer>
+
+   <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.getElementById('heroSection');
+    const startQuizButton = document.getElementById('startQuizButton');
+    const quizQuestionsContainer = document.getElementById('quizQuestionsContainer');
+    const quizResultsPage = document.getElementById('quizResultsPage');
+    const questionDisplay = document.getElementById('questionDisplay');
+    const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    const submitQuizBtn = document.getElementById('submitQuizBtn');
+    const cancelQuizBtn = document.getElementById('cancelQuizBtn');
+    const resultsPrimaryLanguage = document.getElementById('resultsPrimaryLanguage');
+    const resultsList = document.getElementById('resultsList');
+    const resultsDescriptionTitle = document.getElementById('resultsDescriptionTitle');
+    const resultsDescriptionText = document.getElementById('resultsDescriptionText');
+    const retakeQuizFromResults = document.getElementById('retakeQuizFromResults');
+
+    // For modal/message box
+    const customMessageBox = document.getElementById('customMessageBox');
+    const messageBoxTitle = document.getElementById('messageBoxTitle');
+    const messageBoxText = document.getElementById('messageBoxText');
+    const closeMessageBoxBtn = document.getElementById('closeMessageBoxBtn');
+
+    let currentQuestionIndex = 0;
+    const userAnswers = {};
+
+    const quizData = [
+        {
+            question: "1. Which area do you want to specialize in?",
+            options: [
+                { text: "Leadership/Management", value: "math" },
+                { text: "Research", value: "literature" },
+                { text: "Teaching", value: "ict" },
+                { text: "Innovation", value: "social" },
+                
+            ]
+        },
+        {
+            question: "2. Do you have prior work experience?",
+            options: [
+                { text: "Yes", value: "yes" },
+                { text: "No", value: "no" },
+
+            ]
+        },
+        {
+            question: "3. Which province do you live in?",
+            options: [
+                { text: "Phnom Penh", value: "phnom penh" },
+                { text: "Siem Reap", value: "siem reap" },
+                { text: "Battambang", value: "battambang" },
+                { text: "Kampong Cham", value: "kampong cham" },
+                { text: "Takeo", value: "takeo" },
+                { text: "Kandal", value: "kandal" },
+                { text: "Kampot", value: "kampot" },
+                { text: "Pursat", value: "pursat" },
+                { text: "Prey Veng", value: "prey veng" },
+                { text: "Kampong Speu", value: "kampong speu" },
+                { text: "Kampong Thom", value: "kampong thom" },
+                { text: "Kampong Chhnang", value: "kampong chhnang" },
+                { text: "Banteay Meanchey", value: "banteay meanchey" },
+                { text: "Kratie", value: "kratie" },
+                { text: "Mondulkiri", value: "mondulkiri" },
+                { text: "Ratanakiri", value: "ratanakiri" },
+                { text: "Stung Treng", value: "stung treng" },
+                { text: "Svay Rieng", value: "svay rieng" },
+                { text: "Tboung Khmum", value: "tboung khmum" },
+                { text: "Preah Sihanouk", value: "preah sihanouk" },
+                { text: "Koh Kong", value: "koh kong" },
+                { text: "Kep", value: "kep" },
+                { text: "Pailin", value: "pailin" },
+                { text: "Oddar Meanchey", value: "oddar meanchey" },
+                { text: "Preah Vihear", value: "preah vihear" }
+            ]
+        }
+    ];
+
+   function getMasterRecommendation(area, experience) {
+    if (area === "math" && experience === "yes") {
+        return {
+            title: "Master of Business Administration (MBA) or Public Administration",
+            desc: "With a background in leadership/management and work experience, you are well-suited for an MBA or Public Administration program."
+        };
+    }
+    if (area === "literature" && experience === "yes") {
+        return {
+            title: "Master of Research or Social Sciences",
+            desc: "Your interest in research and prior work experience make you a great candidate for a Master's in Research, Social Sciences, or Policy Studies."
+        };
+    }
+    if (area === "ict" && experience === "yes") {
+        return {
+            title: "Master of Education or Educational Leadership",
+            desc: "With a teaching focus and work experience, consider a Master's in Education, Educational Leadership, or Curriculum Development."
+        };
+    }
+    if (area === "social" && experience === "yes") {
+        return {
+            title: "Master of Innovation or Entrepreneurship",
+            desc: "Your passion for innovation and work experience align well with a Master's in Innovation, Entrepreneurship, or Technology Management."
+        };
+    }
+    if (experience === "no") {
+        return {
+            title: "Academic Master's Program",
+            desc: "Without prior work experience, you may want to pursue a research-based or academic Master's program to build expertise before entering the workforce."
+        };
+    }
+    // Default
+    return {
+        title: "Master's Degree Path",
+        desc: "Based on your answers, you can explore a variety of master's degree programs. Contact local universities for more guidance."
+    };
+}
+// Function to display custom messages (replaces alert())
+            function showMessageBox(title, message) {
+                messageBoxTitle.textContent = title;
+                messageBoxText.textContent = message;
+                customMessageBox.classList.remove('hidden');
+            }
+
+            closeMessageBoxBtn.addEventListener('click', () => {
+                customMessageBox.classList.add('hidden');
+            });
+
+            function renderQuestion() {
+                const question = quizData[currentQuestionIndex];
+                let html = `
+                    <p class="text-lg font-semibold text-gray-700 mb-4">${question.question}</p>
+                    <div class="flex flex-col space-y-3">
+                `;
+                question.options.forEach((option, index) => {
+                    const checked = userAnswers[`q${currentQuestionIndex + 1}`] === option.value ? 'checked' : '';
+                    html += `
+                        <label class="option-label">
+                            <input type="radio" name="q${currentQuestionIndex + 1}" value="${option.value}" class="mr-3" ${checked}>
+                            <span class="text-gray-700">${option.text}</span>
+                        </label>
+                    `;
+                });
+                html += `</div>`;
+                questionDisplay.innerHTML = html;
+
+                // Add event listeners to newly rendered radio buttons
+                const radioButtons = questionDisplay.querySelectorAll(`input[name="q${currentQuestionIndex + 1}"]`);
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', (event) => {
+                        userAnswers[`q${currentQuestionIndex + 1}`] = event.target.value;
+                        updateNavigationButtons();
+                    });
+                });
+
+                updateNavigationButtons();
+            }
+
+            function updateNavigationButtons() {
+                prevQuestionBtn.disabled = currentQuestionIndex === 0;
+                nextQuestionBtn.classList.toggle('hidden', currentQuestionIndex === quizData.length - 1);
+                submitQuizBtn.classList.toggle('hidden', currentQuestionIndex !== quizData.length - 1);
+
+                const currentQuestionAnswered = userAnswers[`q${currentQuestionIndex + 1}`] !== undefined;
+                if (currentQuestionIndex === quizData.length - 1) {
+                    submitQuizBtn.disabled = !currentQuestionAnswered;
+                } else {
+                    nextQuestionBtn.disabled = !currentQuestionAnswered;
+                }
+            }
+
+    function calculateResults() {
+    const area = userAnswers.q1;
+    const experience = userAnswers.q2;
+    const province = userAnswers.q3;
+
+    const recommendation = getMasterRecommendation(area, experience);
+
+    // Build the summary list
+    let resultSummaryHtml = '';
+    resultSummaryHtml += `<li><i class="fas fa-book-open icon" style="color: #ef4444;"></i><span>Specialization Area:</span> <strong>${quizData[0].options.find(opt => opt.value === area)?.text || 'N/A'}</strong></li>`;
+    resultSummaryHtml += `<li><i class="fas fa-briefcase icon" style="color: #22c55e;"></i><span>Work Experience:</span> <strong>${quizData[1].options.find(opt => opt.value === experience)?.text || 'N/A'}</strong></li>`;
+    resultSummaryHtml += `<li><i class="fas fa-map-marker-alt icon" style="color: #8b5cf6;"></i><span>Province:</span> <strong>${quizData[2].options.find(opt => opt.value === province)?.text || 'N/A'}</strong></li>`;
+
+    resultsPrimaryLanguage.textContent = recommendation.title;
+    resultsDescriptionTitle.textContent = recommendation.title;
+    resultsDescriptionText.innerHTML = recommendation.desc + `<br><br><strong>Province:</strong> ${quizData[2].options.find(opt => opt.value === province)?.text || 'N/A'}`;
+    resultsList.innerHTML = resultSummaryHtml;
+
+    // Hide quiz, show results
+    heroSection.classList.add('hidden');
+    quizQuestionsContainer.classList.add('hidden');
+    quizResultsPage.classList.remove('hidden');
+    quizResultsPage.scrollIntoView({ behavior: 'smooth' });
+
+    // Update the inner icon of the results chart container
+    const resultsChartInner = document.querySelector('.results-chart-inner');
+    resultsChartInner.innerHTML = `<i class="fas fa-user-graduate text-4xl text-blue-500"></i>`;
+    document.querySelector('.results-chart-container').style.background = 'none';
+}
+
+    // Event Listeners
+    startQuizButton.addEventListener('click', () => {
+        heroSection.classList.add('hidden');
+        quizQuestionsContainer.classList.remove('hidden');
+        currentQuestionIndex = 0;
+        renderQuestion();
+        quizQuestionsContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    prevQuestionBtn.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            renderQuestion();
+        }
+    });
+
+    nextQuestionBtn.addEventListener('click', () => {
+        if (currentQuestionIndex < quizData.length - 1) {
+            currentQuestionIndex++;
+            renderQuestion();
+        }
+    });
+
+    submitQuizBtn.addEventListener('click', () => {
+        calculateResults();
+    });
+
+    cancelQuizBtn.addEventListener('click', () => {
+        // Reset quiz state
+        currentQuestionIndex = 0;
+        for (const key in userAnswers) {
+            delete userAnswers[key];
+        }
+        quizQuestionsContainer.classList.add('hidden');
+        quizResultsPage.classList.add('hidden');
+        heroSection.classList.remove('hidden');
+        heroSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    retakeQuizFromResults.addEventListener('click', () => {
+        // Reset quiz state
+        currentQuestionIndex = 0;
+        for (const key in userAnswers) {
+            delete userAnswers[key];
+        }
+        quizQuestionsContainer.classList.add('hidden');
+        quizResultsPage.classList.add('hidden');
+        heroSection.classList.remove('hidden');
+        heroSection.scrollIntoView({ behavior: 'smooth' });
+    });// Print button functionality
+            printResultsBtn.addEventListener('click', () => {
+                window.print();
+            });
+
+            // Send button functionality (show modal)
+            sendResultsBtn.addEventListener('click', () => {
+                sendResultsModal.classList.remove('hidden');
+            });
+
+            // Close modal button functionality
+            closeModalBtn.addEventListener('click', () => {
+                sendResultsModal.classList.add('hidden');
+                sendForm.reset(); // Clear form fields
+            });
+
+            // Handle modal form submission (for demonstration, just log to console)
+            sendForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(sendForm);
+                const data = {};
+                for (let [name, value] of formData.entries()) {
+                    data[name] = value;
+                }
+                console.log("Sending results:", data);
+                // In a real application, you would send this data to a server
+                sendResultsModal.classList.add('hidden');
+                sendForm.reset();
+                showMessageBox("Results Sent!", "Your quiz results have been 'sent' successfully!");
+            });
+
+            // Initial render
+            renderQuestion(); // Render the first question when the page loads (though it's hidden by default)
+        });
+</script>
+
+</body>
+</html>
+
+
