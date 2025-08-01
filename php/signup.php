@@ -36,9 +36,15 @@ $stmt = $conn->prepare("INSERT INTO users (firstname, email, password, created_a
 $stmt->bind_param("ssss", $firstname, $email, $hashedPassword, $created_at);
 
 if ($stmt->execute()) {
-    echo "✅ User registered successfully!";
-    // header("Location: success.html");
-    // exit();
+   session_start();
+$_SESSION['user_id'] = $conn->insert_id;
+$_SESSION['username'] = $firstname;
+
+echo "<script>
+        alert('✅ Registered successfully!');
+        window.location.href = '../index.html'; // Adjust as needed
+      </script>";
+
 } else {
     echo "Error: " . $stmt->error;
 }

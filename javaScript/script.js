@@ -1,18 +1,21 @@
-import { universityList } from './university-data.js';
 
-// JavaScript for Sidebar Toggle
-const menuIcon = document.getElementById("menu-icon");
-const sidebar = document.getElementById("sidebar");
-const closeBtn = document.getElementById("close-menu");
+//------------------profile icon-------------------------------
+    const profileIconBtn = document.getElementById('profileIconBtn');
+    const profileDropdown = document.getElementById('profileDropdown');
 
-console.log(universityList); 
+    profileIconBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent dropdown from closing immediately
+        profileDropdown.classList.toggle('hidden');
+    });
 
-// Show sidebar when menu icon is clicked
-menuIcon.addEventListener("click", function() {
-  sidebar.classList.remove("hidden"); // Remove 'hidden' class to show sidebar
-});
+    document.addEventListener('click', (e) => {
+        if (!profileDropdown.contains(e.target)) {
+            profileDropdown.classList.add('hidden');
+        }
+    });
 
-// Hide sidebar when close button is clicked
-closeBtn.addEventListener("click", function() {
-  sidebar.classList.add("hidden"); // Add 'hidden' class to hide sidebar
-});
+    function handleLogout() {
+        isLoggedIn = false;
+        alert("Logged out.");
+        // Optional: Redirect to login page or homepage
+    }

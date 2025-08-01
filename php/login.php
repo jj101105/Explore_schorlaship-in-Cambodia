@@ -30,11 +30,16 @@ if ($result->num_rows === 1) {
     $hashedPassword = $row['password'];
 
     // Verify password
-    if (password_verify($passwordInput, $hashedPassword)) {
-        echo "<script>
-                alert('✅ Login successful! Welcome, " . htmlspecialchars($row['firstname']) . "');
-                window.location.href = '../html/explore-now.html';
-              </script>";
+   //----------------------------------------
+if (password_verify($passwordInput, $hashedPassword)) {
+    session_start();
+$_SESSION['username'] = $row['firstname'];
+
+    echo "<script>
+            alert('✅ Login successful! Welcome, " . htmlspecialchars($row['firstname']) . "');
+            window.location.href = '../index.html';
+          </script>";
+
     } else {
         echo "<script>
                 alert('❌ Incorrect password.');
@@ -47,6 +52,8 @@ if ($result->num_rows === 1) {
             window.history.back();
           </script>";
 }
+
+
 
 // Close connections
 $stmt->close();

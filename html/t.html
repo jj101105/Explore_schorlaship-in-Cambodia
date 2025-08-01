@@ -695,7 +695,549 @@ document.querySelectorAll('.favorite-btn').forEach(button => {
 });
 
 //----------------------------------------
-let scholarshipsData = [];
+
+  const scholarshipsData = [
+            {
+                id: 'rupp-general-1',
+                title: 'RUPP General Bachelor Scholarship',
+                subtitle: '(For Cambodian Students)',
+                logo: 'https://placehold.co/40x40/f0f8ff/007bff?text=RUPP',
+                favorites: 45,
+                tags: ['Bachelor', 'Partially Funded', 'Cambodia', 'General'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Partially Funded',
+                    degree: 'Bachelor',
+                    deadline: '30-Sep-2025'
+                },
+                description: 'The Royal University of Phnom Penh (RUPP) offers scholarships for outstanding Cambodian high school graduates. This scholarship covers a portion of tuition fees for various bachelor\'s degree programs across different faculties.',
+                benefits: [
+                    'Partial tuition fee waiver (50%)', 'Access to university facilities',
+                    'Mentorship program with faculty members', 'Opportunity to participate in research projects'
+                ],
+                university: 'Royal University of Phnom Penh (RUPP)',
+                major: 'Various (Arts, Science, Social Sciences)',
+                eligibility: {
+                    gpa: '3.5+', maxAge: '20', grade: 'High School Graduate', gender: 'Any', ielts: 'Not required', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Excellent academic record from high school',
+                        'Pass RUPP entrance examination', 'Demonstrate financial need (optional for full consideration)'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'High school transcript', 'National ID card copy', 'Application form',
+                    'Passport-sized photos', 'Recommendation letter from high school principal'
+                ],
+                howToApply: 'Submit the application form and required documents to the RUPP Admissions Office. Shortlisted candidates will be invited for an interview and a written exam.'
+            },
+            {
+                id: 'moeys-equity-2',
+                title: 'MoEYS Equity Scholarship Program',
+                subtitle: '(For Underprivileged Cambodian Students)',
+                logo: 'https://placehold.co/40x40/e6f7ff/0056b3?text=MOEYS',
+                favorites: 60,
+                tags: ['Bachelor', 'Fully Funded', 'Cambodia', 'Equity'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Fully Funded',
+                    degree: 'Bachelor',
+                    deadline: '15-Oct-2025'
+                },
+                description: 'The Ministry of Education, Youth and Sport (MoEYS) provides scholarships to support talented students from remote or economically disadvantaged backgrounds across Cambodia. This program aims to ensure equitable access to higher education.',
+                benefits: [
+                    'Full tuition fees', 'Monthly living stipend', 'Accommodation support',
+                    'Textbook allowance', 'Transportation assistance', 'Mentoring and support services'
+                ],
+                university: 'Various Public Universities in Cambodia',
+                major: 'All Fields of Study',
+                eligibility: {
+                    gpa: '3.0+', maxAge: '22', grade: 'High School Graduate', gender: 'Any', ielts: 'Not required', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Proof of low-income household',
+                        'Residency in a rural or remote area', 'Strong commitment to community development'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'Family income certificate', 'Residential proof', 'High school diploma',
+                    'Personal statement', 'Two recommendation letters'
+                ],
+                howToApply: 'Applications are managed through provincial education departments. Students must submit their documents to their local education office, which will then forward eligible applications to MoEYS for review.'
+            },
+            {
+                id: 'cambodia-korea-it-3',
+                title: 'Cambodia-Korea IT & Engineering Scholarship',
+                subtitle: '(Joint Program for STEM Fields)',
+                logo: 'https://placehold.co/40x40/e0f7e0/008000?text=KOR',
+                favorites: 55,
+                tags: ['Bachelor', 'Fully Funded', 'Cambodia', 'STEM', 'IT', 'Engineering'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Fully Funded',
+                    degree: 'Bachelor',
+                    deadline: '01-Nov-2025'
+                },
+                description: 'A collaborative scholarship program between the Cambodian and Korean governments, focusing on developing skilled professionals in Information Technology and Engineering. Students will study at selected technical universities in Cambodia.',
+                benefits: [
+                    'Full tuition coverage', 'Monthly stipend for living expenses',
+                    'Opportunity for short-term exchange to South Korea', 'Access to advanced labs and equipment'
+                ],
+                university: 'Institute of Technology of Cambodia (ITC), Royal University of Phnom Penh (RUPP)',
+                major: 'Information Technology, Computer Science, Electrical Engineering, Civil Engineering',
+                eligibility: {
+                    gpa: '3.8+', maxAge: '21', grade: 'High School Graduate (Science Stream)', gender: 'Any', ielts: '5.5 (preferred)', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Strong academic performance in science and math',
+                        'Interest in IT or Engineering fields', 'Successful completion of an interview'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'High school academic record', 'Motivation letter', 'Proof of Cambodian nationality',
+                    'English proficiency certificate (if available)', 'Recommendation from science teacher'
+                ],
+                howToApply: 'Applications are accepted online through the Ministry of Education website. Shortlisted candidates will undergo a technical aptitude test and an interview with representatives from both countries.'
+            },
+            {
+                id: 'japan-cambodia-agri-4',
+                title: 'Japan-Cambodia Friendship Scholarship for Agriculture',
+                subtitle: '(Rural Development Focus)',
+                logo: 'https://placehold.co/40x40/f7e0f7/800080?text=JPN',
+                favorites: 40,
+                tags: ['Bachelor', 'Fully Funded', 'Cambodia', 'Agriculture', 'Rural Development'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Fully Funded',
+                    degree: 'Bachelor',
+                    deadline: '20-Oct-2025'
+                },
+                description: 'This scholarship, funded by the Japanese government, aims to support Cambodian students pursuing studies in agriculture and rural development, contributing to the sustainable growth of Cambodia\'s agricultural sector.',
+                benefits: [
+                    'Full tuition and university fees', 'Monthly living allowance',
+                    'Annual research grant', 'Opportunity for field trips and practical training',
+                    'Japanese language training'
+                ],
+                university: 'Royal University of Agriculture (RUA)',
+                major: 'Agronomy, Animal Science, Fisheries, Rural Development',
+                eligibility: {
+                    gpa: '3.2+', maxAge: '23', grade: 'High School Graduate', gender: 'Any', ielts: 'Not required', workExperience: 'Preferred (agricultural background)',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Interest in agriculture and rural development',
+                        'Commitment to working in rural areas after graduation', 'Good health'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'High school diploma and transcripts', 'Personal essay on agricultural interest',
+                    'Two academic references', 'Health certificate'
+                ],
+                howToApply: 'Applications are submitted directly to the Royal University of Agriculture. A selection committee, including Japanese representatives, will review applications and conduct interviews.'
+            },
+            {
+                id: 'asean-exchange-5',
+                title: 'ASEAN Scholarship for Cambodian Students',
+                subtitle: '(Intra-ASEAN Exchange Program)',
+                logo: 'https://placehold.co/40x40/e0f0f7/007bff?text=ASEAN',
+                favorites: 30,
+                tags: ['Bachelor', 'Partially Funded', 'Cambodia', 'Exchange', 'Regional'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Partially Funded',
+                    degree: 'Bachelor',
+                    deadline: '05-Dec-2025'
+                },
+                description: 'This scholarship facilitates academic exchange within the ASEAN region, allowing Cambodian students to pursue specific fields of study at partner universities in Cambodia with partial financial support.',
+                benefits: [
+                    'Partial tuition subsidy', 'Monthly stipend for living expenses',
+                    'Opportunity for short-term exchange to other ASEAN countries', 'Networking with ASEAN peers'
+                ],
+                university: 'National University of Management (NUM), Pannasastra University of Cambodia (PUC)',
+                major: 'International Relations, Economics, Tourism, Business Administration',
+                eligibility: {
+                    gpa: '3.4+', maxAge: '22', grade: 'High School Graduate', gender: 'Any', ielts: '6.0', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Strong interest in ASEAN affairs',
+                        'Good communication skills', 'Leadership potential'
+                    ]
+                },
+                eligibleCountries: ['Cambodia (for study in Cambodia)'],
+                requiredDocuments: [
+                    'Academic transcripts', 'Statement of purpose', 'English proficiency test results',
+                    'Passport copy', 'Two letters of recommendation'
+                ],
+                howToApply: 'Applications are handled by the international relations office of participating Cambodian universities. Students should contact their desired university for specific application procedures and deadlines.'
+            },
+            {
+                id: 'acleda-business-6',
+                title: 'ACLEDA Institute of Business Scholarship',
+                subtitle: '(For Business & Finance Studies)',
+                logo: 'https://placehold.co/40x40/fff0e0/ff8c00?text=AIB',
+                favorites: 38,
+                tags: ['Bachelor', 'Partially Funded', 'Cambodia', 'Business', 'Finance'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Partially Funded',
+                    degree: 'Bachelor',
+                    deadline: '10-Jan-2026'
+                },
+                description: 'The ACLEDA Institute of Business offers scholarships to talented Cambodian students pursuing degrees in business, finance, and banking, aiming to cultivate future leaders in the financial sector.',
+                benefits: [
+                    'Tuition fee reduction (up to 75%)', 'Internship opportunities at ACLEDA Bank',
+                    'Mentorship from industry professionals', 'Career development workshops'
+                ],
+                university: 'ACLEDA Institute of Business',
+                major: 'Banking and Finance, Business Administration, Accounting',
+                eligibility: {
+                    gpa: '3.6+', maxAge: '20', grade: 'High School Graduate', gender: 'Any', ielts: 'Not required', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Strong interest in business and finance',
+                        'Excellent analytical and problem-solving skills', 'Successful interview performance'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'High school academic records', 'Personal statement', 'National ID copy',
+                    'Financial need assessment form (optional)', 'Recommendation letter'
+                ],
+                howToApply: 'Apply directly to the ACLEDA Institute of Business. The selection process includes an entrance exam, an interview, and a review of academic records.'
+            },
+            {
+                id: 'french-embassy-7',
+                title: 'French Embassy Scholarship for Cambodia',
+                subtitle: '(For French Language & Science Studies)',
+                logo: 'https://placehold.co/40x40/e0e0f7/0000ff?text=FRA',
+                favorites: 25,
+                tags: ['Bachelor', 'Master', 'Partially Funded', 'Cambodia', 'French', 'Science'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Partially Funded',
+                    degree: 'Bachelor/Master',
+                    deadline: '25-Dec-2025'
+                },
+                description: 'The French Embassy in Cambodia offers scholarships for Cambodian students interested in pursuing higher education in French language, literature, or specific scientific fields at Cambodian universities with French partnerships.',
+                benefits: [
+                    'Partial tuition fees', 'French language course subsidies',
+                    'Cultural exchange opportunities', 'Access to French academic resources'
+                ],
+                university: 'Royal University of Phnom Penh (RUPP), Institute of Technology of Cambodia (ITC)',
+                major: 'French Language, Physics, Chemistry, Biology, Mathematics',
+                eligibility: {
+                    gpa: '3.3+', maxAge: '25', grade: 'High School Graduate (for Bachelor), Bachelor\'s Degree (for Master)', gender: 'Any', ielts: 'Not required (DELF/DALF preferred)', workExperience: 'Not required',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Proficiency in French (or willingness to learn)',
+                        'Strong academic background in chosen field', 'Motivation to contribute to Cambodia-France relations'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'Academic transcripts', 'Motivation letter in French', 'French language certificate (if any)',
+                    'CV', 'Two academic references'
+                ],
+                howToApply: 'Applications are submitted to the Cooperation and Cultural Action Service of the French Embassy in Phnom Penh. Interviews will be conducted in French.'
+            },
+            {
+                id: 'chinese-govt-cambodia-8',
+                title: 'Chinese Government Scholarship (CGS) for Cambodia',
+                subtitle: '(Various Fields)',
+                logo: 'https://placehold.co/40x40/f7e7e7/ff0000?text=CHN',
+                favorites: 70,
+                tags: ['Bachelor', 'Master', 'PhD', 'Fully Funded', 'Cambodia', 'China'],
+                details: {
+                    studyIn: 'Cambodia (with potential for exchange)',
+                    type: 'Fully Funded',
+                    degree: 'Bachelor/Master/PhD',
+                    deadline: '01-Mar-2026'
+                },
+                description: 'The Chinese Government Scholarship program supports Cambodian students to pursue higher education in various fields at designated universities in Cambodia, often with opportunities for exchange programs in China.',
+                benefits: [
+                    'Full tuition fees', 'Monthly living stipend', 'Accommodation allowance',
+                    'Comprehensive medical insurance', 'Research support'
+                ],
+                university: 'Royal University of Phnom Penh (RUPP), National University of Management (NUM), Institute of Technology of Cambodia (ITC)',
+                major: 'All Fields of Study',
+                eligibility: {
+                    gpa: 'N/A', maxAge: '25 (Bachelor), 35 (Master), 40 (PhD)', grade: 'High School Diploma (Bachelor), Bachelor\'s Degree (Master), Master\'s Degree (PhD)', gender: 'Any', ielts: 'Not strictly required (HSK preferred)', workExperience: 'Varies by program',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Good academic standing', 'Good health',
+                        'Non-Chinese citizen', 'Meet specific university admission requirements'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'CGS application form', 'Notarized highest diploma', 'Academic transcripts',
+                    'Study plan/Research proposal', 'Two recommendation letters', 'Passport copy',
+                    'Physical Examination Form'
+                ],
+                howToApply: 'Applicants can apply through the Cambodian Ministry of Education, Youth and Sport or directly to the Chinese Embassy in Cambodia. The application process is highly competitive.'
+            },
+            {
+                id: 'ngo-community-9',
+                title: 'Local NGO Community Development Scholarship',
+                subtitle: '(For Rural Community Leaders)',
+                logo: 'https://placehold.co/40x40/e0f7e0/008000?text=NGO',
+                favorites: 20,
+                tags: ['Bachelor', 'Partially Funded', 'Cambodia', 'Community Development'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Partially Funded',
+                    degree: 'Bachelor',
+                    deadline: '15-Feb-2026'
+                },
+                description: 'A scholarship offered by a local Cambodian NGO to support students from rural communities who are committed to returning and contributing to their local development after graduation.',
+                benefits: [
+                    'Partial tuition fees', 'Mentorship from NGO staff',
+                    'Practical experience in community projects', 'Networking opportunities with community leaders'
+                ],
+                university: 'Regional Universities/Colleges in Cambodia',
+                major: 'Social Work, Rural Development, Public Health, Education',
+                eligibility: {
+                    gpa: '2.8+', maxAge: '25', grade: 'High School Graduate', gender: 'Any', ielts: 'Not required', workExperience: 'Preferred (volunteer work)',
+                    detailedRequirements: [
+                        'Cambodian citizenship, residing in a rural area', 'Demonstrated commitment to community service',
+                        'Leadership potential within their community', 'Interview with NGO representatives'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'High school certificate', 'Personal statement outlining community goals',
+                    'Letter of support from local community leader', 'Proof of residency'
+                ],
+                howToApply: 'Applications are submitted directly to the participating NGO. The selection process involves a written application, an interview, and a community assessment visit.'
+            },
+            {
+                id: 'stem-cambodia-10',
+                title: 'Cambodia STEM Future Leaders Scholarship',
+                subtitle: '(Science, Technology, Engineering, Math)',
+                logo: 'https://placehold.co/40x40/e0f0f7/007bff?text=STEM',
+                favorites: 50,
+                tags: ['Bachelor', 'Master', 'Fully Funded', 'Cambodia', 'STEM'],
+                details: {
+                    studyIn: 'Cambodia',
+                    type: 'Fully Funded',
+                    degree: 'Bachelor/Master',
+                    deadline: '01-Jan-2026'
+                },
+                description: 'This scholarship aims to foster the next generation of STEM leaders in Cambodia by providing full financial support for students pursuing degrees in science, technology, engineering, and mathematics at leading Cambodian institutions.',
+                benefits: [
+                    'Full tuition fees and university charges', 'Monthly living allowance',
+                    'Research grants (for Master\'s students)', 'Access to specialized labs',
+                    'Internship opportunities with tech companies'
+                ],
+                university: 'Institute of Technology of Cambodia (ITC), Royal University of Phnom Penh (RUPP)',
+                major: 'Computer Science, Software Engineering, Data Science, Electrical Engineering, Civil Engineering, Physics, Chemistry, Mathematics',
+                eligibility: {
+                    gpa: '3.7+', maxAge: '22 (Bachelor), 28 (Master)', grade: 'High School Graduate (for Bachelor), Bachelor\'s Degree (for Master)', gender: 'Any', ielts: '6.0 (preferred)', workExperience: 'Not required (Bachelor), Preferred (Master)',
+                    detailedRequirements: [
+                        'Cambodian citizenship', 'Exceptional academic record in STEM subjects',
+                        'Strong analytical and critical thinking skills', 'Demonstrated passion for innovation'
+                    ]
+                },
+                eligibleCountries: ['Cambodia'],
+                requiredDocuments: [
+                    'Academic transcripts', 'Motivation letter highlighting STEM interest',
+                    'Two academic recommendation letters (especially from science/math teachers)',
+                    'Portfolio of relevant projects (optional but recommended)'
+                ],
+                howToApply: 'Applications are submitted online through a dedicated portal. Shortlisted candidates will be invited for a rigorous STEM aptitude test and an interview with a panel of experts.'
+            }
+        ];
+        // Function to render scholarship cards
+        function renderScholarshipCards(filteredScholarships = scholarshipsData) {
+            scholarshipCardsGrid.innerHTML = ''; // Clear existing cards
+            if (filteredScholarships.length === 0) {
+                scholarshipCardsGrid.innerHTML = '<p class="text-center text-gray-600 col-span-full">No scholarships found matching your criteria.</p>';
+                return;
+            }
+
+            filteredScholarships.forEach(scholarship => {
+                const cardHtml = `
+                    <div class="scholarship-card bg-white rounded-xl shadow-md p-5 relative" tabindex="0" data-id="${scholarship.id}">
+                        <span class="absolute top-3 right-3 text-gray-500 text-sm">${scholarship.favorites}</span>
+                        <div class="flex items-start mb-4">
+                            <img src="${scholarship.logo}" alt="Scholarship Logo" class="rounded-full mr-3 shadow-sm w-10 h-10">
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-lg">${scholarship.title}</h3>
+                                <p class="text-gray-600 text-sm">${scholarship.subtitle}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-2 text-gray-700 text-sm mb-4">
+                            <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>Study in: <span class="font-medium">${scholarship.details.studyIn}</span></p>
+                            <p><i class="fas fa-tag text-blue-500 mr-2"></i>Type: <span class="font-medium">${scholarship.details.type}</span></p>
+                            <p><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Degree: <span class="font-medium">${scholarship.details.degree}</span></p>
+                            <p><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Deadline: <span class="font-medium">${scholarship.details.deadline}</span></p>
+                        </div>
+                        <p class="text-gray-500 text-xs mb-4">${scholarship.favorites} Favorites</p>
+                        <div class="flex justify-around border-t border-gray-200 pt-4">
+                            <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Favorite">
+                                <i class="far fa-heart mr-2"></i>Favorite
+                            </button>
+                            <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Q&As">
+                                <i class="far fa-comments mr-2"></i>Q&As
+                            </button>
+                            <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Share">
+                                <i class="fas fa-share-alt mr-2"></i>Share
+                            </button>
+                        </div>
+                    </div>
+                `;
+                scholarshipCardsGrid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            // Add click listeners to newly rendered cards
+            document.querySelectorAll('.scholarship-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const scholarshipId = this.dataset.id;
+                    handleScholarshipCardClick(scholarshipId);
+                });
+            });
+        }
+
+        // Function to handle scholarship card click (with login check)
+        function handleScholarshipCardClick(id) {
+            if (isLoggedIn) {
+                renderScholarshipDetails(id);
+            } else {
+                currentScholarshipId = id; // Store the ID for after login
+                showAuthModal();
+            }
+        }
+
+        // Function to show the authentication modal
+        function showAuthModal() {
+            authModal.classList.remove('hidden');
+            authMessage.classList.add('hidden'); // Hide any previous messages
+            emailInput.value = ''; // Clear inputs
+            passwordInput.value = '';
+        }
+
+        // Function to hide the authentication modal
+        function hideAuthModal() {
+            authModal.classList.add('hidden');
+        }
+
+        // Simulate authentication (for demonstration purposes)
+        function handleAuth() {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            // Simple validation
+            if (!email || !password) {
+                authMessage.textContent = 'Please enter both email and password.';
+                authMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Simulate successful login/signup
+            isLoggedIn = true;
+            authMessage.textContent = 'Success! Redirecting to scholarship details...';
+            authMessage.classList.remove('hidden');
+            authMessage.classList.remove('text-red-500');
+            authMessage.classList.add('text-green-600');
+
+            setTimeout(() => {
+                hideAuthModal();
+                if (currentScholarshipId) {
+                    renderScholarshipDetails(currentScholarshipId);
+                    currentScholarshipId = null; // Clear stored ID
+                }
+            }, 1500); // Simulate a delay for login
+        }
+
+        // Function to render scholarship details
+        function renderScholarshipDetails(id) {
+            const scholarship = scholarshipsData.find(s => s.id === id);
+            if (!scholarship) {
+                console.error('Scholarship not found:', id);
+                return;
+            }
+
+            // Populate detail view
+            detailScholarshipLogo.src = scholarship.logo;
+            detailScholarshipTitle.textContent = scholarship.title;
+            detailScholarshipSubtitle.textContent = scholarship.subtitle;
+            detailStudyIn.textContent = scholarship.details.studyIn;
+            detailType.textContent = scholarship.details.type;
+            detailDegree.textContent = scholarship.details.degree;
+            detailDeadline.textContent = scholarship.details.deadline;
+            detailDescription.textContent = scholarship.description;
+
+            // Populate lists (benefits, detailed requirements, eligible countries, required documents)
+            detailBenefits.innerHTML = scholarship.benefits.map(item => `<li>${item}</li>`).join('');
+            detailUniversity.textContent = scholarship.university;
+            detailMajor.textContent = scholarship.major;
+            detailGPA.textContent = scholarship.eligibility.gpa;
+            detailMaxAge.textContent = scholarship.eligibility.maxAge;
+            detailGrade.textContent = scholarship.eligibility.grade;
+            detailGender.textContent = scholarship.eligibility.gender;
+            detailIELTS.textContent = scholarship.eligibility.ielts;
+            detailWorkExperience.textContent = scholarship.eligibility.workExperience;
+            detailDetailedRequirements.innerHTML = scholarship.eligibility.detailedRequirements.map(item => `<li>${item}</li>`).join('');
+            detailEligibleCountries.innerHTML = scholarship.eligibleCountries.map(item => `<li>${item}</li>`).join('');
+            detailRequiredDocuments.innerHTML = scholarship.requiredDocuments.map(item => `<li>${item}</li>`).join('');
+            detailHowToApply.textContent = scholarship.howToApply;
+
+            // Show detail view, hide list view
+            scholarshipListView.classList.add('hidden');
+            scholarshipDetailView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        }
+
+        // Event listener for "Back to Scholarships" button
+        backToScholarshipsBtn.addEventListener('click', function() {
+            scholarshipDetailView.classList.add('hidden');
+            scholarshipListView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        });
+
+        // Scholarship search function
+        function doScholarshipSearch() {
+            const input = document.getElementById('scholarshipSearchInput');
+            const query = input.value.toLowerCase().trim();
+            const filtered = scholarshipsData.filter(scholarship =>
+                scholarship.title.toLowerCase().includes(query) ||
+                scholarship.subtitle.toLowerCase().includes(query) ||
+                scholarship.description.toLowerCase().includes(query) ||
+                scholarship.details.studyIn.toLowerCase().includes(query) ||
+                scholarship.tags.some(tag => tag.toLowerCase().includes(query))
+            );
+            renderScholarshipCards(filtered);
+        }
+
+        // Filter button active state and filtering logic
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('bg-white', 'text-gray-700')); // Reset non-active styles
+
+                this.classList.add('active', 'bg-blue-600', 'text-white');
+                this.classList.remove('bg-white', 'text-gray-700');
+
+                const filterType = this.dataset.filter;
+                let filteredScholarships = [];
+
+                if (filterType === 'All') {
+                    filteredScholarships = scholarshipsData;
+                } else {
+                    filteredScholarships = scholarshipsData.filter(scholarship =>
+                        scholarship.tags.includes(filterType) ||
+                        scholarship.details.type.includes(filterType) || // Filter by 'Fully Funded' or 'Partially Funded'
+                        scholarship.details.degree.includes(filterType) // Filter by 'Bachelor', 'Master', 'PhD'
+                    );
+                }
+                renderScholarshipCards(filteredScholarships);
+            });
+        });
+
+        // Event listeners for modal buttons
+        closeModalBtn.addEventListener('click', hideAuthModal);
+        loginBtn.addEventListener('click', handleAuth);
+        signupBtn.addEventListener('click', handleAuth); // Both buttons trigger the same simulated auth for now
+
+        // Initial render of scholarship cards when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderScholarshipCards();
+        });
 
     async function fetchScholarships() {
         try {
@@ -714,13 +1256,6 @@ let scholarshipsData = [];
     document.addEventListener('DOMContentLoaded', () => {
         fetchScholarships();
     });
-
-    // Your existing renderScholarshipCards(), renderScholarshipDetails(), handle clicks etc. stay the same
-
     </script>
-
-
 </body>
 </html>
-
-

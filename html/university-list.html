@@ -8,31 +8,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            min-height: 100vh;
-        }
-        .header {
-            background-color: #fff;
-            width: 100%;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #3b82f6;
-            letter-spacing: -1px;
-        }
-        .nav-link { color: #374151; font-weight: 500; margin-left: 1.5rem; transition: color 0.2s; }
-        .nav-link:hover, .nav-link:focus { color: #2563eb; outline: none; }
+          body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      background-color: #f0f2f5;
+    }
+    .header {
+      background-color: #fff;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column; /* Stack vertically */
+      align-items: stretch;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .header-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3b82f6;
+      letter-spacing: -1px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-link {
+      color: #4b5563;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 1rem;
+    }
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #2563eb;
+      outline: none;
+    }
         .hero-section {
             background: linear-gradient(120deg, #52549c 0%, #362ab8 100%);
             color: white;
@@ -162,20 +182,36 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-logo">Exploring Scholarship in Cambodia</div>
-        <nav class="flex items-center">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="recmm.html" class="nav-link">Quizzes</a>
-            <a href="university-list.html" class="nav-link">University</a>
-            <a href="all-scholarship.html" class="nav-link">Scholarship</a>
-            <!-- Search Button -->
+     <!-- Header Section -->
+    <header class="bg-white p-4 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="header-logo">Exploring Scholarship in Cambodia</div>
+            </div>
+            <nav class="flex items-center">
+                <a href="../index.html" class="nav-link">Home</a>
+                 <a href="recmm.html" class="nav-link">Quizzes</a> 
+                 <a href="university-list.html" class="nav-link">Universities</a>
+                <a href="all-scholarship.html" class="nav-link">Scholarships</a>
+               <!-- Search Button -->
             <button id="searchToggle" class="nav-link bg-transparent border-none p-0" aria-label="Search" style="background:none;">
                 <i class="fas fa-search"></i>
             </button>
-            <a href="#" class="nav-link" aria-label="User"><i class="fas fa-user-circle"></i></a>
-        </nav>
+                                <!-- Profile Icon with Dropdown -->
+                <div class="relative">
+                    <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-2xl focus:outline-none" aria-label="Profile">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                        <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                        <a href="history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recent</a>
+                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+            
         <!-- Search Bar (hidden by default) -->
         <div id="searchBar" class="absolute right-8 top-20 bg-white rounded-lg shadow-lg p-2 flex items-center gap-2" style="display:none; z-index:200;">
             <input type="text" id="searchInput" class="border border-gray-300 rounded px-3 py-1 focus:outline-none" placeholder="Search scholarships, universities...">
@@ -274,7 +310,7 @@
         </div>
         <p class="mt-2">&copy; 2025 Scholarship Hub. All Rights Reserved.</p>
     </footer>
-
+ <script src="../javaScript/script.js"></script>
     <script>
     // Simple search filter for universities
     function filterUniversities() {

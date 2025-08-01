@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Scholarship Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            color: #4b5563; /* gray-700 */
+        }
+        .sidebar-item:hover {
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .sidebar-item.active {
+            background-color: #ecfeff; /* cyan-50 */
+            color: #06b6d4; /* cyan-500 */
+            font-weight: 600;
+        }
+        .sidebar-item.active svg {
+            color: #06b6d4; /* cyan-500 */
+        }
+        .sidebar-item svg {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+            color: #6b7280; /* gray-500 */
+        }
+        .profile-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.5rem;
+            background-color: #f9fafb; /* gray-50 */
+            color: #4b5563; /* gray-700 */
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .profile-input:focus {
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        .profile-input::placeholder {
+            color: #9ca3af; /* gray-400 */
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <div class="text-2xl font-bold text-blue-600 tracking-tight">🎓Exploring Scholarships in Cambodia</div>
+            <nav class="flex items-center gap-6">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="recmm.html" class="nav-link">Quizzes</a>
+                <a href="university-list.html" class="nav-link">University</a>
+                <a href="all-scholarship.html" class="nav-link">Scholarship</a>
+                
+                <a id="signup-btn" href="signup.html" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition">Sign Up</a>
+
+                <div id="profile-section" class="hidden flex flex-col items-center relative cursor-pointer select-none">
+                    <div class="relative">
+                        <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-4xl focus:outline-none" aria-label="Profile">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                            <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                            <a href="history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recent</a>
+                            <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+        <aside class="w-full lg:w-1/4 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-6">
+                <div class="w-14 h-14 bg-pink-200 text-pink-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">
+                    <span id="sidebar-initials"></span> </div>
+                <div>
+                    <h2 id="sidebar-username" class="text-lg font-semibold text-gray-900"></h2> <p id="sidebar-time" class="text-sm text-gray-500"></p> </div>
+            </div>
+            <nav class="space-y-2">
+                <div id="myProfileLink" class="sidebar-item active" data-content="my-profile">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </div>
+                <div id="myWishlistLink" class="sidebar-item" data-content="my-wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span>My Wishlist</span>
+                    <span class="ml-auto text-xs bg-gray-200 px-2 py-1 rounded-full text-gray-700">2</span>
+                </div>
+                <div id="recommendationsLink" class="sidebar-item" data-content="recommendations">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </div>
+                <div id="recentlyViewedLink" class="sidebar-item" data-content="recently-viewed">
+                    <i class="fas fa-history"></i>
+                    <span>Recently Viewed</span>
+                </div>
+                <div id="completedQuestionnairesLink" class="sidebar-item" data-content="completed-questionnaires">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Questionnaire History</span>
+                </div>
+                <div id="logoutLink" class="sidebar-item text-red-600 hover:bg-red-50 hover:text-red-700">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </div>
+            </nav>
+        </aside>
+
+        <section class="flex-grow w-full lg:w-3/4 bg-white rounded-xl shadow-md p-8">
+            <h1 id="main-greeting" class="text-2xl font-bold text-gray-800 mb-6"></h1> <div id="my-profile" class="content-section">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Update Basic Profile Preferences</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                        <input type="text" id="contactNumber" placeholder="Contact Number" class="profile-input" />
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Birthdate</label>
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="text" id="birthdateDD" placeholder="DD" class="profile-input text-center" maxlength="2" />
+                            <input type="text" id="birthdateMM" placeholder="MM" class="profile-input text-center" maxlength="2" />
+                            <input type="text" id="birthdateYYYY" placeholder="YYYY" class="profile-input text-center" maxlength="4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-end">
+                    <button class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition shadow">Save Changes</button>
+                </div>
+            </div>
+
+            <div id="my-wishlist" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">My Saved Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Here you will find scholarships and universities you have saved.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold text-blue-700">Kampuchea Higher Education Grant</p>
+                            <p class="text-sm text-gray-600">Scholarship</p>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700" title="Remove from Wishlist"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold text-blue-700">Royal University of Phnom Penh</p>
+                            <p class="text-sm text-gray-600">University</p>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700" title="Remove from Wishlist"><i class="fas fa-trash"></i></button>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="recommendations" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Recommended Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Based on your questionnaire responses, here are some recommendations:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="font-semibold text-green-700">STEM Excellence Award</p>
+                        <p class="text-sm text-gray-600">Scholarship for Science & Tech. (Matches your interest in STEM)</p>
+                        <a href="#" class="text-green-600 hover:underline text-sm mt-2 block">View Details</a>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="font-semibold text-green-700">National University of Management</p>
+                        <p class="text-sm text-gray-600">University (Recommended for Business Studies)</p>
+                        <a href="#" class="text-green-600 hover:underline text-sm mt-2 block">View Details</a>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="recently-viewed" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Previously Viewed Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Keep track of the scholarships and universities you've recently explored.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <p class="font-semibold text-gray-800">Overseas Study Scholarship</p>
+                        <p class="text-sm text-gray-600">Viewed: July 19, 2025</p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <p class="font-semibold text-gray-800">Institute of Technology of Cambodia</p>
+                        <p class="text-sm text-gray-600">Viewed: July 18, 2025</p>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="completed-questionnaires" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Completed Questionnaire Sessions</h2>
+                <p class="text-gray-600 mb-4">Review your past questionnaire results and their impact on recommendations.</p>
+                <div class="space-y-4">
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                        <p class="font-semibold text-purple-700">Scholarship Compatibility Quiz - Session 1</p>
+                        <p class="text-sm text-gray-600">Completed: June 20, 2025</p>
+                        <p class="text-sm text-gray-600">Results: Strong match for STEM and Arts scholarships.</p>
+                        <a href="#" class="text-purple-600 hover:underline text-sm mt-2 block">View Details/Retake Quiz</a>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                        <p class="font-semibold text-purple-700">University Preference Survey - Session 1</p>
+                        <p class="text-sm text-gray-600">Completed: May 15, 2025</p>
+                        <p class="text-sm text-gray-600">Results: Preferred public universities with strong research programs.</p>
+                        <a href="#" class="text-purple-600 hover:underline text-sm mt-2 block">View Details/Retake Quiz</a>
+                    </div>
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-200 py-8 mt-8">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 px-4">
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">About</h3>
+                <a href="about-us.html" class="footer-links block mb-1">About us</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Opportunities</h3>
+                <a href="undergratuate.html" class="footer-links block mb-1">Undergraduate Scholarship</a>
+                <a href="postgratuate.html" class="footer-links block mb-1">Postgraduate Scholarships</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Useful links</h3>
+                <a href="free-resources.html" class="footer-links block mb-1">Free Resource</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Support</h3>
+                <a href="privacy-policy.html" class="footer-links block mb-1">Privacy Policy</a>
+                <a href="faqs.html" class="footer-links block mb-1">FAQs</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Connect</h3>
+                <div class="social-icons flex gap-4 mt-2">
+                    <a href="https://www.facebook.com/share/161V5KMnMx/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/borasy.27?igsh=MXRoaXQxZWNxZGIxYw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 mt-8">
+            © 2025 Scholarships in Cambodia. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sidebarItems = document.querySelectorAll(".sidebar-item");
+            const contentSections = document.querySelectorAll(".content-section");
+            const logoutLink = document.getElementById("logoutLink");
+            const sidebarUsername = document.getElementById("sidebar-username");
+            const sidebarInitials = document.getElementById("sidebar-initials");
+            const mainGreeting = document.getElementById("main-greeting");
+            const sidebarTime = document.getElementById("sidebar-time");
+            const profileFirstNameInput = document.getElementById("firstName");
+            const profileLastNameInput = document.getElementById("lastName");
+            const profileEmailInput = document.getElementById("email");
+
+            // Function to show a specific content section
+            const showContent = (id) => {
+                contentSections.forEach(section => {
+                    section.classList.add("hidden");
+                });
+                document.getElementById(id).classList.remove("hidden");
+            };
+
+            // Function to update active sidebar item
+            const updateActiveSidebarItem = (activeLink) => {
+                sidebarItems.forEach(item => item.classList.remove("active"));
+                activeLink.classList.add("active");
+            };
+
+            // Function to get time-based greeting
+            const getGreeting = (firstName) => {
+            const hour = new Date().getHours();
+            let greeting = "Good ";
+            if (hour < 12) {
+                greeting += "Morning";
+            } else if (hour < 18) {
+                greeting += "Afternoon";
+            } else {
+                greeting += "Evening";
+            }
+            return `${greeting}! ${firstName}`;
+        };
+
+            // Update time in sidebar
+            const updateSidebarTime = () => {
+                const now = new Date();
+                const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                sidebarTime.textContent = now.toLocaleTimeString('en-US', options);
+            };
+
+            // Initial call to set time and update every minute
+            updateSidebarTime();
+            setInterval(updateSidebarTime, 60000); // Update every minute
+
+            // Event listeners for sidebar items
+            sidebarItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    const contentId = item.dataset.content;
+                    if (contentId) {
+                        showContent(contentId);
+                        updateActiveSidebarItem(item);
+                    }
+                });
+            });
+
+            // Handle logout
+            logoutLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const confirmed = confirm("Are you sure you want to logout?");
+                if (confirmed) {
+                    fetch('../php/logout.php') // Adjust path if needed
+                        .then(() => {
+                            window.location.href = "../index.html"; // Redirect to index.html after logout
+                        });
+                }
+            });
+
+           fetch('../php/auth-status.php')
+    .then(res => res.json())
+    .then(data => {
+        const signupBtn = document.getElementById("signup-btn");
+        const profileSection = document.getElementById("profile-section");
+
+        if (data.loggedIn) {
+            signupBtn.classList.add("hidden");
+            profileSection.classList.remove("hidden");
+
+            const fullName = data.fullName || "User";
+            const firstName = data.firstName || "User";
+            const lastName = data.lastName || "";
+            const email = data.email || "";
+            const initials = data.initials || "U";
+
+            sidebarUsername.textContent = fullName;
+            sidebarInitials.textContent = initials;
+            mainGreeting.textContent = getGreeting(firstName);
+
+            profileFirstNameInput.value = firstName;
+            profileLastNameInput.value = lastName;
+            profileEmailInput.value = email;
+
+                        // Close dropdown if clicked outside
+                        document.addEventListener("click", (event) => {
+                            const profileDropdown = document.getElementById("profileDropdown");
+                            const profileIconBtn = document.getElementById("profileIconBtn");
+                            if (!profileIconBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                                profileDropdown.classList.add("hidden");
+                            }
+                        });
+
+                        // Initial state: show "My Profile"
+                        showContent("my-profile");
+                        updateActiveSidebarItem(document.getElementById("myProfileLink"));
+
+                    } else {
+                        // User is not logged in, redirect to login page (or index.html)
+                        // This dashboard page should only be accessible when logged in.
+                        // You might want a more sophisticated redirect based on your app's flow.
+                        window.location.href = "../index.html"; // Redirect to homepage/login
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching auth status:', error);
+                    // In case of error, assume not logged in and redirect
+                    window.location.href = "../index.html";
+                });
+        });
+    </script>
+</body>
+</html>

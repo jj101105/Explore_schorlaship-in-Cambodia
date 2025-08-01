@@ -375,10 +375,7 @@
             });
         }
 
-        /**
-         * Adds a new saved item to Firestore.
-         * @param {Object} itemData - The data for the new item (name, description).
-         */
+       
         async function addSavedItem(itemData) {
             if (!db || !userId) {
                 showMessage(addItemMessage, 'Not authenticated or Firebase not initialized.', 'error');
@@ -405,10 +402,6 @@
             }
         }
 
-        /**
-         * Removes a saved item from Firestore.
-         * @param {string} itemId - The ID of the item to remove.
-         */
         async function removeSavedItem(itemId) {
             if (!db || !userId) {
                 showMessage(addItemMessage, 'Not authenticated or Firebase not initialized.', 'error');
@@ -531,8 +524,33 @@
                 showMessage(profileMessage, 'Error logging out. Please try again.', 'error');
             }
         });
+
+//---------------------------favorite-------------------------------------
+document.addEventListener('DOMContentLoaded', async () => {
+    const userId = localStorage.getItem('loggedInUserId'); // Or cookie/session
+
+    const res = await fetch(`get_favorites.php?user_id=${userId}`);
+    const favIDs = await res.json();
+
+    // If you have all scholarships stored in a global JS variable
+    const container = document.getElementById('favoritesContainer');
+    container.innerHTML = '';
+
+    favIDs.forEach(id => {
+        const scholarship = scholarshipsData.find(s => s.id === id);
+        if (scholarship) {
+            const card = `
+                <div class="bg-white p-4 rounded shadow">
+                    <img src="${scholarship.logo}" class="w-10 h-10 mb-2">
+                    <h3 class="font-semibold">${scholarship.title}</h3>
+                    <p class="text-sm">${scholarship.subtitle}</p>
+                    <!-- Add other details -->
+                </div>`;
+            container.insertAdjacentHTML('beforeend', card);
+        }
+    });
+});
+
     </script>
 </body>
 </html>
-
-
