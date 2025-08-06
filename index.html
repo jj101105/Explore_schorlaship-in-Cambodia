@@ -249,33 +249,69 @@
             © 2025 Scholarships in Cambodia. All rights reserved.
         </div>
     </footer>
- <script src="javaScript/script.js"></script> 
+    <script>
+ // window.location.href = "html/signup.html";
+
+
+</script>
+ <script src="javaScript/script.js"></script>
  <script>
+  /*document.addEventListener("DOMContentLoaded", () => {
+    fetch('php/auth-status.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.loggedIn) {
+          // Logged in → show profile icon
+          document.getElementById("signup-btn").style.display = "none";
+          document.getElementById("profile-section").classList.remove("hidden");
+        } else {
+          // Not logged in → redirect to signup
+          window.location.href = "html/signup.html";
+        }
+      });
+  });*/
 
 document.addEventListener("DOMContentLoaded", () => {
   fetch('php/auth-status.php')
     .then(res => res.json())
     .then(data => {
-      if (data.loggedIn) {
-        document.getElementById("signup-btn").style.display = "none";
-        document.getElementById("profile-section").classList.remove("hidden");
-      } else {
-        document.getElementById("signup-btn").style.display = "inline-block";
-        document.getElementById("profile-section").classList.add("hidden");
+      const isLoggedIn = data.loggedIn;
 
+      if (!isLoggedIn) {
+        // Redirect to signup page (correct relative path)
+        window.location.href = "html/signup.html";
+        return;
+      }
 
+      // Show/hide sign up and profile section accordingly
+      document.getElementById("signup-btn").style.display = "none";
+      document.getElementById("profile-section").classList.remove("hidden");
 
-                // Logout button click
-                document.getElementById("logoutBtn").addEventListener("click", (e) => {
-                    e.preventDefault();
-                    fetch('php/logout.php').then(() => {
-                        location.reload();
-                    });
-                });
-            }
+      // Redirect to recmm page after just logged in, if applicable
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("justLoggedIn") === "1") {
+        window.history.replaceState({}, document.title, "index.html");
+        window.location.href = "html/recmm.html";
+        return;
+      }
+
+      // Profile icon click event
+      const profileIconBtn = document.getElementById("profileIconBtn");
+      if (profileIconBtn) {
+        profileIconBtn.addEventListener("click", () => {
+          window.location.href = "html/user-dashboard.html";
         });
+      }
+    })
+    .catch(err => {
+      console.error('Fetch auth-status error:', err);
+      // Optionally redirect to signup on error:
+      window.location.href = "html/signup.html";
+    });
 });
+</script>
 
+ <script>
 
 /*
 document.addEventListener("DOMContentLoaded", () => {
@@ -313,4 +349,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-

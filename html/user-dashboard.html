@@ -3,554 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>User Dashboard | Scholarship Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom styles for the Inter font and general body styling */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Very light gray background for a clean look */
-            min-height: 100vh;
-            margin: 0;
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+        .sidebar-item {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            color: #4b5563; /* gray-700 */
         }
-        .dashboard-content {
-            display: none; /* Hide all content sections by default */
+        .sidebar-item:hover {
+            background-color: #f3f4f6; /* gray-100 */
         }
-        .dashboard-content.active {
-            display: block; /* Show active content section */
+        .sidebar-item.active {
+            background-color: #ecfeff; /* cyan-50 */
+            color: #06b6d4; /* cyan-500 */
+            font-weight: 600;
         }
-        /* Active tab button styling for sidebar */
-        .tab-button.active {
-            background-color: #e0f2fe; /* Light blue background for active tab */
-            color: #1d4ed8; /* Darker blue text for active tab */
-            font-weight: 600; /* Semi-bold */
-            border-left: 4px solid #2563eb; /* Prominent left border for active tab */
-            padding-left: 1rem; /* Adjust padding due to border */
+        .sidebar-item.active svg {
+            color: #06b6d4; /* cyan-500 */
         }
-        /* Hover effect for tab buttons */
-        .tab-button:hover:not(.active) {
-            background-color: #f0f4f8; /* Slightly darker hover for inactive tabs */
-            color: #4b5563; /* Slightly darker text on hover */
+        .sidebar-item svg {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+            color: #6b7280; /* gray-500 */
         }
-        /* Custom scrollbar for main content if it overflows */
-        .scrollable-content {
-            overflow-y: auto;
-            max-height: calc(100vh - 120px); /* Adjust based on header height */
-        }
-        /* Enhance form input focus */
-        input:focus, textarea:focus, select:focus {
+        .profile-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.5rem;
+            background-color: #f9fafb; /* gray-50 */
+            color: #4b5563; /* gray-700 */
             outline: none;
-            border-color: #3b82f6; /* Blue border on focus */
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* Light blue ring on focus */
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .profile-input:focus {
+            border-color: #3b82f6; /* blue-500 */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        .profile-input::placeholder {
+            color: #9ca3af; /* gray-400 */
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <header class="bg-gradient-to-r from-blue-700 to-blue-900 text-white p-5 shadow-xl">
-        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-4xl font-extrabold mb-3 sm:mb-0 tracking-tight">Dashboard Account</h1>
-            <div class="flex items-center space-x-5">
-                <span id="header-user-id" class="text-base opacity-90 font-light">Loading User...</span>
-                <button id="logout-button" class="bg-white text-blue-800 px-6 py-2.5 rounded-full shadow-lg hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-300 transition duration-300 ease-in-out font-semibold text-base">
-                    Logout
-                </button>
-            </div>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <div class="text-2xl font-bold text-blue-600 tracking-tight">🎓Exploring Scholarships in Cambodia</div>
+            <nav class="flex items-center gap-6">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="recmm.html" class="nav-link">Quizzes</a>
+                <a href="university-list.html" class="nav-link">University</a>
+                <a href="all-scholarship.html" class="nav-link">Scholarship</a>
+                
+                <a id="signup-btn" href="signup.html" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition">Sign Up</a>
+
+                <div id="profile-section" class="hidden flex flex-col items-center relative cursor-pointer select-none">
+                    <div class="relative">
+                        <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-4xl focus:outline-none" aria-label="Profile">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                            <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                            <a href="history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recent</a>
+                            <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <main class="flex-1 container mx-auto p-6 flex flex-col md:flex-row gap-6">
-        <aside class="w-full md:w-64 bg-white p-6 rounded-xl shadow-lg flex-shrink-0">
-            <nav class="space-y-4">
-                <button id="saved-tab" class="tab-button w-full text-left py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-100 font-medium transition duration-200 ease-in-out">
-                    View Saved Items
-                </button>
-                <button id="recommended-tab" class="tab-button w-full text-left py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-100 font-medium transition duration-200 ease-in-out">
-                    Recommended Results
-                </button>
-                <button id="profile-tab" class="tab-button w-full text-left py-3 px-4 rounded-lg text-gray-700 hover:bg-gray-100 font-medium transition duration-200 ease-in-out">
-                    Profile Settings
-                </button>
+    <main class="flex-grow container mx-auto p-6 md:p-8 flex flex-col lg:flex-row gap-8">
+        <aside class="w-full lg:w-1/4 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-6">
+                <div class="w-14 h-14 bg-pink-200 text-pink-700 rounded-full flex items-center justify-center font-bold text-xl mr-4">
+                    <span id="sidebar-initials"></span> </div>
+                <div>
+                    <h2 id="sidebar-username" class="text-lg font-semibold text-gray-900"></h2> <p id="sidebar-time" class="text-sm text-gray-500"></p> </div>
+            </div>
+            <nav class="space-y-2">
+                <div id="myProfileLink" class="sidebar-item active" data-content="my-profile">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </div>
+                <div id="myWishlistLink" class="sidebar-item" data-content="my-wishlist">
+                    <i class="fas fa-heart"></i>
+                    <span>My Wishlist</span>
+                    <span class="ml-auto text-xs bg-gray-200 px-2 py-1 rounded-full text-gray-700">2</span>
+                </div>
+                <div id="recommendationsLink" class="sidebar-item" data-content="recommendations">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </div>
+                <div id="recentlyViewedLink" class="sidebar-item" data-content="recently-viewed">
+                    <i class="fas fa-history"></i>
+                    <span>Recently Viewed</span>
+                </div>
+                <div id="completedQuestionnairesLink" class="sidebar-item" data-content="completed-questionnaires">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Questionnaire History</span>
+                </div>
+                <div id="logoutLink" class="sidebar-item text-red-600 hover:bg-red-50 hover:text-red-700">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log Out</span>
+                </div>
             </nav>
         </aside>
 
-        <section class="flex-1 bg-white p-8 rounded-xl shadow-lg scrollable-content">
-            <div id="saved-content" class="dashboard-content active">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 border-b-2 pb-4 border-gray-200">Your Saved Items</h3>
-
-                <div class="mb-10 p-7 bg-blue-50 rounded-xl border border-blue-200 shadow-md">
-                    <h4 class="font-bold text-2xl text-blue-800 mb-5">Add New Saved Item</h4>
-                    <form id="add-item-form" class="space-y-5">
-                        <div>
-                            <label for="item-name" class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
-                            <input type="text" id="item-name" name="itemName" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base transition duration-150 ease-in-out" placeholder="e.g., STEM Scholarship, Tech University" required>
+        <section class="flex-grow w-full lg:w-3/4 bg-white rounded-xl shadow-md p-8">
+            <h1 id="main-greeting" class="text-2xl font-bold text-gray-800 mb-6"></h1> <div id="my-profile" class="content-section">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Update Basic Profile Preferences</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" value="" class="profile-input" />
+                    </div>
+                    <div>
+                        <label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                        <input type="text" id="contactNumber" placeholder="Contact Number" class="profile-input" />
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Birthdate</label>
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="text" id="birthdateDD" placeholder="DD" class="profile-input text-center" maxlength="2" />
+                            <input type="text" id="birthdateMM" placeholder="MM" class="profile-input text-center" maxlength="2" />
+                            <input type="text" id="birthdateYYYY" placeholder="YYYY" class="profile-input text-center" maxlength="4" />
                         </div>
-                        <div>
-                            <label for="item-description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                            <textarea id="item-description" name="itemDescription" rows="3" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base transition duration-150 ease-in-out" placeholder="Brief details about the scholarship or university"></textarea>
-                        </div>
-                        <button type="submit" id="add-item-button" class="w-full flex justify-center py-3.5 px-6 border border-transparent rounded-lg shadow-md text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-100">
-                            Add Item
-                        </button>
-                        <div id="add-item-message" class="text-center text-sm mt-3"></div>
-                    </form>
+                    </div>
                 </div>
-
-                <div id="saved-items-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <p class="text-gray-500 text-center col-span-full py-8" id="no-saved-items-message">Loading saved items...</p>
+                <div class="mt-8 flex justify-end">
+                    <button class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition shadow">Save Changes</button>
                 </div>
             </div>
 
-            <div id="recommended-content" class="dashboard-content">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 border-b-2 pb-4 border-gray-200">Recommended for You</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md border border-blue-200 hover:shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-1">
-                        <h4 class="font-bold text-xl text-blue-800 mb-2">Future Innovators Scholarship</h4>
-                        <p class="text-blue-700 text-sm mb-3">Based on your interest in technology.</p>
-                        <p class="text-blue-600 text-base font-semibold">Award: Up to $10,000</p>
-                        <button class="mt-4 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm hover:bg-blue-700 transition duration-200 ease-in-out shadow-md">Learn More</button>
+            <div id="my-wishlist" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">My Saved Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Here you will find scholarships and universities you have saved.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold text-blue-700">Kampuchea Higher Education Grant</p>
+                            <p class="text-sm text-gray-600">Scholarship</p>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700" title="Remove from Wishlist"><i class="fas fa-trash"></i></button>
                     </div>
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md border border-blue-200 hover:shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-1">
-                        <h4 class="font-bold text-xl text-blue-800 mb-2">Global Studies Program</h4>
-                        <p class="text-blue-700 text-sm mb-3">Matches your preference for international experience.</p>
-                        <p class="text-blue-600 text-base font-semibold">Location: Abroad</p>
-                        <button class="mt-4 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm hover:bg-blue-700 transition duration-200 ease-in-out shadow-md">Explore</button>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                            <p class="font-semibold text-blue-700">Royal University of Phnom Penh</p>
+                            <p class="text-sm text-gray-600">University</p>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700" title="Remove from Wishlist"><i class="fas fa-trash"></i></button>
                     </div>
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md border border-blue-200 hover:shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-1">
-                        <h4 class="font-bold text-xl text-blue-800 mb-2">Environmental Science Degree</h4>
-                        <p class="text-blue-700 text-sm mb-3">Strong fit with your science questionnaire answers.</p>
-                        <p class="text-blue-600 text-base font-semibold">University: Green Valley</p>
-                        <button class="mt-4 bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm hover:bg-blue-700 transition duration-200 ease-in-out shadow-md">View Program</button>
                     </div>
-                </div>
-                <p class="text-gray-600 mt-8 text-center text-lg">Recommendations are updated regularly based on your profile and questionnaire answers.</p>
-                <p class="text-gray-400 text-xs mt-2 text-center">(Note: These are static placeholders in this demo. Real recommendations require backend processing.)</p>
             </div>
 
-            <div id="profile-content" class="dashboard-content">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 border-b-2 pb-4 border-gray-200">Update Your Profile</h3>
-                <form id="profile-form" class="space-y-6">
-                    <div>
-                        <label for="profile-username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                        <input type="text" id="profile-username" name="username" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base transition duration-150 ease-in-out" placeholder="Your username">
+            <div id="recommendations" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Recommended Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Based on your questionnaire responses, here are some recommendations:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="font-semibold text-green-700">STEM Excellence Award</p>
+                        <p class="text-sm text-gray-600">Scholarship for Science & Tech. (Matches your interest in STEM)</p>
+                        <a href="#" class="text-green-600 hover:underline text-sm mt-2 block">View Details</a>
                     </div>
-                    <div>
-                        <label for="profile-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" id="profile-email" name="email" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm bg-gray-100 cursor-not-allowed sm:text-base" placeholder="Your email" readonly>
-                        <p class="text-xs text-gray-500 mt-1">Email cannot be changed here.</p>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="font-semibold text-green-700">National University of Management</p>
+                        <p class="text-sm text-gray-600">University (Recommended for Business Studies)</p>
+                        <a href="#" class="text-green-600 hover:underline text-sm mt-2 block">View Details</a>
                     </div>
-                    <div>
-                        <label for="profile-interests" class="block text-sm font-medium text-gray-700 mb-1">Interests</label>
-                        <textarea id="profile-interests" name="interests" rows="3" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base transition duration-150 ease-in-out" placeholder="e.g., Science, Arts, Sports, Technology (comma-separated)"></textarea>
                     </div>
-                    <div>
-                        <label for="profile-education-level" class="block text-sm font-medium text-gray-700 mb-1">Education Level</label>
-                        <select id="profile-education-level" name="educationLevel" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-base transition duration-150 ease-in-out">
-                            <option value="">Select your education level</option>
-                            <option value="high_school">High School</option>
-                            <option value="undergraduate">Undergraduate</option>
-                            <option value="graduate">Graduate</option>
-                            <option value="other">Other</option>
-                        </select>
+            </div>
+
+            <div id="recently-viewed" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Previously Viewed Scholarships & Universities</h2>
+                <p class="text-gray-600 mb-4">Keep track of the scholarships and universities you've recently explored.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <p class="font-semibold text-gray-800">Overseas Study Scholarship</p>
+                        <p class="text-sm text-gray-600">Viewed: July 19, 2025</p>
                     </div>
-                    <button type="submit" id="save-profile-button" class="w-full flex justify-center py-3.5 px-6 border border-transparent rounded-lg shadow-md text-lg font-semibold text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out transform hover:scale-105 active:scale-100">
-                        Save Profile Changes
-                    </button>
-                    <div id="profile-message" class="text-center text-sm mt-3"></div>
-                </form>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                        <p class="font-semibold text-gray-800">Institute of Technology of Cambodia</p>
+                        <p class="text-sm text-gray-600">Viewed: July 18, 2025</p>
+                    </div>
+                    </div>
+            </div>
+
+            <div id="completed-questionnaires" class="content-section hidden">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Completed Questionnaire Sessions</h2>
+                <p class="text-gray-600 mb-4">Review your past questionnaire results and their impact on recommendations.</p>
+                <div class="space-y-4">
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                        <p class="font-semibold text-purple-700">Scholarship Compatibility Quiz - Session 1</p>
+                        <p class="text-sm text-gray-600">Completed: June 20, 2025</p>
+                        <p class="text-sm text-gray-600">Results: Strong match for STEM and Arts scholarships.</p>
+                        <a href="#" class="text-purple-600 hover:underline text-sm mt-2 block">View Details/Retake Quiz</a>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                        <p class="font-semibold text-purple-700">University Preference Survey - Session 1</p>
+                        <p class="text-sm text-gray-600">Completed: May 15, 2025</p>
+                        <p class="text-sm text-gray-600">Results: Preferred public universities with strong research programs.</p>
+                        <a href="#" class="text-purple-600 hover:underline text-sm mt-2 block">View Details/Retake Quiz</a>
+                    </div>
+                    </div>
             </div>
         </section>
     </main>
 
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, deleteDoc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <footer class="bg-gray-900 text-gray-200 py-8 mt-8">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 px-4">
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">About</h3>
+                <a href="about-us.html" class="footer-links block mb-1">About us</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Opportunities</h3>
+                <a href="undergratuate.html" class="footer-links block mb-1">Undergraduate Scholarship</a>
+                <a href="postgratuate.html" class="footer-links block mb-1">Postgraduate Scholarships</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Useful links</h3>
+                <a href="free-resources.html" class="footer-links block mb-1">Free Resource</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Support</h3>
+                <a href="privacy-policy.html" class="footer-links block mb-1">Privacy Policy</a>
+                <a href="faqs.html" class="footer-links block mb-1">FAQs</a>
+            </div>
+            <div>
+                <h3 class="font-bold text-blue-400 mb-2">Connect</h3>
+                <div class="social-icons flex gap-4 mt-2">
+                    <a href="https://www.facebook.com/share/161V5KMnMx/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/borasy.27?igsh=MXRoaXQxZWNxZGIxYw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 mt-8">
+            © 2025 Scholarships in Cambodia. All rights reserved.
+        </div>
+    </footer>
 
-        // Firebase variables
-        let app;
-        let db;
-        let auth;
-        let userId;
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sidebarItems = document.querySelectorAll(".sidebar-item");
+            const contentSections = document.querySelectorAll(".content-section");
+            const logoutLink = document.getElementById("logoutLink");
+            const sidebarUsername = document.getElementById("sidebar-username");
+            const sidebarInitials = document.getElementById("sidebar-initials");
+            const mainGreeting = document.getElementById("main-greeting");
+            const sidebarTime = document.getElementById("sidebar-time");
+            const profileFirstNameInput = document.getElementById("firstName");
+            const profileLastNameInput = document.getElementById("lastName");
+            const profileEmailInput = document.getElementById("email");
 
-        // Global variables provided by the environment
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            // Function to show a specific content section
+            const showContent = (id) => {
+                contentSections.forEach(section => {
+                    section.classList.add("hidden");
+                });
+                document.getElementById(id).classList.remove("hidden");
+            };
 
-        // Get DOM elements
-        const headerUserId = document.getElementById('header-user-id');
-        const logoutButton = document.getElementById('logout-button');
-        const savedTab = document.getElementById('saved-tab');
-        const recommendedTab = document.getElementById('recommended-tab');
-        const profileTab = document.getElementById('profile-tab');
-        const savedContent = document.getElementById('saved-content');
-        const recommendedContent = document.getElementById('recommended-content');
-        const profileContent = document.getElementById('profile-content');
-        const profileForm = document.getElementById('profile-form');
-        const profileUsernameInput = document.getElementById('profile-username');
-        const profileEmailInput = document.getElementById('profile-email');
-        const profileInterestsInput = document.getElementById('profile-interests');
-        const profileEducationLevelSelect = document.getElementById('profile-education-level');
-        const profileMessage = document.getElementById('profile-message');
+            // Function to update active sidebar item
+            const updateActiveSidebarItem = (activeLink) => {
+                sidebarItems.forEach(item => item.classList.remove("active"));
+                activeLink.classList.add("active");
+            };
 
-        const addItemForm = document.getElementById('add-item-form');
-        const itemNameInput = document.getElementById('item-name');
-        const itemDescriptionInput = document.getElementById('item-description');
-        const addItemButton = document.getElementById('add-item-button');
-        const addItemMessage = document.getElementById('add-item-message');
-        const savedItemsContainer = document.getElementById('saved-items-container');
-        const noSavedItemsMessage = document.getElementById('no-saved-items-message');
-
-        /**
-         * Displays a message to the user with a specific type (success, error, info).
-         * The message will clear after 5 seconds.
-         * @param {HTMLElement} element - The DOM element to display the message in.
-         * @param {string} message - The message text.
-         * @param {string} type - The type of message ('success', 'error', 'info').
-         */
-        function showMessage(element, message, type) {
-            element.textContent = message;
-            if (type === 'success') {
-                element.className = 'text-center text-sm mt-3 text-green-600 font-medium';
-            } else if (type === 'error') {
-                element.className = 'text-center text-sm mt-3 text-red-600 font-medium';
-            } else if (type === 'info') {
-                element.className = 'text-center text-sm mt-3 text-blue-600 font-medium';
+            // Function to get time-based greeting
+            const getGreeting = (firstName) => {
+            const hour = new Date().getHours();
+            let greeting = "Good ";
+            if (hour < 12) {
+                greeting += "Morning";
+            } else if (hour < 18) {
+                greeting += "Afternoon";
+            } else {
+                greeting += "Evening";
             }
-            // Clear message after 5 seconds
-            setTimeout(() => {
-                element.textContent = '';
-                element.className = 'text-center text-sm mt-3'; // Reset class
-            }, 5000);
-        }
+            return `${greeting}! ${firstName}`;
+        };
 
-        // Initialize Firebase and set up authentication listener
-        if (Object.keys(firebaseConfig).length > 0) {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
+            // Update time in sidebar
+            const updateSidebarTime = () => {
+                const now = new Date();
+                const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                sidebarTime.textContent = now.toLocaleTimeString('en-US', options);
+            };
 
-            // Listen for authentication state changes
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    userId = user.uid;
-                    headerUserId.textContent = `User ID: ${userId}`;
-                    console.log("User authenticated:", userId);
-                    // Fetch and display user profile data
-                    await fetchUserProfile(user.uid);
-                    // Set up real-time listener for saved items
-                    setupSavedItemsListener(user.uid);
-                } else {
-                    // If no user is authenticated, try to sign in with custom token or anonymously
-                    if (initialAuthToken) {
-                        try {
-                            await signInWithCustomToken(auth, initialAuthToken);
-                            console.log("Signed in with custom token.");
-                        } catch (error) {
-                            console.error("Error signing in with custom token:", error);
-                            await signInAnonymously(auth);
-                            console.log("Signed in anonymously due to custom token error.");
-                        }
+            // Initial call to set time and update every minute
+            updateSidebarTime();
+            setInterval(updateSidebarTime, 60000); // Update every minute
+
+            // Event listeners for sidebar items
+            sidebarItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    const contentId = item.dataset.content;
+                    if (contentId) {
+                        showContent(contentId);
+                        updateActiveSidebarItem(item);
+                    }
+                });
+            });
+
+            // Handle logout
+            logoutLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const confirmed = confirm("Are you sure you want to logout?");
+                if (confirmed) {
+                    fetch('../php/logout.php') // Adjust path if needed
+                        .then(() => {
+                            window.location.href = "../index.html"; // Redirect to index.html after logout
+                        });
+                }
+            });
+
+           fetch('../php/auth-status.php')
+    .then(res => res.json())
+    .then(data => {
+        const signupBtn = document.getElementById("signup-btn");
+        const profileSection = document.getElementById("profile-section");
+
+        if (data.loggedIn) {
+            signupBtn.classList.add("hidden");
+            profileSection.classList.remove("hidden");
+
+            const fullName = data.fullName || "User";
+            const firstName = data.firstName || "User";
+            const lastName = data.lastName || "";
+            const email = data.email || "";
+            const initials = data.initials || "U";
+
+            sidebarUsername.textContent = fullName;
+            sidebarInitials.textContent = initials;
+            mainGreeting.textContent = getGreeting(firstName);
+
+            profileFirstNameInput.value = firstName;
+            profileLastNameInput.value = lastName;
+            profileEmailInput.value = email;
+
+                        // Close dropdown if clicked outside
+                        document.addEventListener("click", (event) => {
+                            const profileDropdown = document.getElementById("profileDropdown");
+                            const profileIconBtn = document.getElementById("profileIconBtn");
+                            if (!profileIconBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
+                                profileDropdown.classList.add("hidden");
+                            }
+                        });
+
+                        // Initial state: show "My Profile"
+                        showContent("my-profile");
+                        updateActiveSidebarItem(document.getElementById("myProfileLink"));
+
                     } else {
-                        await signInAnonymously(auth);
-                        console.log("Signed in anonymously.");
+                        // User is not logged in, redirect to login page (or index.html)
+                        // This dashboard page should only be accessible when logged in.
+                        // You might want a more sophisticated redirect based on your app's flow.
+                        window.location.href = "../index.html"; // Redirect to homepage/login
                     }
-                    // If still no user after attempts, redirect or show message
-                    if (!auth.currentUser) {
-                        headerUserId.textContent = 'Not logged in.';
-                        console.log("No authenticated user. Please log in.");
-                        // In a real app, you might redirect to login page:
-                        // window.location.href = 'index.html';
-                    }
-                }
-            });
-        } else {
-            console.error("Firebase config not found. Firebase will not be initialized.");
-            headerUserId.textContent = 'Firebase not configured (Demo Mode)';
-            // Fallback for demo without Firebase config
-            document.addEventListener('DOMContentLoaded', () => {
-                showMessage(profileMessage, 'Firebase not configured. Profile updates are simulated.', 'info');
-                showMessage(addItemMessage, 'Firebase not configured. Saved items are simulated.', 'info');
-            });
-        }
-
-        /**
-         * Fetches user profile data from Firestore and populates the profile form.
-         * @param {string} uid - The user's unique ID.
-         */
-        async function fetchUserProfile(uid) {
-            if (!db) {
-                console.warn("Firestore not initialized. Cannot fetch profile.");
-                return;
-            }
-            try {
-                const userDocRef = doc(db, `artifacts/${appId}/users/${uid}/user_data`, 'profile');
-                const docSnap = await getDoc(userDocRef);
-
-                if (docSnap.exists()) {
-                    const userData = docSnap.data();
-                    profileUsernameInput.value = userData.username || '';
-                    profileEmailInput.value = userData.email || ''; // Email is read-only
-                    profileInterestsInput.value = userData.interests || '';
-                    profileEducationLevelSelect.value = userData.educationLevel || '';
-                    console.log("User profile fetched:", userData);
-                } else {
-                    console.log("No profile found for user:", uid);
-                    // Optionally set default values or prompt user to complete profile
-                    profileUsernameInput.value = auth.currentUser.displayName || '';
-                    profileEmailInput.value = auth.currentUser.email || '';
-                    profileInterestsInput.value = '';
-                    profileEducationLevelSelect.value = '';
-                }
-            } catch (error) {
-                console.error("Error fetching user profile:", error);
-                showMessage(profileMessage, 'Error loading profile data.', 'error');
-            }
-        }
-
-        /**
-         * Sets up a real-time listener for saved items in Firestore.
-         * @param {string} uid - The user's unique ID.
-         */
-        function setupSavedItemsListener(uid) {
-            if (!db) {
-                console.warn("Firestore not initialized. Cannot set up saved items listener.");
-                return;
-            }
-            const savedItemsCollectionRef = collection(db, `artifacts/${appId}/users/${uid}/saved_items`);
-            const q = query(savedItemsCollectionRef); // No orderBy to avoid index issues
-
-            onSnapshot(q, (snapshot) => {
-                const items = [];
-                snapshot.forEach(doc => {
-                    items.push({ id: doc.id, ...doc.data() });
+                })
+                .catch(error => {
+                    console.error('Error fetching auth status:', error);
+                    // In case of error, assume not logged in and redirect
+                    window.location.href = "../index.html";
                 });
-                renderSavedItems(items);
-            }, (error) => {
-                console.error("Error listening to saved items:", error);
-                showMessage(addItemMessage, 'Error loading saved items.', 'error');
-            });
-        }
-
-        /**
-         * Renders the saved items dynamically in the UI.
-         * @param {Array<Object>} items - An array of saved item objects.
-         */
-        function renderSavedItems(items) {
-            savedItemsContainer.innerHTML = ''; // Clear existing items
-
-            if (items.length === 0) {
-                noSavedItemsMessage.textContent = 'No saved items yet. Add one above!';
-                noSavedItemsMessage.classList.remove('hidden');
-                return;
-            } else {
-                noSavedItemsMessage.classList.add('hidden');
-            }
-
-            items.forEach(item => {
-                const itemCard = document.createElement('div');
-                itemCard.className = 'bg-gray-50 p-6 rounded-xl shadow-md border border-gray-200 flex flex-col justify-between hover:shadow-lg transition duration-200 ease-in-out transform hover:-translate-y-1';
-                itemCard.innerHTML = `
-                    <div>
-                        <h4 class="font-bold text-xl text-gray-800 mb-2">${item.name}</h4>
-                        <p class="text-gray-700 text-sm mb-3">${item.description}</p>
-                    </div>
-                    <button class="remove-item-button mt-4 bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition duration-200 ease-in-out shadow-md">Remove</button>
-                `;
-                // Set data-id on the button itself for easy access in event listener
-                itemCard.querySelector('.remove-item-button').dataset.id = item.id; 
-                savedItemsContainer.appendChild(itemCard);
-            });
-
-            // Add event listeners to new remove buttons
-            document.querySelectorAll('.remove-item-button').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const itemId = event.target.dataset.id;
-                    removeSavedItem(itemId);
-                });
-            });
-        }
-
-       
-        async function addSavedItem(itemData) {
-            if (!db || !userId) {
-                showMessage(addItemMessage, 'Not authenticated or Firebase not initialized.', 'error');
-                return;
-            }
-            addItemButton.disabled = true;
-            addItemButton.textContent = 'Adding...';
-            try {
-                const savedItemsCollectionRef = collection(db, `artifacts/${appId}/users/${userId}/saved_items`);
-                await addDoc(savedItemsCollectionRef, {
-                    name: itemData.name,
-                    description: itemData.description,
-                    createdAt: new Date().toISOString()
-                });
-                showMessage(addItemMessage, 'Item added successfully!', 'success');
-                addItemForm.reset();
-                console.log('Item added:', itemData.name);
-            } catch (error) {
-                console.error('Error adding item:', error);
-                showMessage(addItemMessage, 'Failed to add item. Please try again.', 'error');
-            } finally {
-                addItemButton.disabled = false;
-                addItemButton.textContent = 'Add Item';
-            }
-        }
-
-        async function removeSavedItem(itemId) {
-            if (!db || !userId) {
-                showMessage(addItemMessage, 'Not authenticated or Firebase not initialized.', 'error');
-                return;
-            }
-            // Use a custom modal or message box instead of confirm() for better UI
-            const userConfirmed = window.confirm('Are you sure you want to remove this item?'); // Using window.confirm for simplicity in this demo
-            if (!userConfirmed) {
-                return;
-            }
-            try {
-                const itemDocRef = doc(db, `artifacts/${appId}/users/${userId}/saved_items`, itemId);
-                await deleteDoc(itemDocRef);
-                showMessage(addItemMessage, 'Item removed successfully!', 'success');
-                console.log('Item removed:', itemId);
-            } catch (error) {
-                console.error('Error removing item:', error);
-                showMessage(addItemMessage, 'Failed to remove item. Please try again.', 'error');
-            }
-        }
-
-        /**
-         * Switches the active content section and updates tab styles.
-         * @param {string} contentId - The ID of the content section to show.
-         * @param {string} tabId - The ID of the tab button to activate.
-         */
-        function showContent(contentId, tabId) {
-            // Hide all content sections
-            document.querySelectorAll('.dashboard-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            // Deactivate all tab buttons
-            document.querySelectorAll('.tab-button').forEach(tab => {
-                tab.classList.remove('active');
-                tab.classList.add('px-4'); /* Ensure consistent padding when inactive */
-            });
-
-            // Show the selected content section
-            document.getElementById(contentId).classList.add('active');
-            // Activate the selected tab button
-            document.getElementById(tabId).classList.add('active');
-        }
-
-        // Event listeners for navigation tabs
-        savedTab.addEventListener('click', () => showContent('saved-content', 'saved-tab'));
-        recommendedTab.addEventListener('click', () => showContent('recommended-content', 'recommended-tab'));
-        profileTab.addEventListener('click', () => showContent('profile-content', 'profile-tab'));
-
-        // Initial state: show saved items content and activate its tab
-        document.addEventListener('DOMContentLoaded', () => {
-            showContent('saved-content', 'saved-tab');
         });
-
-        // Handle Add Item Form Submission
-        addItemForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const itemName = itemNameInput.value.trim();
-            const itemDescription = itemDescriptionInput.value.trim();
-
-            if (itemName && itemDescription) {
-                addSavedItem({ name: itemName, description: itemDescription });
-            } else {
-                showMessage(addItemMessage, 'Please fill in both fields.', 'error');
-            }
-        });
-
-        // Handle Profile Form Submission
-        profileForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent default form submission
-
-            const newUsername = profileUsernameInput.value.trim();
-            const newInterests = profileInterestsInput.value.trim();
-            const newEducationLevel = profileEducationLevelSelect.value;
-            const user = auth.currentUser;
-
-            if (!user || !db) {
-                showMessage(profileMessage, 'Not authenticated or Firebase not initialized.', 'error');
-                return;
-            }
-
-            document.getElementById('save-profile-button').disabled = true;
-            document.getElementById('save-profile-button').textContent = 'Saving...';
-
-            try {
-                const userDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_data`, 'profile');
-                await setDoc(userDocRef, {
-                    username: newUsername,
-                    interests: newInterests,
-                    educationLevel: newEducationLevel
-                }, { merge: true }); // Merge to update only specified fields
-
-                showMessage(profileMessage, 'Profile updated successfully!', 'success');
-                console.log('User profile updated:', user.uid, newUsername, newInterests, newEducationLevel);
-            } catch (error) {
-                console.error('Error updating profile:', error);
-                showMessage(profileMessage, 'Failed to update profile. Please try again.', 'error');
-            } finally {
-                document.getElementById('save-profile-button').disabled = false;
-                document.getElementById('save-profile-button').textContent = 'Save Profile Changes';
-            }
-        });
-
-        // Handle Logout
-        logoutButton.addEventListener('click', async () => {
-            if (!auth) {
-                console.warn("Firebase Auth not initialized. Cannot log out.");
-                return;
-            }
-            const userConfirmed = window.confirm('Are you sure you want to log out?');
-            if (!userConfirmed) {
-                return;
-            }
-            try {
-                await signOut(auth);
-                console.log("User logged out.");
-                // Redirect to logout.html
-                window.location.href = 'logout.html'; 
-            } catch (error) {
-                console.error("Error logging out:", error);
-                showMessage(profileMessage, 'Error logging out. Please try again.', 'error');
-            }
-        });
-
-//---------------------------favorite-------------------------------------
-document.addEventListener('DOMContentLoaded', async () => {
-    const userId = localStorage.getItem('loggedInUserId'); // Or cookie/session
-
-    const res = await fetch(`get_favorites.php?user_id=${userId}`);
-    const favIDs = await res.json();
-
-    // If you have all scholarships stored in a global JS variable
-    const container = document.getElementById('favoritesContainer');
-    container.innerHTML = '';
-
-    favIDs.forEach(id => {
-        const scholarship = scholarshipsData.find(s => s.id === id);
-        if (scholarship) {
-            const card = `
-                <div class="bg-white p-4 rounded shadow">
-                    <img src="${scholarship.logo}" class="w-10 h-10 mb-2">
-                    <h3 class="font-semibold">${scholarship.title}</h3>
-                    <p class="text-sm">${scholarship.subtitle}</p>
-                    <!-- Add other details -->
-                </div>`;
-            container.insertAdjacentHTML('beforeend', card);
-        }
-    });
-});
-
     </script>
 </body>
 </html>

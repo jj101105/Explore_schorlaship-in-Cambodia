@@ -40,10 +40,9 @@ if ($stmt->execute()) {
 $_SESSION['user_id'] = $conn->insert_id;
 $_SESSION['username'] = $firstname;
 
-echo "<script>
-        alert('✅ Registered successfully!');
-        window.location.href = '../index.html'; // Adjust as needed
-      </script>";
+header("Location: ../index.html?justLoggedIn=1");
+exit();
+
 
 } else {
     echo "Error: " . $stmt->error;

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Program Management | Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="flex min-h-screen">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
+            <div class="flex items-center justify-center mb-8">
+                <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 hover:scale-105 transition">
+                    <span class="text-3xl">🎓</span>
+                    <span class="text-xl font-extrabold text-blue-900">Scholarship Admin</span>
+                </div>
+            </div>
+            <nav class="space-y-3">
+                <a href="Admin-dashboard.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="scholarship.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-graduation-cap"></i> Scholarships</a>
+                <a href="university.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-university"></i> Universities</a>
+                <a href="program.html" class="flex items-center gap-3 text-blue-600 font-medium"><i class="fas fa-book"></i> Programs</a>
+                <a href="user.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-users"></i> Users</a>
+                <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-comment-dots"></i> Feedback</a>
+                <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-6">
+            <!-- Topbar -->
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold">Programs</h1>
+                <div class="flex items-center gap-4">
+                    <button class="relative">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 rounded-full"></span>
+                    </button>
+                    <button class="flex items-center space-x-2">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" class="w-10 h-10 rounded-full border" />
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Program Table -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Programs List</h2>
+                    <button onclick="document.getElementById('addProgramModal').classList.remove('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        <i class="fas fa-plus mr-1"></i> Add Program
+                    </button>
+                </div>
+                <input type="text" placeholder="Search program by name or university..." class="w-full mb-4 px-3 py-2 border rounded" id="programSearchInput"/>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm border">
+                        <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3 text-left border">#</th>
+                                <th class="p-3 text-left border">Program Name</th>
+                                <th class="p-3 text-left border">University</th>
+                                <th class="p-3 text-left border">Description</th>
+                                <th class="p-3 text-left border">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="programTableBody">
+                            <!-- Dynamic content loaded from PHP -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Program Modal -->
+    <div id="addProgramModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
+        <div class="bg-white p-6 w-full max-w-lg rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4" id="programModalTitle">Add New Program</h2>
+            <form id="addProgramForm" class="space-y-4">
+                <select name="university_id" id="programUniversitySelect" class="w-full px-4 py-2 border rounded" required>
+                    <option value="">Select University</option>
+                    <!-- Universities will be loaded here by JavaScript -->
+                </select>
+                <input name="program_name" type="text" placeholder="Program Name (e.g., Computer Science)" class="w-full px-4 py-2 border rounded" required />
+                <textarea name="description" placeholder="Program Description (optional)" class="w-full px-4 py-2 border rounded h-24 resize-y"></textarea>
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="document.getElementById('addProgramModal').classList.add('hidden'); resetProgramForm();" class="px-4 py-2 border rounded">Cancel</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Program</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../javaScript/program.js"></script>
+</body>
+</html>
+
+
+//*******

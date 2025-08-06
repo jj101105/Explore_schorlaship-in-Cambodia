@@ -35,10 +35,9 @@ if (password_verify($passwordInput, $hashedPassword)) {
     session_start();
 $_SESSION['username'] = $row['firstname'];
 
-    echo "<script>
-            alert('✅ Login successful! Welcome, " . htmlspecialchars($row['firstname']) . "');
-            window.location.href = '../index.html';
-          </script>";
+   header("Location: ../index.html?justLoggedIn=1");
+exit();
+
 
     } else {
         echo "<script>
