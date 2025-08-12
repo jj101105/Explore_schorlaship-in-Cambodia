@@ -1,147 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard | Scholarship Explorer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-  <div class="flex min-h-screen">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard | Scholarship Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="flex min-h-screen">
+      <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
+        <div class="flex items-center justify-center mb-8">
+          <div
+            class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 hover:scale-105 transition"
+          >
+            <span class="text-3xl">🎓</span>
+            <span class="text-xl font-extrabold text-blue-900"
+              >Scholarship Admin</span
+            >
+          </div>
+        </div>
+        <nav class="space-y-3">
+          <a href="Admin-dashboard.html" class="flex items-center gap-3 hover:text-blue-500"
+            ><i class="fas fa-chart-line"></i> Dashboard</a
+          >
+          <a href="scholarship.html" class="flex items-center gap-3 text-blue-600 font-medium"
+            ><i class="fas fa-graduation-cap"></i> Scholarships</a
+          >
+          <a href="university-management.html" class="flex items-center gap-3 hover:text-blue-500"
+            ><i class="fas fa-university"></i> Universities</a
+          >
+          <a href="program.html" class="flex items-center gap-3 hover:text-blue-500"
+            ><i class="fas fa-book"></i> Programs</a
+          >
+          <a href="user.html" class="flex items-center gap-3 hover:text-blue-500"
+            ><i class="fas fa-users"></i> Users</a
+          >
+          <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-500"
+            ><i class="fas fa-comment-dots"></i> Feedback</a
+          >
+          <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"
+            ><i class="fas fa-sign-out-alt"></i> Logout</a
+          >
+        </nav>
+      </aside>
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
-      <div class="flex items-center justify-center mb-8">
-        <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 hover:scale-105 transition">
-          <span class="text-3xl">🎓</span>
-          <span class="text-xl font-extrabold text-blue-900">Scholarship Admin</span>
+      <main class="flex-1 ml-64 p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-3xl font-bold">Scholarships</h1>
+          <div class="flex items-center gap-4">
+            <button class="relative">
+              <i class="fas fa-bell text-xl"></i>
+              <span
+                class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 rounded-full"
+              ></span>
+            </button>
+            <button id="profileBtn" class="flex items-center space-x-2">
+              <img
+                src="https://via.placeholder.com/40"
+                class="w-10 h-10 rounded-full border"
+              />
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
         </div>
-      </div>
-      <nav class="space-y-3">
-        <a href="Admin-dashboard.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-chart-line"></i> Dashboard</a>
-        <a href="scholarship.html" class="flex items-center gap-3 text-blue-600 font-medium"><i class="fas fa-graduation-cap"></i> Scholarships</a>
-        <a href="university-management.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-university"></i> Universities</a>
-        <a href="program.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-book"></i> Programs</a>
-        <a href="user.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-users"></i> Users</a>
-        <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-comment-dots"></i> Feedback</a>
-        <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      </nav>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 ml-64 p-6">
-      <!-- Topbar -->
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold">Scholarships</h1>
-        <div class="flex items-center gap-4">
-          <button class="relative">
-            <i class="fas fa-bell text-xl"></i>
-            <span class="absolute -top-1 -right-1 h-3 w-3 bg-red-600 rounded-full"></span>
-          </button>
-          <button id="profileBtn" class="flex items-center space-x-2">
-            <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full border" />
-            <i class="fas fa-chevron-down"></i>
-          </button>
+        <div class="bg-white p-6 rounded-xl shadow-sm border">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Scholarships</h2>
+            <button
+              onclick="openAddScholarshipForm()"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              <i class="fas fa-plus mr-1"></i> Add New
+            </button>
+          </div>
+          <input
+            id="searchInput"
+            onkeyup="searchScholarships()"
+            type="text"
+            placeholder="Search by scholarship name"
+            class="w-full mb-4 px-3 py-2 border rounded"
+          />
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm border">
+              <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
+                <tr>
+                  <th class="p-3 text-left border">#</th>
+                  <th class="p-3 text-left border">Scholarship Name</th>
+                  <th class="p-3 text-left border">Study In</th>
+                  <th class="p-3 text-left border">Degree</th>
+                  <th class="p-3 text-left border">Type</th>
+                  <th class="p-3 text-left border">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="scholarshipTable"></tbody>
+            </table>
+          </div>
         </div>
-      </div>
-
-      <!-- Scholarships Table -->
-      <div class="bg-white p-6 rounded-xl shadow-sm border">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold">Scholarships</h2>
-          <button onclick="document.getElementById('addModal').classList.remove('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            <i class="fas fa-plus mr-1"></i> Add New
-          </button>
-        </div>
-        <input type="text" placeholder="Search by scholarship name" class="w-full mb-4 px-3 py-2 border rounded" />
-        <div class="overflow-x-auto">
-          <table class="min-w-full text-sm border">
-            <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
-              <tr>
-                <th class="p-3 text-left border">#</th>
-                <th class="p-3 text-left border">Scholarship Name</th>
-                <th class="p-3 text-left border">Province</th>
-                <th class="p-3 text-left border">GPA</th>
-                <th class="p-3 text-left border">Degree</th>
-                <th class="p-3 text-left border">Type</th>
-                <th class="p-3 text-left border">Fields</th>
-                <th class="p-3 text-left border">College Type</th>
-                <th class="p-3 text-left border">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="scholarshipTable">
-              <!-- Loaded dynamically -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- Add/Edit Scholarship Modal -->
-  <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
-   <div class="bg-white p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl shadow-lg">
-
-      <h2 class="text-xl font-semibold mb-4">Add/Edit Scholarship</h2>
-      <form id="addScholarshipForm" class="space-y-4">
-        <div>
-          <label class="block mb-1 font-medium">Scholarship Name</label>
-          <input name="scholarship_name" type="text" class="w-full px-4 py-2 border rounded" required />
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Province</label>
-          <select name="province" class="w-full px-4 py-2 border rounded" required>
-            <option value="">Select Province</option>
-            <option>Phnom Penh</option>
-            <option>Siem Reap</option>
-            <option>Kampot</option>
-            <option>Battambang</option>
-            <option>Kandal</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Minimum GPA</label>
-          <input name="gpa" type="number" step="0.1" min="1" max="4" class="w-full px-4 py-2 border rounded" required />
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Degree Level</label>
-          <select name="degree_level" class="w-full px-4 py-2 border rounded" required>
-            <option value="">Select Degree</option>
-            <option>Bachelor</option>
-            <option>Master</option>
-            <option>Associate</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Scholarship Type</label>
-          <input name="scholarship_type" type="text" class="w-full px-4 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Fields of Study</label>
-          <input name="fields_of_study" type="text" class="w-full px-4 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">College Type</label>
-          <select name="college_type" class="w-full px-4 py-2 border rounded" required>
-            <option value="">Select Type</option>
-            <option>Public</option>
-            <option>Private</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1 font-medium">Description</label>
-          <textarea name="description" class="w-full px-4 py-2 border rounded"></textarea>
-        </div>
-        <div class="flex justify-end gap-2 pt-4">
-          <button type="button" onclick="document.getElementById('addModal').classList.add('hidden')" class="px-4 py-2 border rounded">Cancel</button>
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
-        </div>
-      </form>
+      </main>
     </div>
-  </div>
 
-  <!-- JS File -->
-  <script src="../javaScript/scholarship.js"></script>
-</body>
+    <div
+      id="addModal"
+      class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center hidden z-50"
+    >
+      <div
+        class="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-lg"
+      >
+        <form id="addScholarshipForm" class="space-y-4">
+          <h2 class="text-2xl font-bold mb-4">Add / Edit Scholarship</h2>
+          <input type="hidden" id="scholarshipId" />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Title</label>
+              <input
+                id="form-title"
+                name="title"
+                required
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Subtitle</label>
+              <input
+                id="form-subtitle"
+                name="subtitle"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div class="col-span-1 md:col-span-2">
+              <label class="block text-sm font-medium mb-1">Logo URL</label>
+              <input
+                id="form-logo"
+                name="logo"
+                type="url"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">Study In</label>
+              <input
+                id="form-studyIn"
+                name="studyIn"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Type</label>
+              <select
+                id="form-type"
+                name="type"
+                class="w-full border px-4 py-2 rounded"
+              >
+                <option>Fully Funded</option>
+                <option>Partially Funded</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Degree</label>
+              <input
+                id="form-degree"
+                name="degree"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div class="col-span-1 md:col-span-3">
+              <label class="block text-sm font-medium mb-1">Deadline</label>
+              <input
+                id="form-deadline"
+                name="deadline"
+                type="date"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Description</label>
+            <textarea
+              id="form-description"
+              name="description"
+              rows="3"
+              class="w-full border px-4 py-2 rounded"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1"
+              >Benefits (comma or newline separated)</label
+            >
+            <textarea
+              id="form-benefits"
+              name="benefits"
+              rows="3"
+              class="w-full border px-4 py-2 rounded"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">University</label>
+            <input
+              id="form-university"
+              name="university"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1"
+              >Major (comma-separated)</label
+            >
+            <input
+              id="form-major"
+              name="major"
+              class="w-full border px-4 py-2 rounded"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1">GPA</label>
+              <input
+                id="form-gpa"
+                name="gpa"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Max Age</label>
+              <input
+                id="form-maxAge"
+                name="maxAge"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Grade</label>
+              <input
+                id="form-grade"
+                name="grade"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1">Gender</label>
+              <input
+                id="form-gender"
+                name="gender"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1"
+                >IELTS (score or 'Not required')</label
+              >
+              <input
+                id="form-ielts"
+                name="ielts"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1"
+                >Work Experience</label
+              >
+              <input
+                id="form-workExperience"
+                name="workExperience"
+                class="w-full border px-4 py-2 rounded"
+              />
+            </div>
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+              <label class="block text-sm font-medium mb-1"
+                >Detailed Requirements (comma or newline separated)</label
+              >
+              <textarea
+                id="form-detailedRequirements"
+                name="detailedRequirements"
+                rows="2"
+                class="w-full border px-4 py-2 rounded"
+              ></textarea>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1"
+              >Eligible Countries (comma or newline separated)</label
+            >
+            <textarea
+              id="form-eligibleCountries"
+              name="eligibleCountries"
+              rows="2"
+              class="w-full border px-4 py-2 rounded"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1"
+              >Required Documents (comma or newline separated)</label
+            >
+            <textarea
+              id="form-requiredDocuments"
+              name="requiredDocuments"
+              rows="3"
+              class="w-full border px-4 py-2 rounded"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">How to Apply</label>
+            <textarea
+              id="form-howToApply"
+              name="howToApply"
+              rows="3"
+              class="w-full border px-4 py-2 rounded"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="document.getElementById('addModal').classList.add('hidden')"
+              class="px-4 py-2 border rounded"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+     let scholarshipsData = [];
+
+// Fetch all scholarships from backend
+function fetchScholarships() {
+  fetch('../php/api.php?action=get')
+    .then(response => response.json())
+    .then(data => {
+      scholarshipsData = data;
+      renderScholarships(scholarshipsData);
+    })
+    .catch(err => {
+      console.error('Failed to fetch scholarships:', err);
+      alert('Failed to load scholarships');
+    });
+}
+
+// Render scholarships in the table
+function renderScholarships(data) {
+  const tableBody = document.getElementById('scholarshipTable');
+  tableBody.innerHTML = '';
+
+  data.forEach((scholarship, index) => {
+    const row = document.createElement('tr');
+    row.classList.add('bg-white', 'border-b', 'hover:bg-gray-50', 'text-gray-700');
+
+    row.innerHTML = `
+      <td class="p-3 border">${index + 1}</td>
+      <td class="p-3 border">${scholarship.title}</td>
+      <td class="p-3 border">${scholarship.details?.studyIn || ''}</td>
+      <td class="p-3 border">${scholarship.details?.degree || ''}</td>
+      <td class="p-3 border">${scholarship.details?.type || ''}</td>
+      <td class="p-3 border">
+        <button onclick="editScholarship('${scholarship.id}')" class="text-blue-600 hover:text-blue-800 mr-2">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button onclick="deleteScholarship('${scholarship.id}')" class="text-red-600 hover:text-red-800">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </td>
+    `;
+
+    tableBody.appendChild(row);
+  });
+}
+
+// Open modal and populate form for editing
+function openAddScholarshipForm(scholarship = null) {
+  const modal = document.getElementById('addModal');
+  modal.classList.remove('hidden');
+
+  const form = document.getElementById('addScholarshipForm');
+  form.reset();
+
+  document.getElementById('scholarshipId').value = '';
+
+  if (scholarship) {
+    document.getElementById('scholarshipId').value = scholarship.id || '';
+
+    document.getElementById('form-title').value = scholarship.title || '';
+    document.getElementById('form-subtitle').value = scholarship.subtitle || '';
+    document.getElementById('form-logo').value = scholarship.logo || '';
+    document.getElementById('form-studyIn').value = scholarship.details?.studyIn || '';
+    document.getElementById('form-type').value = scholarship.details?.type || '';
+    document.getElementById('form-degree').value = scholarship.details?.degree || '';
+    document.getElementById('form-deadline').value = scholarship.details?.deadline || '';
+    document.getElementById('form-description').value = scholarship.description || '';
+    document.getElementById('form-benefits').value = (scholarship.benefits || []).join('\n');
+    document.getElementById('form-university').value = scholarship.university || '';
+    document.getElementById('form-major').value = scholarship.major || '';
+    document.getElementById('form-gpa').value = scholarship.eligibility?.gpa || '';
+    document.getElementById('form-maxAge').value = scholarship.eligibility?.maxAge || '';
+    document.getElementById('form-grade').value = scholarship.eligibility?.grade || '';
+    document.getElementById('form-gender').value = scholarship.eligibility?.gender || '';
+    document.getElementById('form-ielts').value = scholarship.eligibility?.ielts || '';
+    document.getElementById('form-workExperience').value = scholarship.eligibility?.workExperience || '';
+    document.getElementById('form-detailedRequirements').value = (scholarship.eligibility?.detailedRequirements || []).join('\n');
+    document.getElementById('form-eligibleCountries').value = (scholarship.eligibleCountries || []).join('\n');
+    document.getElementById('form-requiredDocuments').value = (scholarship.requiredDocuments || []).join('\n');
+    document.getElementById('form-howToApply').value = scholarship.howToApply || '';
+  }
+}
+
+// Handle form submit for Add or Update
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const scholarshipId = document.getElementById('scholarshipId').value;
+  const action = scholarshipId ? 'update' : 'add';
+
+  const data = {
+    id: scholarshipId,
+    title: form.title.value.trim(),
+    subtitle: form.subtitle.value.trim(),
+    logo: form.logo.value.trim(),
+    details: {
+      studyIn: form.studyIn.value.trim(),
+      type: form.type.value.trim(),
+      degree: form.degree.value.trim(),
+      deadline: form.deadline.value.trim(),
+    },
+    description: form.description.value.trim(),
+    benefits: form.benefits.value.split('\n').map(s => s.trim()).filter(Boolean),
+    university: form.university.value.trim(),
+    major: form.major.value.trim(),
+    eligibility: {
+      gpa: form.gpa.value.trim(),
+      maxAge: form.maxAge.value.trim(),
+      grade: form.grade.value.trim(),
+      gender: form.gender.value.trim(),
+      ielts: form.ielts.value.trim(),
+      workExperience: form.workExperience.value.trim(),
+      detailedRequirements: form.detailedRequirements.value.split('\n').map(s => s.trim()).filter(Boolean),
+    },
+    eligibleCountries: form.eligibleCountries.value.split('\n').map(s => s.trim()).filter(Boolean),
+    requiredDocuments: form.requiredDocuments.value.split('\n').map(s => s.trim()).filter(Boolean),
+    howToApply: form.howToApply.value.trim(),
+  };
+
+  fetch('../php/api.php' + (action === 'update' ? '?action=update' : '?action=add'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(resData => {
+      if (resData.success || resData.id) {
+        alert('Scholarship saved successfully');
+        document.getElementById('addModal').classList.add('hidden');
+        fetchScholarships(); // reload table from backend
+      } else {
+        alert('Failed to save: ' + (resData.error || 'Unknown error'));
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Error saving scholarship');
+    });
+}
+
+
+function editScholarship(id) {
+  const scholarship = scholarshipsData.find(s => s.id == id);
+  if (scholarship) {
+    openAddScholarshipForm(scholarship);
+  } else {
+    alert('Scholarship not found');
+  }
+}
+
+
+// Delete scholarship by ID
+function deleteScholarship(id) {
+  if (!confirm('Are you sure you want to delete this scholarship?')) return;
+
+  fetch(`../php/api.php?action=delete&id=${id}`, {
+    method: 'DELETE'
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Deleted successfully');
+        fetchScholarships();
+      } else {
+        alert('Failed to delete: ' + (data.error || 'Unknown error'));
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Error deleting scholarship');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchScholarships();
+
+  document.getElementById('addScholarshipForm').addEventListener('submit', handleFormSubmit);
+});
+
+
+    </script>
+  </body>
 </html>

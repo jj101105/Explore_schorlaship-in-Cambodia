@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PPI</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+.logo-container {
+    display: flex;
+    align-items: center; /* Vertically align icon and text */
+}
+
+.logo-container span {
+    margin-left: 10px; /* Add space between icon and text */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 130px;
+    height: 138px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar Menu */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+  }
+  
+  /* Hide sidebar by default */
+  .hidden {
+    display: none;
+  }
+  
+  #sidebar .profile {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #sidebar ul li a i {
+    margin-right: 10px;
+    color: #0056b3;
+  }
+  
+  #sidebar .new-badge {
+    background: pink;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 12px;
+    margin-left: 10px;
+  }
+  
+  #sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Hamburger Icon */
+  #menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        /* General Styles */
+#exchange-program {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Paragraph Styling */
+#exchange-program p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Headings */
+#exchange-program h2 {
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Lists */
+#exchange-program ul {
+    list-style: none;
+    padding: 0;
+}
+
+#exchange-program ul li {
+    background: url('https://cdn-icons-png.flaticon.com/16/846/846449.png') no-repeat left center;
+    background-size: 14px;
+    padding-left: 25px;
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #exchange-program {
+        padding: 15px;
+    }
+    #exchange-program h2 {
+        font-size: 20px;
+    }
+    #exchange-program p, 
+    #exchange-program ul li {
+        font-size: 14px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+  <!-- Header -->
+<header>
+    <nav class="navbar">
+        <div class="logo-container">
+            🎓 <span>Exploring Scholarships in Cambodia</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="university-list.html">University List</a></li>
+            <li><a href="recmm.html">Recommend</a></li>
+            <li><a href="signup.html" class="btn">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Header with Logo -->
+<div class="header">
+    <img src="../images/PreahKossomak.jpg" alt="Phnom Penh International University Logo">
+    <div>
+        <span class="title">Phnom Penh International University</span> <br>
+        <span>PPI</span>
+    </div>
+</div>
+
+<div class="content">
+    <div class="factories-container"></div>
+</div>
+
+<!-- Main Content Section -->
+<div class="content">
+    <p class="description">
+        Phnom Penh International University (PPIU) is a well-established private institution in Cambodia. The university focuses on delivering high-quality education in various disciplines, preparing students to meet global standards in their respective fields.
+    </p>
+
+    <ul class="scholarship-list">
+        <li><a href="#">PPIU Academic Excellence Scholarship 🌟</a>
+            <br>• For students with outstanding academic performance.
+            <br>• Covers full or partial tuition fees.
+        </li>
+        <li><a href="#">Need-Based Financial Assistance 💰</a>
+            <br>• For students who are financially disadvantaged.
+            <br>• Based on an application and financial need assessment.
+        </li>
+        <li><a href="#">PPIU Leadership and Innovation Scholarship 🏆</a>
+            <br>• Awarded to students demonstrating exceptional leadership and innovation skills.
+        </li>
+    </ul>
+    <div class="unverified">Verified</div>
+</div>
+
+<div class="container">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+        <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+        <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+        <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+    </div>
+
+    <!-- 📌 Outline Section -->
+    <div id="outline" class="tab-content active">
+        <h1>Phnom Penh International University (PPIU)</h1>
+        <p>Founded in 2000, Phnom Penh International University (PPIU) is one of Cambodia’s leading private higher education institutions. PPIU offers an international standard of education with a diverse range of programs and has a strong focus on developing competent graduates ready to enter the global workforce.</p>
+
+        <h2>Facilities</h2>
+        <ul>
+            <li>Modern classrooms and lecture halls</li>
+            <li>Computer labs and multimedia rooms</li>
+            <li>Extensive library with access to e-resources</li>
+            <li>Student clubs, sports facilities, and extracurricular programs</li>
+        </ul>
+
+        <h2>Vision</h2>
+        <p>To become a leading institution of higher education in Cambodia, known for academic excellence and producing graduates who are globally competitive and socially responsible.</p>
+
+        <h2>Mission</h2>
+        <li>PPIU is committed to:
+            <br>• Providing high-quality and accessible education.
+            <br>• Promoting innovation, leadership, and entrepreneurship.
+            <br>• Enhancing global partnerships and collaborations.
+            <br>• Fostering research and development.
+        </li>
+    </div>
+
+    <!-- 📚 Academics Section -->
+    <div id="academics" class="tab-content">
+        <h1>Academics</h1>
+        <h2>Faculties</h2>
+        <ul>
+            <li>Faculty of Business and Economics</li>
+            <li>Faculty of Computer Science and Information Technology</li>
+            <li>Faculty of Engineering and Architecture</li>
+            <li>Faculty of Law and Political Science</li>
+            <li>Faculty of Social Science and Humanities</li>
+        </ul>
+
+        <h2>Programs Offered</h2>
+        <ul>
+            <li>Bachelor’s Degrees in Business Administration, IT, Engineering, Law, and more</li>
+            <li>Master’s Degrees in Business Administration (MBA) and other fields</li>
+            <li>Certificate programs in various disciplines</li>
+        </ul>
+    </div>
+
+    <!-- 🎓 Scholarships Section -->
+    <div id="scholarships" class="tab-content" style="display: none;">
+        <h1>Scholarships</h1>
+        <p>PPIU offers various scholarships to encourage academic excellence, support financially challenged students, and recognize leadership and innovation.</p>
+        <p class="highlight">Scholarship Categories:</p>
+        <ul>
+            <li>PPIU Academic Excellence Scholarship</li>
+            <li>PPIU Need-Based Financial Assistance</li>
+            <li>PPIU Leadership and Innovation Scholarship</li>
+            <li>International Exchange Program Scholarship</li>
+        </ul>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>Phnom Penh International University (PPIU)</p>
+                <p>St. 288, Sangkat Boeung Keng Kang III, Phnom Penh, Cambodia</p>
+                <p><a href="https://www.ppiu.edu.kh" target="_blank">https://www.ppiu.edu.kh</a></p>
+                <p>Email: <a href="mailto:info@ppiu.edu.kh">info@ppiu.edu.kh</a></p>
+            </div>
+            <div class="contact-image">
+                <img src="https://www.ppiu.edu.kh/images/campus.jpg" alt="Phnom Penh International University Campus">
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 Exchange Program Section -->
+    <div id="exchange" class="tab-content">
+        <h1>Exchange Program</h1>
+        <p>PPIU provides students with opportunities for international exchange programs, offering them the chance to study abroad and gain valuable global experience.</p>
+
+        <h2>Initiatives</h2>
+        <ul>
+            <li>Collaborations with universities worldwide</li>
+            <li>Opportunities for student internships and research programs abroad</li>
+            <li>Participation in global academic conferences and competitions</li>
+        </ul>
+
+        <h2>Goals</h2>
+        <ul>
+            <li>Provide students with international exposure and networking opportunities</li>
+            <li>Enhance cultural and academic exchange</li>
+            <li>Develop global leaders and innovators</li>
+        </ul>
+    </div>
+</div>
+
+
+    <script>
+         // Get elements
+const menuIcon = document.getElementById("menu-icon");
+const sidebar = document.getElementById("sidebar");
+const closeBtn = document.getElementById("close-menu");
+
+// Show sidebar when menu icon is clicked
+menuIcon.addEventListener("click", function() {
+    sidebar.classList.remove("hidden"); // Remove the 'hidden' class to show sidebar
+});
+
+// Hide sidebar when close button is clicked
+closeBtn.addEventListener("click", function() {
+    sidebar.classList.add("hidden"); // Add 'hidden' class to hide sidebar
+});
+//=========================================================================
+function openTab(evt, tabName) {
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    var tablinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".tab-link.active").click();
+});//============================================================
+function openTab(evt, tabName) {
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    var tablinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+    </script>
+
+</body>
+</html>
+    

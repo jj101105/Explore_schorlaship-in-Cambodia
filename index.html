@@ -60,7 +60,7 @@
 
            <!-- Profile Icon Button -->
             <div id="profile-section" class="hidden flex flex-col items-center select-none">
-            <a href="html/tes-user-dash.html" id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-4xl focus:outline-none" aria-label="Profile">
+            <a href="html/user-dashboard.html" id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-4xl focus:outline-none" aria-label="Profile">
                 <i class="fas fa-user-circle"></i>
             </a>
             </div>
@@ -287,6 +287,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("signup-btn").style.display = "none";
       document.getElementById("profile-section").classList.remove("hidden");
 
+
+      
       // Redirect to recmm page after just logged in, if applicable
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get("justLoggedIn") === "1") {

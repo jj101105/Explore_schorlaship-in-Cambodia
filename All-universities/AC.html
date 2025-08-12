@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Acleda university of business</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+  <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recommend.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/ACLEDA.jpg" alt="acleda LOGO">
+        <div>
+            <span class="title"> Acleda university of business </span> <br>
+            <span>(ACLEDA)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+<div class="content">
+    <p class="description">
+        ACLEDA University of Business offers various scholarships and financial aid to support both local and international students. 
+        Here are the main types of scholarships available:
+    </p>
+    
+    <ul class="scholarship-list">
+        <li><a href="#">1. Government Scholarships:</a> Scholarships are provided to students who actively participate in the community or come from disadvantaged families in specific regions or provinces that are prioritized.</li>
+        
+        <li><a href="#">2. Academic Scholarships:</a> These scholarships are granted based on the individual academic achievements of students, and the benefits depend on the student's performance.</li>
+
+        <li><a href="#">3. Community Service Scholarships:</a> These scholarships are awarded to students who have been actively involved in community service and have demonstrated a positive influence within their communities.</li>
+    </ul>
+    
+    <div class="unverified">Unverified</div>
+</div>
+<div class="container">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+        <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+        <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+        <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+    </div>
+
+    <!-- 📌 Outline Section (Updated to match the image) -->
+    <div id="outline" class="tab-content active">
+        <h1>ACLEDA University of Business</h1>
+        <p>Founded in 2007, ACLEDA University of Business (AUB) has become a leading institution in Cambodia, offering programs that meet the growing demands of the modern workforce. The university provides a wide range of academic programs designed to develop professional and entrepreneurial skills.</p>
+        
+        <h2>Facilities</h2>
+        <ul>
+            <li>Library</li>
+            <li>Computer Labs</li>
+            <li>Auditorium</li>
+            <li>Student Cafeteria</li>
+        </ul>
+
+        <h2>Vision</h2>
+        <p>ACLEDA University of Business strives to be a leading institution in business education in Cambodia, preparing students to contribute effectively to the development of the economy and society.</p>
+
+
+        <h2>Mission</h2>
+        <p>Our mission is to provide high-quality education that equips students with the skills and knowledge needed for success in business and entrepreneurship, fostering ethical leadership and global perspectives.</p>
+    </div>
+
+    <!-- 📚 Academics Section (Updated to match the image) -->
+    <div id="academics" class="tab-content">
+        <h1>Academics</h1>
+
+        <!-- Associate Program -->
+        <h2>Associate Program</h2>
+        <ul>
+            <li>Business Administration</li>
+            <li>Accounting</li>
+        </ul>
+
+        <!-- Bachelor Degree -->
+        <h2>Bachelor Degree</h2>
+        <ul>
+            <li>Business Administration</li>
+            <li>Accounting</li>
+            <li>Finance</li>
+            <li>Management</li>
+        </ul>
+
+        <!-- Master Degree -->
+        <h2>Master Degree</h2>
+        <ul>
+            <li>Business Administration (MBA)</li>
+            <li>Finance</li>
+        </ul>
+    </div>
+
+    <!-- Scholarships Section -->
+    <div id="scholarships" class="tab-content" style="display: none;">
+        <h1>Scholarships</h1>
+        <p>ACLEDA University of Business offers various scholarship opportunities and financial assistance to students based on their academic performance and specific criteria. For more details, please visit the university’s official website or contact the admissions office.</p>
+        <p class="highlight">Scholarship details are as follows:</p>
+        <p>Scholarships for a 2-year period</p>
+        <table>
+            <tr>
+                <th>Grade</th>
+                <th>Fee per Year</th>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>$300</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>$350</td>
+            </tr>
+            <tr>
+                <td>C</td>
+                <td>$400</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>$450</td>
+            </tr>
+            <tr>
+                <td>E</td>
+                <td>$500</td>
+            </tr>
+        </table>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>ACLEDA University of Business</p>
+                <p>Phnom Penh, Cambodia</p>
+                <p>Tel: +855 23 987 654</p>
+                <p><a href="http://www.acleda.edu.kh" target="_blank">www.acleda.edu.kh</a></p>
+                <p>Email: <a href="mailto:info@acleda.edu.kh">info@acleda.edu.kh</a></p>
+            </div>
+            <div class="contact-image">
+                <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+            </div>
+        </div>
+    </div>
+
+    <!-- Exchange Program Section -->
+    <div id="exchange" class="tab-content">
+        <h1>🌍 Exchange Program</h1>
+        <p>ACLEDA University of Business has established partnerships with several international institutions to promote cross-cultural exchange and enhance the global learning experience for students.</p>
+        
+        <h2>International Partners</h2>
+        <ul>
+            <li>Bangkok University</li>
+            <li>Ubon Ratchathani Rajabhat University</li>
+            <li>Sikkim Manipal University</li>
+            <li>Surindra Rajabhat University</li>
+            <li>King Mongkut’s University of Technology Thonburi</li>
+            <li>Yunnan University of Finance and Economics</li>
+            <li>Kasem Bundit University</li>
+        </ul>
+
+        <h2>Student Exchange Program</h2>
+        <p>ACLEDA University of Business’s Student Exchange Program enables students to study abroad, gain international perspectives, and broaden their academic and cultural understanding. This program fosters global collaboration and professional growth, preparing students to thrive in the globalized business world.</p>
+    </div>
+</div>
+
+
+<script>
+    function openTab(evt, tabName) {
+        var tabcontent = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        var tablinks = document.getElementsByClassName("tab-link");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".tab-link.active").click();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SEA</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+.logo-container {
+    display: flex;
+    align-items: center; /* Vertically align icon and text */
+}
+
+.logo-container span {
+    margin-left: 10px; /* Add space between icon and text */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar Menu */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+  }
+  
+  /* Hide sidebar by default */
+  .hidden {
+    display: none;
+  }
+  
+  #sidebar .profile {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #sidebar ul li a i {
+    margin-right: 10px;
+    color: #0056b3;
+  }
+  
+  #sidebar .new-badge {
+    background: pink;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 12px;
+    margin-left: 10px;
+  }
+  
+  #sidebar .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Hamburger Icon */
+  #menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        /* General Styles */
+#exchange-program {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Paragraph Styling */
+#exchange-program p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Headings */
+#exchange-program h2 {
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Lists */
+#exchange-program ul {
+    list-style: none;
+    padding: 0;
+}
+
+#exchange-program ul li {
+    background: url('https://cdn-icons-png.flaticon.com/16/846/846449.png') no-repeat left center;
+    background-size: 14px;
+    padding-left: 25px;
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #exchange-program {
+        padding: 15px;
+    }
+    #exchange-program h2 {
+        font-size: 20px;
+    }
+    #exchange-program p, 
+    #exchange-program ul li {
+        font-size: 14px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+  <!-- Header -->
+<header>
+    <nav class="navbar">
+        <div class="logo-container">
+            🎓 <span>Exploring Scholarships in Cambodia</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="university-list.html">University List</a></li>
+            <li><a href="recmm.html">Recommend</a></li>
+            <li><a href="signup.html" class="btn">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Header with Logo -->
+<div class="header">
+    <img src="../images/SEA.png" alt="SEA Logo">
+    <div>
+        <span class="title">Southeast Asia University</span> <br>
+        <span>(SEA)</span>
+    </div>
+</div>
+
+<div class="content">
+    <div class="factories-container"></div>
+</div>
+
+<!-- Main Content Section -->
+<div class="content">
+    <p class="description">
+        Southeast Asia University (SEA) is a private institution in Cambodia dedicated to delivering affordable and quality higher education. It aims to develop skilled professionals who can contribute to national and international development.
+    </p>
+
+    <ul class="scholarship-list">
+        <li><a href="#">SEA Scholarship Program for High School Graduates 🌟</a>
+            <br>• For students with excellent academic records.
+            <br>• Covers partial or full tuition fees.
+        </li>
+        <li><a href="#">Need-based Tuition Reduction 💰</a>
+            <br>• For financially disadvantaged students.
+            <br>• Based on application and assessment.
+        </li>
+        <li><a href="#">Top Academic Performer Award 🏆</a>
+            <br>• Awarded to top-performing students every academic year.
+        </li>
+    </ul>
+    <div class="unverified">Verified</div>
+</div>
+
+<div class="container">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+        <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+        <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+        <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+    </div>
+
+    <!-- 📌 Outline Section -->
+    <div id="outline" class="tab-content active">
+        <h1>Southeast Asia University (SEA)</h1>
+        <p>Established in 1997, SEA is recognized by the Ministry of Education, Youth and Sport of Cambodia. The university emphasizes practical learning, modern education methods, and the development of professional skills for the 21st century.</p>
+
+        <h2>Facilities</h2>
+        <ul>
+            <li>Multimedia-equipped classrooms</li>
+            <li>Computer and language labs</li>
+            <li>Well-stocked library and e-resources</li>
+            <li>Clubs, competitions, and community engagement programs</li>
+        </ul>
+
+        <h2>Vision</h2>
+        <p>To become a leading private university providing high-quality education and producing competent graduates in Cambodia.</p>
+
+        <h2>Mission</h2>
+        <li>SEA is committed to:
+            <br>• Providing accessible and affordable higher education.
+            <br>• Enhancing teaching, learning, and research.
+            <br>• Promoting innovation and practical skills.
+            <br>• Building networks for local and international collaboration.
+        </li>
+    </div>
+
+    <!-- 📚 Academics Section -->
+    <div id="academics" class="tab-content">
+        <h1>Academics</h1>
+        <h2>Faculties</h2>
+        <ul>
+            <li>Faculty of Business Administration</li>
+            <li>Faculty of Law and Public Administration</li>
+            <li>Faculty of Information Technology and Science</li>
+            <li>Faculty of Civil Engineering and Architecture</li>
+            <li>Faculty of Education and Languages</li>
+            <li>Faculty of Agriculture and Rural Development</li>
+        </ul>
+
+        <h2>Programs Offered</h2>
+        <ul>
+            <li>Bachelor’s Degrees in Business, IT, Engineering, Law, and more</li>
+            <li>Master’s Degrees in Business and Public Administration</li>
+            <li>Associate degrees and certificate programs</li>
+        </ul>
+    </div>
+
+    <!-- 🎓 Scholarships Section -->
+    <div id="scholarships" class="tab-content" style="display: none;">
+        <h1>Scholarships</h1>
+        <p>SEA University offers various scholarships to encourage academic excellence and support financially challenged students.</p>
+        <p class="highlight">Scholarship Categories:</p>
+        <ul>
+            <li>SEA Scholarship Program for High School Graduates</li>
+            <li>Need-Based Tuition Reduction Program</li>
+            <li>Top Academic Performer Award</li>
+            <li>Women in STEM Support Grant</li>
+        </ul>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>Southeast Asia University (SEA)</p>
+                <p>No. 81, Street 261, Sangkat Tek Laork 3, Khan Toul Kork, Phnom Penh, Cambodia</p>
+                <p><a href="https://sea.edu.kh" target="_blank">https://sea.edu.kh</a></p>
+                <p>Email: <a href="mailto:info@sea.edu.kh">info@sea.edu.kh</a></p>
+            </div>
+            <div class="contact-image">
+                <img src="https://sea.edu.kh/images/sea-campus.jpg" alt="SEA Campus">
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 Exchange Program Section -->
+    <div id="exchange" class="tab-content">
+        <h1>Exchange Program</h1>
+        <p>Southeast Asia University is working to expand its international cooperation by developing exchange and internship programs with universities in ASEAN and Asia-Pacific countries.</p>
+
+        <h2>Initiatives</h2>
+        <ul>
+            <li>Regional education partnerships</li>
+            <li>Joint training and study programs</li>
+            <li>International research collaboration</li>
+        </ul>
+
+        <h2>Goals</h2>
+        <ul>
+            <li>Empower students with global knowledge and exposure</li>
+            <li>Promote intercultural competence and academic growth</li>
+            <li>Enhance research and innovation</li>
+        </ul>
+    </div>
+</div>
+
+    <script>
+         // Get elements
+const menuIcon = document.getElementById("menu-icon");
+const sidebar = document.getElementById("sidebar");
+const closeBtn = document.getElementById("close-menu");
+
+// Show sidebar when menu icon is clicked
+menuIcon.addEventListener("click", function() {
+    sidebar.classList.remove("hidden"); // Remove the 'hidden' class to show sidebar
+});
+
+// Hide sidebar when close button is clicked
+closeBtn.addEventListener("click", function() {
+    sidebar.classList.add("hidden"); // Add 'hidden' class to hide sidebar
+});
+//=========================================================================
+function openTab(evt, tabName) {
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    var tablinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".tab-link.active").click();
+});//============================================================
+function openTab(evt, tabName) {
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    var tablinks = document.getElementsByClassName("tab-link");
+    for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.classList.add("active");
+}
+    </script>
+
+</body>
+</html>
+    

@@ -10,7 +10,6 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
     <div class="flex min-h-screen">
 
-        <!-- Sidebar -->
         <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
             <div class="flex items-center justify-center mb-8">
                 <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 hover:scale-105 transition">
@@ -29,9 +28,7 @@
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 ml-64 p-6">
-            <!-- Topbar -->
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Programs</h1>
                 <div class="flex items-center gap-4">
@@ -46,7 +43,6 @@
                 </div>
             </div>
 
-            <!-- Program Table -->
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-semibold">Programs List</h2>
@@ -54,7 +50,7 @@
                         <i class="fas fa-plus mr-1"></i> Add Program
                     </button>
                 </div>
-                <input type="text" placeholder="Search program by name or university..." class="w-full mb-4 px-3 py-2 border rounded" id="programSearchInput"/>
+                <input type="text" placeholder="Search program by name or faculty..." class="w-full mb-4 px-3 py-2 border rounded" id="programSearchInput"/>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-sm border">
                         <thead class="bg-gray-100 text-gray-600 uppercase tracking-wider">
@@ -62,27 +58,29 @@
                                 <th class="p-3 text-left border">#</th>
                                 <th class="p-3 text-left border">Program Name</th>
                                 <th class="p-3 text-left border">University</th>
+                                <th class="p-3 text-left border">Faculty</th>
                                 <th class="p-3 text-left border">Description</th>
                                 <th class="p-3 text-left border">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="programTableBody">
-                            <!-- Dynamic content loaded from PHP -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Add/Edit Program Modal -->
     <div id="addProgramModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-30">
         <div class="bg-white p-6 w-full max-w-lg rounded-xl shadow-lg">
             <h2 class="text-xl font-semibold mb-4" id="programModalTitle">Add New Program</h2>
             <form id="addProgramForm" class="space-y-4">
+                <input type="hidden" name="program_id" id="programIdInput">
                 <select name="university_id" id="programUniversitySelect" class="w-full px-4 py-2 border rounded" required>
                     <option value="">Select University</option>
-                    <!-- Universities will be loaded here by JavaScript -->
+                </select>
+                <select name="faculty_id" id="programFacultySelect" class="w-full px-4 py-2 border rounded" required>
+                    <option value="">Select Faculty</option>
                 </select>
                 <input name="program_name" type="text" placeholder="Program Name (e.g., Computer Science)" class="w-full px-4 py-2 border rounded" required />
                 <textarea name="description" placeholder="Program Description (optional)" class="w-full px-4 py-2 border rounded h-24 resize-y"></textarea>
@@ -97,6 +95,3 @@
     <script src="../javaScript/program.js"></script>
 </body>
 </html>
-
-
-//*******

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UHS </title>
+    <style>
+       
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a0a0a;
+    color: white;
+}
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+    </style>
+</head>
+<body>
+
+  <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recmm.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+<!-- 📂 Sidebar Menu -->
+
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/UHS_Cambodia_logo.png" alt="UHS Logo">
+        <div>
+            <span class="title">University of Health Science</span> <br>
+            <span>(UHS)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+    <div class="content">
+        <p class="description">
+            UHS offers many types of scholarships to help students with their studies. These include:
+        </p>
+
+        <ul class="scholarship-list">
+            <li><a href="#">1. Merit Scholarships:</a> Awarded For students with high grades and top exam results.</li>
+            <li><a href="#">2. Need-Based Scholarships:</a> For students from poor families who need financial support.</li>
+            <li><a href="#">3. MoEYS Scholarships:</a> From the Ministry of Education for bachelor’s, master’s, and PhD programs.</li>
+            <li><a href="#">4. Japan IUHW Scholarships:</a> Full scholarships to study medicine in Japan for 6 years.</li>
+            <li><a href="#">5. IPC Scholarships:</a> For master’s students in health science, includes money for daily expenses.</li>
+            <li><a href="#">6. CHPAA Scholarships:</a> From Cambodian doctors in America to support health students.</li>
+            <li><a href="#">7. ASEAN & KOICA Scholarships:</a> For studying in ASEAN countries or Korea.</li>
+            <li><a href="#">8. WHO & JICA Scholarships:</a> For students in public health or research.</li>
+            <li><a href="#">9. Other Partner Scholarships:</a> From NGOs or foreign universities for study or research abroad.</li>
+        </ul>
+
+
+        <div class="unverified">Unverified</div>
+    </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+            <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+            <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+        </div>
+
+       <!-- 📌 Outline Section (Updated to match the image) -->
+<div id="outline" class="tab-content active">
+    <h1>University of Health Science </h1>
+    <p> National University of Management (NUM), established in 1983, is a leading public university in Cambodia, offering undergraduate and graduate degrees in Business Administration (e.g., Management, Finance, Accounting, Economics, IT, and Business Law). Its campus is located in Phnom Penh's financial district.</p>    
+    <h2 >Facilities</h2>
+    <ul>
+        <li>Library</a></li>
+        <li>Laboratories</a></li>
+    </ul>
+
+    <h2>Vision</h2>
+    <p>The UHS will be recognized as the nation’s leading higher educational institution in the field of health sciences in which the students, teachers and staff strive for excellence in teaching and learning, research and public services.</p>
+    <h2>Mission</h2>
+    <p>The UHS will contribute to improve the health of Cambodians by:</p>
+        <ul>
+        <li>Contributing to human resources development through training that meets national and international standards.</li>
+        <li>Conducting research in response to the country’s needs according to national and international standards.</li>
+        <li>Providing services with quality and ethics.</li>
+        <li>Governing with efficiency and transparency.</li>
+        <li>Promoting national and international cooperation.</li>
+    </ul>
+
+    <h2>Goals</h2>
+    <p>During the strategic planning process, the UHS identified a set of six overarching goals for the next five years:</p>
+<ul>
+    <li>Goal #1: Achieve and be recognized for both academic excellence and development of our students and faculties.</li>
+    <li>Goal #2: Be recognized as a leading institution in Research and Innovation in Health Sciences in Cambodia.</li>
+    <li>Goal #3: Contribute to the provision of services that respond to the needs of our communities.</li>
+    <li>Goal #4: Promote good governance and modernization.</li>
+    <li>Goal #5: Develop high-quality Human Resources and the facilities required for excellence.</li>
+    <li>Goal #6: Strengthen and broaden International Cooperation.</li>
+</ul>
+</div>
+
+       <!-- 📚 Academics Section (Updated to match the image) -->
+       <div id="academics" class="tab-content">
+        <h1>Academics</h1>
+    
+        <h2>Faculty of Medicine</h2>
+        <ul>
+            <li>Bachelor Degree of Medicine</li>
+            <li>General Doctor</li>
+            <li>Specialist Doctor</li>
+        </ul>
+    
+        <h2>Faculty of Pharmacy</h2>
+        <ul>
+            <li>Bachelor Degree of Pharmacy</li>
+            <li>Master Degree of Pharmacy</li>
+            <li>Specialized pharmaceutical</li>
+            <li>Public Health</li>
+            <li>Bachelor of Public Health</li>
+        </ul>
+    
+        <h2>Faculty of Dentistry</h2>
+        <ul>
+            <li>Bachelor Degree of Dentistry</li>
+            <li>Master Degree of Dentistry</li>
+            <li>Master Degree Dentistry of Public Health</li>
+            <li>Master Degree of Pediatric Dentistry</li>
+            <li>Master Degree of Gum Health Dentistry</li>
+            <li>Doctor Degree of Public Health</li>
+            <li>Doctor Degree of Orthodontics</li>
+        </ul>
+    
+        <h2>Technical School of Medical Care</h2>
+        <ul>
+            <li>Associate Degree of Nursery</li>
+            <li>Associate Degree of Midwifery</li>
+            <li>Associate Degree of Medical Research</li>
+            <li>Associate Degree of Motion therapy</li>
+            <li>Associate Degree of Radiology</li>
+            <li>Bachelor Degree of Nursery</li>
+            <li>Bachelor Degree of Midwifery</li>
+            <li>Bachelor Degree of Nursery and Midwifery</li>
+        </ul>
+    </div>
+
+
+        <!-- Scholarships Section -->
+        <div id="scholarships" class="tab-content">
+            <h1>Scholarships</h1>
+            <p>UHS offers a wide range of scholarships.these include:</p>
+            <h2>Types of Scholarships</h2>
+            <ul>
+                <li>Merit-based</li>
+                <li>Need-based</li>
+                <li>Government-funded</li>
+                <li>International</li>
+                <li>Partner-funded</li>
+                <li>Specific Organization funded</li>
+            </ul>
+           <!-- Contact Info with Image -->
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>University of Health Science (UHS)</p>
+            <p><a href=" https://www.uhs.edu.kh/scholarship/" target="_blank">www.uhs.edu.kh</a></p>
+            <p>Email: <a href="mailto:info@itc.edu.kh ">info@itc.edu.kh </a></p>
+        </div>
+        <div class="contact-image">
+            <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+        </div>
+        </div>
+    </div>
+
+        <!-- Exchange Program Section -->
+<div id="exchange" class="tab-content">
+    <h1>UHS Exchange Programs</h1>
+    <p>The University of Health Sciences (UHS) offers various exchange programs to promote global medical education, research collaboration, and student cultural exchange. Here are some key programs:</p>
+
+    <ul>
+        <li><strong>Family Medicine Exchange with Boston University (USA):</strong> UHS collaborates with Boston University's Global Health Collaborative (BU GHC) to develop Family Medicine education. This program allows Cambodian students and professionals to participate in clinical training and knowledge sharing in primary care. <a href="https://www.bu.edu/ghc/where-we-work/cambodia/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+
+        <li><strong>Student Exchange Program with Khon Kaen University, Thailand:</strong> UHS students join short-term exchange programs at Khon Kaen University’s Faculty of Medicine. This program promotes cross-cultural learning and practical experience in Thai hospitals alongside students from Japan and Laos. <a href="https://www.intermed.kku.ac.th/cross-cultural-learning-in-medicine-students-from-laos-japan-and-cambodia-successfully-complete-exchange-at-md-kku/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+
+        <li><strong>PURSEA Regional Collaboration:</strong> UHS is a member of the PURSEA (Pilot Project for University Reform in Southeast Asia) network. This program focuses on improving university governance and academic partnerships between UHS and regional universities. <a href="https://pursea.hanu.vn/en/membre/university-health-sciences-cambodia-uss?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+
+        <li><strong>Master’s and PhD Scholarships with Partner Universities:</strong> Through partnerships with international institutions like Institut Pasteur and Japanese universities, UHS students and faculty can pursue higher degrees abroad, including master’s and doctoral programs in life sciences and public health. <a href="https://www.pasteur-kh.org/life-sciences-and-health/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+    </ul>
+    <div class="contact-info">
+        <p><strong>Contact Information:</strong></p>
+        <p>For more detailed information about exchange programs, you can contact the Office of International Student Affairs:</p>
+        <p>Email: <a href="info@uhs.edu.kh">info@uhs.edu.kh</a></p>
+        <p>Phone: +855 23 430 559</p>
+    </div>
+
+    <p>These programs reflect IUHS's commitment to fostering international academic partnerships and providing students with opportunities for global learning experiences.</p>
+
+    </div>
+</div>      
+    
+        </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tab-link.active").click();
+        });
+    </script>
+
+</body>
+</html>
+    <script>
+        
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>

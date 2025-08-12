@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Royal University of Agriculture (RUA)</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+  <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recmm.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/RUA.png" alt="RAC Logo">
+        <div>
+            <span class="title"> Royal University of Agriculture  </span> <br>
+            <span>(RUA)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+    <div class="content">
+        <p class="description">
+            RUA offers various scholarships and financial aid to support both local students. 
+            Here are the main types of scholarships available:
+        </p>
+    <ul class="scholarship-list">
+        <li><a href="#">Merit-Based Scholarships</a>  
+            <br>• Awarded to students who have demonstrated outstanding academic performance.  
+            <br>• Criteria may include high GPA, excellence in specific subjects, or exceptional research projects.
+        </li>
+
+        <li><a href="#">Need-Based Financial Aid</a>  
+            <br>• Designed to support students from economically disadvantaged backgrounds.  
+            <br>• Applicants are typically required to provide proof of financial need.
+        </li>
+
+        <li><a href="#">Departmental Scholarships</a>  
+            <br>• Offered by specific faculties or departments to encourage specialization in particular fields.  
+            <br>• Includes scholarships for agricultural sciences, veterinary medicine, and agribusiness.
+        </li>
+
+        <li><a href="#">Exchange Program Scholarships</a>  
+            <br>• Provide opportunities for students to study abroad or participate in exchange programs with partner universities.  
+            <br>• May cover tuition, travel, and living expenses.
+        </li>
+
+        <li><a href="#">Research Grants and Scholarships</a>  
+            <br>• Available for students engaged in research projects, especially those addressing agricultural development and innovation.  
+            <br>• Often require a research proposal and alignment with RUA's strategic research goals.
+        </li>
+
+        <li><a href="#">External Scholarships</a>  
+            <br>• Sponsored by government agencies, NGOs, or international organizations.  
+            <br>• May include scholarships for rural development, sustainable agriculture, and community engagement.
+        </li>
+    </ul>
+        <div class="unverified">Unverified</div>
+    </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+            <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+            <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+        </div>
+
+
+       <!-- 📌 Outline Section (Updated to match the image) -->
+       <div id="outline" class="tab-content active">
+        <h1>RUA University</h1>
+        <P>The **Royal University of Agriculture (RUA)** in Cambodia was founded in 1964 by King Norodom Sihanouk as the **Royal University of Agronomy Science (RUAS)**. It graduated around 200 students between 1965 and 1975. After reopening as the **Institute of Agricultural Education (IAE)**, it offered short agricultural courses and later evolved into the RUA, focusing on higher education in agriculture.</P>
+        
+        <h2>Vision</h2>
+        <P>RUA, as the leading agricultural university in Cambodia, shall progressively achieve an international level of quality in education,
+             research and extension of agriculture, related sectors and sustainable use of natural resources.</P>
+        <h2>Mission</h2>
+        <P>Contribute to the development of agriculture and related sectors and to the sustainable use of natural resources by providing higher-education programs, research and extension in line with national and international development issue and job market needs.</P>
+    </div>
+
+    <!-- 📚 Academics Section (Updated to match the image) -->
+<div id="academics" class="tab-content">
+    <h1>Academics</h1>
+
+    <!-- Faculty of Agronomy Science -->
+    <h2>Faculty of Agronomy Science</h2>
+    <ul>
+        <li>Department of Plant Protection</li>
+        <li>Department of Soil Science</li>
+        <li>Department of Crop Production</li>
+    </ul>
+
+    <!-- Faculty of Rubber Science -->
+    <h2>Faculty of Rubber Science</h2>
+    <!-- No specific programs listed, so just a placeholder for now -->
+    <ul>
+        <li>Programs to be added</li>
+    </ul>
+
+    <!-- Faculty of Animal Science -->
+    <h2>Faculty of Animal Science</h2>
+    <ul>
+        <li>Department of Animal Breeding and Genetics</li>
+        <li>Department of Animal Nutrition</li>
+        <li>Department of Livestock Production</li>
+    </ul>
+
+    <!-- Faculty of Veterinary Medicine -->
+    <h2>Faculty of Veterinary Medicine</h2>
+    <!-- No specific programs listed, so just a placeholder for now -->
+    <ul>
+        <li>Programs to be added</li>
+    </ul>
+
+    <!-- Faculty of Forestry and Environment -->
+    <h2>Faculty of Forestry and Environment</h2>
+    <ul>
+        <li>Department of Forest Resources</li>
+        <li>Department of Forest Conservation</li>
+    </ul>
+
+    <!-- Faculty of Fisheries -->
+    <h2>Faculty of Fisheries</h2>
+    <ul>
+        <li>Department of Aquatic Biology and Environment</li>
+        <li>Department of Capture Fisheries and Products</li>
+        <li>Department of Aquaculture</li>
+    </ul>
+
+    <!-- Faculty of Agricultural Engineering -->
+    <h2>Faculty of Agricultural Engineering</h2>
+    <ul>
+        <li>Department of Soil and Water Engineering</li>
+        <li>Department of Agricultural Machinery</li>
+        <li>Department of Agricultural Energy and Environment</li>
+    </ul>
+
+    <!-- Faculty of Agricultural Economics & Rural Development -->
+    <h2>Faculty of Agricultural Economics & Rural Development</h2>
+    <ul>
+        <li>Department of Agricultural Economics</li>
+        <li>Department of Rural Development</li>
+        <li>Department of Agri-business</li>
+    </ul>
+
+    <!-- Faculty of Agro-Industry -->
+    <h2>Faculty of Agro-Industry</h2>
+    <ul>
+        <li>Department of Food Science and Technology</li>
+        <li>Department of Food Biotechnology</li>
+        <li>Department of Post-harvest Technology</li>
+    </ul>
+
+    <!-- Faculty of Land Management & Land Administration -->
+    <h2>Faculty of Land Management & Land Administration</h2>
+    <ul>
+        <li>Programs to be added</li>
+    </ul>
+
+
+    <!-- Degree Programs -->
+    <h2>Degree Programs</h2>
+    <h3>Bachelor's Degree Programs</h3>
+    <ul>
+        <li>Agricultural Economics</li>
+        <li>Animal Sciences</li>
+        <li>Agribusiness</li>
+        <li>Animal Genetics and Breeding</li>
+        <li>Rural Planning and Development</li>
+        <li>Poultry Science</li>
+        <li>Agronomy</li>
+        <li>Animal Nutrition</li>
+        <li>Horticulture</li>
+        <li>Veterinary Medicine</li>
+        <li>Plant Genetics and Breeding</li>
+        <li>Inland Aquaculture</li>
+        <li>Plant Pathology</li>
+        <li>Mariculture</li>
+        <li>Entomology</li>
+        <li>Fishery Resources Management</li>
+        <li>Seed Science and Technology</li>
+        <li>Wood Technology</li>
+        <li>Soil Science</li>
+        <li>Forest Resource Management</li>
+        <li>Food Science</li>
+        <li>Wildlife Science</li>
+        <li>Post-harvest Technology</li>
+        <li>Renewable Natural Resources</li>
+    </ul>
+
+    <h3>Associate Degree Programs</h3>
+    <ul>
+        <li>Programs to be added</li>
+    </ul>
+
+    <h3>Master's Degree Programs</h3>
+    <ul>
+        <li>Programs to be added</li>
+    </ul>
+
+    <h3>Ph.D. Degree Programs</h3>
+    <ul>
+        <li>Agricultural Economics</li>
+        <li>Animal Sciences</li>
+        <li>Agribusiness</li>
+        <li>Animal Genetics and Breeding</li>
+        <li>Rural Planning and Development</li>
+        <li>Poultry Science</li>
+        <li>Agronomy</li>
+        <li>Animal Nutrition</li>
+        <li>Horticulture</li>
+        <li>Veterinary Medicine</li>
+        <li>Plant Genetics and Breeding</li>
+        <li>Inland Aquaculture</li>
+        <li>Plant Pathology</li>
+        <li>Mariculture</li>
+        <li>Entomology</li>
+        <li>Fishery Resources Management</li>
+        <li>Seed Science and Technology</li>
+        <li>Wood Technology</li>
+        <li>Soil Science</li>
+        <li>Forest Resource Management</li>
+        <li>Food Science</li>
+        <li>Wildlife Science</li>
+        <li>Post-harvest Technology</li>
+        <li>Renewable Natural Resources</li>
+    </ul>
+</div>
+    <!-- Scholarships Section -->
+<div id="scholarships" class="tab-content" style="display: none;">
+    <h1>Scholarships</h1>
+
+    <!-- MS FSCC Program -->
+    <h2>The Master of Science in Food Security and Climate Change (MS FSCC)</h2>
+    <p>The Master of Science in Food Security and Climate Change (MS FSCC) is a joint degree offered by five members of the University Consortium for Graduate Education in Agriculture and Natural Resources (UC), namely:</p>
+    <ul>
+        <li>Kasetsart University (KU) in Thailand</li>
+        <li>University of the Philippines Los Baños (UPLB) in the Philippines</li>
+        <li>Universiti Putra Malaysia (UPM) in Malaysia</li>
+        <li>Institut Pertanian Bogor (IPB) in Indonesia</li>
+        <li>Universitas Gadjah Mada (UGM) in Indonesia</li>
+    </ul>
+
+    <p>This joint degree program focuses on addressing the critical issues of food security and climate change, providing students with the necessary knowledge and skills to tackle global agricultural and environmental challenges.</p>
+
+    <p>Scholarships are available for students applying for the MS FSCC program. More details on eligibility, application process, and available scholarships will be provided by the respective universities.</p>
+    
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Info</h2>
+            <p>Royal University of Agriculture (RUA)</p>
+            <p>Khan Dongkor , Phnom Penh, Cambodia.</p>
+            <p>Tel: +855 23 219 82 </p>
+        </div>
+        <div class="contact-image">
+            <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+        </div>
+    </div>
+</div>
+
+
+        <!-- Exchange Program Section -->
+        <div id="exchange" class="tab-content">
+            <h1>🌍 Royal University of Agriculture Student Exchange Program</h1>
+            <p>The Royal University of Agriculture is partnered with a number of schools around the world, providing students with excellent opportunities for international exchange programs.</p>
+        
+            <h2>✈️ Eligibility and Requirements:</h2>
+            <ul>
+                <li><strong>Students must be officially nominated by their home institution.</strong></li>
+                <li><strong>Tuition and related fees must be paid to the home institution.</strong></li>
+                <li><strong>Opportunities to study abroad for one semester (six months) or two semesters (one year).</strong></li>
+            </ul>
+        
+            <h2>🌎 Partner Universities and Exchange Programs:</h2>
+            <table border="1">
+                <tr>
+                    <th>Country</th>
+                    <th>Partner Universities</th>
+                </tr>
+                <tr>
+                    <td>Cambodia</td>
+                    <td>Institute of Technology of Cambodia, International University, Royal University of Phnom Penh, Saint Paul Institute, The Korea Program on International Agriculture (KOPIA Cambodia Center)</td>
+                </tr>
+                <tr>
+                    <td>Belgium</td>
+                    <td>Vlaamse Interuniversitaire Raad, Vrije Universiteit Brussel</td>
+                </tr>
+                <tr>
+                    <td>China</td>
+                    <td>Biotechnology Research Institute, Guangxi Academy of Agricultural Sciences (BRI-GXAAS), Chinju National University, Guangxi University of China, Guizhou University, Guizhou University of Agriculture, Hainan Tropical Ocean University, Hainan University, The Southwest Forestry College P.R, Yuna Agriculture University</td>
+                </tr>
+                <tr>
+                    <td>France</td>
+                    <td>French Agricultural Research Centre for International Development, L' Agence Universitaire de la Francophonie, The Institut National Polytechnique Toulouse, The Institute of Research For Development (IRD), Université d’Auvergne of Clermont-Ferrand, Université Paul Sabatier - Toulous III, VetAgro Sup</td>
+                </tr>
+                <tr>
+                    <td>Czech Republic</td>
+                    <td>Czech University of Life Sciences Prague (CULS), Mendel University in Brno</td>
+                </tr>
+                <tr>
+                    <td>Denmark</td>
+                    <td>Roskilde University</td>
+                </tr>
+                <tr>
+                    <td>Germany</td>
+                    <td>Deutsche Gesellschaft Für Internationale Zusammenarbeit (GIZ) GmbH, InWEnt- Internationale Weiterbildung und Entwicklung gGmbH</td>
+                </tr>
+                <tr>
+                    <td>Indonesia</td>
+                    <td>Bogor Agricultural University, SEAMEO Regional Centre for Tropical Biology (BIOTROP), University of Lampung</td>
+                </tr>
+                <tr>
+                    <td>Israel</td>
+                    <td>Agriculture Tutoring LTD, The International Centre for Agriculture Studies (Agrostudies)</td>
+                </tr>
+                <tr>
+                    <td>Japan</td>
+                    <td>Faculty of Agriculture, Shinshu University, Faculty of Agriculture, Utsunomiya University, Hokkaido University, Institute for Global Environmental Strategies Japanese Center for International Studies in Ecology (JISE), Institute of Environment Rehabilitation and Conservation (ERECON), Japan International Cooperation Foundation, Japan International Research Center for Agricultural Sciences (JIRCAS), Japan Team of Young Human Power, Kagawa University, Kyoto University, Nagao Natural Environment Foundation (NEF), Nagoya University, National Food Research Institute, National Agriculture and Food Research Organization, Otemae University, Saga University, Sakura Human Training Program, Tokyo University of Agriculture and Technology, University of Tsukuba, Waseda University</td>
+                </tr>
+                <tr>
+                    <td>Italy</td>
+                    <td>University of Pisa, University of Rome</td>
+                </tr>
+                <tr>
+                    <td>Korea</td>
+
+                    <td>Agricultural Machinery Systems and Engineering, Busan Metropolitan Agricultural Technology Center, Chinju National University, Chonbuk National University, College of Agriculture, Chonnam National University, College of Natural Resources and Life Science, Pusan National University, Duksung Women's University, Gyeongsang National University, Handong Global University, Institute of International Cooperation on Agriculture, Dankook University, Kangwon National university, Konkuk University, KOPIA, Rotary International, Korea International Cooperation Agency (KOICA), Korean National College of Agriculture and Fisheries, Kumkangkikun Co.,LTD, Sangmyung University, Sunchon National University</td>
+                </tr>
+                <tr>
+                    <td>Laos</td>
+                    <td>National University of Laos</td>
+                </tr>
+                <tr>
+                    <td>Malaysia</td>
+                    <td>Bena, International University of Malaya-Wales (IUMW), Universiti Kuala Lumpur, Universiti Putra Malaysia</td>
+                </tr>
+                <tr>
+                    <td>New Zealand</td>
+                    <td>Victoria University of Wellington</td>
+                </tr>
+                <tr>
+                    <td>Philippines</td>
+                    <td>University of the Philippines Los Banos</td>
+                </tr>
+                <tr>
+                    <td>Singapore</td>
+                    <td>Republic Polytechnic</td>
+                </tr>
+                <tr>
+                    <td>Spain</td>
+                    <td>University of Girona (Udg), University of Granada, University of Valladolid</td>
+                </tr>
+                <tr>
+                    <td>Sweden</td>
+                    <td>Uppsala University</td>
+                </tr>
+                <tr>
+                    <td>Thailand</td>
+                    <td>Chulalongkorn University, Kasetsart University, Khon Kaen University, King Mongkut's University of Technology Thonburi, Mae Fah Luang University, Maejo University, Mahidol University, Prince of Songkla University, Rajabhat Institute Surin, Rambhai Barni Rajabhat University, Ubon Ratchathani University</td>
+                </tr>
+                <tr>
+                    <td>United Kingdom</td>
+                    <td>Cardiff and Vale College</td>
+                </tr>
+                <tr>
+                    <td>United States</td>
+                    <td>The U.S Agency for International Development (USAID), University of California, Davis Campus</td>
+                </tr>
+                <tr>
+                    <td>Vietnam</td>
+                    <td>Can Tho University, College of Economics, Hue University, Hue University of Agriculture and Forestry, Nong Lam University, University of Agriculture and Forestry (UAF), University of Natural Sciences, VNU University of Science</td>
+                </tr>
+            </table>
+        </div>
+        
+        </div>
+        
+        
+        
+            <script>
+                function openTab(evt, tabName) {
+                    var tabcontent = document.getElementsByClassName("tab-content");
+                    for (var i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+        
+                    var tablinks = document.getElementsByClassName("tab-link");
+                    for (var i = 0; i < tablinks.length; i++) {
+                        tablinks[i].classList.remove("active");
+                    }
+        
+                    document.getElementById(tabName).style.display = "block";
+                    evt.currentTarget.classList.add("active");
+                }
+        
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelector(".tab-link.active").click();
+                });
+            </script>
+        
+        </body>
+        </html>
+            <script>
+                
+                function openTab(evt, tabName) {
+                    var tabcontent = document.getElementsByClassName("tab-content");
+                    for (var i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+        
+                    var tablinks = document.getElementsByClassName("tab-link");
+                    for (var i = 0; i < tablinks.length; i++) {
+                        tablinks[i].classList.remove("active");
+                    }
+        
+                    document.getElementById(tabName).style.display = "block";
+                    evt.currentTarget.classList.add("active");
+                }
+            </script>
+        
+        </body>
+        </html>
+                

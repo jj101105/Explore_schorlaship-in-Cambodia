@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Limkokwing University of Creative Technology</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recmm.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/Limkokwing.jpg" alt="limkokwing Logo">
+        <div>
+            <span class="title">Limkokwing University of Creative Technology  </span> <br>
+            <span>(LIMKOKWING)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+<div class="content">
+    <p class="description">
+        Limkokwing University offers various scholarships and financial aid to support both local and international students. 
+        Here are the main types of scholarships available:
+    </p>
+    <ul class="scholarship-list">
+        <li><a href="#">Limkokwing Scholarships:</a> These scholarships are based on academic excellence, leadership, and extracurricular involvement. They are awarded to both local and international students for various undergraduate and postgraduate programs.</li>
+        
+        <li><a href="#">International Student Scholarships:</a> Designed for international students who wish to pursue a degree at Limkokwing University, these scholarships help cover tuition fees and provide support for living expenses.</li>
+        
+        <li><a href="#">Creative Talent Scholarships:</a> Available for students with exceptional creative talent, these scholarships support students who excel in fields such as art, design, multimedia, and technology.</li>
+    </ul>
+
+    <div class="unverified">Unverified</div>
+</div>
+
+<div class="container">
+    <!-- Tab Navigation -->
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+        <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+        <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+        <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+    </div>
+
+    <!-- 📌 Outline Section (Updated to match the image) -->
+    <div id="outline" class="tab-content active">
+        <h1>Limkokwing University of Creative Technology</h1>
+        <p>Limkokwing University of Creative Technology, established in 1991, is a private institution that emphasizes creativity, innovation, and technology. The university has campuses in Malaysia, Botswana, Cambodia, and several other countries. It offers a range of undergraduate and postgraduate programs with a strong focus on design, multimedia, business, and communication.</p>
+        <h2>Facilities</h2>
+        <ul>
+            <li>State-of-the-art Creative Studios</li>
+            <li>Fully Equipped Classrooms</li>
+            <li>Library with Digital Resources</li>
+            <li>Computer Labs</li>
+            <li>Design and Multimedia Labs</li>
+            <li>Cafeteria and Recreation Areas</li>
+        </ul>
+
+        <h2>Vision</h2>
+        <p>To be the leading global university in creative education and innovation, producing world-class graduates in various fields of creativity and technology.</p>
+
+        <h2>Mission</h2>
+        <p>Limkokwing University aims to provide students with a unique education that merges creativity, technology, and business, preparing them for success in a rapidly changing global market.</p>
+    </div>
+
+
+   <!-- 📚 Academics Section (Updated to match the image) -->
+   <div id="academics" class="tab-content">
+    <h1>Academics</h1>
+    
+    <!-- Architecture & Design -->
+    <h2>Architecture & Design</h2>
+    <h3>Associate Degree</h3>
+    <ul>
+        <li>Associate Degree in Interior Design (2 years)</li>
+    </ul>
+    <h3>Main Courses</h3>
+    <ul>
+        <li>History & Culture</li>
+        <li>Design Studio</li>
+        <li>Building Science & Construction</li>
+        <li>Technical Drawing</li>
+        <li>Computer Aided Design & Drafting</li>
+        <li>Professional Practice (Internship)</li>
+    </ul>
+    
+    <h3>Foundation Year</h3>
+    <ul>
+        <li>1 year – Fundamental and broadband knowledge for Architecture and Design.</li>
+    </ul>
+    <h3>Main Courses</h3>
+    <ul>
+        <li>Communication Skills</li>
+        <li>Design Creativity</li>
+        <li>Information Technologies</li>
+        <li>Business & Social Studies</li>
+    </ul>
+    
+    <h3>Bachelor Degrees</h3>
+    <ul>
+        <li>Bachelor of Arts in Interior Architecture (3 years)</li>
+        <li>Bachelor of Science in Architectural Studies (3 years)</li>
+    </ul>
+    <h3>Main Courses for Bachelor Degrees</h3>
+    <ul>
+        <li>Interior Architecture</li>
+        <li>Architectural Graphic</li>
+        <li>Building Construction & Materials</li>
+        <li>Design</li>
+        <li>Environmental Study & Services</li>
+        <li>Professional Practice</li>
+        <li>Project Management</li>
+    </ul>
+    
+    <h3>Master’s Degree</h3>
+    <ul>
+        <li>Master of Architecture (2 years)</li>
+    </ul>
+    <h3>Main Courses for Master’s Degree</h3>
+    <ul>
+        <li>Architectural Design</li>
+        <li>Advanced Building Technology</li>
+        <li>Planning and Landscape</li>
+        <li>Research Method</li>
+        <li>Architectural Thesis</li>
+        <li>Free & Directive Electives</li>
+        <li>Business Studies</li>
+        <li>Project Management</li>
+        <li>Culture and Criticism</li>
+        <li>Architectural Sustainability</li>
+    </ul>
+    
+    <!-- Arts, Literature & Human Sciences -->
+    <h2>Arts, Literature & Human Sciences</h2>
+    <h3>Associate Degrees</h3>
+    <ul>
+        <li>Associate Degree in Fashion & Apparel Design (2 years)</li>
+        <li>Associate Degree in Textile Design (2 years)</li>
+        <li>Associate Degree in Creative Multimedia (2 years)</li>
+        <li>Associate Degree in Web Design (2 years)</li>
+        <li>Associate Degree in Animation (2 years)</li>
+    </ul>
+    <h3>Main Courses for Associate Degrees</h3>
+    <ul>
+        <li>Fashion and Apparel Design</li>
+        <li>Pattern Drafting</li>
+        <li>Textile Studies</li>
+        <li>Photography</li>
+        <li>Animation Practice</li>
+        <li>Web Design</li>
+        <li>Digital Imaging</li>
+        <li>2D Animation</li>
+        <li>Sound Production</li>
+    </ul>
+    
+    <h3>Foundation in Design</h3>
+    <ul>
+        <li>1 year – Preparation for entry into Degree programs in Art, Design, and Multimedia.</li>
+    </ul>
+    <h3>Main Courses for Foundation Year</h3>
+    <ul>
+        <li>Design Creativity</li>
+        <li>Sketching</li>
+        <li>Social Studies</li>
+        <li>Drawing</li>
+    </ul>
+    
+    <h3>Bachelor Degrees</h3>
+    <ul>
+        <li>Bachelor of Arts in Fashion Design and Business Innovation (3 years)</li>
+        <li>Bachelor of Design in Professional Design (Visual Communication) (3 years)</li>
+    </ul>
+    <h3>Main Courses for Bachelor Degrees</h3>
+    <ul>
+        <li>Fashion Forecasting</li>
+        <li>Pattern Drafting & Sewing Technique</li>
+        <li>Fashion Photography</li>
+        <li>Graphic Design</li>
+        <li>Typography</li>
+        <li>Advertising</li>
+    </ul>
+
+
+    <!-- Business Management -->
+    <h2>Business Management</h2>
+    <h3>Associate Degree</h3>
+    <ul>
+        <li>Associate Degree in Tourism Management (2 years)</li>
+    </ul>
+    <h3>Main Courses for Associate Degree</h3>
+    <ul>
+        <li>Tourism Management</li>
+        <li>Tourism Economics</li>
+        <li>Eco Tourism</li>
+        <li>Customer Service</li>
+        <li>Internship</li>
+    </ul>
+
+    <h3>Foundation in Business</h3>
+    <ul>
+        <li>1 year – Preparation for business programs.</li>
+    </ul>
+    <h3>Main Courses for Foundation Year</h3>
+    <ul>
+        <li>Business Studies</li>
+        <li>Marketing</li>
+        <li>Economics</li>
+    </ul>
+    
+    <h3>Bachelor Degrees</h3>
+    <ul>
+        <li>Bachelor of Business Administration (3 years)</li>
+        <li>Bachelor of Business in Accounting (3 years)</li>
+        <li>Bachelor of Business in International Business (3 years)</li>
+        <li>Bachelor of Business in Entrepreneurship (3 years)</li>
+    </ul>
+    <h3>Main Courses for Bachelor Degrees</h3>
+    <ul>
+        <li>Financial Accounting</li>
+        <li>Business Management</li>
+        <li>Microeconomics</li>
+        <li>Marketing</li>
+        <li>Entrepreneurship</li>
+        <li>Project Management</li>
+    </ul>
+    
+    <h3>Master’s Degrees</h3>
+    <ul>
+        <li>Master of Business Administration in Human Resource Management (2 years)</li>
+        <li>Master of Business Administration in Multimedia Management (2 years)</li>
+        <li>Master of Business Administration in Communication & Public Relations (2 years)</li>
+        <li>Master of Business Administration in Finance & Banking (2 years)</li>
+    </ul>
+    <h3>Main Courses for Master’s Degrees</h3>
+    <ul>
+        <li>Marketing & Financial Management</li>
+        <li>Human Resource Management</li>
+        <li>Public Relations</li>
+        <li>Project Management</li>
+    </ul>
+
+    <!-- Civil Engineering -->
+    <h2>Civil Engineering</h2>
+    <h3>Foundation Year</h3>
+    <ul>
+        <li>1 year – Prepares for Civil Engineering Bachelor.</li>
+    </ul>
+    <h3>Main Courses for Foundation Year</h3>
+    <ul>
+        <li>Engineering Mathematics</li>
+        <li>Computer Programming</li>
+        <li>Strength of Materials</li>
+    </ul>
+    
+    <h3>Bachelor Degree in Civil Engineering</h3>
+    <ul>
+        <li>3 years</li>
+    </ul>
+    <h3>Main Courses for Bachelor Degree</h3>
+    <ul>
+        <li>Industrial Training</li>
+        <li>Structural Design</li>
+        <li>Fluid Mechanics</li>
+    </ul>
+
+    <!-- Mathematics, Sciences & Engineering -->
+    <h2>Mathematics, Sciences & Engineering</h2>
+    <h3>Associate Degree in Mobile Computing</h3>
+    <ul>
+        <li>2 years</li>
+    </ul>
+    <h3>Main Courses for Associate Degree</h3>
+    <ul>
+        <li>Mobile System</li>
+        <li>Web Programming with PHP</li>
+        <li>Mobile Programming</li>
+    </ul>
+
+    <h3>Foundation Year in Information Technology</h3>
+    <ul>
+        <li>1 year</li>
+    </ul>
+    <h3>Main Courses for Foundation Year</h3>
+    <ul>
+        <li>Information Technologies</li>
+        <li>Marketing</li>
+        <li>Economics</li>
+    </ul>
+
+    <h3>Bachelor Degrees</h3>
+    <ul>
+        <li>Bachelor of Science in Business Information Technology (3 years)</li>
+        <li>Bachelor of Science in Software Engineering with Multimedia (3 years)</li>
+    </ul>
+    <h3>Main Courses for Bachelor Degrees</h3>
+    <ul>
+        <li>Computer Systems</li>
+        <li>Java Programming</li>
+        <li>Object-Oriented Design</li>
+        <li>Multimedia Technology</li>
+    </ul>
+</div>
+
+
+<!-- Scholarships Section -->
+<div id="scholarships" class="tab-content">
+    <h1>Scholarships</h1>
+    <p>Sala is currently offering a 30% scholarship coupon code to all students, with no test or exam required. Students who receive a coupon code (voucher) in physical form from Sala can directly go to Limkokwing University’s admission office to register with the coupon.</p>
+    
+    <h2>Financial Assistance</h2>
+    <p>The university offers financial assistance to students in genuine financial difficulty. Students in need of support can write to the Student Service Department and consult with their education counselor. Special assistance will be given to deserving students based on the following criteria:</p>
+    <ul>
+        <li>Must be able to prove that they are undergoing financial difficulty.</li>
+        <li>Must have good academic performance.</li>
+        <li>Must be reasonably active in extracurricular activities.</li>
+        <li>Must have the support and recommendation of their school.</li>
+    </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exchange Program Section -->
+    <div id="exchange" class="tab-content">
+        <h2>Exchange Program / Transfer to Other Campuses</h2>
+        <p>Students wishing to pursue their studies at Limkokwing campuses abroad can consult with their education counselor about the transfer process. Students should apply at least 2 months before the start of the semester to allow time for visa processing and other necessary documentation.</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>Limkokwing University of Creative Technology</p>
+                <p>Address: Jalan Innovative, Cyberjaya, Malaysia</p>
+                <p>Phone: +603-8318 3600</p>
+                <p>Website: <a href="https://www.limkokwing.edu.my/" target="_blank">www.limkokwing.edu.my</a></p>
+                <p>Email: <a href="mailto:info@limkokwing.edu.my">info@limkokwing.edu.my</a></p>
+            </div>
+            <div class="contact-image">
+                <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+            </div>
+        </div>
+    </div>
+
+<script>
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tab-link.active").click();
+        });
+    </script>
+
+</body>
+</html>

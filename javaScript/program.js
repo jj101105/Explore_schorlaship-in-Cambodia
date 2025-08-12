@@ -4,11 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const programModalTitle = document.getElementById('programModalTitle');
     const addProgramForm = document.getElementById('addProgramForm');
     const programUniversitySelect = document.getElementById('programUniversitySelect');
+    const programFacultySelect = document.getElementById('programFacultySelect');
     const programSearchInput = document.getElementById('programSearchInput');
 
-    let editingProgramId = null; // To store the ID of the program being edited
+    let editingProgramId = null; 
+    let programsData = []; 
 
-    // --- Custom Modal Elements (reused from university.js logic) ---
     let notificationModal = null;
     let confirmationModal = null;
 
@@ -69,45 +70,73 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Fetch and Populate Universities Dropdown ---
-    const fetchUniversitiesForDropdown = async () => {
-    try {
-        const response = await fetch('../php/program.php?action=fetch_universities');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const universities = await response.json();
-            console.log('Universities fetched:', universities);
-        if (!Array.isArray(universities)) throw new Error('Response is not an array');
+    const fetchAndPopulateUniversities = async () => {
         programUniversitySelect.innerHTML = '<option value="">Select University</option>';
-        universities.forEach(uni => {
-            const option = document.createElement('option');
-            option.value = uni.University_ID;
-            option.textContent = uni.University_Name;
-            programUniversitySelect.appendChild(option);
-        });
-    } catch (error) {
-            console.error('Error fetching universities for dropdown:', error);
-        showNotification('Failed to load universities for selection.', 'error');
-    }
-};
+        try {
+            const response = await fetch('../php/program.php?action=fetch_universities');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const universities = await response.json();
+            if (!Array.isArray(universities)) throw new Error('Response is not an array');
+            universities.forEach(uni => {
+                const option = document.createElement('option');
+                option.value = uni.university_id;
+                option.textContent = uni.university_name;
+                programUniversitySelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching universities:', error);
+            showNotification('Failed to load universities for selection.', 'error');
+        }
+    };
 
-const fetchPrograms = async () => {
-    try {
-        const response = await fetch('../php/program.php');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const programs = await response.json();
-          console.log('Programs fetched:', programs);
-        if (!Array.isArray(programs)) throw new Error('Response is not an array');
-        displayPrograms(programs);
-    } catch (error) {
-          console.error('Error fetching programs:', error);
-        showNotification('Failed to load programs.', 'error');
-    }
-};
+    // --- Fetch and Populate Faculties Dropdown (no longer filtered by university) ---
+    const fetchFacultiesForDropdown = async () => {
+        programFacultySelect.innerHTML = '<option value="">Select Faculty</option>';
+        try {
+            // Note: The `university_id` is no longer used in the request URL
+            const response = await fetch(`../php/program.php?action=fetch_faculties`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const faculties = await response.json();
 
+            if (!Array.isArray(faculties)) {
+                 console.error('Response is not an array:', faculties);
+                 throw new Error('Response is not an array');
+            }
+            
+            if (faculties.length === 0) {
+                 programFacultySelect.innerHTML = '<option value="">No faculties found</option>';
+            } else {
+                 faculties.forEach(fac => {
+                    const option = document.createElement('option');
+                    option.value = fac.faculty_id;
+                    option.textContent = fac.faculty_name;
+                    programFacultySelect.appendChild(option);
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching faculties for dropdown:', error);
+            showNotification('Failed to load faculties for selection.', 'error');
+        }
+    };
+
+    // --- Fetch Programs ---
+    const fetchPrograms = async () => {
+        try {
+            const response = await fetch('../php/program.php');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            programsData = await response.json();
+            if (!Array.isArray(programsData)) throw new Error('Response is not an array');
+            displayPrograms(programsData);
+        } catch (error) {
+            console.error('Error fetching programs:', error);
+            showNotification('Failed to load programs.', 'error');
+        }
+    };
 
     const displayPrograms = (programs) => {
-        programTableBody.innerHTML = ''; // Clear existing rows
+        programTableBody.innerHTML = ''; 
         if (programs.length === 0) {
-            programTableBody.innerHTML = '<tr><td colspan="5" class="text-center p-4 text-gray-500">No programs found.</td></tr>';
+            programTableBody.innerHTML = '<tr><td colspan="6" class="text-center p-4 text-gray-500">No programs found.</td></tr>';
             return;
         }
 
@@ -116,30 +145,40 @@ const fetchPrograms = async () => {
             row.className = 'hover:bg-gray-50';
             row.innerHTML = `
                 <td class="p-3 border">${index + 1}</td>
-                <td class="p-3 border">${prog.Program_Name}</td>
-                <td class="p-3 border">${prog.University_Name || 'N/A'}</td>
-                <td class="p-3 border max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">${prog.Description || 'N/A'}</td>
+                <td class="p-3 border">${prog.program_name}</td>
+                <td class="p-3 border">${prog.university_name || 'N/A'}</td>
+                <td class="p-3 border">${prog.faculty_name || 'N/A'}</td>
+                <td class="p-3 border max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">${prog.description || 'N/A'}</td>
                 <td class="p-3 border">
                     <button class="edit-btn bg-yellow-500 text-white px-3 py-1 rounded mr-2 hover:bg-yellow-600"
-                            data-id="${prog.Program_ID}" data-university-id="${prog.University_ID}"
-                            data-program-name="${prog.Program_Name}" data-description="${prog.Description}">Edit</button>
+                            data-id="${prog.program_id}" data-university-id="${prog.university_id}" data-faculty-id="${prog.faculty_id}"
+                            data-program-name="${prog.program_name}" data-description="${prog.description || ''}">Edit</button>
                     <button class="delete-btn bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                            data-id="${prog.Program_ID}" data-program-name="${prog.Program_Name}">Delete</button>
+                            data-id="${prog.program_id}" data-program-name="${prog.program_name}">Delete</button>
                 </td>
             `;
             programTableBody.appendChild(row);
         });
 
-        // Attach event listeners to new buttons
         attachButtonListeners();
     };
 
     const attachButtonListeners = () => {
         document.querySelectorAll('.edit-btn').forEach(button => {
-            button.onclick = (e) => {
+            button.onclick = async (e) => {
                 editingProgramId = e.target.dataset.id;
                 programModalTitle.textContent = 'Edit Program';
-                addProgramForm.elements.university_id.value = e.target.dataset.universityId;
+                
+                const universityId = e.target.dataset.universityId;
+                const facultyId = e.target.dataset.facultyId;
+
+                await fetchAndPopulateUniversities();
+                programUniversitySelect.value = universityId;
+
+                // Call the new function that doesn't use a university ID
+                await fetchFacultiesForDropdown();
+                programFacultySelect.value = facultyId;
+
                 addProgramForm.elements.program_name.value = e.target.dataset.programName;
                 addProgramForm.elements.description.value = e.target.dataset.description;
                 addProgramModal.classList.remove('hidden');
@@ -157,7 +196,6 @@ const fetchPrograms = async () => {
         });
     };
 
-    // --- Handle Form Submission (Add/Edit) ---
     addProgramForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(addProgramForm);
@@ -171,7 +209,7 @@ const fetchPrograms = async () => {
                 method: 'POST',
                 body: formData,
             });
-            const result = await response.json(); // PHP returns JSON
+            const result = await response.json();
 
             if (result.status === 'success') {
                 showNotification(result.message, 'success');
@@ -182,8 +220,8 @@ const fetchPrograms = async () => {
             }
 
             addProgramModal.classList.add('hidden');
-            resetProgramForm(); // Reset form fields
-            fetchPrograms(); // Refresh the table
+            resetProgramForm();
+            fetchPrograms();
 
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -191,7 +229,6 @@ const fetchPrograms = async () => {
         }
     });
 
-    // --- Handle Delete Program ---
     const handleDeleteProgram = async (id) => {
         const formData = new FormData();
         formData.append('action', 'delete');
@@ -206,7 +243,7 @@ const fetchPrograms = async () => {
 
             if (result.status === 'success') {
                 showNotification(result.message, 'success');
-                fetchPrograms(); // Refresh the table
+                fetchPrograms();
             } else {
                 showNotification(`Deletion failed: ${result.message}`, 'error');
             }
@@ -216,31 +253,35 @@ const fetchPrograms = async () => {
         }
     };
 
-    // --- Reset Form Function ---
     const resetProgramForm = () => {
         addProgramForm.reset();
         editingProgramId = null;
         programModalTitle.textContent = 'Add New Program';
-        programUniversitySelect.value = ''; // Reset dropdown
+        programUniversitySelect.value = '';
+        programFacultySelect.innerHTML = '<option value="">Select Faculty</option>';
     };
 
-    // --- Search Functionality ---
     programSearchInput.addEventListener('input', () => {
         const searchTerm = programSearchInput.value.toLowerCase();
-        const rows = programTableBody.querySelectorAll('tr');
-        rows.forEach(row => {
-            const programName = row.children[1].textContent.toLowerCase();
-            const universityName = row.children[2].textContent.toLowerCase(); // Search by university name too
-            if (programName.includes(searchTerm) || universityName.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
+        const filteredPrograms = programsData.filter(prog => 
+            (prog.program_name && prog.program_name.toLowerCase().includes(searchTerm)) ||
+            (prog.university_name && prog.university_name.toLowerCase().includes(searchTerm)) ||
+            (prog.faculty_name && prog.faculty_name.toLowerCase().includes(searchTerm))
+        );
+        displayPrograms(filteredPrograms);
     });
 
-    // Initial fetches when the page loads
-    fetchUniversitiesForDropdown();
+    programUniversitySelect.addEventListener('change', (e) => {
+        // This event listener now calls the function without a parameter
+        fetchFacultiesForDropdown();
+    });
+
     fetchPrograms();
+    
+    document.querySelector('button[onclick*="addProgramModal"]').addEventListener('click', () => {
+        resetProgramForm();
+        fetchAndPopulateUniversities();
+        // Also call the fetch faculties function when the modal opens
+        fetchFacultiesForDropdown();
+    });
 });
-///******************** */

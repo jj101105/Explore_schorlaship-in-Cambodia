@@ -1,363 +1,528 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Scholarships in Cambodia</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-      font-family: "Inter", sans-serif;
-      margin: 0;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cambodia Scholarship Chatbot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
       background-color: #f0f2f5;
-    }
-    .header {
-      background-color: #fff;
-      width: 100%;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
       display: flex;
-      flex-direction: column; /* Stack vertically */
-      align-items: stretch;
-    }
-    .header-top {
-      display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 1rem 2rem;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
     }
-    .header-logo {
+    .chat-container {
+      background-color: #ffffff;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 70vh;
+      max-height: 90vh;
+    }
+    .chat-header {
+      background-color: #4f46e5;
+      color: white;
+      padding: 1.5rem;
       font-size: 1.5rem;
       font-weight: 700;
-      color: #3b82f6;
-      letter-spacing: -1px;
+      text-align: center;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
     }
-    nav {
+    .chat-messages {
+      flex-grow: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
       display: flex;
-      align-items: center;
-      gap: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+      scroll-behavior: smooth;
     }
-    .nav-link {
-      color: #4b5563;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s;
+    .message {
+      max-width: 80%;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      word-wrap: break-word;
+      white-space: pre-line;
+      position: relative;
+    }
+    .message.user {
+      background-color: #e0e7ff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0.25rem;
+    }
+    .message.bot {
+      background-color: #f3f4f6;
+      align-self: flex-start;
+      border-bottom-left-radius: 0.25rem;
+    }
+    .chat-input-container {
+      padding: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .chat-input {
+      flex-grow: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      outline: none;
       font-size: 1rem;
     }
-    .nav-link:hover,
-    .nav-link:focus {
-      color: #2563eb;
-      outline: none;
+    .chat-input:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
     }
-        .hero-section {
-            background: linear-gradient(120deg, #6366f1 0%, #362ab8 100%);
-            color: #fff;
-            width: 100%;
-            padding: 4rem 1rem 3rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-        .hero-title {
-            font-size: 2.7rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-        .hero-subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero-cta {
-            background: #fff;
-            color: #362ab8;
-            font-weight: 700;
-            font-size: 1.15rem;
-            border-radius: 0.75rem;
-            padding: 1rem 2.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 6px 15px rgba(44,28,114,0.12);
-            transition: background 0.2s, color 0.2s, transform 0.1s;
-            border: none;
-        }
-        .hero-cta:hover, .hero-cta:focus {
-            background: #6366f1;
-            color: #fff;
-            transform: translateY(-2px);
-            outline: none;
-        }
-        .additional-quizzes-section {
-            width: 100%;
-            max-width: 1200px;
-            padding: 2rem 1rem;
-            text-align: center;
-            margin: 0 auto;
-            margin-top: 2.5rem;
-        }
-        .quiz-card {
-            background-color: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 1.5rem;
-            text-align: left;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 370px;
-        }
-        .quiz-card:hover, .quiz-card:focus-within {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(59,130,246,0.13);
-            border-color: #6366f1;
-        }
-        .quiz-card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #3b82f6;
-        }
-        .quiz-card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        .quiz-card-description {
-            color: #6b7280;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .quiz-card img {
-            width: 100%;
-            max-width: 220px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 0.75rem;
-            margin-top: 1rem;
-            box-shadow: 0 2px 8px rgba(99,102,241,0.08);
-        }
-        .footer {
-            background-color: #1f2937;
-            color: #d1d5db;
-            width: 100%;
-            padding: 2rem 2rem;
-            margin-top: 4rem;
-            text-align: center;
-            font-size: 0.95rem;
-        }
-        .footer-links a {
-            color: #93c5fd;
-            margin: 0 0.75rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover, .footer-links a:focus {
-            color: #60a5fa;
-            outline: none;
-        }
-        .social-icons a {
-            color: #d1d5db;
-            font-size: 1.5rem;
-            margin: 0 0.75rem;
-            transition: color 0.2s;
-        }
-        .social-icons a:hover, .social-icons a:focus {
-            color: #fff;
-            outline: none;
-        }
-        @media (max-width: 900px) {
-            .additional-quizzes-section .grid {
-                grid-template-columns: 1fr;
-            }
-            .quiz-card {
-                min-height: 0;
-            }
-        }
-    </style>
+    .send-button {
+      background-color: #4f46e5;
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      border: none;
+    }
+    .send-button:hover {
+      background-color: #4338ca;
+    }
+    .clear-button {
+      background-color: #e5e7eb;
+      color: #4f46e5;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      margin-left: 0.5rem;
+      transition: background-color 0.2s;
+    }
+    .clear-button:hover {
+      background-color: #c7d2fe;
+    }
+    .loading-indicator {
+      align-self: flex-start;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem;
+      background-color: #f3f4f6;
+      color: #6b7280;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #a5b4fc;
+      border-radius: 50%;
+      margin-right: 2px;
+      animation: blink 1.2s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .suggestion-btn {
+      background: #e0e7ff;
+      color: #4f46e5;
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .suggestion-btn:hover {
+      background: #c7d2fe;
+    }
+    .error-message {
+      color: #dc2626;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .copy-btn {
+      background: #e0e7ff;
+      color: #4f46e5;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: 10px;
+    }
+    .copy-btn:hover {
+      background: #c7d2fe;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="bg-white p-4 shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="header-logo">Exploring Scholarship in Cambodia</div>
-            </div>
-            <nav class="flex items-center">
-                <a href="../index.html" class="nav-link">Home</a>
-                 <a href="recmm.html" class="nav-link">Quizzes</a> 
-                 <a href="university-list.html" class="nav-link">Universities</a>
-                <a href="all-scholarship.html" class="nav-link">Scholarships</a>
-               
-                                <!-- Profile Icon with Dropdown -->
-                <div class="relative">
-                    <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-2xl focus:outline-none" aria-label="Profile">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                        <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                        <a href="history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recent</a>
-                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
-                    </div>
-                </div>
-        </div>
+    <div class="bg-blue-50 py-3 px-6 shadow-sm flex justify-end">
+    <a href="../index.html" 
+       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+        Go to Home
+    </a>
+</div>
+  <div class="chat-container">
+   
+    <div class="chat-header">Scholarship Assistant (Cambodia)</div>
 
-            </nav>
-        <!-- Search Bar (hidden by default) -->
-        <div id="searchBar" class="absolute right-8 top-20 bg-white rounded-lg shadow-lg p-2 flex items-center gap-2" style="display:none; z-index:200;">
-            <input type="text" id="searchInput" class="border border-gray-300 rounded px-3 py-1 focus:outline-none" placeholder="Search scholarships, universities...">
-            <button id="searchBtn" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" aria-label="Submit Search">
-                <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    </header>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input-container">
+      <input type="text" id="user-input" class="chat-input" placeholder="Type your message..." autocomplete="off" />
+      <button id="send-button" class="send-button">Send</button>
+      <button id="clear-button" class="clear-button">Clear</button>
+    </div>
+  </div>
+  <script>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <h1 class="hero-title">Find Your Best Scholarship Path</h1>
-        <p class="hero-subtitle">
-            Take a quick quiz to discover the degree path and scholarship opportunities that fit your background, interests, and goals in Cambodia.
-        </p>
-        <a href="#quizzes" class="hero-cta">Start Exploring Quizzes</a>
-    </section>
+//-----------------------------------------------------
 
-    <!-- Additional Quizzes Section -->
-    <section class="additional-quizzes-section" id="quizzes">
-        <h2 class="text-3xl font-bold text-gray-800 mb-8">
-            Discover Even More with <span class="text-blue-600">Additional Quizzes</span>
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <a href="answer-rcm.html" class="block focus:outline-none" target="_blank" tabindex="0">
-                <div class="quiz-card cursor-pointer" tabindex="-1">
-                    <div class="quiz-card-icon"><i class="fas fa-lightbulb"></i></div>
-                    <div class="quiz-card-title">General Scholarship & Degree Path Quiz</div>
-                    <div class="quiz-card-description">
-                        Unsure where to start? This quiz helps you discover the best degree and scholarship options based on your interests and background.
-                    </div>
-                    <img src="../images/Graduation-Ceremony-for-Class-of-2023.jpg" alt="General Scholarship Quiz">
-                </div>
-            </a>
-            <a href="associate-quiz.html" class="block focus:outline-none" target="_blank" tabindex="0">
-                <div class="quiz-card cursor-pointer" tabindex="-1">
-                    <div class="quiz-card-icon"><i class="fas fa-tools"></i></div>
-                    <div class="quiz-card-title">Associate Degree Quiz</div>
-                    <div class="quiz-card-description">
-                        Discover TVET skills, scholarships, and career tracks based on your strengths and province.
-                    </div>
-                    <img src="../images/images-1.jpg" alt="Associate Degree Quiz">
-                </div>
-            </a>
-            <a href="bachelor-quiz.html" class="block focus:outline-none" target="_blank" tabindex="0">
-                <div class="quiz-card cursor-pointer" tabindex="-1">
-                    <div class="quiz-card-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <div class="quiz-card-title">Bachelor's Degree Quiz</div>
-                    <div class="quiz-card-description">
-                        Find the best-fit major and scholarship opportunities using your high school subject preferences.
-                    </div>
-                    <img src="../images/images1.jpg" alt="Bachelor's Degree Quiz">
-                </div>
-            </a>
-            <a href="master-quiz.html" class="block focus:outline-none" target="_blank" tabindex="0">
-                <div class="quiz-card cursor-pointer" tabindex="-1">
-                    <div class="quiz-card-icon"><i class="fas fa-user-graduate"></i></div>
-                    <div class="quiz-card-title">Master's Degree Quiz</div>
-                    <div class="quiz-card-description">
-                        Advance your career by selecting a master's program aligned with your work experience and goals.
-                    </div>
-                    <img src="../images/images.jpg" alt="Master's Degree Quiz">
-                </div>
-            </a>
-        </div>
-    </section>
+document.addEventListener("DOMContentLoaded", () => {
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="social-icons mb-4">
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
-        <div class="footer-links mb-2">
-            <a href="#">Terms of Use</a> |
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Return Policy</a>
-        </div>
-        <p>&copy; 2025 Scholarship Explorer. All Rights Reserved.</p>
-    </footer>
-    <script src="javaScript/script.js"></script>  
-    <script>
-    // Toggle search bar
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchToggle = document.getElementById('searchToggle');
-        const searchBar = document.getElementById('searchBar');
-        const searchInput = document.getElementById('searchInput');
-        searchToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (searchBar.style.display === "none" || searchBar.style.display === "") {
-                searchBar.style.display = "flex";
-                setTimeout(() => searchInput.focus(), 100);
-            } else {
-                searchBar.style.display = "none";
-            }
-        });
-        // Optional: Hide search bar when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!searchBar.contains(e.target) && !searchToggle.contains(e.target)) {
-                searchBar.style.display = "none";
-            }
-        });
-        // Example search action
-        document.getElementById('searchBtn').addEventListener('click', function() {
-            const query = searchInput.value.trim();
-            if(query) {
-                window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
-            }
-        });
-        // Enter key submits search
-        searchInput.addEventListener('keydown', function(e) {
-            if(e.key === 'Enter') {
-                document.getElementById('searchBtn').click();
-            }
-        });
-    });
+        if (isLoggedIn) {
+            // Create the Go to Home link
+            const navBar = document.createElement("div");
+            navBar.className = "bg-blue-50 py-3 px-6 shadow-sm flex justify-end";
 
-    //------------------profile icon-------------------------------
-    const profileIconBtn = document.getElementById('profileIconBtn');
-    const profileDropdown = document.getElementById('profileDropdown');
-
-    profileIconBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent dropdown from closing immediately
-        profileDropdown.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!profileDropdown.contains(e.target)) {
-            profileDropdown.classList.add('hidden');
+            navBar.innerHTML = `
+                <a href="../index.html" 
+                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    Go to Home
+                </a>
+            `;
         }
     });
 
-    function handleLogout() {
-        isLoggedIn = false;
-        alert("Logged out.");
-        // Optional: Redirect to login page or homepage
+    //-------------------------------------------------------
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const clearButton = document.getElementById('clear-button');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Scholarship data (fixed, only one array, no duplicates)
+    const scholarshipsData = [
+      {
+        name: "University of Cambodia (UC) Scholarships",
+        university: "University of Cambodia",
+        field_of_study: "Various undergraduate fields across UC",
+        eligibility: "Cambodian citizens; competitive exam covering English and general knowledge; award type based on performance.",
+        deadline: "Annual, exam-based (contact admissions for current cycle)",
+        type: "Undergraduate — full tuition (Academic Excellence), 50% (Scholastic Aptitude), or partial (Partial Scholarships)",
+        benefits: "Tuition support based on performance and need; maintained via GPA, attendance, and participation in activities."
+      },
+      {
+        name: "Woori Bank–RUPP Scholarships",
+        university: "Royal University of Phnom Penh (RUPP)",
+        field_of_study: "Sustainable Urban Planning & Development, Economic Development, Community Development, Computer Science, International Business Management, Mathematics",
+        eligibility: "Undergraduate students at RUPP in eligible fields; selection based on merit.",
+        deadline: "Annual; check RUPP announcements",
+        type: "Undergraduate",
+        benefits: "100 scholarships/year worth up to USD 50,000 in total funding."
+      },
+      {
+        name: "Techo Digital Talent Scholarship",
+        university: "Royal University of Phnom Penh (RUPP)",
+        field_of_study: "Computer Science, Telecom & Electronics, Information Technology",
+        eligibility: "Cambodian students with strong academic records in eligible fields; 30 slots at RUPP.",
+        deadline: "Annual; check IDT/RUPP announcements",
+        type: "Undergraduate",
+        benefits: "Full funding for tuition and academic support under the national digital talent initiative."
+      },
+      {
+        name: "International/Exchange Scholarships (RUPP)",
+        university: "Royal University of Phnom Penh (RUPP)",
+        field_of_study: "Various fields through partner institutions",
+        eligibility: "RUPP students; specific criteria vary per partner program.",
+        deadline: "Varies by program",
+        type: "Exchange/Study Abroad",
+        benefits: "Covers tuition at partner institutions, travel stipends, and living allowances (varies by partner)."
+      },
+      {
+        name: "Merit-based Scholarships — International Engineering Program",
+        university: "Institute of Technology of Cambodia (ITC)",
+        field_of_study: "Engineering majors",
+        eligibility: "Top 30% of students in International Engineering Program based on academic performance.",
+        deadline: "Typically October–November; last cycle deadline November 24, 2024",
+        type: "Undergraduate — double-degree program",
+        benefits: "Top 15% receive 50% tuition scholarship; next 15% receive 30% tuition scholarship."
+      },
+      {
+        name: "Sumitomo Corporation Scholarship",
+        university: "Institute of Technology of Cambodia (ITC)",
+        field_of_study: "Chemical, Civil, Computer & Communication, Industrial & Mechanical Engineering, etc.",
+        eligibility: "Outstanding ITC students in eligible departments; selection based on merit.",
+        deadline: "Annual; check ITC scholarship announcements",
+        type: "Undergraduate",
+        benefits: "Scholarship for 8 top students annually; covers tuition and study expenses."
+      },
+      {
+        name: "Geo-resources & Geotechnical Engineering (GGE) Scholarships",
+        university: "Institute of Technology of Cambodia (ITC)",
+        field_of_study: "Geo-resources and Geotechnical Engineering",
+        eligibility: "ITC GGE students for double-degree or graduate programs with partner institutions.",
+        deadline: "Varies by partner program",
+        type: "Undergraduate and Graduate",
+        benefits: "Covers tuition and living costs for study at partner universities across Asia and Europe."
+      },
+      {
+        name: "Angkor University Scholarships",
+        university: "Angkor University",
+        field_of_study: "Nursing, Midwifery, Engineering, Architecture, Law, Tourism, Accounting, IT, English, Rural Development",
+        eligibility: "Based on internal scholarship exam performance or donor-specific criteria.",
+        deadline: "Not specified — check university site",
+        type: "Undergraduate",
+        benefits: "50%–100% tuition waiver; some include stipend and housing (e.g., Genkiya Fund)."
+      },
+      {
+        name: "De Montfort University (DMU) Cambodia Scholarships",
+        university: "De Montfort University Cambodia",
+        field_of_study: "International Foundation Year and Undergraduate programs",
+        eligibility: "Cambodian applicants with academic merit, artistic talent, sports excellence, or community service record.",
+        deadline: "Rolling",
+        type: "Undergraduate — merit-based",
+        benefits: "20%–50% tuition waiver depending on criteria."
+      },
+    ];
+
+    // Session context
+    let chatHistory = [];
+
+    // Helper function to display messages
+    function displayMessage(text, sender) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', sender);
+      messageElement.innerHTML = text.replace(/\n/g, '<br>');
+      chatMessages.appendChild(messageElement);
+      smoothScrollToBottom();
     }
-</script>
-<body>
 
+    // Welcome message and suggestions
+    function welcomeMessage() {
+      displayMessage("👋 Hello! I'm your Scholarship Bot. I can provide information about scholarships in Cambodia. What would you like to know?", "bot");
+      displaySuggestions();
+    }
 
+    function displaySuggestions() {
+      const suggestions = [
+        "Show me all scholarships for undergraduate.",
+        "List scholarships for business field.",
+        "Deadlines for scholarships.",
+        "Which scholarships are at RUPP?",
+      ];
+      const suggestionWrap = document.createElement('div');
+      suggestionWrap.className = "message bot";
+      const label = document.createElement('div');
+      label.innerHTML = "<strong>Quick questions:</strong>";
+      suggestionWrap.appendChild(label);
+
+      const suggestionsDiv = document.createElement('div');
+      suggestionsDiv.className = "suggestions";
+      suggestions.forEach(q => {
+        const btn = document.createElement('button');
+        btn.textContent = q;
+        btn.className = "suggestion-btn";
+        btn.onclick = () => {
+          userInput.value = q;
+          processUserInput();
+        };
+        suggestionsDiv.appendChild(btn);
+      });
+      suggestionWrap.appendChild(suggestionsDiv);
+      chatMessages.appendChild(suggestionWrap);
+      smoothScrollToBottom();
+    }
+
+    // Display error message
+    function displayError(message) {
+      const errorElement = document.createElement('div');
+      errorElement.className = 'error-message';
+      errorElement.textContent = message;
+      chatMessages.appendChild(errorElement);
+      smoothScrollToBottom();
+    }
+
+    // Loading animation
+    function showLoading() {
+      const loadingElement = document.createElement('div');
+      loadingElement.classList.add('loading-indicator');
+      loadingElement.id = 'loading-indicator';
+      loadingElement.innerHTML = 'Bot is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      chatMessages.appendChild(loadingElement);
+      smoothScrollToBottom();
+    }
+
+    function hideLoading() {
+      const loadingElement = document.getElementById('loading-indicator');
+      if (loadingElement) loadingElement.remove();
+    }
+
+    // Smooth scroll
+    function smoothScrollToBottom() {
+      chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: "smooth" });
+    }
+
+    // Reset chat
+    function resetChat() {
+      chatMessages.innerHTML = '';
+      chatHistory = [];
+      userInput.value = '';
+      userInput.focus();
+      welcomeMessage();
+    }
+
+    // Gemini API call with session context
+    async function getGeminiResponse(prompt) {
+      const history = chatHistory.map(msg => ({
+        role: msg.sender === "user" ? "user" : "model",
+        parts: [{ text: msg.text }]
+      }));
+      history.push({ role: "user", parts: [{ text: prompt }] });
+
+      const payload = {
+        contents: history,
+        generationConfig: { responseMimeType: "text/plain" }
+      };
+
+      const apiKey = "AIzaSyA0wgstSIvpJeGYg9FM74_r8Ole6GcgNHc";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
+        }
+
+        const result = await response.json();
+
+        if (
+          result.candidates &&
+          result.candidates.length > 0 &&
+          result.candidates[0].content &&
+          result.candidates[0].content.parts &&
+          result.candidates[0].content.parts.length > 0
+        ) {
+          return result.candidates[0].content.parts[0].text;
+        } else {
+          return "Sorry, I couldn't generate a response. Please try again.";
+        }
+      } catch (error) {
+        console.error("API call failed:", error);
+        return "I'm sorry, I'm having trouble connecting right now. Please try again later.";
+      }
+    }
+
+    // Process user input
+    async function processUserInput() {
+      const userText = userInput.value.trim();
+      if (userText === '' || sendButton.disabled) return;
+
+      displayMessage(userText, 'user');
+      chatHistory.push({ sender: "user", text: userText });
+      userInput.value = '';
+      sendButton.disabled = true;
+      userInput.disabled = true;
+      showLoading();
+
+      // Format scholarship data for prompt
+      const scholarshipInfo = scholarshipsData
+        .map(s =>
+          `Scholarship Name: ${s.name}\n` +
+          `University: ${s.university}\n` +
+          `Field of Study: ${s.field_of_study}\n` +
+          `Eligibility: ${s.eligibility}\n` +
+          `Deadline: ${s.deadline}\n` +
+          `Type: ${s.type}\n` +
+          `Benefits: ${s.benefits}\n`
+        )
+        .join('\n---\n\n');
+
+      const prompt = `
+You are a helpful chatbot providing information about scholarships in Cambodia.
+Use the following scholarship data to answer the user's questions.
+
+Scholarship Data:
+${scholarshipInfo}
+
+Instructions:
+- Answer the user's question clearly and concisely.
+- Use only the information provided in the scholarship data above.
+- If you cannot find the answer in the data, state that you do not have that information.
+- Format your response using headings, bullet points, and bold text for clarity.
+- Do not use any information outside of the provided data.
+- Do not use asterisks (*).
+
+User question: ${userText}
+`;
+
+      let botResponse = await getGeminiResponse(prompt);
+      hideLoading();
+
+      if (!botResponse || botResponse.trim() === '') {
+        displayError("Sorry, I couldn't generate a response. Please try again.");
+      } else {
+        // Simple markdown parsing for a better visual
+        const formattedResponse = botResponse
+          .replace(/### (.*)/g, '<h3>$1</h3>')
+          .replace(/## (.*)/g, '<h2>$1</h2>')
+          .replace(/^- (.*)/gm, '<li>$1</li>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        displayMessage(formattedResponse.trim(), 'bot');
+        chatHistory.push({ sender: "bot", text: botResponse.trim() });
+      }
+
+      sendButton.disabled = false;
+      userInput.disabled = false;
+      userInput.focus();
+    }
+
+    // Event listeners
+    sendButton.addEventListener('click', processUserInput);
+    userInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') processUserInput();
+    });
+    clearButton.addEventListener('click', resetChat);
+
+    // Autofocus input on load
+    window.onload = () => {
+      userInput.focus();
+      welcomeMessage();
+    };
+  </script>
 </body>
 </html>
+
 

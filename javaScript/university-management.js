@@ -21,6 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // So, from html/ to php/, it's one step up (..) then down into php/
     const API_URL = '../php/university-management.php';
 
+    // Select the form elements
+    const universityNameInput = document.getElementById('universityName'); 
+    const universitySlugInput = document.getElementById('universitySlug');
+
+    // Function to generate a slug from a string
+    const generateSlug = (text) => {
+        return text.toString().toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-') // Replace spaces with a hyphen
+            .replace(/[^\w-]+/g, '') // Remove all non-word characters
+            .replace(/--+/g, '-') // Replace multiple hyphens with a single one
+            .replace(/^-+/, '') // Trim hyphens from the start
+            .replace(/-+$/, ''); // Trim hyphens from the end
+    };
+
+    // Event listener to automatically update the slug field
+    if (universityNameInput && universitySlugInput) {
+        universityNameInput.addEventListener('input', () => {
+            const slug = generateSlug(universityNameInput.value);
+            universitySlugInput.value = slug;
+        });
+    }
+
     // --- Custom Modal Elements ---
     let notificationModal = null;
     let confirmationModal = null;
@@ -221,6 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Handle Form Submission (Add/Edit) ---
     universityForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        //----------------------------
+        universitySlugInput.value = generateSlug(universityNameInput.value);
+        //----------------------------
         const formData = new FormData(universityForm); // Automatically collects all form fields, including file
 
         try {

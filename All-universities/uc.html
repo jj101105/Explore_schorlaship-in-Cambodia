@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> The University of Cambodia (UC) </title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recmm.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/UC.jpg" alt="UC Logo">
+        <div>
+            <span class="title"> The University of Cambodia   </span> <br>
+            <span>(UC)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+    <div class="content">
+        <p class="description">
+           UC offers various scholarships and financial aid to support both local students. 
+            Here are the main types of scholarships available:
+        </p>
+        <h2>Key Scholarships</h2>
+    <ul>
+        <li><strong>Samdech Techo Hun Sen Vision-100 Scholarships:</strong> Main program, funded by donors and organizations.</li>
+        <li><strong>Private Scholarships:</strong> Given by individuals, no exam required.</li>
+        <li><strong>Additional Scholarships (2016):</strong> Includes Best Achievers, Sports, Research Assistant, and more.</li>
+        <li><strong>UC Peace Scholarships (2021-2025):</strong> 500 awards through a competitive exam.</li>
+    </ul>
+    
+    <p>These scholarships help students with tuition and academic support.</p>
+    
+    <h2>Other Scholarship Programs</h2>
+    <ul class="scholarship-list">
+        <li><strong>Best Achievers Scholarships:</strong> Awarded to top-performing students.</li>
+        <li><strong>Excellence Scholarships:</strong> Given to students with outstanding academic records.</li>
+        <li><strong>Outstanding Student Scholarships:</strong> For students demonstrating exceptional achievements.</li>
+        <li><strong>High School Top Student Scholarships:</strong> Recognizing top high school graduates.</li>
+        <li><strong>Sports Scholarships:</strong> For students excelling in athletics.</li>
+        <li><strong>ASEAN Young Leaders Scholarships:</strong> Supporting future leaders from ASEAN countries.</li>
+        <li><strong>TSS Scholarships:</strong> Aimed at talented students in specific fields.</li>
+        <li><strong>Research Assistant Scholarships:</strong> Supporting students involved in research.</li>
+        <li><strong>Teaching Assistant Scholarships:</strong> For students assisting in academic teaching.</li>
+        <li><strong>Graduate Teaching Assistant Scholarships:</strong> For graduate students taking on teaching roles.</li>
+        <li><strong>Partial Scholarships:</strong> Providing partial tuition assistance.</li>
+        <li><strong>Center for English Studies Partial Scholarships:</strong> Helping students improve English proficiency.</li>
+    </ul>
+        <div class="unverified">Unverified</div>
+    </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+            <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+            <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+        </div>
+
+       <!-- 📌 Outline Section (Updated to match the image) -->
+       <div id="outline" class="tab-content active">
+        <h1>University of Cambodia</h1>
+        <p>The University of Cambodia (UC) is one of Cambodia’s leading higher education institutions, established in 2003. It offers undergraduate, graduate, and doctoral programs across multiple disciplines, emphasizing quality education, research, and innovation.</p>
+        <h2>Facilities</h2>
+        <ul>  
+        <li>Modern Classrooms</li>
+        <li>Computer Labs</li>
+        <li>Library and Research Centers</li>
+        <li>Auditorium and Conference Rooms</li>
+        <li>Student Lounge and Study Areas</li>
+        <li>Sports Facilities</li>
+        </ul>
+
+
+        <h2>Vision</h2>
+        <p>To be a leading university in Cambodia and internationally recognized for academic excellence, research, and innovation.</p>
+        
+        <h2>Mission</h2>
+        <p>UC is committed to providing high-quality education, fostering research and innovation, promoting global cooperation, and preparing students for leadership roles in their respective fields.</p>
+        </div>
+        <!-- 📚 Academics Section (Updated to match the image) -->
+    <div id="academics" class="tab-content">
+        <h1>Academics</h1>
+    
+        <!-- College of Arts and Humanities -->
+        <h2>College of Arts and Humanities</h2>
+        <h3>Department of Sociology and Anthropology</h3>
+        <ul>
+            <li>Sociology (AA, BA, MA, PhD)</li>
+            <li>Anthropology (AA, BA, MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Social Work</h3>
+        <ul>
+            <li>Social Work (AA, BA, MA, PhD)</li>
+            <li>Psychology (AA, BA, MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Literature and Cultural Studies</h3>
+        <ul>
+            <li>Asia Studies (AA, BA, MA, PhD)</li>
+            <li>American Studies (AA, BA, MA, PhD)</li>
+        </ul>
+    
+        <!-- School of Foreign Languages -->
+        <h2>School of Foreign Languages</h2>
+        <h3>Department of Chinese Language</h3>
+        <ul>
+            <li>Chinese Language (AA, BA)</li>
+        </ul>
+    
+        <h3>Department of English Language</h3>
+        <ul>
+            <li>English Language and Literature (BA)</li>
+            <li>English Language Translation and Interpretation (AA, BA)</li>
+            <li>Business English Communication (AA, BA)</li>
+            <li>Teaching English as a Foreign Language (AA, BA, MA)</li>
+        </ul>
+    
+        <h3>Department of French Language</h3>
+        <ul>
+            <li>French Language (AA, BA)</li>
+            <li>French Language for International Relations (AA, BA)</li>
+        </ul>
+    
+        <h3>Department of Japanese Language</h3>
+        <ul>
+            <li>Japanese Language (AA, BA)</li>
+        </ul>
+    
+        <h3>Department of Korean Language</h3>
+        <ul>
+            <li>Korean Language (AA, BA)</li>
+        </ul>
+    
+        <h3>Short Course Programs</h3>
+        <ul>
+            <li>Chinese Language</li>
+            <li>English Language</li>
+            <li>French Language</li>
+            <li>German Language</li>
+            <li>Japanese Language</li>
+            <li>Korean Language</li>
+            <li>Thai Language</li>
+        </ul>
+    
+        <!-- College of Science and Technology -->
+        <h2>College of Science and Technology</h2>
+        <h3>Department of Information Technology</h3>
+        <ul>
+            <li>Information Technology (BA, MA)</li>
+        </ul>
+    
+        <h3>Department of Computer Science</h3>
+        <ul>
+            <li>Computer Science (AA, BA, MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Electronics and Telecommunications</h3>
+        <ul>
+            <li>Electronics and Telecommunication (BA, MA)</li>
+        </ul>
+    
+        <!-- College of Education -->
+        <h2>College of Education</h2>
+        <h3>Department of Educational Science</h3>
+        <ul>
+            <li>Education (AA, BA, MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Educational Administration</h3>
+        <ul>
+            <li>Educational Administration (BA, MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Curriculum Design and Instruction</h3>
+        <ul>
+            <li>Curriculum Design and Instruction (BA)</li>
+        </ul>
+    
+        <!-- College of Law -->
+        <h2>College of Law</h2>
+        <h3>Department of Law</h3>
+        <ul>
+            <li>Law (LL.B.)</li>
+        </ul>
+    
+        <h3>Department of International Law</h3>
+        <ul>
+            <li>International Law (LL.M., LL.D.)</li>
+        </ul>
+    
+        <h3>Department of Private and Public Law</h3>
+        <ul>
+            <li>Private Law (LL.B.)</li>
+            <li>Public Law (LL.B.)</li>
+        </ul>
+    
+        <!-- College of Social Sciences -->
+        <h2>College of Social Sciences</h2>
+        <h3>Department of Politics and International Relations</h3>
+        <ul>
+            <li>History (AA, BA, MA, PhD)</li>
+            <li>Political Science (BA, MA, PhD)</li>
+            <li>International Relations (BA)</li>
+            <li>Peace Studies (MA, PhD)</li>
+        </ul>
+
+
+        <h3>Department of Public Policy and Administration</h3>
+        <ul>
+            <li>Public Policy (BA)</li>
+            <li>Public Administration (BA)</li>
+        </ul>
+    
+        <h3>Department of Development Studies</h3>
+        <ul>
+            <li>Development Studies (BA, MA)</li>
+        </ul>
+    
+        <!-- School of Creative Arts -->
+        <h2>School of Creative Arts</h2>
+        <h3>Department of Arts Music and Song</h3>
+        <ul>
+            <li>Arts Music and Song (AA, BA)</li>
+        </ul>
+    
+        <h3>Department of Arts Dance</h3>
+        <ul>
+            <li>Arts Dance (AA, BA)</li>
+        </ul>
+    
+        <h3>Department of Dramatic Arts</h3>
+        <ul>
+            <li>Dramatic Arts (AA, BA)</li>
+        </ul>
+    
+        <!-- College of Media and Communications -->
+        <h2>College of Media and Communications</h2>
+        <h3>Department of Media and Arts Studies</h3>
+        <ul>
+            <li>Media and Arts Studies (BA)</li>
+            <li>Journalism (BA)</li>
+        </ul>
+    
+        <h3>Department of Visual Communications</h3>
+        <ul>
+            <li>Visual Communications (BA)</li>
+        </ul>
+    
+        <h3>Department of Communication Studies</h3>
+        <ul>
+            <li>Communication Studies (BA)</li>
+        </ul>
+    
+        <!-- The Tony Fernandes School of Business -->
+        <h2>The Tony Fernandes School of Business</h2>
+        <h3>Department of Accounting and Finance</h3>
+        <ul>
+            <li>Accounting (AA, BA, MBA, PhD)</li>
+            <li>Finance (AA, BA, MBA, PhD)</li>
+            <li>Finance and Banking (BA)</li>
+        </ul>
+    
+        <h3>Department of Management</h3>
+        <ul>
+            <li>Management (AA, BA, MBA, PhD)</li>
+            <li>Human Resource Management (AA, BA, MBA, PhD)</li>
+            <li>Organizational Development (AA, BA, MBA, PhD)</li>
+            <li>Business Management (BA)</li>
+            <li>Hospitality and Tourism Management (BA, MBA)</li>
+        </ul>
+    
+        <h3>Department of Entrepreneurship and Strategy</h3>
+        <ul>
+            <li>Economics (AA, BA, MBA, PhD)</li>
+            <li>International Business (BA, MBA)</li>
+            <li>Business Administration (DBA)</li>
+        </ul>
+    
+        <h3>Department of Marketing</h3>
+        <ul>
+            <li>Marketing (AA, BA, MBA, PhD)</li>
+        </ul>
+    
+        <!-- Techo Sen School of Government and International Relations -->
+        <h2>Techo Sen School of Government and International Relations</h2>
+        <h3>Department of ASEAN Studies</h3>
+        <ul>
+            <li>ASEAN Studies (MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Diplomacy and International Relations</h3>
+        <ul>
+            <li>Diplomacy and Negotiation (MA, PhD)</li>
+            <li>International Relations (MA, PhD)</li>
+        </ul>
+    
+        <h3>Department of Administration of Government</h3>
+        <ul>
+            <li>Public Policy (MA, PhD)</li>
+            <li>Public Administration (MA, PhD)</li>
+            <li>Public Management (MA, PhD)</li>
+        </ul>
+    </div>
+    
+         <!-- Scholarships Section -->
+    <div id="scholarships" class="tab-content">
+        <h1>Scholarships</h1>
+        <p>The University of Cambodia is delighted to announce 3,050 scholarship placements for the academic year 2018-2019 to support the Royal Government of Cambodia’s Human Resource Development.</p>
+
+
+        <h2>Undergraduate Degree Scholarships</h2>
+        <table border="1">
+            <tr>
+                <th>Program</th>
+                <th>Number of Scholarships</th>
+                <th>Coverage</th>
+            </tr>
+            <tr>
+                <td>School of Creative Arts (BA K-Track)</td>
+                <td>150</td>
+                <td>100% for all academic years</td>
+            </tr>
+            <tr>
+                <td>College of Media and Communications (BA K-Track)</td>
+                <td>100</td>
+                <td>100% for all academic years</td>
+            </tr>
+            <tr>
+                <td>The Tony Fernandes School of Business (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>College of Arts and Humanities (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>College of Education (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>School of Law (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>School of Foreign Languages (BA)</td>
+                <td>150</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>College of Science and Technology (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>College of Social Sciences (BA)</td>
+                <td>100</td>
+                <td>100%</td>
+            </tr>
+        </table>
+        
+        <p><strong>Note:</strong> These scholarships are available for students who have passed high school in the year 2018 only.</p>
+        
+            <h3>Important Dates:</h3>
+            <ul>
+                <li>Final deadline for application: 2nd of October 2018</li>
+                <li>Date of examination: 5th of October 2018</li>
+                <li>Result released on: 13th of October 2018</li>
+            </ul>
+        
+            <h2>Graduate Degree Scholarships</h2>
+            <ul class="scholarship-list">
+                <li><a href="#">Techo Sen School (TSS) Scholarships:</a> 50 scholarships (MA: 35, Ph.D: 15), 100% coverage.</li>
+            </ul>
+        
+            <h3>Important Dates:</h3>
+            <ul>
+                <li>Same dates as above for the undergraduate scholarships.</li>
+            </ul>
+        
+            <h2>Partial Scholarships</h2>
+            <ul class="scholarship-list">
+                <li><a href="#">Partial Scholarships:</a> 2000 scholarships (BA: 1500, MA: 300, Ph.D: 200), 50% coverage.</li>
+            </ul>
+        
+            <h3>Important Dates:</h3>
+            <ul>
+                <li>Deadline for application: 31st of October 2018</li>
+            </ul>
+        
+            <p>For more information, please contact the University of Cambodia:</p>
+        
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Contact Info</h2>
+                    <p>University of Cambodia</p>
+                    <p>Website: <a href="https://www.uc.edu.kh" target="_blank">www.uc.edu.kh</a></p>
+                    <p>Facebook Page: The University of Cambodia - UC</p>
+                    <p>Telephone: 023 993 276 / 060 333 346 / 093 777 576 / 069 521 111 / 095 692 111</p>
+                </div>
+                
+                <div class="contact-image">
+                    <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+                </div>
+            </div>
+        </div>
+
+
+<!-- Exchange Program Section -->
+<div id="exchange" class="tab-content">
+    <h1>🌍 UC Student Exchange Program</h1>
+    <p>UC strongly supports student exchange opportunities, allowing students to gain international exposure through short-term and long-term exchanges. As a member of the AUN Network and European Union Projects, RULE students have participated in exchanges across ASEAN and beyond, including countries such as Singapore, Indonesia, China, France, Germany, Spain, Turkey, Belgium, Canada, Japan, India, and Estonia.</p>
+    <h2>🌎 Partner Universities and Exchange Programs:</h2>
+    <table border="1">
+        <tr>
+            <th>University Name</th>
+            <th>Program Scope</th>
+            <th>Country</th>
+            <th>Year</th>
+        </tr>
+        <tr>
+            <td>Bansomdejchaopraya Rajabhat University</td>
+            <td>Thailand Exchange</td>
+            <td>Thailand</td>
+            <td>2005</td>
+        </tr>
+        <tr>
+            <td>Kyung Hee University</td>
+            <td>Republic of Korea Exchange</td>
+            <td>Republic of Korea</td>
+            <td>2006</td>
+        </tr>
+        <tr>
+            <td>Ohio University</td>
+            <td>USA Exchange</td>
+            <td>USA</td>
+            <td>2006</td>
+        </tr>
+        <tr>
+            <td>United Nations Sustainable Development Solutions Network</td>
+            <td>Global Development Program</td>
+            <td>Global</td>
+            <td>2006</td>
+        </tr>
+        <tr>
+            <td>Unigen Corp.</td>
+            <td>USA Exchange</td>
+            <td>USA</td>
+            <td>2008</td>
+        </tr>
+        <tr>
+            <td>European Commission</td>
+            <td>International Cooperation</td>
+            <td>EU</td>
+            <td>2009</td>
+        </tr>
+        <tr>
+            <td>Kalinga Institute of Industrial Technology</td>
+            <td>India Exchange</td>
+            <td>India</td>
+            <td>2009</td>
+        </tr>
+        <tr>
+            <td>Payap University</td>
+            <td>Thailand Exchange</td>
+            <td>Thailand</td>
+            <td>2009</td>
+        </tr>
+        <tr>
+            <td>University of Jenderal Achmad Yani</td>
+            <td>Indonesia Exchange</td>
+            <td>Indonesia</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>University of Houston</td>
+            <td>USA Exchange</td>
+            <td>USA</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>People Health Development (PHD) Association</td>
+            <td>Global Health Program</td>
+            <td>Global</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>Dongseo University</td>
+            <td>Republic of Korea Exchange</td>
+            <td>Republic of Korea</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>Galilee International Management Institute (GMI)</td>
+            <td>Israel Exchange</td>
+            <td>Israel</td>
+            <td>2010</td>
+        </tr>
+        <tr>
+            <td>Inha University</td>
+            <td>Republic of Korea Exchange</td>
+            <td>Republic of Korea</td>
+            <td>2010</td>
+        </tr>
+    </table>
+
+<script>
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tab-link.active").click();
+        });
+    </script>
+
+</body>
+</html>
+                

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Pannasastra University of Cambodia (PUC)</title>
+    <style>
+       /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a0a0a;
+            color: white;
+        }
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar .logo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+        
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+/* ====== Heading Styles ====== */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    border-bottom: 2px solid #003366;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 20px;
+}
+
+/* ====== Highlighted Text (Grade A & B) ====== */
+.highlight {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ====== Table Styling ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    font-size: 16px;
+}
+
+/* ====== Notes Section ====== */
+.note {
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 5px solid #003366;
+}
+
+  /* Contact Section (Side-by-Side Layout) */
+  .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🌍 Navigation Bar  -->
+  <nav class="navbar">
+    <div class="logo-container">
+      🎓 <span>Exploring Scholarships in Cambodia</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="university-list.html">University List</a></li>
+        <li><a href="recmm.html">Recommend</a></li></li>
+        <li><a href="signup.html" class="btn">Sign Up</a></li>
+      </ul>
+    </ul>
+</nav>
+
+
+    <!-- Header with Logo -->
+    <div class="header">
+        <img src="../images/PUC.jpg" alt="PUC Logo">
+        <div>
+            <span class="title"> Pannasastra University of Cambodia  </span> <br>
+            <span>(PUC)</span>
+        </div>
+    </div>
+    <!-- Main Content Section -->
+    <div class="content">
+        <p class="description">
+           PUC offers various scholarships and financial aid to support both local students. 
+            Here are the main types of scholarships available:
+        </p>
+        <ul class="scholarship-list">
+            <li><a href="#">Undergraduate Scholarships:</a> Offered to students from socioeconomically disadvantaged backgrounds, these scholarships provide financial support to undergraduate students who have completed at least one term at PUC. Eligible students must submit an application with required documents such as a family book or household registration document.</li>
+            
+            <li><a href="#">Graduate Scholarships - Master in International Human Rights Law:</a> In collaboration with the Raoul Wallenberg Institute, PUC offers up to 15 scholarships for this program, including full scholarships and partial scholarships covering 50% of tuition fees. These scholarships are intended to support students pursuing graduate studies in human rights law.</li>
+            
+            <li><a href="#">External Scholarships:</a> Various international scholarships are available to PUC students through platforms like WeMakeScholars. These scholarships cater to different fields of study and offer partial or full funding based on academic performance, leadership qualities, and eligibility criteria.</li>
+        </ul>
+        
+        <div class="unverified">Unverified</div>
+    </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+            <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+            <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+        </div>
+
+       <!-- 📌 Outline Section (Updated to match the image) -->
+       <div id="outline" class="tab-content active">
+        <h1>Pannasastra University of Cambodia (PUC)</h1>
+        <P>In 1997, Pannasastra University was first established and offered pre-academic programs. Full academic programs were officially introduced in 2000. It is located along Samdech Sothearos Boulevard.</P>
+        <h2>Facilities</h2>
+        <ul>
+            <li>Fully Equipped Classroom</li>
+            <li>Conference Hall</li>
+            <li>Computer Lab</li>
+            <li>Library</li>
+            <li>Sport Fields</li>
+        </ul>
+
+        <h2>Vision</h2>
+        <P> To be the leading institution in Cambodia, internationally recognized for delivering top-tier education, fostering cutting-edge research, and encouraging innovation.</P>
+        <h2>Mission</h2>
+        <P>PUC is committed to preparing students with the skills, ethics, and knowledge essential for success in the job market. The university promotes research, drives innovation, strengthens global partnerships, and advocates for lifelong learning.</P>
+    </div>
+
+
+       <!-- 📚 Academics Section -->
+<div id="academics" class="tab-content">
+    <h1>Academics</h1>
+
+    <!-- Faculty of Arts, Letters, and Humanities -->
+    <h2>Faculty of Arts, Letters, and Humanities</h2>
+    <ul>
+        <li>Introduction to Humanities</li>
+        <li>Introduction to Philosophy and Society</li>
+    </ul>
+
+    <!-- Faculty of Business and Economics -->
+    <h2>Faculty of Business and Economics</h2>
+    <ul>
+        <li>Management Principles</li>
+        <li>Accounting I</li>
+    </ul>
+
+
+    <!-- Faculty of Communications and Media Arts -->
+    <h2>Faculty of Communications and Media Arts</h2>
+    <ul>
+        <li>Introduction to Humanities</li>
+        <li>Introduction to Law</li>
+    </ul>
+
+    <!-- Faculty of Education -->
+    <h2>Faculty of Education</h2>
+    <ul>
+        <li>English Phonetics and Pronunciation</li>
+        <li>Speaking and Listening Development</li>
+    </ul>
+
+    <!-- Faculty of Law and Public Affairs -->
+    <h2>Faculty of Law and Public Affairs</h2>
+    <ul>
+        <li>Introduction to Law</li>
+        <li>Basic Legal Concepts</li>
+    </ul>
+
+    <!-- Faculty of Mathematics, Sciences, & Engineering -->
+    <h2>Faculty of Mathematics, Sciences, & Engineering</h2>
+    <ul>
+        <li>Introduction to Biology</li>
+        <li>Chemistry I</li>
+    </ul>
+
+    <!-- Faculty of Social Sciences & International Relations -->
+    <h2>Faculty of Social Sciences & International Relations</h2>
+    <ul>
+        <li>Introduction to Public Policy and Administration</li>
+        <li>Theories of International Relations</li>
+    </ul>
+
+    <!-- Bachelor Degree Programs -->
+    <h2>Bachelor Degree Programs</h2>
+    <ul>
+        <li>Bachelor of Law</li>
+        <li>Bachelor of Law (France Cooperation Program)</li>
+        <li>Bachelor of Law (English Language Based Bachelor of Law Program - ELBBL)</li>
+        <li>Bachelor of Public Administration</li>
+        <li>Bachelor of International Relations</li>
+        <li>Bachelor of Banking and Finance</li>
+        <li>Bachelor of Accounting</li>
+        <li>Bachelor of Business Management</li>
+        <li>Bachelor of Economics and Management (France Cooperation Program)</li>
+        <li>Bachelor of Development Economics</li>
+        <li>Bachelor of Tourism and Hospitality Management</li>
+        <li>Bachelor of Informatics Economics</li>
+        <li>Bachelor of Information Technology</li>
+    </ul>
+
+    <!-- Master Degree Programs -->
+    <h2>Master Degree Programs</h2>
+    <ul>
+        <li>Master of Laws in Private Law</li>
+        <li>Master of Laws in Public Administration</li>
+        <li>Master of Business in Management</li>
+        <li>Master of Business in Finance</li>
+    </ul>
+</div>
+
+     <!-- Scholarships Section -->
+<div id="scholarships" class="tab-content">
+    <h1>Scholarships</h1>
+    <p>Pannasastra University of Cambodia (PUC) offers scholarships for students who meet specific criteria. These scholarships are available for both new and continuing students, and include various benefits depending on the student’s performance.</p>
+
+    <h2>Eligibility Criteria for Scholarships</h2>
+    <h3>For New Candidates:</h3>
+    <ul>
+        <li>Must come from a family with a lower socio-economic background.</li>
+        <li>Have completed at least one term of study at PUC with a B average.</li>
+        <li>Must apply at the PUC Administration Office.</li>
+        <li>Have no history of disciplinary issues at PUC.</li>
+        <li>Maintain good attendance and academic honesty.</li>
+        <li>Full scholarship students must work at least 10 hours per week as student assistants.</li>
+    </ul>
+
+    <h3>For Continuing Candidates:</h3>
+    <ul>
+        <li>Must maintain at least a C average GPA each year.</li>
+        <li>Participate in the Work-Study Program (e.g., Office Assistant, Library Assistant).</li>
+        <li>Support university events as informed by officials.</li>
+        <li>Follow the Student Code of Conduct with model behavior and academic honesty.</li>
+    </ul>
+
+
+    <h2>Scholarship and Grade Policy</h2>
+    <p>The scholarship award is based on the student’s GPA or grades. Students who perform poorly may have their scholarship reduced, suspended, or revoked.</p>
+    
+    <table>
+        <tr>
+            <th>GPA or Grade</th>
+            <th>Scholarship Award</th>
+        </tr>
+        <tr>
+            <td>A, B, C</td>
+            <td>Maintain the same award level</td>
+        </tr>
+        <tr>
+            <td>D</td>
+            <td>70% of the original scholarship</td>
+        </tr>
+        <tr>
+            <td>F</td>
+            <td>50% of the original scholarship</td>
+        </tr>
+        <tr>
+            <td>Drop out</td>
+            <td>Lose scholarship completely</td>
+        </tr>
+    </table>
+
+    <h3>Options for Students with “F” or “D” Grades</h3>
+    <p>For students who receive a "D" or "F" grade, there are options to improve their academic standing:</p>
+    <ul>
+        <li><strong>Option 1:</strong> Repeat the course with a partial payment (50% for “F”, 30% for “D”).</li>
+        <li><strong>Option 2:</strong> Take a “Remedial” English course for $55 to improve proficiency.</li>
+    </ul>
+
+    <h2>Scholarship Recipients and Class Schedule Policy</h2>
+    <p>Scholarship recipients must adhere to specific class schedules based on their academic year and work status:</p>
+    <ul>
+        <li><strong>Foundation Year to 2nd Year:</strong> Full scholarship students can only attend morning or afternoon classes.</li>
+        <li><strong>3rd Year and Beyond:</strong> Non-working students cannot take evening classes. Working students may request evening classes with documentation of employment.</li>
+    </ul>
+
+    <p>Scholarship renewal applications must be submitted by October 31 of each academic year. Failure to apply may result in loss of scholarship eligibility.</p>
+
+    <h2>Contact Info</h2>
+    <p>Pannasastra University of Cambodia (PUC)</p>
+    <p>Address: Phnom Penh, Cambodia</p>
+    <p>Phone: +855 23 993 274</p>
+    <p>Website: <a href="https://www.puc.edu.kh" target="_blank">www.puc.edu.kh</a></p>
+    <p>Email: <a href="mailto:info@puc.edu.kh">info@puc.edu.kh</a></p>
+    <div class="contact-image">
+        <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+    </div>
+</div>
+</div>
+
+<!-- Exchange Program Section -->
+<div id="exchange" class="tab-content">
+    <h1>🌍 PUC Student Exchange Program</h1>
+    <p>PUC offers extensive student exchange opportunities across various countries. Below is a list of universities and programs available for exchange students.</p>
+
+    <h2>🌎 Partner Universities by Country:</h2>
+
+
+    <h3>United States of America</h3>
+    <ul>
+        <li>California State University, Dominguez Hills, U.S.A.</li>
+        <li>California State University, Long Beach</li>
+        <li>Cal State University Fullerton, University Extended Education</li>
+        <li>California State University, Fullerton, California, U.S.A.</li>
+        <li>The Public Affairs Session of The U.S. Embassy Phnom Penh</li>
+        <li>Teachers Across Borders</li>
+        <li>Humboldt State University</li>
+        <li>Center for Civic Education</li>
+        <li>Souls Foundation</li>
+        <li>Bank Street College of Education</li>
+        <li>School for International Training-Study Abroad</li>
+        <li>University of La Verne College of Education and Educational Leadership</li>
+        <li>American Assistance for Cambodia</li>
+        <li>Council on International Educational Exchange</li>
+        <li>Troy University, U.S.A.</li>
+        <li>The University of North Carolina-Pembroke (U.S.A.)</li>
+        <li>Middlesex Community College Lowell, Massachusetts, U.S.A.</li>
+        <li>The University of Texas at San Antonio</li>
+        <li>Northern Illinois University, DeKalb, Illinois, USA</li>
+        <li>Bridgewater State College</li>
+        <li>School of Business Edgewood College</li>
+        <li>International Education Emporia State University</li>
+        <li>Seton Hill University, U.S.A.</li>
+        <li>Fort Hays State University</li>
+        <li>Hawai’i Pacific University</li>
+        <li>The Asia Foundation</li>
+        <li>University of Massachusetts Lowell</li>
+        <li>The Oregon State, Board of Higher Education Acting By and Through Portland State University</li>
+        <li>Texas State University-San Marcos</li>
+        <li>Portland State University</li>
+        <li>The Open Society Justice Initiative</li>
+        <li>University of Central Oklahoma, Edmond, Oklahoma</li>
+        <li>English Language Institute</li>
+    </ul>
+
+    <h3>China</h3>
+    <ul>
+        <li>Central University of Finance and Economics of China</li>
+        <li>Beijing Language and Culture University</li>
+        <li>Bijie University</li>
+        <li>Yunnan University of Finance and Economics</li>
+        <li>Sichuan International Studies University</li>
+        <li>Qiannan Normal University for Nationalities</li>
+        <li>Yangzhou University</li>
+        <li>Beijing Union University</li>
+        <li>Guizhou University, People’s Republic of China</li>
+        <li>Lingnan University</li>
+        <li>Huazhong University of Science and Technology College of Public Administration</li>
+        <li>Sias International University</li>
+        <li>First Institute of Oceanography, State Oceanic Administration of China</li>
+        <li>Xi’an University of Arts and Science</li>
+        <li>Qinzhou University</li>
+        <li>Qiannan Normal College for Nationalities</li>
+        <li>Kunming University of Science and Technology, China</li>
+        <li>National Ocean Technology Center, P.R. China</li>
+        <li>Xingyang Normal University, China (XNU)</li>
+        <li>Hainan Tropical Ocean University</li>
+        <li>Wuhan Technology and Business University</li>
+        <li>Southwest University of Political Science and Law of China</li>
+        <li>Zhengzhou University</li>
+    </ul>
+
+    <h3>South Korea</h3>
+    <ul>
+        <li>Kookmin University</li>
+        <li>The Good Policy Forum of South Korea and Sam Relief Inc. of U.S.A.</li>
+        <li>Chungju National University</li>
+        <li>Silla University, Korea</li>
+        <li>Hangdong Global University</li>
+        <li>Chung-Ang University, Republic of Korea</li>
+        <li>Dankook University, Korea</li>
+        <li>The University of Seoul</li>
+        <li>Pukyong National University, Republic of Korea</li>
+        <li>SeoKyeong University</li>
+        <li>Daejeon University of Korea</li>
+        <li>Daejin University, Republic of Korea</li>
+        <li>Kunsan National University</li>
+        <li>Shihan Khmer Bank</li>
+        <li>Komoh National Institute of Technology</li>
+    </ul>
+
+
+    <h3>Japan</h3>
+    <ul>
+        <li>Tokyo University of Foreign Studies</li>
+        <li>The Yonezawa Rotary Club of Japan</li>
+        <li>The Yamada Osamitsu Scholarship Foundation, Kawasaki, Japan</li>
+        <li>Graduate School of International Relations, International University of Japan</li>
+        <li>Hiroshima University of Economics (HUE)</li>
+        <li>Hiroshima University of Economics, Hiroshima Corner</li>
+        <li>Okayama Shoka University, Japan</li>
+        <li>Teikyo University, Japan</li>
+    </ul>
+</div>
+
+<script>
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tab-link.active").click();
+        });
+    </script>
+
+</body>
+</html>

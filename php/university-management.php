@@ -1,8 +1,7 @@
 <?php
 header('Content-Type: application/json'); // Crucial: Tell browser to expect JSON
 
-// Adjust path to your connection.php based on your project structure
-require_once 'connection.php'; // Assuming connection.php is two levels up from php/
+require_once 'connection.php';
 
 $response = ['status' => 'error', 'message' => 'Invalid request.'];
 
@@ -49,11 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $campus = $_POST['campus'] ?? '';
         $hours = $_POST['hours'] ?? '';
         $details = $_POST['details'] ?? '';
+        $university_slug = $_POST['university_slug'] ?? '';
 
         if (empty($university_name) || empty($founded) || empty($website) || empty($phone) || empty($campus) || empty($hours) || empty($details)) {
             $response = ['status' => 'error', 'message' => 'All fields are required.'];
         } else {
-            $target_dir = "../images/"; // Adjust your image upload directory relative to this PHP file
+            $target_dir = "../images/";
             $uploadOk = 1;
             $final_image_name = '';
 
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 }
                 $final_image_name = basename($image);
             } else {
-                $final_image_name = 'default_university.png'; // Default image if none uploaded
+                $final_image_name = 'default_university.png';
             }
 
             if ($uploadOk == 0) {
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     if ($image && !move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir . $final_image_name)) {
                         $response = ['status' => 'error', 'message' => "Sorry, there was an error uploading your image."];
                     } else {
-                        $sql = "INSERT INTO universities (university_name, image, founded, website, phone, campus, hours, details) VALUES (:university_name, :image, :founded, :website, :phone, :campus, :hours, :details)";
+                        $sql = "INSERT INTO universities (university_name, image, founded, website, phone, campus, hours, details, University_Slug) VALUES (:university_name, :image, :founded, :website, :phone, :campus, :hours, :details, :university_slug)";
                         $stmt = $conn->prepare($sql);
                         $stmt->bindParam(':university_name', $university_name);
                         $stmt->bindParam(':image', $final_image_name);
@@ -98,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         $stmt->bindParam(':campus', $campus);
                         $stmt->bindParam(':hours', $hours);
                         $stmt->bindParam(':details', $details);
+                        $stmt->bindParam(':university_slug', $university_slug);
 
                         if ($stmt->execute()) {
                             $response = ['status' => 'success', 'message' => 'University added successfully!'];
@@ -119,15 +120,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $campus = $_POST['campus'] ?? '';
         $hours = $_POST['hours'] ?? '';
         $details = $_POST['details'] ?? '';
+        $university_slug = $_POST['university_slug'] ?? '';
 
         if (empty($university_id) || empty($university_name) || empty($founded) || empty($website) || empty($phone) || empty($campus) || empty($hours) || empty($details)) {
             $response = ['status' => 'error', 'message' => 'All fields are required for editing.'];
         } else {
-            $target_dir = "../../images/"; // Adjust your image upload directory relative to this PHP file
+            $target_dir = "../../images/";
             $uploadOk = 1;
             $final_image_name = $current_image;
 
-            if ($_FILES['image']['error'] === UPLOAD_ERR_OK) { // New image uploaded
+            if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $target_file = $target_dir . basename($_FILES["image"]["name"]);
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                 $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -157,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     if ($check_stmt->rowCount() > 0) {
                         $response = ['status' => 'duplicate', 'message' => "University with this name already exists."];
                     } else {
-                        $sql = "UPDATE universities SET university_name = :university_name, image = :image, founded = :founded, website = :website, phone = :phone, campus = :campus, hours = :hours, details = :details WHERE university_id = :university_id";
+                        $sql = "UPDATE universities SET university_name = :university_name, image = :image, founded = :founded, website = :website, phone = :phone, campus = :campus, hours = :hours, details = :details, University_Slug = :university_slug WHERE university_id = :university_id";
                         $stmt = $conn->prepare($sql);
                         $stmt->bindParam(':university_name', $university_name);
                         $stmt->bindParam(':image', $final_image_name);
@@ -167,6 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         $stmt->bindParam(':campus', $campus);
                         $stmt->bindParam(':hours', $hours);
                         $stmt->bindParam(':details', $details);
+                        $stmt->bindParam(':university_slug', $university_slug);
                         $stmt->bindParam(':university_id', $university_id, PDO::PARAM_INT);
 
                         if ($stmt->execute()) {
@@ -182,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $university_id = $_POST['university_id'] ?? null;
         if ($university_id) {
             try {
-                $target_dir = "../../images/"; // Adjust your image upload directory relative to this PHP file
+                $target_dir = "../../images/";
                 $img_sql = "SELECT image FROM universities WHERE university_id = :university_id";
                 $img_stmt = $conn->prepare($img_sql);
                 $img_stmt->bindParam(':university_id', $university_id, PDO::PARAM_INT);
@@ -217,6 +220,3 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 echo json_encode($response);
 exit(); // Ensure no other output
 ?>
-
-
-//************************************** */

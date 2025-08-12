@@ -9,101 +9,37 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-       body {
-      font-family: "Inter", sans-serif;
-      margin: 0;
-      background-color: #f0f2f5;
-    }
-    .header {
-      background-color: #fff;
-      width: 100%;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      flex-direction: column; /* Stack vertically */
-      align-items: stretch;
-    }
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-    }
-    .header-logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #3b82f6;
-      letter-spacing: -1px;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .nav-link {
-      color: #4b5563;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s;
-      font-size: 1rem;
-    }
-    .nav-link:hover,
-    .nav-link:focus {
-      color: #2563eb;
-      outline: none;
-    }
-    /* Filter buttons container */
-    .filter-container {
-      border-top: 1px solid #e5e7eb;
-      padding: 0.5rem 2rem;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none; /* Firefox */
-    }
-    .filter-container::-webkit-scrollbar {
-      display: none; /* Chrome, Safari */
-    }
-    #filterButtons {
-      display: inline-flex;
-      gap: 0.75rem;
-    }
-    .filter-btn {
-      font-size: 0.875rem;
-      padding: 0.5rem 1.25rem;
-      border-radius: 9999px; /* fully rounded */
-      cursor: pointer;
-      user-select: none;
-      border: 1px solid transparent;
-      transition: background-color 0.2s, color 0.2s;
-    }
-    .filter-btn.active,
-    .filter-btn:focus {
-      background-color: #2563eb;
-      color: white;
-      outline: none;
-      border-color: transparent;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
-    }
-    .filter-btn:not(.active) {
-      background-color: white;
-      color: #4b5563;
-      border-color: #d1d5db;
-    }
-    .filter-btn:not(.active):hover {
-      background-color: #f3f4f6;
-      color: #2563eb;
-    } 
-
-
-
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f0f2f5;
+        }
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            letter-spacing: -1px;
+        }
+        .nav-link {
+            color: #4b5563;
+            font-weight: 500;
+            margin-left: 1.5rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover, .nav-link:focus {
+            color: #2563eb;
+            outline: none;
+        }
         .search-bar input {
             border-radius: 1.5rem;
             padding-left: 2.5rem;
         }
         .search-bar i {
             left: 1rem;
+        }
+        .filter-btn.active, .filter-btn:focus {
+            background: #2563eb;
+            color: #fff;
+            outline: none;
         }
         .scholarship-card {
             transition: box-shadow 0.2s, transform 0.2s;
@@ -188,29 +124,16 @@
     <header class="bg-white p-4 shadow-sm sticky top-0 z-50">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="header-logo">Exploring Scholarship in Cambodia</div>
+                <div class="header-logo">Scholarship Events</div>
             </div>
             <nav class="flex items-center">
                 <a href="../index.html" class="nav-link">Home</a>
-                 <a href="recmm.html" class="nav-link">Quizzes</a> 
-                 <a href="university-list.html" class="nav-link">Universities</a>
                 <a href="all-scholarship.html" class="nav-link">Scholarships</a>
-               
-                                <!-- Profile Icon with Dropdown -->
-                <div class="relative">
-                    <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-2xl focus:outline-none" aria-label="Profile">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                        <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                        <a href="history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Recent</a>
-                        <button onclick="handleLogout()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</button>
-                    </div>
-                </div>
-
+                <a href="university-list.html" class="nav-link">Universities</a>
+                <a href="recmm.html" class="nav-link">Quizzes</a>
+                <a href="user-dashboard.html" class="nav-link" aria-label="User"><i class="fas fa-user-circle"></i></a>
             </nav>
         </div>
-
         <!-- Search Bar -->
         <div class="container mx-auto mt-4 px-4">
             <form class="relative search-bar" onsubmit="event.preventDefault(); doScholarshipSearch();">
@@ -238,121 +161,95 @@
 
     <!-- Main Content Section -->
     <main class="flex-grow container mx-auto p-4 pt-0 overflow-y-auto scrollable-content">
+        
+        
         <!-- Scholarship List View -->
-        <div id="scholarshipListView">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4 mt-4">The Latest Scholarships in Cambodia</h2>
-            <!-- Scholarship Cards Grid -->
-            <div id="scholarshipCardsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Scholarship cards will be dynamically loaded here -->
-            </div>
+<div id="scholarshipListView">
+  <div id="scholarshipCardsGrid" class="grid grid-cols-3 gap-4"></div>
+</div>
 
-        </div>
+<!-- Scholarship Detail View -->
+<div id="scholarshipDetailView" class="hidden container mx-auto p-4 pt-0">
+    <div class="mb-4">
+        <a id="backToScholarshipsBtn" href="#" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm">
+            <i class="fas fa-arrow-left mr-2"></i>Back to Scholarships
+        </a>
+    </div>
 
-        <!-- Scholarship Detail View (Initially hidden) -->
-        <div id="scholarshipDetailView" class="hidden">
-            <button id="backToScholarshipsBtn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full mb-4 hover:bg-gray-300 transition-colors">
-                <i class="fas fa-arrow-left mr-2"></i>Back to Scholarships
-            </button>
-
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="flex items-center">
-                        <img id="detailScholarshipLogo" src="" alt="Scholarship Logo" class="rounded-full mr-4 w-12 h-12 shadow-sm">
-                        <div>
-                            <h3 id="detailScholarshipTitle" class="font-semibold text-gray-900 text-xl"></h3>
-                            <p id="detailScholarshipSubtitle" class="text-gray-600 text-base"></p>
-                        </div>
-                    </div>
-                    <button class="text-gray-500 hover:text-red-500 transition-colors" aria-label="Favorite">
-                        <i class="far fa-heart text-2xl"></i>
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4 text-gray-700 text-base mb-6">
-                    <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>Study in: <span id="detailStudyIn" class="font-medium"></span></p>
-                    <p><i class="fas fa-tag text-blue-500 mr-2"></i>Type: <span id="detailType" class="font-medium"></span></p>
-                    <p><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Degree: <span id="detailDegree" class="font-medium"></span></p>
-                    <p><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Deadline: <span id="detailDeadline" class="font-medium"></span></p>
-                </div>
-                <div class="flex justify-end border-t border-gray-200 pt-4">
-                    <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm mr-4" aria-label="Q&As">
-                        <i class="far fa-comments mr-2"></i>Q&As
-                    </button>
-                    <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Share">
-                        <i class="fas fa-share-alt mr-2"></i>Share
-                    </button>
-                </div>
-            </div>
-
-            <!-- Scholarship Description -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Scholarship Description</h4>
-                <p id="detailDescription" class="text-gray-700 text-base leading-relaxed"></p>
-            </div>
-
-            <!-- Scholarship Benefits -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Scholarship Benefits</h4>
-                <ul id="detailBenefits" class="list-disc list-inside text-gray-700 text-base space-y-1">
-                    <!-- Benefits will be dynamically loaded here -->
-                </ul>
-            </div>
-
-            <!-- University & Major -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">University</h4>
-                <p id="detailUniversity" class="text-gray-700 text-base mb-4"></p>
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Major</h4>
-                <p id="detailMajor" class="text-gray-700 text-base"></p>
-            </div>
-
-            <!-- Eligibility Requirements -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Eligibility Requirements</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700 text-base mb-4">
-                    <p>GPA: <span id="detailGPA" class="font-medium"></span></p>
-                    <p>Maximum Age: <span id="detailMaxAge" class="font-medium"></span></p>
-                    <p>Grade: <span id="detailGrade" class="font-medium"></span></p>
-                    <p>Gender: <span id="detailGender" class="font-medium"></span></p>
-                    <p>IELTS: <span id="detailIELTS" class="font-medium"></span></p>
-                    <p>Work Experience: <span id="detailWorkExperience" class="font-medium"></span></p>
-                </div>
-                <h5 class="font-semibold text-gray-800 text-base mb-2">Requirement Detailed</h5>
-                <ul id="detailDetailedRequirements" class="list-disc list-inside text-gray-700 text-base space-y-1">
-                    <!-- Detailed requirements will be dynamically loaded here -->
-                </ul>
-            </div>
-
-            <!-- Eligibility Countries -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Eligibility Countries</h4>
-                <ul id="detailEligibleCountries" class="list-disc list-inside text-gray-700 text-base space-y-1">
-                    <!-- Eligible countries will be dynamically loaded here -->
-                </ul>
-            </div>
-
-            <!-- Required Documents -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">Required Document</h4>
-                <ul id="detailRequiredDocuments" class="list-disc list-inside text-gray-700 text-base space-y-1">
-                    <!-- Required documents will be dynamically loaded here -->
-                </ul>
-            </div>
-
-            <!-- How to Apply -->
-            <div class="bg-white rounded-xl shadow-md p-6 mb-4 detail-section">
-                <h4 class="font-semibold text-gray-800 text-lg mb-3">How to Apply</h4>
-                <p id="detailHowToApply" class="text-gray-700 text-base leading-relaxed"></p>
-            </div>
-
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
-                <button class="bg-blue-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition-colors text-lg font-semibold">
-                    Apply with us
-                </button>
-                <button class="bg-gray-200 text-gray-800 px-6 py-3 rounded-xl shadow-md hover:bg-gray-300 transition-colors text-lg font-semibold">
-                    Official Link
-                </button>
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div class="flex items-start mb-4 md:mb-0">
+            <img id="detailScholarshipLogo" src="default_logo.png" alt="Scholarship Logo" class="w-16 h-16 rounded-full mr-4">
+            <div>
+                <h2 id="detailScholarshipTitle" class="text-2xl font-bold text-gray-900"></h2>
+                <p id="detailScholarshipSubtitle" class="text-gray-600"></p>
             </div>
         </div>
+        <div class="flex space-x-4 text-gray-500 text-sm">
+            <button class="flex items-center hover:text-blue-600 transition-colors"><i class="far fa-heart mr-2"></i>Favorite</button>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4 grid grid-cols-1 md:grid-cols-2 gap-y-4 text-sm">
+        <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>Study in: <span id="detailStudyIn" class="font-medium">Cambodia</span></p>
+        <p><i class="fas fa-tag text-blue-500 mr-2"></i>Type: <span id="detailType" class="font-medium">Fully Funded</span></p>
+        <p><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Degree: <span id="detailDegree" class="font-medium">Bachelor</span></p>
+        <p><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Deadline: <span id="detailDeadline" class="font-medium">15-Oct-2025</span></p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Scholarship Description</h3>
+        <p id="detailDescription" class="text-gray-700 leading-relaxed"></p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Scholarship Benefits</h3>
+        <ul id="detailBenefits" class="list-disc list-inside space-y-1 text-gray-700"></ul>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">University</h3>
+        <p id="detailUniversity" class="text-gray-700 leading-relaxed"></p>
+    <h3 class="font-bold text-xl mb-3 text-gray-800">Major</h3>
+    <p id="detailMajor" class="text-gray-700 leading-relaxed"></p>
+</div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Eligibility Requirements</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 text-gray-700">
+            <div>
+                <p><strong class="font-semibold text-gray-900">GPA:</strong> <span id="detailGPA"></span></p>
+                <p><strong class="font-semibold text-gray-900">Grade:</strong> <span id="detailGrade"></span></p>
+                <p><strong class="font-semibold text-gray-900">IELTS:</strong> <span id="detailIELTS"></span></p>
+            </div>
+            <div>
+                <p><strong class="font-semibold text-gray-900">Max Age:</strong> <span id="detailMaxAge"></span></p>
+                <p><strong class="font-semibold text-gray-900">Gender:</strong> <span id="detailGender"></span></p>
+                <p><strong class="font-semibold text-gray-900">Work Experience:</strong> <span id="detailWorkExperience"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Requirement Details</h3>
+        <ul id="detailDetailedRequirements" class="list-disc list-inside space-y-1 text-gray-700">
+            </ul>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Eligible Countries</h3>
+        <ul id="detailEligibleCountries" class="list-disc list-inside space-y-1 text-gray-700"></ul>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">Required Document</h3>
+        <ul id="detailRequiredDocuments" class="list-disc list-inside space-y-1 text-gray-700"></ul>
+    </div>
+    
+    <div class="bg-white rounded-xl shadow-md p-6 mb-4">
+        <h3 class="font-bold text-xl mb-3 text-gray-800">How to Apply</h3>
+        <p id="detailHowToApply" class="text-gray-700 leading-relaxed"></p>
+    </div>
+</div>
     </main>
 
     <!-- Footer -->
@@ -373,354 +270,196 @@
         <p class="mt-2">&copy; 2025 Scholarship Platform. All rights reserved.</p>
     </footer>
 
-    <!-- Login/Signup Modal -->
-    <div id="authModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 p-4">
-        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-md w-full modal-content relative">
-            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl" aria-label="Close modal">
-                &times;
-            </button>
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign In or Sign Up</h2>
-            <form id="authForm" onsubmit="event.preventDefault(); handleAuth();">
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
-                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@example.com" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Password</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="********" required>
-                </div>
-                <div class="flex flex-col space-y-3">
-                    <button type="submit" id="loginBtn" class="bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                        Log In
-                    </button>
-                    <button type="button" id="signupBtn" class="bg-gray-200 text-gray-800 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                        Sign Up
-                    </button>
-                </div>
-            </form>
-            <p id="authMessage" class="text-center text-sm mt-4 text-red-500 hidden"></p>
-        </div>
-    </div>
-
     <script>
-      
-        // Global flag to simulate login status
-        let isLoggedIn = false;
-        let currentScholarshipId = null; // To store the ID of the scholarship clicked before login
+  // Global scholarships array
+  let scholarshipsData = [];
 
-        // Get references to main view elements
-        const scholarshipListView = document.getElementById('scholarshipListView');
-        const scholarshipDetailView = document.getElementById('scholarshipDetailView');
-        const scholarshipCardsGrid = document.getElementById('scholarshipCardsGrid');
-        const backToScholarshipsBtn = document.getElementById('backToScholarshipsBtn');
+  // Get references to main view elements
+  const scholarshipListView = document.getElementById('scholarshipListView');
+  const scholarshipDetailView = document.getElementById('scholarshipDetailView');
+  const scholarshipCardsGrid = document.getElementById('scholarshipCardsGrid');
+  const backToScholarshipsBtn = document.getElementById('backToScholarshipsBtn');
 
-        // Get references to detail view elements
-        const detailScholarshipLogo = document.getElementById('detailScholarshipLogo');
-        const detailScholarshipTitle = document.getElementById('detailScholarshipTitle');
-        const detailScholarshipSubtitle = document.getElementById('detailScholarshipSubtitle');
-        const detailStudyIn = document.getElementById('detailStudyIn');
-        const detailType = document.getElementById('detailType');
-        const detailDegree = document.getElementById('detailDegree');
-        const detailDeadline = document.getElementById('detailDeadline');
-        const detailDescription = document.getElementById('detailDescription');
-        const detailBenefits = document.getElementById('detailBenefits');
-        const detailUniversity = document.getElementById('detailUniversity');
-        const detailMajor = document.getElementById('detailMajor');
-        const detailGPA = document.getElementById('detailGPA');
-        const detailMaxAge = document.getElementById('detailMaxAge');
-        const detailGrade = document.getElementById('detailGrade');
-        const detailGender = document.getElementById('detailGender');
-        const detailIELTS = document.getElementById('detailIELTS');
-        const detailWorkExperience = document.getElementById('detailWorkExperience');
-        const detailDetailedRequirements = document.getElementById('detailDetailedRequirements');
-        const detailEligibleCountries = document.getElementById('detailEligibleCountries');
-        const detailRequiredDocuments = document.getElementById('detailRequiredDocuments');
-        const detailHowToApply = document.getElementById('detailHowToApply');
+  // Get references to detail view elements
+  const detailScholarshipLogo = document.getElementById('detailScholarshipLogo');
+  const detailScholarshipTitle = document.getElementById('detailScholarshipTitle');
+  const detailScholarshipSubtitle = document.getElementById('detailScholarshipSubtitle');
+  const detailStudyIn = document.getElementById('detailStudyIn');
+  const detailType = document.getElementById('detailType');
+  const detailDegree = document.getElementById('detailDegree');
+  const detailDeadline = document.getElementById('detailDeadline');
+  const detailDescription = document.getElementById('detailDescription');
+  const detailBenefits = document.getElementById('detailBenefits');
+  const detailUniversity = document.getElementById('detailUniversity');
+  const detailMajor = document.getElementById('detailMajor');
+  const detailGPA = document.getElementById('detailGPA');
+  const detailMaxAge = document.getElementById('detailMaxAge');
+  const detailGrade = document.getElementById('detailGrade');
+  const detailGender = document.getElementById('detailGender');
+  const detailIELTS = document.getElementById('detailIELTS');
+  const detailWorkExperience = document.getElementById('detailWorkExperience');
+  const detailDetailedRequirements = document.getElementById('detailDetailedRequirements');
+  const detailEligibleCountries = document.getElementById('detailEligibleCountries');
+  const detailRequiredDocuments = document.getElementById('detailRequiredDocuments');
+  const detailHowToApply = document.getElementById('detailHowToApply');
 
-        // Get references to modal elements
-        const authModal = document.getElementById('authModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const authForm = document.getElementById('authForm');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-        const signupBtn = document.getElementById('signupBtn');
-        const authMessage = document.getElementById('authMessage');
+  // Load all scholarships from backend on page load
+  function loadScholarships() {
+    fetch('../php/get_scholarships.php') // Adjust the URL as needed
+      .then(response => response.json())
+      .then(data => {
+        scholarshipsData = data;
+        renderScholarshipCards();
+      })
+      .catch(error => {
+        console.error('Error fetching scholarships:', error);
+        scholarshipCardsGrid.innerHTML = '<p class="text-center text-red-500">Failed to load scholarships.</p>';
+      });
+  }
 
-        // Function to render scholarship cards
-        function renderScholarshipCards(filteredScholarships = scholarshipsData) {
-            scholarshipCardsGrid.innerHTML = ''; // Clear existing cards
-            if (filteredScholarships.length === 0) {
-                scholarshipCardsGrid.innerHTML = '<p class="text-center text-gray-600 col-span-full">No scholarships found matching your criteria.</p>';
-                return;
-            }
-
-            filteredScholarships.forEach(scholarship => {
-                const cardHtml = `
-                    <div class="scholarship-card bg-white rounded-xl shadow-md p-5 relative" tabindex="0" data-id="${scholarship.id}">
-                        <span class="absolute top-3 right-3 text-gray-500 text-sm">${scholarship.favorites}</span>
-                        <div class="flex items-start mb-4">
-                            <img src="${scholarship.logo}" alt="Scholarship Logo" class="rounded-full mr-3 shadow-sm w-10 h-10">
-                            <div>
-                                <h3 class="font-semibold text-gray-900 text-lg">${scholarship.title}</h3>
-                                <p class="text-gray-600 text-sm">${scholarship.subtitle}</p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 gap-2 text-gray-700 text-sm mb-4">
-                            <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>Study in: <span class="font-medium">${scholarship.details.studyIn}</span></p>
-                            <p><i class="fas fa-tag text-blue-500 mr-2"></i>Type: <span class="font-medium">${scholarship.details.type}</span></p>
-                            <p><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Degree: <span class="font-medium">${scholarship.details.degree}</span></p>
-                            <p><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Deadline: <span class="font-medium">${scholarship.details.deadline}</span></p>
-                        </div>
-                        <p class="text-gray-500 text-xs mb-4">${scholarship.favorites} Favorites</p>
-                        <div class="flex justify-around border-t border-gray-200 pt-4">
-                            <button class="favorite-btn" data-id="${scholarship.id}">
-                            <i class="far fa-heart"></i> Favorite
-                                </button>
-
-                            
-                            <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Share">
-                                <i class="fas fa-share-alt mr-2"></i>Share
-                            </button>
-                        </div>
-                    </div>
-                `;
-                scholarshipCardsGrid.insertAdjacentHTML('beforeend', cardHtml);
-            });
-
-            // Add click listeners to newly rendered cards
-            document.querySelectorAll('.scholarship-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const scholarshipId = this.dataset.id;
-                    handleScholarshipCardClick(scholarshipId);
-                });
-            });
-        }
-
-        // Function to handle scholarship card click (with login check)
-        function handleScholarshipCardClick(id) {
-            if (isLoggedIn) {
-                renderScholarshipDetails(id);
-            } else {
-                currentScholarshipId = id; // Store the ID for after login
-                showAuthModal();
-            }
-        }
-
-        // Function to show the authentication modal
-        function showAuthModal() {
-            authModal.classList.remove('hidden');
-            authMessage.classList.add('hidden'); // Hide any previous messages
-            emailInput.value = ''; // Clear inputs
-            passwordInput.value = '';
-        }
-
-        // Function to hide the authentication modal
-        function hideAuthModal() {
-            authModal.classList.add('hidden');
-        }
-
-        // Simulate authentication (for demonstration purposes)
-        function handleAuth() {
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            // Simple validation
-            if (!email || !password) {
-                authMessage.textContent = 'Please enter both email and password.';
-                authMessage.classList.remove('hidden');
-                return;
-            }
-
-            // Simulate successful login/signup
-            isLoggedIn = true;
-            authMessage.textContent = 'Success! Redirecting to scholarship details...';
-            authMessage.classList.remove('hidden');
-            authMessage.classList.remove('text-red-500');
-            authMessage.classList.add('text-green-600');
-
-            setTimeout(() => {
-                hideAuthModal();
-                if (currentScholarshipId) {
-                    renderScholarshipDetails(currentScholarshipId);
-                    currentScholarshipId = null; // Clear stored ID
-                }
-            }, 1500); // Simulate a delay for login
-        }
-
-        // Function to render scholarship details
-        function renderScholarshipDetails(id) {
-            const scholarship = scholarshipsData.find(s => s.id === id);
-            if (!scholarship) {
-                console.error('Scholarship not found:', id);
-                return;
-            }
-
-            // Populate detail view
-            detailScholarshipLogo.src = scholarship.logo;
-            detailScholarshipTitle.textContent = scholarship.title;
-            detailScholarshipSubtitle.textContent = scholarship.subtitle;
-            detailStudyIn.textContent = scholarship.details.studyIn;
-            detailType.textContent = scholarship.details.type;
-            detailDegree.textContent = scholarship.details.degree;
-            detailDeadline.textContent = scholarship.details.deadline;
-            detailDescription.textContent = scholarship.description;
-
-            // Populate lists (benefits, detailed requirements, eligible countries, required documents)
-            detailBenefits.innerHTML = scholarship.benefits.map(item => `<li>${item}</li>`).join('');
-            detailUniversity.textContent = scholarship.university;
-            detailMajor.textContent = scholarship.major;
-            detailGPA.textContent = scholarship.eligibility.gpa;
-            detailMaxAge.textContent = scholarship.eligibility.maxAge;
-            detailGrade.textContent = scholarship.eligibility.grade;
-            detailGender.textContent = scholarship.eligibility.gender;
-            detailIELTS.textContent = scholarship.eligibility.ielts;
-            detailWorkExperience.textContent = scholarship.eligibility.workExperience;
-            detailDetailedRequirements.innerHTML = scholarship.eligibility.detailedRequirements.map(item => `<li>${item}</li>`).join('');
-            detailEligibleCountries.innerHTML = scholarship.eligibleCountries.map(item => `<li>${item}</li>`).join('');
-            detailRequiredDocuments.innerHTML = scholarship.requiredDocuments.map(item => `<li>${item}</li>`).join('');
-            detailHowToApply.textContent = scholarship.howToApply;
-
-            // Show detail view, hide list view
-            scholarshipListView.classList.add('hidden');
-            scholarshipDetailView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
-        }
-
-        // Event listener for "Back to Scholarships" button
-        backToScholarshipsBtn.addEventListener('click', function() {
-            scholarshipDetailView.classList.add('hidden');
-            scholarshipListView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
-        });
-
-        // Scholarship search function
-        function doScholarshipSearch() {
-            const input = document.getElementById('scholarshipSearchInput');
-            const query = input.value.toLowerCase().trim();
-            const filtered = scholarshipsData.filter(scholarship =>
-                scholarship.title.toLowerCase().includes(query) ||
-                scholarship.subtitle.toLowerCase().includes(query) ||
-                scholarship.description.toLowerCase().includes(query) ||
-                scholarship.details.studyIn.toLowerCase().includes(query) ||
-                scholarship.tags.some(tag => tag.toLowerCase().includes(query))
-            );
-            renderScholarshipCards(filtered);
-        }
-
-        // Filter button active state and filtering logic
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('bg-white', 'text-gray-700')); // Reset non-active styles
-
-                this.classList.add('active', 'bg-blue-600', 'text-white');
-                this.classList.remove('bg-white', 'text-gray-700');
-
-                const filterType = this.dataset.filter;
-                let filteredScholarships = [];
-
-                if (filterType === 'All') {
-                    filteredScholarships = scholarshipsData;
-                } else {
-                    filteredScholarships = scholarshipsData.filter(scholarship =>
-                        scholarship.tags.includes(filterType) ||
-                        scholarship.details.type.includes(filterType) || // Filter by 'Fully Funded' or 'Partially Funded'
-                        scholarship.details.degree.includes(filterType) // Filter by 'Bachelor', 'Master', 'PhD'
-                    );
-                }
-                renderScholarshipCards(filteredScholarships);
-            });
-        });
-
-        // Event listeners for modal buttons
-        closeModalBtn.addEventListener('click', hideAuthModal);
-        loginBtn.addEventListener('click', handleAuth);
-        signupBtn.addEventListener('click', handleAuth); // Both buttons trigger the same simulated auth for now
-
-        // Initial render of scholarship cards when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            renderScholarshipCards();
-        });
-
-//------------------profile icon-------------------------------
-    const profileIconBtn = document.getElementById('profileIconBtn');
-    const profileDropdown = document.getElementById('profileDropdown');
-
-    profileIconBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent dropdown from closing immediately
-        profileDropdown.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!profileDropdown.contains(e.target)) {
-            profileDropdown.classList.add('hidden');
-        }
-    });
-
-    function handleLogout() {
-        isLoggedIn = false;
-        alert("Logged out.");
-        // Optional: Redirect to login page or homepage
+  // Render scholarship cards
+  function renderScholarshipCards(filteredScholarships = scholarshipsData) {
+    scholarshipCardsGrid.innerHTML = ''; // Clear previous cards
+    if (filteredScholarships.length === 0) {
+      scholarshipCardsGrid.innerHTML = '<p class="text-center text-gray-600 col-span-full">No scholarships found matching your criteria.</p>';
+      return;
     }
 
-//----------------------------favorite button-------------------------
-document.querySelectorAll('.favorite-btn').forEach(button => {
-    button.addEventListener('click', async function (e) {
-        e.stopPropagation();
-        const scholarshipId = this.dataset.id;
-
-        // Optional: check if user is logged in first
-        const userId = localStorage.getItem('loggedInUserId'); // or use session/cookie
-
-        if (!userId) {
-            alert('Please log in to save favorites.');
-            return;
-        }
-
-        // Send to backend
-        const res = await fetch('php/save_favorite.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id: userId, scholarship_id: scholarshipId })
-        });
-
-        const data = await res.json();
-        if (data.success) {
-            alert("Added to favorites!");
-        } else {
-            alert("Already in favorites or error!");
-        }
+    filteredScholarships.forEach(scholarship => {
+      const cardHtml = `
+        <div class="scholarship-card bg-white rounded-xl shadow-md p-5 relative cursor-pointer" tabindex="0" data-id="${scholarship.id}">
+          <span class="absolute top-3 right-3 text-gray-500 text-sm">${scholarship.favorites}</span>
+          <div class="flex items-start mb-4">
+          <img src="${scholarship.logo}" alt="Scholarship Logo"
+     class="rounded-full mr-3 shadow-sm w-10 h-10"
+     onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Scholarship';">            <div>
+              <h3 class="font-semibold text-gray-900 text-lg">${scholarship.title}</h3>
+              <p class="text-gray-600 text-sm">${scholarship.subtitle}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-2 text-gray-700 text-sm mb-4">
+            <p><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>Study in: <span class="font-medium">${scholarship.details.studyIn}</span></p>
+            <p><i class="fas fa-tag text-blue-500 mr-2"></i>Type: <span class="font-medium">${scholarship.details.type}</span></p>
+            <p><i class="fas fa-graduation-cap text-blue-500 mr-2"></i>Degree: <span class="font-medium">${scholarship.details.degree}</span></p>
+            <p><i class="fas fa-calendar-alt text-blue-500 mr-2"></i>Deadline: <span class="font-medium">${scholarship.details.deadline}</span></p>
+          </div>
+          <p class="text-gray-500 text-xs mb-4">${scholarship.favorites} Favorites</p>
+          <div class="flex justify-around border-t border-gray-200 pt-4">
+            <button class="flex items-center text-gray-600 hover:text-blue-600 transition-colors text-sm" aria-label="Favorite">
+              <i class="far fa-heart mr-2"></i>Favorite
+            </button>
+          </div>
+        </div>
+      `;
+      scholarshipCardsGrid.insertAdjacentHTML('beforeend', cardHtml);
     });
-});
 
-//----------------------------------------
-let scholarshipsData = [];
+    // Attach click listeners to each card
+    document.querySelectorAll('.scholarship-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const scholarshipId = card.dataset.id;
+        renderScholarshipDetails(scholarshipId);
+      });
+    });
+  }
 
-    async function fetchScholarships() {
-        try {
-           const response = await fetch('../php/get_scholarships.php');
-
-            if (!response.ok) throw new Error('Failed to load scholarships');
-            scholarshipsData = await response.json();
-            renderScholarshipCards();
-        } catch (error) {
-            console.error(error);
-            alert('Failed to load scholarships data.');
-        }
+  // Render scholarship details view
+ function renderScholarshipDetails(id) {
+    const scholarship = scholarshipsData.find(s => s.id == id);
+    if (!scholarship) {
+        alert('Scholarship details not found.');
+        return;
     }
+    detailScholarshipLogo.src = scholarship.logo;
+    // ...set other fields as before...
+    scholarshipListView.classList.add('hidden');
+    scholarshipDetailView.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Call fetch on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchScholarships();
+    // Fill detail fields
+    detailScholarshipLogo.src = scholarship.logo;
+    detailScholarshipTitle.textContent = scholarship.title;
+    detailScholarshipSubtitle.textContent = scholarship.subtitle;
+    detailStudyIn.textContent = scholarship.details.studyIn;
+    detailType.textContent = scholarship.details.type;
+    detailDegree.textContent = scholarship.details.degree;
+    detailDeadline.textContent = scholarship.details.deadline;
+    detailDescription.textContent = scholarship.description;
+
+    // Assuming these fields are arrays; adjust if backend differs
+    detailBenefits.innerHTML = scholarship.benefits.map(item => `<li>${item}</li>`).join('');
+    detailUniversity.textContent = scholarship.university;
+    detailMajor.textContent = scholarship.major;
+    detailGPA.textContent = scholarship.eligibility.gpa;
+    detailMaxAge.textContent = scholarship.eligibility.maxAge;
+    detailGrade.textContent = scholarship.eligibility.grade;
+    detailGender.textContent = scholarship.eligibility.gender;
+    detailIELTS.textContent = scholarship.eligibility.ielts;
+    detailWorkExperience.textContent = scholarship.eligibility.workExperience;
+    detailDetailedRequirements.innerHTML = scholarship.eligibility.detailedRequirements.map(item => `<li>${item}</li>`).join('');
+    detailEligibleCountries.innerHTML = scholarship.eligibleCountries.map(item => `<li>${item}</li>`).join('');
+    detailRequiredDocuments.innerHTML = scholarship.requiredDocuments.map(item => `<li>${item}</li>`).join('');
+    detailHowToApply.textContent = scholarship.howToApply;
+
+    // Show detail view, hide list view
+    scholarshipListView.classList.add('hidden');
+    scholarshipDetailView.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Back button to list
+  backToScholarshipsBtn.addEventListener('click', () => {
+    scholarshipDetailView.classList.add('hidden');
+    scholarshipListView.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Scholarship search function
+  function doScholarshipSearch() {
+    const input = document.getElementById('scholarshipSearchInput');
+    const query = input.value.toLowerCase().trim();
+    const filtered = scholarshipsData.filter(scholarship =>
+      scholarship.title.toLowerCase().includes(query) ||
+      scholarship.subtitle.toLowerCase().includes(query) ||
+      scholarship.description.toLowerCase().includes(query) ||
+      scholarship.details.studyIn.toLowerCase().includes(query) ||
+      scholarship.tags.some(tag => tag.toLowerCase().includes(query))
+    );
+    renderScholarshipCards(filtered);
+  }
+
+  // Filter buttons logic
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      // Reset all buttons
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active', 'bg-blue-600', 'text-white');
+        b.classList.add('bg-white', 'text-gray-700');
+      });
+
+      // Set current button active
+      this.classList.add('active', 'bg-blue-600', 'text-white');
+      this.classList.remove('bg-white', 'text-gray-700');
+
+      const filterType = this.dataset.filter;
+      let filteredScholarships = [];
+
+      if (filterType === 'All') {
+        filteredScholarships = scholarshipsData;
+      } else {
+        filteredScholarships = scholarshipsData.filter(scholarship =>
+          scholarship.tags.includes(filterType) ||
+          scholarship.details.type.includes(filterType) ||
+          scholarship.details.degree.includes(filterType)
+        );
+      }
+      renderScholarshipCards(filteredScholarships);
     });
+  });
 
-    // Your existing renderScholarshipCards(), renderScholarshipDetails(), handle clicks etc. stay the same
-
-    </script>
-
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', loadScholarships);
+</script>
 
 </body>
 </html>
-
-

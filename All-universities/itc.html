@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute of Technology of Cambodia (ITC) </title>
+    <style>
+       /* General Page Styling */
+
+
+       
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a0a0a;
+    color: white;
+}
+
+/* Two-Column Layout */
+.factories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* Each faculty section */
+        .factory {
+            width: 48%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        /* Custom Bullet Points */
+        .factory ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .factory ul li {
+            position: relative;
+            padding-left: 15px;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+
+        .factory ul li::before {
+            content: "•"; /* Custom bullet */
+            color: #0084C7;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* Headings */
+        h2 {
+            color: #003366;
+        }
+
+        /* Responsive Layout (For Mobile) */
+        @media (max-width: 768px) {
+            .factory {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center; /* Vertically align icon and text */
+}
+
+.logo-container span {
+    margin-left: 10px; /* Add space between icon and text */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #72ff00;
+}
+
+.nav-links .btn {
+    background: #21c32d;
+    padding: 8px 14px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links .btn:hover {
+    background: #1aad26;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
+
+.header img {
+    width: 160px;
+    height: 158px;
+    margin-right: 40px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    color: #00ccff;
+}
+/* Style for (RUPP) */
+.header span:last-child {
+    font-size: 25px; 
+    font-weight: bold;
+    color: #eef3f6;
+}
+/* Content Box */
+.content {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #d0ffd0;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box select,
+.search-box button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-box select {
+    width: 200px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box button {
+    background-color: #72ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background-color: #50cc00;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+#sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+
+#sidebar .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 12px;
+    border-bottom: 1px solid #444;
+}
+
+#sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#sidebar ul li a:hover {
+    color: #72ff00;
+}
+
+#sidebar ul li a i {
+    margin-right: 10px;
+    color: #72ff00;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Scholarship List */
+.scholarship-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .scholarship-list li {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .scholarship-list a {
+            color: #00ccff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .scholarship-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Section (Side-by-Side Layout) */
+        .contact-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            width: 60%;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-image {
+            width: 35%;
+        }
+
+        .contact-image img {
+            width: 85%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .contact-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info, .contact-image {
+                width: 100%;
+            }
+
+            .contact-image {
+                margin-top: 10px;
+            }
+        }
+/* Unverified Badge */
+.unverified {
+    color: black; /* Changed text color to black for contrast */
+    font-weight: bold;
+    align-items: center;
+    background: white; /* White background */
+    gap: 5px;
+    margin-top: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.unverified::before {
+    content: "📌";
+}
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: white; /* White background */
+    padding: 10px;
+    border-bottom: 2px solid #8B0000; /* Added bottom border */
+}
+
+/* Tab Links */
+.tab-link {
+    background: none;
+    border: 2px solid #8B0000; /* Border for visibility */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #8B0000; /* Dark red text */
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.tab-link:hover,
+.tab-link.active {
+    background: #8B0000;
+    color: white;
+}
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 25px;
+    background: #ffffff; /* White background */
+    color: #333; /* Darker text for better readability */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for a modern look */
+    transition: all 0.3s ease-in-out; /* Smooth transition effect */
+    font-family: Arial, sans-serif;
+    line-height: 1.6; /* Better spacing for readability */
+}
+
+/* Active Tab Content */
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Headings inside Tab Content */
+.tab-content h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tab-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #206000; /* Green color for headings */
+    margin-top: 20px;
+}
+
+
+/* Paragraphs inside Tab Content */
+.tab-content p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* Facilities List Styling */
+.tab-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.tab-content ul li {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0084C7; /* Blue color */
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* Custom Bullet Point for List */
+.tab-content ul li::before {
+    content: "•"; /* Custom bullet */
+    color: #0084C7;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+} 
+.factories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the boxes */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.factory {
+    width: 48%; /* Each factory takes 48% of the width */
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+    </style>
+</head>
+<body><header>
+    <nav class="navbar">
+        <div class="logo-container">
+         
+            🎓 <span>Exploring Scholarships in Cambodia</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="university-list.html">University List</a></li>
+            <li><a href="recmmd.html">Recommend</a></li>
+            <li><a href="signup.html" class="btn">Sign Up</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- Header with Logo -->
+<div class="header">
+    <img src="../images/itc-cambodia.png" alt="ITC Logo">
+    <div>
+        <span class="title">Institute of Technology of Cambodia </span> <br>
+        <span>(ITC)</span>
+    </div>
+</div>
+<div class="content">
+    <div class="factories-container">
+        </div>
+</div>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <p class="description">
+            Various organizations and institutions offer scholarships and financial aid to support students in Information Technology and Communication (ITC). 
+            Here are the main types of ITC scholarships available:
+        </p>
+        
+    
+        <ul class="scholarship-list">
+            <li><a href="#">1. Government ITC Scholarships:</a> Offered by national governments to support students in IT fields, covering tuition and living expenses.</li>
+            <li><a href="#">2. International ITC Scholarships:</a> Provided by global organizations or governments to encourage international students to study IT abroad.</li>
+            <li><a href="#">3. Merit-Based ITC Scholarships:</a> Awarded to students based on academic achievements or technical expertise in IT fields.</li>
+            <li><a href="#">4. NGO & Private Sector ITC Scholarships:</a> Offered by NGOs and private companies to support students, especially from underrepresented groups, in IT education.</li>
+            <li><a href="#">5. Research & Graduate ITC Scholarships:</a> For graduate students and researchers pursuing advanced studies or research in IT fields like AI and cybersecurity.</li>
+        </ul>
+        
+    </div>
+
+        <div class="unverified">Unverified</div>
+    </div>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'outline')">Outline</button>
+            <button class="tab-link" onclick="openTab(event, 'academics')">Academics</button>
+            <button class="tab-link" onclick="openTab(event, 'scholarships')">Scholarships</button>
+            <button class="tab-link" onclick="openTab(event, 'exchange')">Exchange Program</button>
+        </div>
+
+       <!-- 📌 Outline Section (Updated to match the image) -->
+<div id="outline" class="tab-content active">
+    <h1>ITC University </h1>
+    <p> In 1993, the Cambodian and French governments partnered to renovate ITC, aiming to improve its administration, financial services, educational system, and human resources.</p>    
+    <h2 >Facilities</h2>
+    <ul>
+        <li>Library</a></li>
+        <li>Computer Labs</a></li>
+        <li>Classrooms and Lecture Halls</a></li>
+        <li>Laboratories</a></li>
+        <li>Research Centers</a></li>
+        <li>Cafeteria and Dining Services</a></li>
+    </ul>
+
+    <h2>Vision</h2>
+    <p>ITC have plan to develop and enhance human resources with high potential in engineering,
+     technology, science, and innovation. The Institute strives to become a leading institution in training young Cambodian students, 
+     equipping them with the skills and knowledge to excel. Additionally, ITC aims to establish itself as a renowned center for scientific and technological research,
+     recognized both nationally and internationally.</p>
+    <h2>Mission</h2>
+    <p> ITC provide high-quality education and training in engineering, technology, and science.
+         ITC is dedicated to equipping students with the knowledge, practical skills, and capabilities needed to meet the demands of the labor market,
+        enabling them to contribute to job creation and Cambodia's socio-economic development.</p>
+    <h2>Goals</h2>
+    <p>To achieve its vision and objectives, the Institute has the following goals:</p>
+    
+    <ul>
+        <li>Develop and produce skilled, high-quality human resources that meet the needs of the labor market.</li>
+        <li>Continuously improve academic quality in engineering, technology, science, and innovation, while enhancing the higher education system in Cambodia.</li>
+        <li>Advance research efforts at both national and international levels.</li>
+        <li>Strengthen collaboration with local and international partners to enhance teaching, research, and the overall educational experience for students and faculty.</li>
+        <li>Foster strong relationships with industries, enterprises, and companies to create job opportunities and provide valuable study tours for students.</li>
+    </ul>
+</div>
+
+       <!-- 📚 Academics Section (Updated to match the image) -->
+<div id="academics" class="tab-content">
+    <h1>Academics</h1>
+    <h2>Fields of Study at ITC</h2>
+    <ul>
+        <li>Food Technology and Chemical Engineering</li>
+        <li>Industrial and Mechanical Engineering</li>
+        <li>Civil Engineering and Architecture</li>
+        <li>Rural Engineering</li>
+        <li>Electrical and Energy Engineering</li>
+        <li>Geo-Resources and Geotechnical Engineering</li>
+        <li>Information and Communication Technology</li>
+        <li>Foundation Year (French and English sections)</li>
+    </ul>
+</div>
+
+
+        <!-- Scholarships Section -->
+        <div id="scholarships" class="tab-content">
+            <h1>Scholarships</h1>
+            <p>ITC does provide other forms of financial assistance and scholarship opportunities through government grants, NGO partnerships, and international collaboration programs. For more details, please visit ITC’s official website or contact the Student Affairs Office.</p>
+            <h2>Types of Scholarships</h2>
+            <ul>
+                <li>Government Scholarships</li>
+                <li>International Scholarships</li>
+                <li>Merit-Based Scholarships</li>
+                <li>NGO & Private Sector Scholarships</li>
+                <li>Research & Graduate Scholarships</li>
+            </ul>
+           <!-- Contact Info with Image -->
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Info</h2>
+                <p>Institute of Technology of Cambodia  (ITC)</p>
+            <p><a href="http://www.itc.edu.kh/" target="_blank">www.itc.edu.kh</a></p>
+            <p>Email: <a href="mailto:info@itc.edu.kh ">info@itc.edu.kh </a></p>
+        </div>
+        <div class="contact-image">
+            <img src="Screenshot 2025-03-07 151437.png" alt="Contact Icon">
+        </div>
+        </div>
+    </div>
+
+        <!-- Exchange Program Section -->
+        <div id="exchange" class="tab-content">
+            <h1>ITC exchange-program</h1>
+            <p>The Institute of Technology of Cambodia (ITC) offers various exchange programs to enhance international academic collaboration and provide students with global exposure. Here are some key programs:</p>
+
+            <ul>
+                <li><strong>International Engineering Program:</strong> ITC offers a 5-year International Engineering Program leading to a master's-equivalent degree. This program is conducted in collaboration with partner universities in countries such as France, Australia, Malaysia, Thailand, Indonesia, and the European Union. Students have the opportunity to earn double degrees and participate in exchange programs with these international institutions. <a href="https://itc.edu.kh/international-engineering-program-2024/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+        
+                <li><strong>Exchange Program with Kanazawa University, Japan:</strong> ITC has established an exchange program with Kanazawa University in Japan. This program allows ITC students to spend one semester studying at Kanazawa University, providing them with valuable international academic experience. <a href="https://itc.edu.kh/departments-and-sections/ggg/exchange-program-to-kanazawa-university-japan/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+        
+                <li><strong>Erasmus+ Faculty Mobility:</strong> ITC participates in the Erasmus+ program, which supports faculty mobility for teaching and research purposes. Through this program, ITC faculty members have the opportunity to collaborate with European universities, enhancing academic exchange and development. <a href="https://itc.edu.kh/newsevent/news/mobility-under-erasmus/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+        
+                <li><strong>AUN/SEED-Net Collaboration:</strong> ITC collaborates with the ASEAN University Network Southeast Engineering Education Development Network (AUN/SEED-Net), facilitating student and faculty exchanges. This partnership aims to improve engineering education and foster regional cooperation. <a href="https://foodstem-euproject.itc.edu.kh/institute-of-technology-of-cambodia/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+
+                <li><strong>Exchange Programs in Transport and Infrastructure Engineering:</strong> ITC's Transport and Infrastructure Engineering program offers exchange opportunities with partner universities in France, Thailand, and Japan. These exchanges provide students with international perspectives on transport and infrastructure development. <a href="https://itc.edu.kh/transport-and-infrastructure-engineering/?utm_source=chatgpt.com" target="_blank">[Source]</a></li>
+            </ul>
+        
+            <div class="contact-info">
+                <p><strong>Contact Information:</strong></p>
+                <p>For more detailed information about exchange programs, you can contact the Office of International Student Affairs:</p>
+                <p>Email: <a href="mailto:info@itc.edu.kh">info@itc.edu.kh</a></p>
+                <p>Phone: +855 23 880 370</p>
+            </div>
+        
+            <p>These programs reflect ITC's commitment to fostering international academic partnerships and providing students with opportunities for global learning experiences.</p>
+        
+            </div>
+    
+        </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            var tablinks = document.getElementsByClassName("tab-link");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".tab-link.active").click();
+        });
+    </script>
+
+</body>
+</html>
+    <script>
+       // Get elements
+    const menuIcon = document.getElementById("menu-icon");
+    const sidebar = document.getElementById("sidebar");
+    const closeBtn = document.getElementById("close-menu");
+    
+    // Show sidebar when menu icon is clicked
+    menuIcon.addEventListener("click", function() {
+        sidebar.classList.remove("hidden"); // Remove the 'hidden' class to show sidebar
+    });
+    
+    // Hide sidebar when close button is clicked
+    closeBtn.addEventListener("click", function() {
+        sidebar.classList.add("hidden"); // Add 'hidden' class to hide sidebar
+    });
+    //=========================================================================
+    function openTab(evt, tabName) {
+        var tabcontent = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+    
+        var tablinks = document.getElementsByClassName("tab-link");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+    
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".tab-link.active").click();
+    });//============================================================
+    function openTab(evt, tabName) {
+        var tabcontent = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        
+        var tablinks = document.getElementsByClassName("tab-link");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+    
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("active");
+    }
+    </script>
+
+</body>
+</html>

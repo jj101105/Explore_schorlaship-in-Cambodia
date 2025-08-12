@@ -7,54 +7,28 @@
    <script src="https://cdn.tailwindcss.com"></script>
    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
-    <style>
-        body { font-family: sans-serif; }
-        .sidebar { width: 250px; background-color: #f8f9fa; padding: 20px; height: 100vh; position: fixed; }
-        .content { margin-left: 250px; padding: 20px; }
-        /* Basic Bootstrap-like alerts (for JS-driven modals), can be replaced with Tailwind for full consistency */
-        .alert {
-            padding: 0.75rem 1.25rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: 0.25rem;
-        }
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
-        .alert-warning {
-            color: #856404;
-            background-color: #fff3cd;
-            border-color: #ffeeba;
-        }
-    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
-    <div class="flex min-h-screen">
+  <div class="flex min-h-screen">
 
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
-            <div class="flex items-center justify-center mb-8">
-                <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 hover:scale-105 transition">
-                    <span class="text-3xl">🎓</span>
-                    <span class="text-xl font-extrabold text-blue-900">Scholarship Admin</span>
-                </div>
-            </div>
-            <nav class="space-y-3">
-                <a href="Admin-dashboard.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-chart-line"></i> Dashboard</a>
-                <a href="scholarship.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-graduation-cap"></i> Scholarships</a>
-                <a href="university-management.html" class="flex items-center gap-3 text-blue-600 font-medium"><i class="fas fa-university"></i> Universities</a>
-                <a href="program.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-book"></i> Programs</a>
-                <a href="user.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-users"></i> Users</a>
-                <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-500"><i class="fas fa-comment-dots"></i> Feedback</a>
-                <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            </nav>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white border-r shadow-sm p-5 fixed h-full z-20">
+  <div class="flex items-center justify-center mb-8">
+    <div class="bg-gradient-to-r from-blue-400 to-blue-200 px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-blue-300 transition-transform duration-200 hover:scale-105">
+      <span class="text-3xl">🎓</span>
+      <span class="text-xl font-extrabold text-blue-1000 tracking-wide drop-shadow">Scholarship Admin</span>
+    </div>
+  </div>
+  <nav class="space-y-3">
+         <nav class="space-y-3">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-chart-line"></i> Dashboard</a>
+        <a href="scholarship.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-graduation-cap"></i> Scholarships</a>
+        <a href="university-management.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-university"></i> Universities</a>
+        <a href="program.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-book"></i> Programs</a>
+        <a href="user.html" class="flex items-center gap-3 hover:text-blue-600"><i class="fas fa-users"></i> Users</a>
+        <a href="feedback.html" class="flex items-center gap-3 hover:text-blue-600 font-medium"><i class="fas fa-comment-dots"></i> Feedback</a>
+        <a href="logout.html" class="flex items-center gap-3 text-red-600 hover:text-red-800"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
         </aside>
 
         <!-- Main Content -->
@@ -118,11 +92,12 @@
                             <input type="hidden" name="action" id="formAction" value="add">
                             <input type="hidden" name="university_id" id="universityId">
                             <input type="hidden" name="current_image" id="currentImage">
+<input type="text" id="universitySlug" name="university_slug" readonly style="display:none;" />
+
 
                             <div class="form-group mb-3">
-                                <label for="university_name">University Name:</label>
-                                <input type="text" class="form-control w-full px-3 py-2 border rounded" id="university_name" name="university_name" required />
-                            </div>
+                                <label for="universityName">University Name:</label>
+                                <input type="text" class="form-control w-full px-3 py-2 border rounded" id="universityName" name="university_name" required />                            </div>
                             <div class="form-group mb-3">
                                 <label for="image">Image:</label>
                                 <div id="currentImageDisplay" class="mb-2"></div>
@@ -168,6 +143,3 @@
     <script src="../javaScript/university-management.js"></script>
 </body>
 </html>
-
-
-//***********************
