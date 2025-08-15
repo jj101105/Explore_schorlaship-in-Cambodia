@@ -1,44 +1,45 @@
 <?php
-// Database connection details
+session_start();
+
+// Database connection
 $host = "localhost";
 $user = "root";
 $password = "";
 $dbname = "userdb";
 
-// Create database connection
 $conn = new mysqli($host, $user, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
     die("❌ Connection failed: " . $conn->connect_error);
 }
 
-// Get input from form
-$email = $_POST['email'];
-$passwordInput = $_POST['password'];
+// Get input and trim spaces
+$loginInput = trim($_POST['email']); // email OR phone
+$passwordInput = trim($_POST['password']);
 
-// Check if user exists
-$sql = "SELECT * FROM users WHERE email = ?";
+// Prepare query to check by email or phone
+$sql = "SELECT * FROM users WHERE TRIM(email) = ? OR TRIM(contact_number) = ? LIMIT 1";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $email);
+$stmt->bind_param("ss", $loginInput, $loginInput);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// If user found
 if ($result->num_rows === 1) {
     $row = $result->fetch_assoc();
-    $hashedPassword = $row['password'];
+    $dbPassword = trim($row['password']); // plain text
 
-    // Verify password
-   //----------------------------------------
-if (password_verify($passwordInput, $hashedPassword)) {
-    session_start();
-$_SESSION['username'] = $row['firstname'];
+    if ($passwordInput === $dbPassword) {
+        // Store user info in session
+        $_SESSION['user_id'] = $row['id'];
+        $_SESSION['first_name'] = $row['firstname'];
+        $_SESSION['last_name'] = $row['lastname'] ?? '';
+        $_SESSION['full_name'] = trim($row['firstname'] . ' ' . ($row['lastname'] ?? ''));
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['contact'] = $row['contact_number'] ?? '';
+        $_SESSION['initials'] = strtoupper(substr($row['firstname'], 0, 1) . substr($row['lastname'] ?? '', 0, 1));
 
-   header("Location: ../index.html?justLoggedIn=1");
-exit();
-
-
+        // Redirect after successful login
+        header("Location: ../index.html?justLoggedIn=1");
+        exit();
     } else {
         echo "<script>
                 alert('❌ Incorrect password.');
@@ -47,14 +48,11 @@ exit();
     }
 } else {
     echo "<script>
-            alert('❌ Email not found.');
+            alert('❌ Email or phone number not found.');
             window.history.back();
           </script>";
 }
 
-
-
-// Close connections
 $stmt->close();
 $conn->close();
 ?>

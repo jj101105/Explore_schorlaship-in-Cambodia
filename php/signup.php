@@ -1,49 +1,57 @@
 <?php
+session_start(); // Start session at the top
+
 $host = "localhost";
 $user = "root";
 $password = ""; // default for XAMPP
 $dbname = "userdb";
-
-// Debug: Check form data
-var_dump($_POST);
 
 // Connect to database
 $conn = new mysqli($host, $user, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "✅ Connected to DB<br>";
 }
 
-// Sanitize and validate input
-$firstname = trim($_POST['firstname']);
-$email = trim($_POST['email']);
-$password = $_POST['password'];
-$created_at = date("Y-m-d H:i:s");
+// Sanitize inputs
+$firstname = trim($_POST['firstname'] ?? '');
+$last_name = trim($_POST['lastname'] ?? ''); // match table column
+$email = trim($_POST['email'] ?? '');
+$pwd = $_POST['password'] ?? '';
+$repeat_pwd = $_POST['repeat-password'] ?? '';
 
-// Hash password
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+// Basic validation
+if (empty($firstname) || empty($last_name) || empty($email) || empty($pwd) || empty($repeat_pwd)) {
+    die("Please fill in all required fields.");
+}
 
-// Debug: Print inputs
-echo "Firstname: $firstname<br>";
-echo "Email: $email<br>";
-echo "Password (hashed): $hashedPassword<br>";
-echo "Created At: $created_at<br>";
+if ($pwd !== $repeat_pwd) {
+    die("Passwords do not match.");
+}
 
-// Use prepared statement to prevent SQL injection
-$stmt = $conn->prepare("INSERT INTO users (firstname, email, password, created_at) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $firstname, $email, $hashedPassword, $created_at);
+// Check if email already exists
+$stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
+    die("This email is already registered.");
+}
+$stmt->close();
+
+$created_at = date("Y-m-d H:i:s"); // use correct column name
+
+// Insert user into database (password stored as plain text)
+$stmt = $conn->prepare("INSERT INTO users (firstname, last_name, email, password, created_at) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $firstname, $last_name, $email, $pwd, $created_at);
 
 if ($stmt->execute()) {
-   session_start();
-$_SESSION['user_id'] = $conn->insert_id;
-$_SESSION['username'] = $firstname;
+    $_SESSION['user_id'] = $conn->insert_id;
+    $_SESSION['username'] = $firstname;
 
-header("Location: ../index.html?justLoggedIn=1");
-exit();
-
-
+    header("Location: ../index.html?justLoggedIn=1");
+    exit();
 } else {
     echo "Error: " . $stmt->error;
 }

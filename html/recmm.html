@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,33 +164,18 @@
       margin-top: 0.5rem;
       font-style: italic;
     }
-    .copy-btn {
-      background: #e0e7ff;
-      color: #4f46e5;
-      border: none;
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.2s;
-      margin-left: 10px;
-    }
-    .copy-btn:hover {
-      background: #c7d2fe;
-    }
   </style>
 </head>
 <body>
-    <div class="bg-blue-50 py-3 px-6 shadow-sm flex justify-end">
-    <a href="../index.html" 
-       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-        Go to Home
-    </a>
-</div>
   <div class="chat-container">
-   
-    <div class="chat-header">Scholarship Assistant (Cambodia)</div>
-
+    <div class="chat-header">
+  <a href="../index.html" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+  </a>
+  Scholarship Bot (Cambodia)
+</div>
     <div class="chat-messages" id="chat-messages"></div>
     <div class="chat-input-container">
       <input type="text" id="user-input" class="chat-input" placeholder="Type your message..." autocomplete="off" />
@@ -200,130 +184,68 @@
     </div>
   </div>
   <script>
-
-//-----------------------------------------------------
-
-document.addEventListener("DOMContentLoaded", () => {
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-        if (isLoggedIn) {
-            // Create the Go to Home link
-            const navBar = document.createElement("div");
-            navBar.className = "bg-blue-50 py-3 px-6 shadow-sm flex justify-end";
-
-            navBar.innerHTML = `
-                <a href="../index.html" 
-                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                    Go to Home
-                </a>
-            `;
-        }
-    });
-
-    //-------------------------------------------------------
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
     const clearButton = document.getElementById('clear-button');
     const chatMessages = document.getElementById('chat-messages');
 
-    // Scholarship data (fixed, only one array, no duplicates)
-    const scholarshipsData = [
-      {
-        name: "University of Cambodia (UC) Scholarships",
-        university: "University of Cambodia",
-        field_of_study: "Various undergraduate fields across UC",
-        eligibility: "Cambodian citizens; competitive exam covering English and general knowledge; award type based on performance.",
-        deadline: "Annual, exam-based (contact admissions for current cycle)",
-        type: "Undergraduate — full tuition (Academic Excellence), 50% (Scholastic Aptitude), or partial (Partial Scholarships)",
-        benefits: "Tuition support based on performance and need; maintained via GPA, attendance, and participation in activities."
-      },
-      {
-        name: "Woori Bank–RUPP Scholarships",
-        university: "Royal University of Phnom Penh (RUPP)",
-        field_of_study: "Sustainable Urban Planning & Development, Economic Development, Community Development, Computer Science, International Business Management, Mathematics",
-        eligibility: "Undergraduate students at RUPP in eligible fields; selection based on merit.",
-        deadline: "Annual; check RUPP announcements",
-        type: "Undergraduate",
-        benefits: "100 scholarships/year worth up to USD 50,000 in total funding."
-      },
-      {
-        name: "Techo Digital Talent Scholarship",
-        university: "Royal University of Phnom Penh (RUPP)",
-        field_of_study: "Computer Science, Telecom & Electronics, Information Technology",
-        eligibility: "Cambodian students with strong academic records in eligible fields; 30 slots at RUPP.",
-        deadline: "Annual; check IDT/RUPP announcements",
-        type: "Undergraduate",
-        benefits: "Full funding for tuition and academic support under the national digital talent initiative."
-      },
-      {
-        name: "International/Exchange Scholarships (RUPP)",
-        university: "Royal University of Phnom Penh (RUPP)",
-        field_of_study: "Various fields through partner institutions",
-        eligibility: "RUPP students; specific criteria vary per partner program.",
-        deadline: "Varies by program",
-        type: "Exchange/Study Abroad",
-        benefits: "Covers tuition at partner institutions, travel stipends, and living allowances (varies by partner)."
-      },
-      {
-        name: "Merit-based Scholarships — International Engineering Program",
-        university: "Institute of Technology of Cambodia (ITC)",
-        field_of_study: "Engineering majors",
-        eligibility: "Top 30% of students in International Engineering Program based on academic performance.",
-        deadline: "Typically October–November; last cycle deadline November 24, 2024",
-        type: "Undergraduate — double-degree program",
-        benefits: "Top 15% receive 50% tuition scholarship; next 15% receive 30% tuition scholarship."
-      },
-      {
-        name: "Sumitomo Corporation Scholarship",
-        university: "Institute of Technology of Cambodia (ITC)",
-        field_of_study: "Chemical, Civil, Computer & Communication, Industrial & Mechanical Engineering, etc.",
-        eligibility: "Outstanding ITC students in eligible departments; selection based on merit.",
-        deadline: "Annual; check ITC scholarship announcements",
-        type: "Undergraduate",
-        benefits: "Scholarship for 8 top students annually; covers tuition and study expenses."
-      },
-      {
-        name: "Geo-resources & Geotechnical Engineering (GGE) Scholarships",
-        university: "Institute of Technology of Cambodia (ITC)",
-        field_of_study: "Geo-resources and Geotechnical Engineering",
-        eligibility: "ITC GGE students for double-degree or graduate programs with partner institutions.",
-        deadline: "Varies by partner program",
-        type: "Undergraduate and Graduate",
-        benefits: "Covers tuition and living costs for study at partner universities across Asia and Europe."
-      },
-      {
-        name: "Angkor University Scholarships",
-        university: "Angkor University",
-        field_of_study: "Nursing, Midwifery, Engineering, Architecture, Law, Tourism, Accounting, IT, English, Rural Development",
-        eligibility: "Based on internal scholarship exam performance or donor-specific criteria.",
-        deadline: "Not specified — check university site",
-        type: "Undergraduate",
-        benefits: "50%–100% tuition waiver; some include stipend and housing (e.g., Genkiya Fund)."
-      },
-      {
-        name: "De Montfort University (DMU) Cambodia Scholarships",
-        university: "De Montfort University Cambodia",
-        field_of_study: "International Foundation Year and Undergraduate programs",
-        eligibility: "Cambodian applicants with academic merit, artistic talent, sports excellence, or community service record.",
-        deadline: "Rolling",
-        type: "Undergraduate — merit-based",
-        benefits: "20%–50% tuition waiver depending on criteria."
-      },
-    ];
-
-    // Session context
+    let scholarshipsData = [];
     let chatHistory = [];
 
-    // Helper function to display messages
-    function displayMessage(text, sender) {
+    async function loadScholarships() {
+      try {
+        const response = await fetch('../php/get_scholarships.php');
+        if (!response.ok) throw new Error('Failed to fetch scholarships');
+        scholarshipsData = await response.json();
+        if (scholarshipsData.length === 0) displayError("No scholarship data available.");
+      } catch (error) {
+        console.error(error);
+        displayError('Unable to load scholarship data from server.');
+      }
+    }
+
+    function displayMessage(message, sender) {
       const messageElement = document.createElement('div');
       messageElement.classList.add('message', sender);
-      messageElement.innerHTML = text.replace(/\n/g, '<br>');
+      messageElement.textContent = message;
       chatMessages.appendChild(messageElement);
       smoothScrollToBottom();
     }
 
-    // Welcome message and suggestions
+    function displayError(message) {
+      const errorElement = document.createElement('div');
+      errorElement.className = 'error-message';
+      errorElement.textContent = message;
+      chatMessages.appendChild(errorElement);
+      smoothScrollToBottom();
+    }
+
+    function showLoading() {
+      const loadingElement = document.createElement('div');
+      loadingElement.classList.add('loading-indicator');
+      loadingElement.id = 'loading-indicator';
+      loadingElement.innerHTML = 'Bot is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      chatMessages.appendChild(loadingElement);
+      smoothScrollToBottom();
+    }
+
+    function hideLoading() {
+      const loadingElement = document.getElementById('loading-indicator');
+      if (loadingElement) loadingElement.remove();
+    }
+
+    function smoothScrollToBottom() {
+      chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: "smooth" });
+    }
+
+    function resetChat() {
+      chatMessages.innerHTML = '';
+      chatHistory = [];
+      userInput.value = '';
+      userInput.focus();
+      welcomeMessage();
+    }
+
     function welcomeMessage() {
       displayMessage("👋 Hello! I'm your Scholarship Bot. I can provide information about scholarships in Cambodia. What would you like to know?", "bot");
       displaySuggestions();
@@ -332,9 +254,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function displaySuggestions() {
       const suggestions = [
         "Show me all scholarships for undergraduate.",
+        "What are the eligibility criteria for Australia Awards?",
         "List scholarships for business field.",
-        "Deadlines for scholarships.",
-        "Which scholarships are at RUPP?",
+        "Deadlines for scholarships in 2025?",
+        "Which scholarships are fully funded?"
       ];
       const suggestionWrap = document.createElement('div');
       suggestionWrap.className = "message bot";
@@ -359,45 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
       smoothScrollToBottom();
     }
 
-    // Display error message
-    function displayError(message) {
-      const errorElement = document.createElement('div');
-      errorElement.className = 'error-message';
-      errorElement.textContent = message;
-      chatMessages.appendChild(errorElement);
-      smoothScrollToBottom();
-    }
-
-    // Loading animation
-    function showLoading() {
-      const loadingElement = document.createElement('div');
-      loadingElement.classList.add('loading-indicator');
-      loadingElement.id = 'loading-indicator';
-      loadingElement.innerHTML = 'Bot is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-      chatMessages.appendChild(loadingElement);
-      smoothScrollToBottom();
-    }
-
-    function hideLoading() {
-      const loadingElement = document.getElementById('loading-indicator');
-      if (loadingElement) loadingElement.remove();
-    }
-
-    // Smooth scroll
-    function smoothScrollToBottom() {
-      chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: "smooth" });
-    }
-
-    // Reset chat
-    function resetChat() {
-      chatMessages.innerHTML = '';
-      chatHistory = [];
-      userInput.value = '';
-      userInput.focus();
-      welcomeMessage();
-    }
-
-    // Gemini API call with session context
     async function getGeminiResponse(prompt) {
       const history = chatHistory.map(msg => ({
         role: msg.sender === "user" ? "user" : "model",
@@ -405,12 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }));
       history.push({ role: "user", parts: [{ text: prompt }] });
 
-      const payload = {
-        contents: history,
-        generationConfig: { responseMimeType: "text/plain" }
-      };
-
-      const apiKey = "AIzaSyA0wgstSIvpJeGYg9FM74_r8Ole6GcgNHc";
+      const payload = { contents: history, generationConfig: { responseMimeType: "text/plain" } };
+      const apiKey = "AIzaSyA0wgstSIvpJeGYg9FM74_r8Ole6GcgNHc"; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       try {
@@ -419,35 +299,19 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText}`);
-        }
-
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const result = await response.json();
-
-        if (
-          result.candidates &&
-          result.candidates.length > 0 &&
-          result.candidates[0].content &&
-          result.candidates[0].content.parts &&
-          result.candidates[0].content.parts.length > 0
-        ) {
+        if (result.candidates?.[0]?.content?.parts?.length > 0) 
           return result.candidates[0].content.parts[0].text;
-        } else {
-          return "Sorry, I couldn't generate a response. Please try again.";
-        }
-      } catch (error) {
-        console.error("API call failed:", error);
-        return "I'm sorry, I'm having trouble connecting right now. Please try again later.";
+        return "Sorry, I couldn't generate a response. Please try again.";
+      } catch {
+        return "Sorry, I'm having trouble connecting right now. Please try again later.";
       }
     }
 
-    // Process user input
     async function processUserInput() {
       const userText = userInput.value.trim();
-      if (userText === '' || sendButton.disabled) return;
+      if (!userText || sendButton.disabled) return;
 
       displayMessage(userText, 'user');
       chatHistory.push({ sender: "user", text: userText });
@@ -456,51 +320,37 @@ document.addEventListener("DOMContentLoaded", () => {
       userInput.disabled = true;
       showLoading();
 
-      // Format scholarship data for prompt
       const scholarshipInfo = scholarshipsData
         .map(s =>
-          `Scholarship Name: ${s.name}\n` +
-          `University: ${s.university}\n` +
-          `Field of Study: ${s.field_of_study}\n` +
-          `Eligibility: ${s.eligibility}\n` +
-          `Deadline: ${s.deadline}\n` +
-          `Type: ${s.type}\n` +
-          `Benefits: ${s.benefits}\n`
-        )
-        .join('\n---\n\n');
+          `Name: ${s.title}
+University: ${s.university}
+Field: ${s.major || 'N/A'}
+Eligibility: ${Array.isArray(s.eligibility) ? s.eligibility.join('; ') : s.eligibility || 'N/A'}
+Deadline: ${s.details?.deadline || 'N/A'}
+Type: ${s.details?.type || 'N/A'}
+Benefits: ${Array.isArray(s.benefits) ? s.benefits.join('; ') : s.benefits || 'N/A'}`
+        ).join('\n\n---\n\n');
 
       const prompt = `
 You are a helpful chatbot providing information about scholarships in Cambodia.
-Use the following scholarship data to answer the user's questions.
 
-Scholarship Data:
+Here is the list of scholarships I can help with:
+
 ${scholarshipInfo}
 
-Instructions:
-- Answer the user's question clearly and concisely.
-- Use only the information provided in the scholarship data above.
-- If you cannot find the answer in the data, state that you do not have that information.
-- Format your response using headings, bullet points, and bold text for clarity.
-- Do not use any information outside of the provided data.
-- Do not use asterisks (*).
+Based on the user's question below, answer clearly and concisely using only the information above. 
+If you don't know the answer, say you don't have that information. Do not use an asterisk (*) in your reply.
 
 User question: ${userText}
 `;
 
-      let botResponse = await getGeminiResponse(prompt);
+      const botResponse = await getGeminiResponse(prompt);
       hideLoading();
 
       if (!botResponse || botResponse.trim() === '') {
         displayError("Sorry, I couldn't generate a response. Please try again.");
       } else {
-        // Simple markdown parsing for a better visual
-        const formattedResponse = botResponse
-          .replace(/### (.*)/g, '<h3>$1</h3>')
-          .replace(/## (.*)/g, '<h2>$1</h2>')
-          .replace(/^- (.*)/gm, '<li>$1</li>')
-          .replace(/`([^`]+)`/g, '<code>$1</code>')
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        displayMessage(formattedResponse.trim(), 'bot');
+        displayMessage(botResponse.trim(), 'bot');
         chatHistory.push({ sender: "bot", text: botResponse.trim() });
       }
 
@@ -511,13 +361,12 @@ User question: ${userText}
 
     // Event listeners
     sendButton.addEventListener('click', processUserInput);
-    userInput.addEventListener('keypress', e => {
-      if (e.key === 'Enter') processUserInput();
-    });
+    userInput.addEventListener('keypress', e => { if (e.key === 'Enter') processUserInput(); });
     clearButton.addEventListener('click', resetChat);
 
-    // Autofocus input on load
-    window.onload = () => {
+    // Load scholarships and start chat on page load
+    window.onload = async () => {
+      await loadScholarships();
       userInput.focus();
       welcomeMessage();
     };

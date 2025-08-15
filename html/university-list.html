@@ -81,24 +81,46 @@
             transform: translateY(-2px) scale(1.03);
         }
         .search-bar {
-            max-width: 400px;
-            margin: 2rem auto 2.5rem auto;
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border-radius: 1.5rem;
-            box-shadow: 0 2px 12px rgba(59,130,246,0.07);
-            padding: 0.5rem 1rem;
-        }
-        .search-bar input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 1.1rem;
-            background: transparent;
-            padding: 0.5rem 0.5rem 0.5rem 0.2rem;
-        }
-        .search-bar i { color: #3b82f6; font-size: 1.2rem; }
+    max-width: 500px;
+    margin: 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 2rem;
+    box-shadow: 0 4px 20px rgba(59,130,246,0.1);
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    background: transparent;
+}
+
+.search-bar button {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-bar button:hover {
+    background: #2563eb;
+}
+
+.hidden {
+    display: none !important;
+}
+
         .university-section {
             padding: 2.5rem 1rem 1.5rem 1rem;
             max-width: 1200px;
@@ -194,31 +216,15 @@
                  <a href="recmm.html" class="nav-link">Quizzes</a> 
                  <a href="university-list.html" class="nav-link">Universities</a>
                 <a href="all-scholarship.html" class="nav-link">Scholarships</a>
-               <!-- Search Button -->
-            <button id="searchToggle" class="nav-link bg-transparent border-none p-0" aria-label="Search" style="background:none;">
-                <i class="fas fa-search"></i>
-            </button>
-                                <!-- Profile Icon with Dropdown -->
-                <div class="relative">
-                    <button id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-2xl focus:outline-none" aria-label="Profile">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
-                        <a href="user-dashboard.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-                        
-                    </div>
-                </div>
+                
+                <!-- Profile Icon Button -->
+                        <a href="../html/user-dashboard.html" id="profileIconBtn" class="text-gray-700 hover:text-blue-600 text-4xl focus:outline-none" aria-label="Profile">
+                         <i class="fas fa-user-circle"></i>
+                         </a>
 
             </nav>
         </div>
-            
-        <!-- Search Bar (hidden by default) -->
-        <div id="searchBar" class="absolute right-8 top-20 bg-white rounded-lg shadow-lg p-2 flex items-center gap-2" style="display:none; z-index:200;">
-            <input type="text" id="searchInput" class="border border-gray-300 rounded px-3 py-1 focus:outline-none" placeholder="Search scholarships, universities...">
-            <button id="searchBtn" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" aria-label="Submit Search">
-                <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
+        
     </header>
 
     <!-- Hero Section -->
@@ -232,9 +238,14 @@
             Discover the most popular and trusted universities in Cambodia.<br>
             Click on a university to learn more about its programs, scholarships, and campus life.
         </p>
-        <a href="#popular" class="cta-btn mt-2 inline-flex items-center gap-2" style="background: #5f4dee; color: #fff; font-weight: 700; padding: 1rem 2.5rem; border-radius: 2rem; font-size: 1.15rem; box-shadow: 0 8px 32px rgba(95,77,238,0.13); border: 2px solid #5f4dee; transition: background 0.2s, color 0.2s, border 0.2s, transform 0.1s;">
-            <i class="fas fa-arrow-down"></i> See Popular Universities
-        </a>
+           <!-- Search Bar (like scholarship page) -->
+                <div id="searchBar" class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search universities...">
+                    <button id="searchBtn" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
     </div>
     <!-- Decorative SVG for extra modern look -->
     <svg viewBox="0 0 1440 320" style="position:absolute; bottom:0; left:0; width:100%; height:80px; z-index:0;" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -312,6 +323,7 @@
     </footer>
  <script src="../javaScript/script.js"></script>
     <script>
+      
     // Simple search filter for universities
     function filterUniversities() {
         const query = document.getElementById('universitySearch').value.toLowerCase();
@@ -322,6 +334,49 @@
             });
         });
     }
+
+
+    fetch('../php/checkLogin.php')
+    .then(res => res.json())
+    .then(data => {
+        if (data.loggedIn) {
+            console.log("User is logged in:", data.user.name);
+            // Example: update profile dropdown
+            const dashboardLink = document.querySelector('#profileDropdown a[href="user-dashboard.html"]');
+            dashboardLink.textContent = `Dashboard (${data.user.name})`;
+        } else {
+            console.log("User not logged in");
+            // Optional: redirect to login
+            // window.location.href = '../login.html';
+        }
+    })
+    .catch(err => console.error(err));
+
+    //---------------------------
+   const searchToggle = document.getElementById('searchToggle');
+const searchBar = document.getElementById('searchBar');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const universityCards = document.querySelectorAll('.university-card');
+
+// Optional: toggle visibility
+searchToggle?.addEventListener('click', () => {
+    searchBar.classList.toggle('hidden');
+    searchInput.focus();
+});
+
+// Filter universities
+function filterUniversities() {
+    const query = searchInput.value.toLowerCase();
+    universityCards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        card.style.display = name.includes(query) ? 'flex' : 'none';
+    });
+}
+
+searchInput.addEventListener('input', filterUniversities);
+searchBtn.addEventListener('click', filterUniversities);
+
     </script>
 </body>
 </html>

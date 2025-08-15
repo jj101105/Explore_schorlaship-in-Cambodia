@@ -281,10 +281,15 @@
       <form action="../php/signup.php" method="POST" autocomplete="on">
         <div class="form-group">
           <input type="text" id="firstname" name="firstname" required placeholder=" " autocomplete="name" />
-          <label for="name">Full Name</label>
+          <label for="firstname">First Name</label>
         </div>
+          <div class="form-group">
+    <input type="text" id="lastname" name="lastname" required placeholder=" " />
+    <label for="lastname">Last Name</label>
+  </div>
+
         <div class="form-group">
-          <input type="email" id="email" name="email" required placeholder=" " autocomplete="email" />
+         <input type="text" name="email" placeholder="Email or Phone Number" required>
           <label for="email">Email</label>
         </div>
         <div class="form-group" style="position: relative;">
@@ -301,7 +306,7 @@
 
         <div class="terms">
           <input type="checkbox" id="terms" required />
-          <label for="terms">I agree with the <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a></label>
+          <label for="terms">I agree with the <a href="term.html">Terms</a> and <a href="privacy-policy.html">Privacy Policy</a></label>
         </div>
 
         <button type="submit" class="submit-button">Register</button>
