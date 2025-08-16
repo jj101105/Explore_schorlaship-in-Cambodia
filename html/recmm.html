@@ -162,12 +162,13 @@
       color: #dc2626;
       font-size: 0.95rem;
       margin-top: 0.5rem;
+
       font-style: italic;
     }
   </style>
 </head>
 <body>
-  <div class="chat-container">
+<div class="chat-container">
     <div class="chat-header">
   <a href="../index.html" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -183,69 +184,30 @@
       <button id="clear-button" class="clear-button">Clear</button>
     </div>
   </div>
+ 
   <script>
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
     const clearButton = document.getElementById('clear-button');
     const chatMessages = document.getElementById('chat-messages');
 
+    // Scholarships data will be loaded from the backend
     let scholarshipsData = [];
-    let chatHistory = [];
 
     async function loadScholarships() {
       try {
         const response = await fetch('../php/get_scholarships.php');
-        if (!response.ok) throw new Error('Failed to fetch scholarships');
         scholarshipsData = await response.json();
-        if (scholarshipsData.length === 0) displayError("No scholarship data available.");
-      } catch (error) {
-        console.error(error);
-        displayError('Unable to load scholarship data from server.');
+      } catch (e) {
+        scholarshipsData = [];
+        displayError("Failed to load scholarships from database.");
       }
     }
 
-    function displayMessage(message, sender) {
-      const messageElement = document.createElement('div');
-      messageElement.classList.add('message', sender);
-      messageElement.textContent = message;
-      chatMessages.appendChild(messageElement);
-      smoothScrollToBottom();
-    }
+    // Session context
+    let chatHistory = [];
 
-    function displayError(message) {
-      const errorElement = document.createElement('div');
-      errorElement.className = 'error-message';
-      errorElement.textContent = message;
-      chatMessages.appendChild(errorElement);
-      smoothScrollToBottom();
-    }
-
-    function showLoading() {
-      const loadingElement = document.createElement('div');
-      loadingElement.classList.add('loading-indicator');
-      loadingElement.id = 'loading-indicator';
-      loadingElement.innerHTML = 'Bot is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-      chatMessages.appendChild(loadingElement);
-      smoothScrollToBottom();
-    }
-
-    function hideLoading() {
-      const loadingElement = document.getElementById('loading-indicator');
-      if (loadingElement) loadingElement.remove();
-    }
-
-    function smoothScrollToBottom() {
-      chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: "smooth" });
-    }
-
-    function resetChat() {
-      chatMessages.innerHTML = '';
-      chatHistory = [];
-      userInput.value = '';
-      userInput.focus();
-      welcomeMessage();
-    }
-
+    // Welcome message and suggestions
     function welcomeMessage() {
       displayMessage("👋 Hello! I'm your Scholarship Bot. I can provide information about scholarships in Cambodia. What would you like to know?", "bot");
       displaySuggestions();
@@ -282,15 +244,69 @@
       smoothScrollToBottom();
     }
 
+    // Display message
+    function displayMessage(message, sender) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message', sender);
+      messageElement.textContent = message;
+      chatMessages.appendChild(messageElement);
+      smoothScrollToBottom();
+    }
+
+    // Display error message
+    function displayError(message) {
+      const errorElement = document.createElement('div');
+      errorElement.className = 'error-message';
+      errorElement.textContent = message;
+      chatMessages.appendChild(errorElement);
+      smoothScrollToBottom();
+    }
+
+    // Loading animation
+    function showLoading() {
+      const loadingElement = document.createElement('div');
+      loadingElement.classList.add('loading-indicator');
+      loadingElement.id = 'loading-indicator';
+      loadingElement.innerHTML = 'Bot is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      chatMessages.appendChild(loadingElement);
+      smoothScrollToBottom();
+    }
+
+    function hideLoading() {
+      const loadingElement = document.getElementById('loading-indicator');
+      if (loadingElement) loadingElement.remove();
+    }
+
+    // Smooth scroll
+    function smoothScrollToBottom() {
+      chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: "smooth" });
+    }
+
+
+    // Reset chat
+    function resetChat() {
+      chatMessages.innerHTML = '';
+      chatHistory = [];
+      userInput.value = '';
+      userInput.focus();
+      welcomeMessage();
+    }
+
+    // Gemini API call with session context
     async function getGeminiResponse(prompt) {
+      // Compose session context for Gemini
       const history = chatHistory.map(msg => ({
         role: msg.sender === "user" ? "user" : "model",
         parts: [{ text: msg.text }]
       }));
       history.push({ role: "user", parts: [{ text: prompt }] });
 
-      const payload = { contents: history, generationConfig: { responseMimeType: "text/plain" } };
-      const apiKey = "AIzaSyA0wgstSIvpJeGYg9FM74_r8Ole6GcgNHc"; 
+      const payload = {
+        contents: history,
+        generationConfig: { responseMimeType: "text/plain" }
+      };
+
+      const apiKey = "AIzaSyA0wgstSIvpJeGYg9FM74_r8Ole6GcgNHc";
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
       try {
@@ -299,19 +315,33 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const result = await response.json();
-        if (result.candidates?.[0]?.content?.parts?.length > 0) 
+
+        if (
+          result.candidates &&
+          result.candidates.length > 0 &&
+          result.candidates[0].content &&
+          result.candidates[0].content.parts &&
+          result.candidates[0].content.parts.length > 0
+        ) {
           return result.candidates[0].content.parts[0].text;
-        return "Sorry, I couldn't generate a response. Please try again.";
-      } catch {
+        } else {
+          return "Sorry, I couldn't generate a response. Please try again.";
+        }
+      } catch (error) {
         return "Sorry, I'm having trouble connecting right now. Please try again later.";
       }
     }
 
+    // Process user input
     async function processUserInput() {
       const userText = userInput.value.trim();
-      if (!userText || sendButton.disabled) return;
+      if (userText === '' || sendButton.disabled) return;
 
       displayMessage(userText, 'user');
       chatHistory.push({ sender: "user", text: userText });
@@ -320,7 +350,7 @@
       userInput.disabled = true;
       showLoading();
 
-      const scholarshipInfo = scholarshipsData
+   const scholarshipInfo = scholarshipsData
         .map(s =>
           `Name: ${s.title}
 University: ${s.university}
@@ -331,6 +361,8 @@ Type: ${s.details?.type || 'N/A'}
 Benefits: ${Array.isArray(s.benefits) ? s.benefits.join('; ') : s.benefits || 'N/A'}`
         ).join('\n\n---\n\n');
 
+
+      // UPDATED PROMPT: Instruct bot not to use asterisk (*) if it doesn't have info
       const prompt = `
 You are a helpful chatbot providing information about scholarships in Cambodia.
 
@@ -344,7 +376,7 @@ If you don't know the answer, say you don't have that information. Do not use an
 User question: ${userText}
 `;
 
-      const botResponse = await getGeminiResponse(prompt);
+      let botResponse = await getGeminiResponse(prompt);
       hideLoading();
 
       if (!botResponse || botResponse.trim() === '') {
@@ -361,17 +393,17 @@ User question: ${userText}
 
     // Event listeners
     sendButton.addEventListener('click', processUserInput);
-    userInput.addEventListener('keypress', e => { if (e.key === 'Enter') processUserInput(); });
+    userInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') processUserInput();
+    });
     clearButton.addEventListener('click', resetChat);
 
-    // Load scholarships and start chat on page load
+    // Autofocus input on load and load scholarships
     window.onload = async () => {
-      await loadScholarships();
       userInput.focus();
+      await loadScholarships();
       welcomeMessage();
     };
   </script>
 </body>
 </html>
-
-
